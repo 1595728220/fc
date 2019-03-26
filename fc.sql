@@ -54,8 +54,19 @@ create table img(
   sm3 varchar(128) comment "小图",
   sm4 varchar(128) comment "小图",
   sm5 varchar(128) comment "小图",
-  md varchar(128) comment "中图",
-  lg varchar(128) comment "大图"
+  sm6 varchar(128) comment "小图",
+  md1 varchar(128) comment "中图",
+  md2 varchar(128) comment "中图",
+  md3 varchar(128) comment "中图",
+  md4 varchar(128) comment "中图",
+  md5 varchar(128) comment "中图",
+  md6 varchar(128) comment "中图",
+  lg1 varchar(128) comment "大图",
+  lg2 varchar(128) comment "大图",
+  lg3 varchar(128) comment "大图",
+  lg4 varchar(128) comment "大图",
+  lg5 varchar(128) comment "大图",
+  lg6 varchar(128) comment "大图"
 );
 #视频表
 create table video(
