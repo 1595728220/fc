@@ -13,10 +13,10 @@ create table user(
   nick varchar(12) comment "昵称",
   imgId int comment "用户头像图片编号" 
 );
-insert into user values(null,"dingding","123456","丁丁","13811111111","杭州市西湖区中心路11号","zero","avatar_1.jpg")
-insert into user values(null,"dangdang","123456","当当","13811111111","杭州市西湖区中心路12号","旧日憾事","avatar_1.jpg")
-insert into user values(null,"dongdong","123456","东东","13811111111","杭州市西湖区中心路13号","失去派大","avatar_1.jpg")
-insert into user values(null,"duanduan","123456","端端","13811111111","杭州市西湖区中心路14号","朕好萌i","avatar_1.jpg")
+insert into user values(null,"dingding","123456","丁丁","13811111111","杭州市西湖区中心路11号","zero","avatar_1.jpg");
+insert into user values(null,"dangdang","123456","当当","13811111111","杭州市西湖区中心路12号","旧日憾事","avatar_1.jpg");
+insert into user values(null,"dongdong","123456","东东","13811111111","杭州市西湖区中心路13号","失去派大","avatar_1.jpg");
+insert into user values(null,"duanduan","123456","端端","13811111111","杭州市西湖区中心路14号","朕好萌i","avatar_1.jpg");
 #竞拍表
 create table auction(
   aid int primary key auto_increment comment "竞拍编号",
@@ -39,7 +39,10 @@ create table product(
   imgId int comment "产品图片编号"
 );
 #http://www.cuihui.cn/cuihuiw/products/13321583.html
-insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,1)
+insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,1);
+insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,1);
+insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,1);
+insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,1);
 #订单表
 create table user_order(
   oid int primary key auto_increment comment "订单编号",
@@ -68,6 +71,10 @@ create table img(
   lg5 varchar(128) comment "大图",
   lg6 varchar(128) comment "大图"
 );
+insert into img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg");
+insert into img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg");
+insert into img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg");
+insert into img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg");
 #视频表
 create table video(
   vid int primary key auto_increment comment "视频编号",
