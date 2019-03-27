@@ -1,2 +1,4 @@
 const express = require("express")
-const bodyParser = require()
+let app = express()
+app.use(express.static("public"))
+app.listen(5501)
