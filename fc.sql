@@ -13,9 +13,9 @@ create table user(
   imgId int comment "用户头像图片编号" 
 );
 insert into user values(null,"123456","丁丁","13811111111","杭州市西湖区中心路11号","zero","avatar_1.jpg");
-insert into user values(null,"123456","当当","13811111111","杭州市西湖区中心路12号","旧日憾事","avatar_1.jpg");
-insert into user values(null,"123456","东东","13811111111","杭州市西湖区中心路13号","失去派大","avatar_1.jpg");
-insert into user values(null,"123456","端端","13811111111","杭州市西湖区中心路14号","朕好萌i","avatar_1.jpg");
+insert into user values(null,"123456","当当","13811111112","杭州市西湖区中心路12号","旧日憾事","avatar_1.jpg");
+insert into user values(null,"123456","东东","13811111113","杭州市西湖区中心路13号","失去派大","avatar_1.jpg");
+insert into user values(null,"123456","端端","13811111114","杭州市西湖区中心路14号","朕好萌i","avatar_1.jpg");
 #竞拍表
 create table auction(
   aid int primary key auto_increment comment "竞拍编号",
