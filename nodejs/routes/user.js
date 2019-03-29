@@ -1,6 +1,7 @@
 const express = require("express")
 const pool = require("../pool")
 let router = express.Router()
+let uidRegex = /^\d*$/
 let phoneRegex = /^1[34578]\d{9}$/
 let upwdRegex = /^[a-zA-Z\d_]{6,12}$/
 let yanzhengma = 1234
@@ -161,12 +162,44 @@ router.post("/forget", (req, res) => {
     } else {
       res.send({
         code: 301,
-        msg: "修改密码失败"
+        msg: "手机号未注册"
       })
     }
   })
 })
 //添加/修改信息 /add uid userName addr nick
+router.post("/add",(req,res)=>{
+  let {uid, userName, addr, nick} = req.body
+  if(!uidRegex.test(uid)) {
+    res.send({code:401,msg:"用户编号格式不正确"})
+    return
+  }
+  if(!userName) {
+    userName = null
+  }
+  if(!addr) {
+    addr = null
+  }
+  if(!nick) {
+    nick = null
+  }
+  let sql = "update user set userName = ?, addr = ?, nick = ? where uid = ?"
+  pool.query(sql,[userName, addr, nick, uid],(err,result)=>{
+    if(err) throw err
+    if(result.affectedRows > 0) {
+      res.send({code:200,msg:"修改个人信息成功"})
+    } else {
+      res.send({code:301,msg:"修改个人信息失败"})
+    }
+  })
+})
 //修改头像 /updateAvatar uid
+router.post("/avatar",(req,res)=>{
+  // let {uid, avatar} = req.body
+  let avatar = req
+  // console.log(uid)
+  console.log(avatar)
+  res.send("1")
+})
 //获取和验证验证码 /yzm phone
 module.exports = router

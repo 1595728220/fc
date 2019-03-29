@@ -31,5 +31,21 @@
         <button>注册</button>
     </form>
     <hr>
+    <h3>用户修改个人信息路由测试</h3>
+    <form action="http://127.0.0.1:8081/user/add" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="uid" placeholder="请输入用户编号"><br>
+        <input type="text" name="userName" placeholder="请输入真实姓名"><br>
+        <input type="text" name="addr" placeholder="请输入收货地址"><br>
+        <input type="text" name="nick" placeholder="请输入昵称"><br>
+        <button>修改</button>
+    </form>
+    <hr>
+    <h3>用户上传头像路由测试</h3>
+    <form action="http://127.0.0.1:8081/user/avatar" method="post" enctype="multipart/form-data">
+        <!-- <input type="text" name="uid" placeholder="请输入用户编号"><br> -->
+        <input type="file" name="avatar"><br>
+        <button>提交</button>
+    </form>
+    <hr>
 </body>
 </html>
