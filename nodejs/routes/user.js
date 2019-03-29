@@ -1,12 +1,12 @@
 const express = require("express")
 const pool = require("../pool")
 let router = express.Router()
-
+let phoneRegex = /^1[34578]\d{9}$/
+let upwdRegex = /^[a-zA-Z\d_]{6,12}$/
+let yanzhengma = 1234
 //用户登陆 /login post phone upwd
 router.post("/login", (req, res) => {
     let { phone, upwd } = req.body
-    let phoneRegex = /^1[34578]\d{9}$/
-    let upwdRegex = /^[a-zA-Z\d_]{6,12}$/
     if (!phoneRegex.test(phone)) {
         res.send({ code: 401, msg: "手机号格式不正确" })
         return
@@ -38,6 +38,29 @@ router.get("/logout", (req,res)=>{
     res.send({code:200,msg:"注销成功"})
 })
 //用户注册 /register post identify phone upwd
+router.post("/register",(req,res)=>{
+  let {phone, upwd, identify}  = req.body
+  identify = parseInt(identify)
+  if(!phoneRegex.test(phone)) {
+    res.send({code:401,msg:"手机号格式不正确"})
+    return
+  }
+  if(!upwdRegex.test(upwd)) {
+    res.send({code:402,msg:"密码格式不正确"})
+    return
+  }
+  if(identify !== yanzhengma) {
+    res.send({code:403,msg:"验证码不正确"})
+    return
+  }
+  let sql = "insert into user(phone, upwd) values(?, ?)"
+  pool.query(sql, [phone, upwd], (err,result)=>{
+    if(err) throw err
+    if(result.affectedRows > 0) {
+      res.send({code:200,msg:"注册成功"})
+    }
+  })
+})
 //重置密码 /forget phone identify upwd repwd
 //添加/修改信息 /add uid userName addr nick
 //修改头像 /updateAvatar uid
