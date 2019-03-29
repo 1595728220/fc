@@ -1,5 +1,7 @@
 const express = require("express")
 const pool = require("../pool")
+const multiparty = require("multiparty")
+const fs = require("fs")
 let router = express.Router()
 let uidRegex = /^\d*$/
 let phoneRegex = /^1[34578]\d{9}$/
@@ -195,11 +197,43 @@ router.post("/add",(req,res)=>{
 })
 //修改头像 /updateAvatar uid
 router.post("/avatar",(req,res)=>{
-  // let {uid, avatar} = req.body
-  let avatar = req
-  // console.log(uid)
-  console.log(avatar)
-  res.send("1")
+  let form = new multiparty.Form()
+  form.uploadDir = "../public/img/user" //设置图片存储路径
+  form.keepExtensions = true //保留后缀
+  form.maxFiledsSize = 2*1024*1024 //内存大小
+  form.maxFilesSize = 5*1024*1024 //文件字节大小限制，超出时会报错
+  //表单解析
+  form.parse(req,function(err,fields,files){
+    if(err) {
+      console.log(err)
+      res.send({code:401,msg:"请上传5m以下的图片"})
+      return
+    }
+    //获取路径
+    let oldpath = files.imgFile[0]["path"],
+      suffix
+    //文件后缀处理格式
+    if(oldpath.indexOf(".jpg") >= 0) {
+      suffix = ".jpg"
+    }else if(oldpath.indexOf(".png") >= 0){
+      suffix = ".png"
+    }else if(oldpath.indexOf(".gif") >= 0){
+      suffix = ".gif"
+    }else {
+      res.send({code:402,msg:"请上传正确格式"})
+    }
+  }) 
+  // console.log(form)
+  form.parse(req,function(err,fields,files){
+    if(err) throw err
+    console.log(files.originalFilename)
+    console.log(files.path)
+    Object.keys(files).forEach(function(name) {
+      console.log('got file named ' + name);
+    });
+    console.log('Upload completed!');
+    res.send()
+  })
 })
 //获取和验证验证码 /yzm phone
 module.exports = router
