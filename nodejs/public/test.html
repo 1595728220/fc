@@ -7,12 +7,28 @@
     <title>Document</title>
 </head>
 <body>
-    <h3>用户登录路由测试</h3>
+    <h3>用户登陆路由测试</h3>
+    <form action="http://127.0.0.1:8081/user/login" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="phone" placeholder="请输入手机号"><br>
+        <input type="password" name="upwd" placeholder="请输入密码"><br>
+        <button>登录</button>
+    </form>
+    <hr>
+    <h3>用户注册路由测试</h3>
     <form action="http://127.0.0.1:8081/user/register" method="post" enctype="application/x-www-form-urlencoded">
         <input type="text" name="phone" placeholder="请输入手机号"><br>
         <input type="password" name="upwd" placeholder="请输入密码"><br>
         <input type="text" name="identify"><br>
-        <button>登录</button>
+        <button>注册</button>
+    </form>
+    <hr>
+    <h3>用户忘记密码路由测试</h3>
+    <form action="http://127.0.0.1:8081/user/forget" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="phone" placeholder="请输入手机号"><br>
+        <input type="password" name="upwd" placeholder="请输入密码"><br>
+        <input type="password" name="repwd" placeholder="请再次输入密码"><br>
+        <input type="text" name="identify"><br>
+        <button>注册</button>
     </form>
     <hr>
 </body>
