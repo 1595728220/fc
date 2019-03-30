@@ -30,6 +30,7 @@ app.use(session({
 app.use(bodyParser.urlencoded({
     extended:false
 }))
+app.use(bodyParser.json())
 
 // 挂载用户路由模块到/user下
 app.use("/user",userRouter)
