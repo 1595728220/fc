@@ -75,12 +75,12 @@ insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","f
 insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg");
 insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg");
 create table user_img(
-  uid int primary key auto_increment,
-  addr varchar(32) comment "用户头像的文件名称"
+  uiid int primary key auto_increment,
+  img_addr varchar(32) comment "用户头像的文件名称"
 );
 insert into user_img values(null,"avatar_1.png");
 #视频表
 create table video(
   vid int primary key auto_increment comment "视频编号",
-  addr varchar(128) comment "视频url"
+  video_addr varchar(128) comment "视频url"
 );

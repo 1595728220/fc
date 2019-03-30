@@ -400,4 +400,16 @@ router.get("/yzm", (req, res) => {
   })
 })
 //获取用户信息
+router.get("/detail",(req,res)=>{
+  let uid = req.query.uid,
+      sql = "select user.phone,userName,addr,nick,img_addr from user,user_img where imgId = uiid "
+  pool.query(sql,(err,result)=>{
+    if(err) throw err
+    if(result.length > 0) {
+      res.send({code:200,msg:"查询成功",data:result[0]})
+    } else{
+      res.send({code:301,msg:"查询失败"})
+    }
+  })
+})
 module.exports = router
