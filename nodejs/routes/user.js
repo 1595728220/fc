@@ -251,6 +251,7 @@ router.post("/avatar", (req, res) => {
   form.maxFilesSize = 5 * 1024 * 1024 //文件字节大小限制，超出时会报错
   //表单解析
   form.parse(req, function (err, fields, files) {
+    // console.log(fields)
     if (err) { //上传文件大小超出限制
       console.log(err)
       res.send({
@@ -286,8 +287,8 @@ router.post("/avatar", (req, res) => {
      * 删除未成功添加的图片
      */
     function shanchu() {
-      fs.unlinkSync(oldpath)
-      console.log("删除文件")
+      console.log("图片未成功添加，正在删除图片...")
+      fs.unlinkSync(oldpath)  
     }
     /**
      * 对查询数据库是否存在用户编号对应的用户的结果进行处理
@@ -295,10 +296,11 @@ router.post("/avatar", (req, res) => {
      * @param {*} result 操作数据库的结果集合
      */
     function yzuser(err, result) {
+      console.log("正在验证用户是否存在...")
       if (err) throw err
       if (result.length > 0) { //用户存在
         //查询用户头像表中数据条数
-        sql = "select max(uid) as uid from user_img"
+        sql = "select max(uiid) as uid from user_img"
         pool.query(sql, upload)
       } else { //用户不存在
         res.send({
@@ -316,6 +318,7 @@ router.post("/avatar", (req, res) => {
      * @param {*} result 操作数据库的结果集合
      */
     function upload(err, result) {
+      console.log("正在为图片重命名...")
       if (err) throw err
       //获取当前用户头像表的数据条数，并+1作为待登记的图片Id
       imgId = result[0].uid + 1
@@ -335,6 +338,7 @@ router.post("/avatar", (req, res) => {
      * @param {*} result 操作数据库的结果集合
      */
     function insert(err, result) {
+      console.log("正在添加图片信息到数据库...")
       if (err) throw err
       if (result.affectedRows > 0) { //插入成功
         //更新数据库用户表中的头像字段
@@ -355,6 +359,7 @@ router.post("/avatar", (req, res) => {
      * @param {*} result 操作数据库的结果集合
      */
     function modify(err, result) {
+      console.log("正在修改数据库中用户头像信息...")
       if (err) throw err
       if (result.affectedRows > 0) { //更新成功
         res.send({
