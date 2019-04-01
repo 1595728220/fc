@@ -288,7 +288,7 @@ router.post("/avatar", (req, res) => {
      */
     function shanchu() {
       console.log("图片未成功添加，正在删除图片...")
-      fs.unlinkSync(oldpath)  
+      fs.unlinkSync(oldpath)
     }
     /**
      * 对查询数据库是否存在用户编号对应的用户的结果进行处理
@@ -406,22 +406,94 @@ router.get("/yzm", (req, res) => {
 })
 //获取用户信息
 router.get("/detail", (req, res) => {
+  //获取用户的编号
   let uid = req.query.uid,
-    sql = "select user.phone,userName,addr,nick,img_addr from user,user_img where imgId = uiid "
-  pool.query(sql, (err, result) => {
+    sql = "select user.phone,userName,addr,nick,img_addr from user,user_img where imgId = uiid and uid = ?"
+  if (!uid) { //用户编号为空
+    res.send({
+      code: 401,
+      msg: "用户编号不能为空"
+    })
+    return
+  }
+  pool.query(sql, [uid], (err, result) => {
     if (err) throw err
-    if (result.length > 0) {
+    //对查询结果集进行判断
+    if (result.length > 0) { //查询结果不为空，返回查询数据
       res.send({
         code: 200,
         msg: "查询成功",
         data: result[0]
       })
-    } else {
+    } else { //查询结果为空，返回查询失败
       res.send({
         code: 301,
-        msg: "查询失败"
+        msg: "查询失败,不存在的用户"
       })
     }
   })
+})
+//用户评论 /user_words uid,content
+router.post("/user_words", (req, res) => {
+  //获取请求主体中的数据
+  let {
+    uid,
+    content,
+    pid
+  } = req.body
+  //验证留言内容是否为空
+  if (!content) { //留言内容为空，返回提示不能为空
+    res.send({
+      code: 401,
+      msg: "评论内容不能为空"
+    })
+    return
+  }
+  //查询是否存在该用户
+  let sql = "select * from user where uid = ?"
+  pool.query(sql, [uid], yz_uid)
+  //对是否存在用户的查询结果进行操作
+  function yz_uid(err, result) {
+    if (err) throw err
+    if (result.length > 0) { //用户存在
+      //查询是否存在该产品
+      let sql = "select * from product where pid = ?"
+      pool.query(sql, [pid], yz_pid)
+    } else { //用户不存在，返回提示不能为空信息
+      res.send({
+        code: 402,
+        msg: "用户不存在"
+      })
+    }
+  }
+  //对是否存在该产品的查询结果进行操作
+  function yz_pid(err, result) {
+    if (err) throw err
+    if (result.length > 0) { //存在该商品
+      //插入用户的评论信息到评论表
+      let sql = "insert into words values(null,?,?,?)"
+      pool.query(sql, [content, pid, uid], cr_words)
+    } else { //不存在该商品，返回不能为空信息
+      res.send({
+        code: 403,
+        msg: "产品不存在"
+      })
+    }
+  }
+  //插入评论信息的结果进行操作
+  function cr_words(err, result) {
+    if (err) throw err
+    if (result.affectedRows > 0) { //插入成功，返回成功信息
+      res.send({
+        code: 200,
+        msg: "评论成功"
+      })
+    } else { //插入失败，返回失败信息
+      res.send({
+        code: 301,
+        msg: "评论失败"
+      })
+    }
+  }
 })
 module.exports = router
