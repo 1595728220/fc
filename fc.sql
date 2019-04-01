@@ -68,12 +68,15 @@ create table product_img(
   lg3 varchar(128) comment "大图",
   lg4 varchar(128) comment "大图",
   lg5 varchar(128) comment "大图",
-  lg6 varchar(128) comment "大图"
+  lg6 varchar(128) comment "大图",
+  detail varchar(128) comment "产品详情",
+  promise varchar(128) comment "产品保障",
+  recommond boolean comment "是否为推荐商品"
 );
-insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg");
-insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg");
-insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg");
-insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg");
+insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg","fo_detail.png","fo_promise.png",true);
+insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg","fo_detail.png","fo_promise.png",true);
+insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg","fo_detail.png","fo_promise.png",true);
+insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg","fo_detail.png","fo_promise.png",true);
 create table user_img(
   uiid int primary key auto_increment,
   img_addr varchar(32) comment "用户头像的文件名称"
@@ -84,3 +87,15 @@ create table video(
   vid int primary key auto_increment comment "视频编号",
   video_addr varchar(128) comment "视频url"
 );
+#评论表
+create table words(
+  wid int primary key auto_increment,
+  content varchar(256) comment "评论内容",
+  productId int comment "评论的商品",
+  userId int comment "评论的用户"
+);
+insert into words values(null,"戴了一段时间了，越来越觉得喜欢。还会继续关注",1,1);
+insert into words values(null,"太喜欢了，水头很足，要朋友看了一下，是a货，送给老妈的生日礼物，发货速度很快，生日当天刚好收到，老妈很喜欢，客服很热情，很有耐心，太满意了，赞?",1,2);
+insert into words values(null,"
+手镯很漂亮，最开始戴不进去，询问客服，客服很耐心，客服从准备买到买后服务态度都特别好，点赞！！！",1,3);
+insert into words values(null,"宝贝已收到，和想象的一样，是正品，这个价钱买到这样的宝贝已经不错了，满意",1,4);
