@@ -136,6 +136,23 @@ router.post("/register", (req, res) => {
   })
 
 })
+//验证手机号是否已注册
+router.get("/hasreg",(req,res)=>{
+  let phone = req.query.phone
+  if(!phone) {
+    res.send({code:401,msg:"手机号不能为空"})
+    return
+  }
+  let sql = "select uid from user where phone = ?"
+  pool.query(sql,[phone], (err,result)=>{
+    if(err) throw err
+    if(result.length > 0) {
+      res.send({code:301,msg:"该手机号已被注册"})
+    } else {
+      res.send({code:200,msg:"该手机可以注册"})
+    }
+  })
+})
 //重置密码 /forget post phone identify upwd repwd
 router.post("/forget", (req, res) => {
   //取出请求主体中的phone,identify,upwd,repwd属性
