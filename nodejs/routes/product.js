@@ -109,9 +109,9 @@ router.get("/list", (req, res) => {
     arr.push(maxprice)
   }
   if (!!keywords) { //关键字不为空
-    keywords = "%" + keywords + "%"
+    let keyword = "%" + keywords + "%"
     sql += " and described like ?"
-    arr.push(keywords)
+    arr.push(keyword)
   }
   if (!!rexiao || !!xinpin) { //热销和新品中至少有一个不为空
     sql += " order by "
