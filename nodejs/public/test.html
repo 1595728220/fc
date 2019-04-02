@@ -22,6 +22,12 @@
         <button>注册</button>
     </form>
     <hr>
+    <h3>用户手机是否注册验证路由测试</h3>
+    <form action="http://127.0.0.1:8081/user/hasreg" method="get" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="phone" placeholder="请输入手机号"><br>
+        <button>注册</button>
+    </form>
+    <hr>
     <h3>用户忘记密码路由测试</h3>
     <form action="http://127.0.0.1:8081/user/forget" method="post" enctype="application/x-www-form-urlencoded">
         <input type="text" name="phone" placeholder="请输入手机号"><br>
@@ -51,6 +57,12 @@
     <h3>获取验证码路由测试</h3>
     <form action="http://127.0.0.1:8081/user/yzm" method="get" enctype="application/x-www-form-urlencoded">
         <input type="text" name="phone" placeholder="请输入手机号"><br>
+        <button>提交</button>
+    </form>
+    <hr>
+    <h3>获取用户信息路由测试</h3>
+    <form action="http://127.0.0.1:8081/user/detail" method="get" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="uid" placeholder="请输入用户编号"><br>
         <button>提交</button>
     </form>
     <hr>
