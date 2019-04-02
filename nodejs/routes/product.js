@@ -53,31 +53,31 @@ router.get("/list", (req, res) => {
   minprice < 0 && (minprice = 0)
   maxprice < minprice && (maxprice = 99999999)
   //添加搜索的关键字到keywords表中
-  if(uid) {
+  if (uid) {
     let sql1 = "select count,kid from keywords where content = ?",
-    count = 1,
-    kid
+      count = 1,
+      kid
     //在keywords表中查询是否存在关键字
-    pool.query(sql1,[keywords],(err,result)=>{
-      if(err) throw err     
-      if(result.length > 0) { //不存在
+    pool.query(sql1, [keywords], (err, result) => {
+      if (err) throw err
+      if (result.length > 0) { //不存在
         count = result[0].count + 1
         kid = result[0].kid
         //更新关键字的搜索次数
         sql1 = "update keywords set count = ? where kid = ?"
-        pool.query(sql1,[count,kid],(err,result)=>{
-          if(err) throw err
+        pool.query(sql1, [count, kid], (err, result) => {
+          if (err) throw err
           console.log("更新关键词表完成")
         })
-      }else{ //不存在
+      } else { //不存在
         //插入新的关键字搜索记录
         sql1 = "insert into keywords values(null,?,?,?)"
-        pool.query(sql1,[keywords,uid,count],(err,result)=>{
-          if(err) throw err
+        pool.query(sql1, [keywords, uid, count], (err, result) => {
+          if (err) throw err
           console.log("插入关键词表完成")
         })
-      } 
-      
+      }
+
     })
   }
   //计算分页的开始下标
@@ -88,47 +88,47 @@ router.get("/list", (req, res) => {
     sql += " and classify = ?" //拼接查询条件
     arr.push(classify) //插入参数到数组中
   }
-  if(!!style) { //款式不为空
+  if (!!style) { //款式不为空
     sql += " and style = ?"
     arr.push(style)
   }
-  if(!!thickness){ //种水不为空
+  if (!!thickness) { //种水不为空
     sql += " and thickness = ?"
     arr.push(thickness)
   }
-  if(!!color) { //颜色不为空
+  if (!!color) { //颜色不为空
     sql += " and color = ?"
     arr.push(color)
-  } 
-  if(!!minprice) { //最低价不为空
+  }
+  if (!!minprice) { //最低价不为空
     sql += " and price >= ?"
     arr.push(minprice)
   }
-  if(!!maxprice) { //最高价不为空
+  if (!!maxprice) { //最高价不为空
     sql += " and price <= ?"
     arr.push(maxprice)
   }
-  if(!!keywords) { //关键字不为空
-    keywords = "%"+keywords+"%"
+  if (!!keywords) { //关键字不为空
+    keywords = "%" + keywords + "%"
     sql += " and described like ?"
     arr.push(keywords)
   }
-  if(!!rexiao || !!xinpin){ //热销和新品中至少有一个不为空
+  if (!!rexiao || !!xinpin) { //热销和新品中至少有一个不为空
     sql += " order by "
-    if(!!rexiao) { //热销不为空
-    sql += " month_buy desc"
+    if (!!rexiao) { //热销不为空
+      sql += " month_buy desc"
     }
-    if(!!xinpin) { //新品不为空
+    if (!!xinpin) { //新品不为空
       sql += " ,shelf_time desc"
     }
   }
   sql += " limit ?,?"
-  arr = arr.concat([start,size])
+  arr = arr.concat([start, size])
   // console.log(sql)
   // console.log(arr)
   //查询数据库
-  pool.query(sql, arr, (err,result)=>{
-    if(err) throw err
+  pool.query(sql, arr, (err, result) => {
+    if (err) throw err
     //返回查询结果
     res.send(result)
   })
