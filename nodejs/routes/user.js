@@ -3,6 +3,7 @@ const express = require("express")
 const pool = require("../pool")
 const multiparty = require("multiparty")
 const fs = require("fs")
+const svgCaptcha = require("svg-captcha")
 let router = express.Router()
 //定义变量格式验证
 let uidRegex = /^\d*$/
@@ -104,7 +105,7 @@ router.post("/register", (req, res) => {
     return
   }
   //验证手机验证码格式
-  if (identify !== req.session.yzm) {
+  if (identify !== req.session.captcha) {
     res.send({
       code: 403,
       msg: "验证码不正确"
@@ -198,7 +199,7 @@ router.post("/forget", (req, res) => {
     return
   }
   //手机验证码校对
-  if (identify !== req.session.yzm) {
+  if (identify !== req.session.captcha) {
     res.send({
       code: 404,
       msg: "验证码不正确"
@@ -408,10 +409,10 @@ router.get("/yzm", (req, res) => {
 
   //取出请求中的查询字符串的phone值
   let phone = req.query.phone,
-    {
-      random,
-      floor
-    } = Math
+    // {
+    //   random,
+    //   floor
+    // } = Math
   //验证手机号格式
   if (!phoneRegex.test(phone)) {
     res.send({
@@ -421,14 +422,19 @@ router.get("/yzm", (req, res) => {
     return
   }
   //生成4位随机验证码
-  let yanzhengma = floor(1000 + random() * 9000)
+  // let yanzhengma = floor(1000 + random() * 9000)
   //存储在session中
-  req.session.yzm = yanzhengma
-  console.log(yanzhengma)
-  res.send({
-    code: 200,
-    msg: "生成验证码"
-  })
+  // req.session.yzm = yanzhengma
+  // console.log(yanzhengma)
+  //创建一个对象
+  var captcha = svgCaptcha.create();
+  //生成验证码，存入session
+    req.session.captcha = captcha.text;
+    console.log(req.session.captcha)
+    // 设置响应类型为svg
+    res.type('svg');
+  //返回数据
+    res.status(200).send(captcha.data)
 })
 //获取用户信息
 router.get("/detail", (req, res) => {
