@@ -28,6 +28,7 @@ router.get("/detail", (req, res) => {
 })
 //单品列表 /get classify style thickness color minprice maxprice rexiao xinpin pno size keywords
 router.get("/list", (req, res) => {
+  //获取请求查询字符串中的classify style thickness color minprice maxprice rexiao xinpin pno size keywords
   let {
     classify,
     style,
@@ -41,59 +42,65 @@ router.get("/list", (req, res) => {
     size,
     keywords
   } = req.query;
+  //默认值
   !pno && (pno = 1);
   !size && (size = 6);
+  //转换位整数
   pno = parseInt(pno)
   size = parseInt(size)
+  //不规范的参数规范化
   minprice < 0 && (minprice = 0)
   maxprice < minprice && (maxprice = 99999999)
+  //计算分页的开始下标
   let start = (pno - 1) * size,
-    sql = "select described,price,md1 from product,product_img where imgId = iid",
-    arr = []
-  if (!!classify) {
-    sql += " and classify = ?"
-    arr.push(classify)
+    sql = "select described,price,md1 from product,product_img where imgId = iid", //存储查询的sql 语句
+    arr = [] //存储查询的参数
+  if (!!classify) { //如果分类不为空
+    sql += " and classify = ?" //拼接查询条件
+    arr.push(classify) //插入参数到数组中
   }
-  if(!!style) {
+  if(!!style) { //款式不为空
     sql += " and style = ?"
     arr.push(style)
   }
-  if(!!thickness){
+  if(!!thickness){ //种水不为空
     sql += " and thickness = ?"
     arr.push(thickness)
   }
-  if(!!color) {
+  if(!!color) { //颜色不为空
     sql += " and color = ?"
     arr.push(color)
-  }
-  if(!!minprice) {
+  } 
+  if(!!minprice) { //最低价不为空
     sql += " and price >= ?"
     arr.push(minprice)
   }
-  if(!!maxprice) {
+  if(!!maxprice) { //最高价不为空
     sql += " and price <= ?"
     arr.push(maxprice)
   }
-  if(!!keywords) {
+  if(!!keywords) { //关键字不为空
     keywords = "%"+keywords+"%"
     sql += " and described like ?"
     arr.push(keywords)
   }
-  if(!!rexiao || !!xinpin){
+  if(!!rexiao || !!xinpin){ //热销和新品中至少有一个不为空
     sql += " order by "
-    if(!!rexiao) {
+    if(!!rexiao) { //热销不为空
     sql += " month_buy desc"
     }
-    if(!!xinpin) {
+    if(!!xinpin) { //新品不为空
       sql += " ,shelf_time desc"
     }
   }
   sql += " limit ?,?"
   arr = arr.concat([start,size])
-  console.log(sql)
-  console.log(arr)
+  // console.log(sql)
+  // console.log(arr)
+  //查询数据库
   pool.query(sql, arr, (err,result)=>{
     if(err) throw err
+    //返回查询结果
     res.send(result)
   })
 })
