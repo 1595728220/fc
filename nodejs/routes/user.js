@@ -359,7 +359,7 @@ router.post("/avatar", (req, res) => {
       if (err) throw err
       if (result.affectedRows > 0) { //插入成功
         //更新数据库用户表中的头像字段
-        sql = "update user set imgId = ? where uid = ?"
+        sql = "update user set user_imgId = ? where uid = ?"
         pool.query(sql, [imgId, fields.uid], modify)
       } else { //插入失败
         res.send({
@@ -425,7 +425,7 @@ router.get("/yzm", (req, res) => {
 router.get("/detail", (req, res) => {
   //获取用户的编号
   let uid = req.query.uid,
-    sql = "select user.phone,userName,addr,nick,img_addr from user,user_img where imgId = uiid and uid = ?"
+    sql = "select phone,userName,addr,nick,img_addr from user,user_img where user_imgId = uiid and uid = ?"
   if (!uid) { //用户编号为空
     res.send({
       code: 401,

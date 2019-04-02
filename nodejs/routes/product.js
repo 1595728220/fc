@@ -53,7 +53,7 @@ router.get("/list", (req, res) => {
   maxprice < minprice && (maxprice = 99999999)
   //计算分页的开始下标
   let start = (pno - 1) * size,
-    sql = "select described,price,md1 from product,product_img where imgId = iid", //存储查询的sql 语句
+    sql = "select described,price,md1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
     arr = [] //存储查询的参数
   if (!!classify) { //如果分类不为空
     sql += " and classify = ?" //拼接查询条件

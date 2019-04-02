@@ -10,7 +10,7 @@ create table user(
   phone varchar(11) comment "手机",
   addr varchar(32) comment "收货地址",
   nick varchar(12) comment "昵称",
-  imgId int comment "用户头像图片编号" 
+  user_imgId int comment "用户头像图片编号" 
 );
 insert into user values(null,"123456","丁丁","13811111111","杭州市西湖区中心路11号","zero",1);
 insert into user values(null,"123456","当当","13811111112","杭州市西湖区中心路12号","旧日憾事",1);
@@ -35,7 +35,7 @@ create table product(
   color varchar(6) comment "颜色",
   shelf_time bigint comment "上架时间",
   month_buy int comment "月销售量",
-  imgId int comment "产品图片编号"
+  product_imgId int comment "产品图片编号"
 );
 #http://www.cuihui.cn/cuihuiw/products/13321583.html
 insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,1);
@@ -48,6 +48,7 @@ create table user_order(
   userId int comment "用户编号",
   productId int comment "产品编号"
 );
+insert into user_order values(1,1,1);
 #图片表
 create table product_img(
   iid int primary key auto_increment comment "图片编号",
