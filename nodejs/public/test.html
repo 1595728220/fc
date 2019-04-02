@@ -39,7 +39,7 @@
     <hr>
     <h3>用户修改个人信息路由测试</h3>
     <form action="http://127.0.0.1:8081/user/add" method="post" enctype="application/x-www-form-urlencoded">
-        <input type="text" name="uid" placeholder="请输入用户编号"><br>
+        <input type="text" name="uid" placeholder="请输入"><br>
         <input type="text" name="userName" placeholder="请输入真实姓名"><br>
         <input type="text" name="addr" placeholder="请输入收货地址"><br>
         <input type="text" name="nick" placeholder="请输入昵称"><br>
@@ -49,7 +49,7 @@
     <h3>用户上传头像路由测试</h3>
     <!-- <form action="" method="post" enctype="multipart/form-data"> -->
     <form action="http://127.0.0.1:8081/user/avatar" method="post" enctype="multipart/form-data">
-        <input type="text" name="uid" placeholder="请输入用户编号"><br>
+        <input type="text" name="uid" placeholder="请输入"><br>
         <input type="file" name="avatar"><br>
         <button>提交</button>
     </form>
@@ -62,13 +62,13 @@
     <hr>
     <h3>获取用户信息路由测试</h3>
     <form action="http://127.0.0.1:8081/user/detail" method="get" enctype="application/x-www-form-urlencoded">
-        <input type="text" name="uid" placeholder="请输入用户编号"><br>
+        <input type="text" name="uid" placeholder="请输入"><br>
         <button>提交</button>
     </form>
     <hr>
     <h3>用户评论路由测试</h3>
     <form action="http://127.0.0.1:8081/user/user_words" method="post" enctype="application/x-www-form-urlencoded">
-        <input type="text" name="uid" placeholder="请输入用户编号"><br>
+        <input type="text" name="uid" placeholder="请输入"><br>
         <input type="text" name="pid" placeholder="请输入产品编号"><br>
         <input type="text" name="content" placeholder="请输入评论信息"><br>
         <button>提交</button>
@@ -77,6 +77,23 @@
     <h3>产品详情路由测试</h3>
     <form action="http://127.0.0.1:8081/product/detail" method="get" enctype="application/x-www-form-urlencoded">
         <input type="text" name="pid" placeholder="请输入产品编号"><br>
+        <button>提交</button>
+    </form>
+    <hr>
+    <h3>商品单品路由测试</h3>
+    <!-- classify style thickness color minprice maxprice rexiao xinpin pno size keywords -->
+    <form action="http://127.0.0.1:8081/product/list" method="get" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="classify" placeholder="请输入" value="挂件"><br>
+        <input type="text" name="style" placeholder="请输入圆圈" value="圆圈"><br>
+        <input type="text" name="thickness" placeholder="请输入冰种" value="冰种"><br>
+        <input type="text" name="color" placeholder="请输入白底青" value="白底青"><br>
+        <input type="text" name="minprice" placeholder="请输入1000" value="1000"><br>
+        <input type="text" name="maxprice" placeholder="请输入4000" value="4000"><br>
+        <input type="text" name="rexiao" placeholder="请输入1" value="1"><br>
+        <input type="text" name="xinpin" placeholder="请输入1" value="1"><br>
+        <input type="text" name="pno" placeholder="请输入1" value="1"><br>
+        <input type="text" name="size" placeholder="请输入6" value="6"><br>
+        <input type="text" name="keywords" placeholder="请输入超值" value="超值"><br>
         <button>提交</button>
     </form>
     <hr>
