@@ -100,3 +100,11 @@ insert into words values(null,"太喜欢了，水头很足，要朋友看了一�
 insert into words values(null,"
 手镯很漂亮，最开始戴不进去，询问客服，客服很耐心，客服从准备买到买后服务态度都特别好，点赞！！！",1,3);
 insert into words values(null,"宝贝已收到，和想象的一样，是正品，这个价钱买到这样的宝贝已经不错了，满意",1,4);
+#搜索关键字表
+create table keywords(
+  kid int primary key auto_increment,
+  content varchar(32) comment "关键字",
+  key_userId int comment "用户编号",
+  count int comment "关键词使用次数"
+);
+insert into keywords values(null,"超值",1,1);
