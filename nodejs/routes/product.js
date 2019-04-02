@@ -30,6 +30,7 @@ router.get("/detail", (req, res) => {
 router.get("/list", (req, res) => {
   //获取请求查询字符串中的classify style thickness color minprice maxprice rexiao xinpin pno size keywords
   let {
+    uid,
     classify,
     style,
     thickness,
@@ -51,6 +52,34 @@ router.get("/list", (req, res) => {
   //不规范的参数规范化
   minprice < 0 && (minprice = 0)
   maxprice < minprice && (maxprice = 99999999)
+  //添加搜索的关键字到keywords表中
+  if(uid) {
+    let sql1 = "select count,kid from keywords where content = ?",
+    count = 1,
+    kid
+    //在keywords表中查询是否存在关键字
+    pool.query(sql1,[keywords],(err,result)=>{
+      if(err) throw err     
+      if(result.length > 0) { //不存在
+        count = result[0].count + 1
+        kid = result[0].kid
+        //更新关键字的搜索次数
+        sql1 = "update keywords set count = ? where kid = ?"
+        pool.query(sql1,[count,kid],(err,result)=>{
+          if(err) throw err
+          console.log("更新关键词表完成")
+        })
+      }else{ //不存在
+        //插入新的关键字搜索记录
+        sql1 = "insert into keywords values(null,?,?,?)"
+        pool.query(sql1,[keywords,uid,count],(err,result)=>{
+          if(err) throw err
+          console.log("插入关键词表完成")
+        })
+      } 
+      
+    })
+  }
   //计算分页的开始下标
   let start = (pno - 1) * size,
     sql = "select described,price,md1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
