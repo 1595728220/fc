@@ -54,11 +54,11 @@ router.get("/list", (req, res) => {
   maxprice < minprice && (maxprice = 99999999)
   //添加搜索的关键字到keywords表中
   if (uid) {
-    let sql1 = "select count,kid from keywords where content = ?",
+    let sql1 = "select count,kid from keywords where content = ? and key_userId = ?",
       count = 1,
       kid
     //在keywords表中查询是否存在关键字
-    pool.query(sql1, [keywords], (err, result) => {
+    pool.query(sql1, [keywords, uid], (err, result) => {
       if (err) throw err
       if (result.length > 0) { //不存在
         count = result[0].count + 1

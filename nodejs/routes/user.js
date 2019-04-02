@@ -527,15 +527,15 @@ router.get("/search",(req,res)=>{
   let uid = req.query.uid,
       sql,
       data = {}
-  sql = "select content from keywords order by count desc"
+  sql = "select content from keywords group by content order by sum(count) desc"
     pool.query(sql,(err,result)=>{
       if(err) throw err
-      data.all = result[0]
+      data.all = result
       if(!!uid) {
         sql = "select content from keywords where key_userId = ? order by count desc limit 0,3"
         pool.query(sql,[uid],(err,result)=>{
           if(err) throw err
-          data.me = result[0]
+          data.me = result
           res.send({code:200,msg:"获取数据成功",data})
         })
       }else{
