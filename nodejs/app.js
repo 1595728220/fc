@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser")
 const session = require("express-session")
 const userRouter = require("./routes/user")
 const productRouter = require("./routes/product")
+const orderRouter = require("./routes/order")
 //定义允许跨域访问的origin列表
 let White_list = ["http://47.103.4.25:5501","http://127.0.0.1:5501","http://127.0.0.1"],
 index
@@ -37,3 +38,5 @@ app.use(bodyParser.json())
 app.use("/user",userRouter)
 //挂载产品路由模块到/product下
 app.use("/product",productRouter)
+//挂载订单模块到/order下
+app.use("/order",orderRouter)
