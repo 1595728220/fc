@@ -271,14 +271,15 @@ router.post("/add", (req, res) => {
 //修改头像 /updateAvatar uid post
 router.post("/avatar", (req, res) => {
   //创建表单对象
-  let form = new multiparty.Form(req.files)
+  let form = new multiparty.Form()
   form.uploadDir = "../public/img/user" //设置图片存储路径
   form.keepExtensions = true //保留后缀
   form.maxFiledsSize = 2 * 1024 * 1024 //内存大小
   form.maxFilesSize = 5 * 1024 * 1024 //文件字节大小限制，超出时会报错
   //表单解析
   form.parse(req, function (err, fields, files) {
-    // console.log(fields)
+    // console.log(files)
+    // console.log(fields.uid)
     if (err) { //上传文件大小超出限制
       console.log(err)
       res.send({
