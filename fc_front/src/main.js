@@ -7,6 +7,7 @@ Vue.prototype.$ajax = axios
 //js
 import "./assets/js/jquery"
 import "./assets/js/jquery.flot"
+import "./assets/js/bootstrap"
 //css
 import "./assets/css/bootstrap.css"
 import "./assets/css/font-awesome.css"

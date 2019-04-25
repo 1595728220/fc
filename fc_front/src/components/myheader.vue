@@ -103,10 +103,10 @@ export default {
   .header_right .breadcrumb{
     background:#fff;
   }
-  .breadcrumb > li + li:before{
+  .breadcrumb-item + .breadcrumb-item::before{
     content:"|";
-    color:#333;
-    font-size:16px;
+    /* color:#333; */
+    /* font-size:16px; */
   }
   .breadcrumb .breadcrumb-item a{
     font-size:16px;
