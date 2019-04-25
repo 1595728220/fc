@@ -13,7 +13,7 @@
         <div id="header_content" class="collapse navbar-collapse">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link to="/" class="nav-link">逛市场</router-link>
+              <a to="/" class="nav-link">逛市场</a>
             </li>
             <li class="nav-item">
                 <router-link to="/" class="nav-link">新品</router-link>
