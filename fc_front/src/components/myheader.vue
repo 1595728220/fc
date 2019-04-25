@@ -22,11 +22,11 @@
     </div>
     <div class="col-lg-6 col-sm-12">
       <div class="row m-0 header_right">
-        <div class="col-lg-6">
+        <div class="col-sm-6">
           <input type="text" class="form-control dib " placeholder="翡翠手镯">
           <button class="btn btn-primary">搜索</button>
         </div>
-        <div class="col-lg-6">
+        <div class="col-sm-6">
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <router-link to="/login">登录</router-link>
