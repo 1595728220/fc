@@ -1,7 +1,9 @@
 <template>
     <div>
         <myheader></myheader>
-        <h1>{{msg}}</h1>  
+        <div class="container">
+            <h1>{{msg}}</h1>
+        </div>
         <myfooter></myfooter>
     </div>
     
