@@ -1,13 +1,13 @@
 <template>
   <div class="row header">
     <div class="col-sm-12">
-      <div class="navbar navbar-expand-sm navbar-light header_nav">
+      <div class="navbar navbar-expand-md navbar-light header_nav">
         <router-link to="/" class="navbar-brand">对庄翡翠</router-link>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#header_area">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div id="header_area" class="collapse navbar-collapse">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav w-100">
             <li class="nav-item">
               <router-link to="/" class="nav-link">逛市场</router-link>
             </li>
@@ -18,16 +18,16 @@
               <router-link to="/" class="nav-link">对庄APP</router-link>
             </li>
             <li class="nav-item pr">
-              <a @mouseenter="class_hover" @mouseleave="class_hover" class="nav-link" data-target="#class_area"
-                data-toggle="collapse"> 分类<div class="triangle_area">
+              <a @click="class_hover" class="nav-link cp"> 分类
+                <div class="triangle_area">
                   <span :class="{'triangle-left':is_triangle_left,'triangle-top':is_triangle_top}">
                   </span>
                 </div>
               </a>
-              <div class="collapse text-dark w-100 class_area" id="class_area">
-                <h1>分类一</h1>
-                <h1>分类二</h1>
-                <h1>分类三</h1>
+              <div class="dropdown-menu text-dark w-100 mb-1" :class="{show:is_show_dropdown}" id="class_area">
+                <h3>分类一</h3>
+                <h3>分类二</h3>
+                <h3>分类三</h3>
               </div>
             </li>
             <li class="nav-item">
@@ -35,14 +35,14 @@
               <button class="btn btn-primary">搜索</button>
             </li>
             <li class="nav-item">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <router-link to="/login">登录</router-link>
-                    </li>
-                    <li class="breadcrumb-item">
-                      <router-link to="/register">注册</router-link>
-                    </li>
-                  </ul>
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <router-link to="/login">登录</router-link>
+                </li>
+                <li class="breadcrumb-item">
+                  <router-link to="/register">注册</router-link>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -55,19 +55,25 @@
     data() {
       return {
         is_triangle_left: false,
-        is_triangle_top: true
+        is_triangle_top: true,
+        is_show_dropdown:false
       }
     },
     methods: {
       class_hover() {
-        console.log("鼠标悬停在分类标签");
+        // console.log("鼠标点击分类标签，展开下拉列表");
         [this.is_triangle_left, this.is_triangle_top] = [this.is_triangle_top, this.is_triangle_left]
+        this.is_show_dropdown = !this.is_show_dropdown
       }
     },
   }
 </script>
 <style>
-  @media (min-width: 576px) {}
+  @media (min-width: 576px) {
+    .header .navbar-nav {
+      align-items:flex-start
+    }
+  }
 
   @media (min-width: 768px) {
     .class_area {
@@ -75,6 +81,13 @@
       position: absolute;
       left: 10px;
       top: 10px;
+    }
+    .header .navbar-nav {
+      justify-content: space-between;
+      align-items:center;
+    }
+    .breadcrumb{
+      align-items: center;
     }
   }
 
@@ -86,9 +99,13 @@
     border-bottom: 1px solid #ccc;
   }
 
-  .header_nav li a {
+
+
+  .header_nav li>a {
     font-size: 16px;
     font-weight: bold;
+    padding-left:0 !important;
+    padding-right:0 !important;
   }
 
   .header_nav li button {
@@ -97,7 +114,8 @@
     font-size: 16px;
     font-weight: bold;
     /* color: rgba(255, 255, 255, 0.5); */
-  } 
+  }
+
   .header_nav li .triangle_area {
     width: 12px;
     height: 12px;
@@ -118,6 +136,11 @@
 
   .header_nav .breadcrumb {
     background: #fff;
+    font-size: 16px;
+    /* align-items: center; */
+    padding-left:0;
+    margin: 0;
+    /* justify-content: space-around; */
   }
 
   .breadcrumb-item+.breadcrumb-item::before {
