@@ -50,9 +50,12 @@
                 placeholder="翡翠手镯">
               <button class="btn btn-primary">搜索</button>
               <div class="dropdown-menu text-dark mb-1 search_area" :class="{show:search_is_show_dropdown}">
-                <h3>搜索词一</h3>
-                <h3>搜索词二</h3>
-                <h3>搜索词三</h3>
+                  <div class="mb-5 p-3">
+                      <h5 class="mb-2">佛</h5>
+                      <div>
+                        <router-link to="/product" class="btn btn-primary w-25">水滴形</router-link>
+                      </div>
+                    </div>
               </div>
             </li>
             <li class="nav-item">
@@ -91,6 +94,13 @@
         this.search_is_show_dropdown = !this.search_is_show_dropdown
       }
     },
+    beforeRouteEnter(to,from,next){
+      console.log('组件路由勾子：beforeRouteEnter')
+      next(vm=>{
+        console.log(vm)  //vm为vue的实例
+        console.log('组件路由勾子beforeRouteEnter的next')
+      })
+    }
   }
 </script>
 <style>
