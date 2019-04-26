@@ -18,21 +18,42 @@
               <router-link to="/" class="nav-link">对庄APP</router-link>
             </li>
             <li class="nav-item pr">
-              <a @click="class_hover" class="nav-link cp"> 分类
+              <a @click="class_click" class="nav-link cp"> 分类
                 <div class="triangle_area">
                   <span :class="{'triangle-left':is_triangle_left,'triangle-top':is_triangle_top}">
                   </span>
                 </div>
               </a>
-              <div class="dropdown-menu text-dark w-100 mb-1" :class="{show:is_show_dropdown}" id="class_area">
-                <h3>分类一</h3>
-                <h3>分类二</h3>
-                <h3>分类三</h3>
+              <div class="dropdown-menu text-dark mb-1 class_area" :class="{show:class_is_show_dropdown}">
+                <div class="mb-5 p-3">
+                  <h5 class="mb-2">吊坠/挂坠</h5>
+                  <div>
+                    <router-link to="/product" class="btn btn-primary w-25">佛</router-link>
+                  </div>
+                </div>
+                <div class="mb-5 p-3">
+                  <h5 class="mb-2">手镯</h5>
+                  <div>
+                    <router-link to="/product" class="btn btn-primary w-25">圆圈</router-link>
+                  </div>
+                </div>
+                <div class="mb-5 p-3">
+                  <h5 class="mb-2">界面裸石</h5>
+                  <div>
+                    <router-link to="/product" class="btn btn-primary w-25">水滴形</router-link>
+                  </div>
+                </div>
               </div>
             </li>
-            <li class="nav-item">
-              <input type="text" class="form-control dib " placeholder="翡翠手镯">
+            <li class="nav-item pr">
+              <input type="text" class="form-control dib " @focus="search_click" @blur="search_click"
+                placeholder="翡翠手镯">
               <button class="btn btn-primary">搜索</button>
+              <div class="dropdown-menu text-dark mb-1 search_area" :class="{show:search_is_show_dropdown}">
+                <h3>搜索词一</h3>
+                <h3>搜索词二</h3>
+                <h3>搜索词三</h3>
+              </div>
             </li>
             <li class="nav-item">
               <ul class="breadcrumb">
@@ -56,14 +77,18 @@
       return {
         is_triangle_left: false,
         is_triangle_top: true,
-        is_show_dropdown:false
+        class_is_show_dropdown: false,
+        search_is_show_dropdown: false
       }
     },
     methods: {
-      class_hover() {
+      class_click() {
         // console.log("鼠标点击分类标签，展开下拉列表");
         [this.is_triangle_left, this.is_triangle_top] = [this.is_triangle_top, this.is_triangle_left]
-        this.is_show_dropdown = !this.is_show_dropdown
+        this.class_is_show_dropdown = !this.class_is_show_dropdown
+      },
+      search_click() {
+        this.search_is_show_dropdown = !this.search_is_show_dropdown
       }
     },
   }
@@ -71,7 +96,7 @@
 <style>
   @media (min-width: 576px) {
     .header .navbar-nav {
-      align-items:flex-start
+      align-items: flex-start
     }
   }
 
@@ -82,11 +107,13 @@
       left: 10px;
       top: 10px;
     }
+
     .header .navbar-nav {
       justify-content: space-between;
-      align-items:center;
+      align-items: center;
     }
-    .breadcrumb{
+
+    .breadcrumb {
       align-items: center;
     }
   }
@@ -104,8 +131,8 @@
   .header_nav li>a {
     font-size: 16px;
     font-weight: bold;
-    padding-left:0 !important;
-    padding-right:0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 
   .header_nav li button {
@@ -135,10 +162,10 @@
   }
 
   .header_nav .breadcrumb {
-    background: #fff;
+    background: transparent;
     font-size: 16px;
     /* align-items: center; */
-    padding-left:0;
+    padding-left: 0;
     margin: 0;
     /* justify-content: space-around; */
   }
@@ -151,5 +178,12 @@
 
   .header_nav .breadcrumb .breadcrumb-item a {
     font-size: 16px;
+  }
+  .header .class_area{
+    width:23rem;
+    top:33px;
+  }
+  .header .search_area{
+    width:23rem;
   }
 </style>
