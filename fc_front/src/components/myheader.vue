@@ -88,7 +88,7 @@
     },
     methods: {
       class_click:function() {
-        // console.log("鼠标点击分类标签，展开下拉列表");
+        console.log("鼠标点击分类标签，展开下拉列表");
         [this.is_triangle_left, this.is_triangle_top] = [this.is_triangle_top, this.is_triangle_left]
         this.class_is_show_dropdown = !this.class_is_show_dropdown
       },
@@ -97,7 +97,9 @@
       }
     },
     create:function(){
-      axios.get("").then()
+      // axios.get("http://127.0.0.1:8080/user/search").then((result)=>{
+      //   console.log(result)
+      // })
     }
   }
 </script>
