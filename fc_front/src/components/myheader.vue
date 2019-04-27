@@ -96,12 +96,8 @@
         this.search_is_show_dropdown = !this.search_is_show_dropdown
       }
     },
-    beforeRouteEnter(to,from,next){
-      console.log('组件路由勾子：beforeRouteEnter')
-      next(vm=>{
-        console.log(vm)  //vm为vue的实例
-        console.log('组件路由勾子beforeRouteEnter的next')
-      })
+    create:function(){
+      axios.get("").then()
     }
   }
 </script>
