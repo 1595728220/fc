@@ -409,7 +409,7 @@ router.post("/avatar", (req, res) => {
 router.get("/yzm", (req, res) => {
 
   //取出请求中的查询字符串的phone值
-  let phone = req.query.phone,
+  let phone = req.query.phone
     // {
     //   random,
     //   floor
