@@ -51,9 +51,9 @@
               <button class="btn btn-primary">搜索</button>
               <div class="dropdown-menu text-dark mb-1 search_area" :class="{show:search_is_show_dropdown}">
                   <div class="mb-5 p-3">
-                      <h5 class="mb-2">佛</h5>
+                      <h5 class="mb-2">热门搜索</h5>
                       <div>
-                        <router-link to="/product" class="btn btn-primary w-25">水滴形</router-link>
+                        <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords" :key="ind">{{keyword.content}}</router-link>
                       </div>
                     </div>
               </div>
@@ -82,7 +82,7 @@
         is_triangle_top: true,
         class_is_show_dropdown: false,
         search_is_show_dropdown: false,
-        keywords:null,
+        keywords:{all:null,me:null},
         classfywords:null
       }
     },
@@ -96,10 +96,14 @@
         this.search_is_show_dropdown = !this.search_is_show_dropdown
       }
     },
-    create:function(){
-      // axios.get("http://127.0.0.1:8080/user/search").then((result)=>{
-      //   console.log(result)
-      // })
+    mounted:function(){
+      this.$axios.get("http://127.0.0.1:8079/user/search").then((result)=>{
+        // console.log(result.data.data.all[0].content)
+        this.keywords = result.data.data.all
+        // console.log(this.keywords)
+      }).catch((error)=>{
+        console.log(error)
+      })
     }
   }
 </script>
