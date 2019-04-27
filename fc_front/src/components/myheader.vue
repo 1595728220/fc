@@ -81,16 +81,18 @@
         is_triangle_left: false,
         is_triangle_top: true,
         class_is_show_dropdown: false,
-        search_is_show_dropdown: false
+        search_is_show_dropdown: false,
+        keywords:null,
+        classfywords:null
       }
     },
     methods: {
-      class_click() {
+      class_click:function() {
         // console.log("鼠标点击分类标签，展开下拉列表");
         [this.is_triangle_left, this.is_triangle_top] = [this.is_triangle_top, this.is_triangle_left]
         this.class_is_show_dropdown = !this.class_is_show_dropdown
       },
-      search_click() {
+      search_click:function() {
         this.search_is_show_dropdown = !this.search_is_show_dropdown
       }
     },
