@@ -54,12 +54,12 @@
                       <div v-if="person_uid">
                         <h5>历史记录</h5>
                         <div>
-
+                            <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.me" :key="ind" :class="{disabled:!is_person_keywords}"><span v-if="keyword">{{keyword.content}}</span></router-link>
                         </div>
                       </div>
                       <h5 class="mb-2">热门搜索</h5>
                       <div>
-                        <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords" :key="ind"><span v-if="keyword">{{keyword.content}}</span></router-link>
+                        <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.all" :key="ind"><span v-if="keyword">{{keyword.content}}</span></router-link>
                       </div>
                     </div>
               </div>
@@ -85,7 +85,7 @@
     data() {
       return {
         //保存当前用户id
-        person_uid:1,
+        person_uid:8,
         //三角形的底边方向是否在左
         is_triangle_left: false,
         //三角形的底边方向是否在上
@@ -97,7 +97,9 @@
         //搜索关键字
         keywords:{all:null,me:null},
         //分类关键字
-        classfywords:null
+        classfywords:null,
+        //是否有个人的搜索关键字记录
+        is_person_keywords:false
       }
     },
     methods: {
@@ -111,13 +113,22 @@
       }
     },
     mounted:function(){
-      this.$axios.get("http://127.0.0.1:8079/user/search",{
-        uid:this.person_uid
+      this.$axios.get("http://127.0.0.1:8081/user/search",{
+        params:{
+          uid:this.person_uid
+        }
       }).then((result)=>{
-        // console.log(result.data.data.all)
+        console.log(result)
         // this.keywords = JSON.parse(JSON.stringify(result.data.data.all))
-        this.keywords = result.data.data.all
+        this.keywords.all = result.data.data.all
+        this.keywords.me = result.data.data.me
         console.log(this.keywords)
+        if(this.keywords.me.length === 0) {
+          this.keywords.me = [{content:"无"}]
+        }else{
+          this.is_person_keywords = true
+        }
+        console.log(this.is_person_keywords)
       }).catch((error)=>{
         console.log(error)
       })
@@ -188,7 +199,7 @@
     cursor:text;
   }
 
-  .header_nav .btn {
+  .header_nav .nav-item>.btn {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
   }
@@ -221,5 +232,9 @@
   .header .search_area a{
     margin-left:1rem;
     margin-bottom:1rem;
+  }
+  .disabled{
+    color:#ddd;
+    pointer-events:none;
   }
 </style>

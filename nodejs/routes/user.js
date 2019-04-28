@@ -537,6 +537,7 @@ router.get("/search",(req,res)=>{
       sql,
 			//存储数据
       data = {}
+  console.log(uid)
   sql = "select content from keywords group by content order by sum(count) desc"
 	//查询数据库的关键词内容，热度降序排列
     pool.query(sql,(err,result)=>{
