@@ -158,7 +158,7 @@
   }
 
   @media (min-width: 768px) {
-    .class_area {
+    .header_nav .class_area {
       width: 500px;
       position: absolute;
       left: 10px;
@@ -228,7 +228,7 @@
     /* justify-content: space-around; */
   }
 
-  .breadcrumb-item+.breadcrumb-item::before {
+  .header_nav .breadcrumb-item+.breadcrumb-item::before {
     content: "|";
     /* color:#333; */
     /* font-size:16px; */

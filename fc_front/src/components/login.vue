@@ -28,12 +28,11 @@
                 <!-- 登录按钮 -->
                 <div class="col-sm-12">
                     <!-- 注册忘记密码跳转链接开始 -->
-                    <ul class="clear">
-                        <li>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
                             <router-link to="/register">注册</router-link>
                         </li>
-                        <li>|</li>
-                        <li>
+                        <li class="breadcrumb-item">
                             <router-link to="/">忘记密码</router-link>
                         </li>
                     </ul>
@@ -82,8 +81,7 @@
 </script>
 <style>
     .login {
-        border:1px solid #fff;
-        border-radius: 7px;
+        border-radius: 0.5rem;
     }
 
     .login .input_form {
