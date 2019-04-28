@@ -50,18 +50,21 @@
                 placeholder="翡翠手镯">
               <button class="btn btn-primary">搜索</button>
               <div class="dropdown-menu text-dark mb-1 search_area" :class="{show:search_is_show_dropdown}">
-                  <div class="mb-5 p-3">
-                      <div v-if="person_uid">
-                        <h5>历史记录</h5>
-                        <div>
-                            <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.me" :key="ind" :class="{disabled:!is_person_keywords}"><span v-if="keyword">{{keyword.content}}</span></router-link>
-                        </div>
-                      </div>
-                      <h5 class="mb-2">热门搜索</h5>
-                      <div>
-                        <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.all" :key="ind"><span v-if="keyword">{{keyword.content}}</span></router-link>
-                      </div>
+                <div class="mb-5 p-3">
+                  <div v-if="person_uid">
+                    <h5>历史记录</h5>
+                    <div>
+                      <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.me"
+                        :key="ind" :class="{disabled:!is_person_keywords}"><span
+                          v-if="keyword">{{keyword.content}}</span></router-link>
                     </div>
+                  </div>
+                  <h5 class="mb-2">热门搜索</h5>
+                  <div>
+                    <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.all"
+                      :key="ind"><span v-if="keyword">{{keyword.content}}</span></router-link>
+                  </div>
+                </div>
               </div>
             </li>
             <li class="nav-item">
@@ -85,7 +88,7 @@
     data() {
       return {
         //保存当前用户id
-        person_uid:8,
+        person_uid: null,
         //三角形的底边方向是否在左
         is_triangle_left: false,
         //三角形的底边方向是否在上
@@ -95,41 +98,53 @@
         //搜索关键字是否显示
         search_is_show_dropdown: false,
         //搜索关键字
-        keywords:{all:null,me:null},
+        keywords: {
+          all: null,
+          me: null
+        },
         //分类关键字
-        classfywords:null,
+        classfywords: null,
         //是否有个人的搜索关键字记录
-        is_person_keywords:false
+        is_person_keywords: false
       }
     },
     methods: {
-      class_click:function() {
+      class_click: function () {
         console.log("鼠标点击分类标签，展开下拉列表");
         [this.is_triangle_left, this.is_triangle_top] = [this.is_triangle_top, this.is_triangle_left]
         this.class_is_show_dropdown = !this.class_is_show_dropdown
       },
-      search_click:function() {
-        this.search_is_show_dropdown = !this.search_is_show_dropdown
+      search_click: function () {
+        if (this.search_is_show_dropdown) {
+          console.log("1秒后搜索关键字栏隐藏")
+          setTimeout(() => {
+            this.search_is_show_dropdown = !this.search_is_show_dropdown
+          }, 1000)
+        } else {
+          this.search_is_show_dropdown = !this.search_is_show_dropdown
+        }
       }
     },
-    mounted:function(){
-      this.$axios.get("http://127.0.0.1:8081/user/search",{
-        params:{
-          uid:this.person_uid
+    mounted: function () {
+      this.$axios.get("http://127.0.0.1:8081/user/search", {
+        params: {
+          uid: this.person_uid
         }
-      }).then((result)=>{
-        console.log(result)
+      }).then((result) => {
+        // console.log(result)
         // this.keywords = JSON.parse(JSON.stringify(result.data.data.all))
         this.keywords.all = result.data.data.all
-        this.keywords.me = result.data.data.me
-        console.log(this.keywords)
-        if(this.keywords.me.length === 0) {
-          this.keywords.me = [{content:"无"}]
-        }else{
+        this.keywords.me = result.data.data.me || []
+        // console.log(this.keywords)
+        if (this.keywords.me.length === 0) {
+          this.keywords.me = [{
+            content: "无"
+          }]
+        } else {
           this.is_person_keywords = true
         }
-        console.log(this.is_person_keywords)
-      }).catch((error)=>{
+        // console.log(this.is_person_keywords)
+      }).catch((error) => {
         console.log(error)
       })
     }
@@ -196,7 +211,7 @@
     vertical-align: middle;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
-    cursor:text;
+    cursor: text;
   }
 
   .header_nav .nav-item>.btn {
@@ -222,19 +237,23 @@
   .header_nav .breadcrumb .breadcrumb-item a {
     font-size: 16px;
   }
-  .header .class_area{
-    width:23rem;
-    top:33px;
+
+  .header .class_area {
+    width: 23rem;
+    top: 33px;
   }
-  .header .search_area{
-    width:23rem;
+
+  .header .search_area {
+    width: 23rem;
   }
-  .header .search_area a{
-    margin-left:1rem;
-    margin-bottom:1rem;
+
+  .header .search_area a {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
   }
-  .disabled{
-    color:#ddd;
-    pointer-events:none;
+
+  .btn.disabled {
+    color: #ddd;
+    pointer-events: none;
   }
 </style>
