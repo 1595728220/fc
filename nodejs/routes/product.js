@@ -133,5 +133,38 @@ router.get("/list", (req, res) => {
     res.send(result)
   })
 })
+//搜索关键词查找相关产品 /get keyword 
+router.get("/search",(req,res)=>{
+	let {
+		//使用搜索功能的用户编号
+		uid,
+		//本次搜索的关键词
+		keyword,
+		sql,
+		count = 0
+	}	 = req.query
+	if(!uid){
+		uid = 0
+	}
+	sql = "select count from keywords where content = ? and key_userId = ?"
+	pool.query(sql,[keyword,uid],(err,result)=>{
+		if(err) throw err
+		if(result.length === 0) {
+			sql = "insert into keywords values(null,?,?,1)"
+			pool.query(sql,[keyword,uid],(err,result)=>{
+				if(err) throw err
+				res.send({code:200,msg:"搜索成功,在关键词库中追加新关键词"})
+			})
+		} else{
+				count = result.count + 1
+				sql = "update keywords set count = ? where key_userId = ?"
+				pool.query(sql,[count,uid],(err,result)=>{
+					if(err) throw err
+					res.send({code:200,msg:"搜索成功,更新关键词搜索次数"})
+				})
+		}
+	})
+	
+})
 //导出产品模块
 module.exports = router
