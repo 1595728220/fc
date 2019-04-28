@@ -46,14 +46,20 @@
               </div>
             </li>
             <li class="nav-item pr">
-              <input type="text" class="form-control dib " @focus="search_click" @blur="search_click"
+              <input type="text" class="form-control dib search_input" @focus="search_click" @blur="search_click"
                 placeholder="翡翠手镯">
               <button class="btn btn-primary">搜索</button>
               <div class="dropdown-menu text-dark mb-1 search_area" :class="{show:search_is_show_dropdown}">
                   <div class="mb-5 p-3">
+                      <div v-if="person_uid">
+                        <h5>历史记录</h5>
+                        <div>
+
+                        </div>
+                      </div>
                       <h5 class="mb-2">热门搜索</h5>
                       <div>
-                        <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords" :key="ind">{{keyword.content}}</router-link>
+                        <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords" :key="ind"><span v-if="keyword">{{keyword.content}}</span></router-link>
                       </div>
                     </div>
               </div>
@@ -79,7 +85,7 @@
     data() {
       return {
         //保存当前用户id
-        person_uid:null,
+        person_uid:1,
         //三角形的底边方向是否在左
         is_triangle_left: false,
         //三角形的底边方向是否在上
@@ -179,6 +185,7 @@
     vertical-align: middle;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+    cursor:text;
   }
 
   .header_nav .btn {

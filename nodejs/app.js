@@ -9,7 +9,7 @@ const orderRouter = require("./routes/order")
 let White_list = ["http://47.103.4.25:5501","http://127.0.0.1:5501","http://127.0.0.1","http://192.168.137.1:8081","http://127.0.0.1:8080"],
 index
 let app = express()
-app.listen(8079)
+app.listen(8081)
 //用于后台测试用的静态资源目录
 app.use(express.static("public"))
 //利用中间件对访问的origin进行白名单验证，通过则添加对应的origin到响应头中，如果未匹配则默认返回白名单中的第一个url
