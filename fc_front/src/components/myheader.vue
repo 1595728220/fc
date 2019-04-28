@@ -52,7 +52,7 @@
               <div class="dropdown-menu text-dark mb-1 search_area" :class="{show:search_is_show_dropdown}">
                 <div class="mb-5 p-3">
                   <div v-if="person_uid">
-                    <h5>历史记录</h5>
+                    <h5>搜索记录</h5>
                     <div>
                       <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.me"
                         :key="ind" :class="{disabled:!is_person_keywords}"><span
