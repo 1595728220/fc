@@ -99,3 +99,9 @@ input:-webkit-autofill{
 .small_font{
   font-size:12px;
 }
+.v_hidden {
+  visibility:hidden;
+}
+.v_show{
+  visibility: visible;
+}

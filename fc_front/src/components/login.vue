@@ -4,29 +4,29 @@
         <!-- content start -->
         <div class="container">
             <!-- loginForm start-->
-            <div class="login row m-0">
-                <div class="col-sm-12">
-                    <h2>登录</h2>
+            <div class="login row mt-5 mb-5 ml-auto mr-auto">
+                <div class="col-sm-12 mb-3">
+                    <h2 class="text-center">登录</h2>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-sm-12 mb-3">
                     <!-- 手机表单开始 -->
-                    <div class="phone_err">手机号格式错误</div>
-                    <input type="text" class="input_form" placeholder="手机号" @blur="func_phone_blur">
+                    <div class="phone_err text-right text-danger" :class="{v_hidden:state_phone}">手机号格式错误</div>
+                    <input type="text" class="input_form" placeholder="手机号" @blur="func_phone_blur" v-model="input_phone" :class="{input_form_error:!state_phone}">
                     <!-- 手机表单结束 -->
                 </div>
 
-                <div class="col-sm-12">
+                <div class="col-sm-12 mb-3">
                     <!-- 密码表单开始 -->
-                    <div class="upwd_err">包含数字、字母、下划线的6-18位</div>
-                    <input type="password" class="input_form" placeholder="密码" @blur="func_upwd_blur">
+                    <div class="upwd_err text-right text-danger" :class="{v_hidden:state_upwd}">包含数字、字母、下划线的6-18位</div>
+                    <input type="password" class="input_form" placeholder="密码" @blur="func_upwd_blur" v-model="input_upwd" :class="{input_form_error:!state_upwd}">
                     <!-- 密码表单结束 -->
                 </div>
 
-                <div class="col-sm-12">
+                <div class="col-sm-12 mb-3">
                     <button class="btn" @click="login">登录</button>
                 </div>
                 <!-- 登录按钮 -->
-                <div class="col-sm-12">
+                <div class="col-sm-12 mb-3">
                     <!-- 注册忘记密码跳转链接开始 -->
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item">
@@ -40,12 +40,10 @@
                 </div>
             </div>
             <!-- loginForm end -->
-
         </div>
         <!-- content end -->
         <myfooter></myfooter>
     </div>
-
 </template>
 <script>
     export default {
@@ -53,54 +51,81 @@
             return {
                 phoneRegex: /^1[34578]\d{9}$/, //手机号正则
                 upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
-                state_phone: 0, //手机号验证状态
-                state_upwd: 0 //密码验证状态
-            }
+                input_phone:"",//保存用户输入的手机号
+                input_upwd:"",//保存用户输入的密码
+                state_phone: true, //手机号验证状态
+                state_upwd: true //密码验证状态
+            };
         },
         methods: {
             /**
              * 手机号表单失去焦点时调用的方法
              */
             func_phone_blur() {
-                console.log("鼠标从手机号失去焦点")
+                console.log("鼠标从手机号失去焦点");
+                //验证手机号格式，并将结果赋值给手机号验证状态
+                this.state_phone = this.phoneRegex.test(this.input_phone)
+                console.log(this.state_phone,this.phoneRegex,this.input_phone)
             },
             /**
              * 密码表单失去焦点时调用的方法
              */
             func_upwd_blur() {
-                console.log("鼠标从密码失去焦点")
+                console.log("鼠标从密码失去焦点");
+                this.state_upwd = this.upwdRegex.test(this.input_upwd)
             },
             /**
              * 登录按钮的点击事件所调用的方法
              */
             login() {
-                console.log("点击登录")
+                console.log("点击登录");
             }
         }
-    }
+    };
 </script>
 <style>
     .login {
         border-radius: 0.5rem;
     }
 
-    .login .input_form {
-        display: block;
-        height: 40px;
-        background: #fff;
-        border: 1px solid #ccc;
-        padding: 0 10px;
-        /* outline:none; */
-        color: #262e39;
-        border-radius: 3px;
-        margin: 0 auto 18px;
-        box-sizing: border-box;
+    .login .breadcrumb {
+        background: transparent;
+        font-size: 16px;
+        /* align-items: center; */
+        padding-left: 0;
+        margin: 0;
+        /* justify-content: space-around; */
     }
 
+    .login .breadcrumb-item+.breadcrumb-item::before {
+        content: "|";
+
+    }
+
+    .login .breadcrumb .breadcrumb-item a {
+        font-size: 16px;
+    }
+    .login h2{
+        font-size:1.25rem;
+    }
+    .login .input_form {
+        width:100%;
+        display: block;
+        height: 2.5rem;
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 0 1.125rem;
+        color: #262e39;
+        border-radius: 0.25rem;
+        box-sizing: border-box;
+    }
     .login .input_form_error {
         outline: none;
-        border-color: #F44336;
+        border-color: #f44336;
     }
+    /* 
+
+    
 
     .login .btn {
         height: 40px;
@@ -114,7 +139,6 @@
         cursor: pointer;
         margin: 0 auto 18px;
         padding: 0 10px;
-
     }
 
     .login .btn:hover {
@@ -125,7 +149,7 @@
     .login>.phone_err {
         width: 340px;
         margin: 0 auto;
-        color: #F44336;
+        color: #f44336;
         top: 75px;
         right: 62px;
         font-size: 12px;
@@ -136,7 +160,7 @@
     .login>.upwd_err {
         width: 340px;
         margin: 0 auto;
-        color: #F44336;
+        color: #f44336;
         top: 134px;
         right: 62px;
         font-size: 12px;
@@ -149,5 +173,5 @@
         text-align: center;
         margin: 20px 0 30px;
         font-weight: normal;
-    }
+    } */
 </style>
