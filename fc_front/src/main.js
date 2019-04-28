@@ -18,8 +18,10 @@ import "./assets/css/my_comm.css"
 //声明全局组件
 import MyHeader from "@/components/myheader"
 import MyFooter from "@/components/myfooter"
+import MyAlert from "@/components/myalert"
 Vue.component('myheader',MyHeader)
 Vue.component('myfooter',MyFooter)
+Vue.component('myalert',MyAlert)
 Vue.config.productionTip = false
 
 new Vue({

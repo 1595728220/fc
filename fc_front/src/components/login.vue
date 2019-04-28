@@ -3,6 +3,9 @@
         <myheader></myheader>
         <!-- content start -->
         <div class="container">
+            <!-- 消息提示模态框开始 -->
+            <myalert></myalert>
+            <!-- 消息提示模态框结束 -->
             <!-- loginForm start-->
             <div class="login row mt-5 mb-5 ml-auto mr-auto">
                 <div class="col-sm-12 mb-3">
@@ -56,7 +59,8 @@
                 input_phone: "",//保存用户输入的手机号
                 input_upwd: "",//保存用户输入的密码
                 state_phone: true, //手机号验证状态
-                state_upwd: true //密码验证状态
+                state_upwd: true, //密码验证状态
+                login_result:null//登录的结果对象
             };
         },
         methods: {
@@ -81,10 +85,14 @@
              */
             login() {
                 this.$axios.post("http://127.0.0.1:8081/user/login",{
+                    //登录的手机号
                     phone:this.input_phone,
+                    //登录的密码
                     upwd:this.input_upwd
                 }).then(result=>{
                     console.log(result)
+                    this.login_result = result.data
+                    console.log(this.login_result)
                 }).catch(error=>{
                     console.log(error)
                 })
