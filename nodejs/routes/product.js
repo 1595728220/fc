@@ -52,16 +52,21 @@ router.get("/list", (req, res) => {
   //不规范的参数规范化
   minprice < 0 && (minprice = 0)
   maxprice < minprice && (maxprice = 99999999)
+  //检查用户是否输入用户编号，如果没有统一改为0，表示游客的搜索关键词
+  if(!uid) {
+    uid = 0
+  }
   //添加搜索的关键字到keywords表中
-  if (uid) {
     let sql1 = "select count,kid from keywords where content = ? and key_userId = ?",
       count = 1,
       kid
     //在keywords表中查询是否存在关键字
     pool.query(sql1, [keywords, uid], (err, result) => {
       if (err) throw err
-      if (result.length > 0) { //不存在
+      if (result.length > 0) { //存在
+        //搜索次数+1
         count = result[0].count + 1
+        //所搜关键词记录的编号
         kid = result[0].kid
         //更新关键字的搜索次数
         sql1 = "update keywords set count = ? where kid = ?"
@@ -79,7 +84,6 @@ router.get("/list", (req, res) => {
       }
 
     })
-  }
   //计算分页的开始下标
   let start = (pno - 1) * size,
     sql = "select described,price,md1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
