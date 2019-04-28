@@ -86,32 +86,33 @@
     };
 </script>
 <style>
-    @media screen and (max-width:575px){
-        .login{
-            width:18rem;
+    @media screen and (max-width:575px) {
+        .login {
+            width: 18rem;
         }
     }
+
     @media screen and (min-width: 576px) {
-        .login{
-            width:70%;
+        .login {
+            width: 70%;
         }
     }
 
     @media screen and (min-width: 768px) {
-        .login{
-            width:60%;
+        .login {
+            width: 60%;
         }
     }
 
     @media screen and (min-width: 992px) {
-        .login{
-            width:50%;
+        .login {
+            width: 50%;
         }
     }
 
     @media screen and (min-width: 1200px) {
-        .login{
-            width:40%;
+        .login {
+            width: 40%;
         }
     }
 
@@ -174,39 +175,4 @@
         background: rgb(42, 117, 254);
         border: rgb(42, 117, 254);
     }
-
-    /* 
-
-    
-
-    
-
-    .login>.phone_err {
-        width: 340px;
-        margin: 0 auto;
-        color: #f44336;
-        top: 75px;
-        right: 62px;
-        font-size: 12px;
-        text-align: right;
-        display: block;
-    }
-
-    .login>.upwd_err {
-        width: 340px;
-        margin: 0 auto;
-        color: #f44336;
-        top: 134px;
-        right: 62px;
-        font-size: 12px;
-        text-align: right;
-        display: block;
-    }
-
-    .login h2 {
-        font-size: 20px;
-        text-align: center;
-        margin: 20px 0 30px;
-        font-weight: normal;
-    } */
 </style>
