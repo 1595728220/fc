@@ -80,7 +80,14 @@
              * 登录按钮的点击事件所调用的方法
              */
             login() {
-                console.log("点击登录");
+                this.$axios.post("http://127.0.0.1:8081/user/login",{
+                    phone:this.input_phone,
+                    upwd:this.input_upwd
+                }).then(result=>{
+                    console.log(result)
+                }).catch(error=>{
+                    console.log(error)
+                })
             }
         }
     };

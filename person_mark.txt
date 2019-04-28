@@ -1,2 +1,5 @@
 1.使用属性绑定对无值属性也有效果
 2.在vue中样式绑定时不能出现-号连字符，否则报错
+3.Access to XMLHttpRequest at 'http://127.0.0.1:8081/user/login' from origin 'http://127.0.0.1:8080' has been blocked by CORS policy: Request header field content-type is not allowed by Access-Control-Allow-Headers in preflight response.这是因为我在后端设置跨域请求的时候没有所需的请求类型
+res.header("Access-Control-Allow-Headers", "Content-Type");
+上面代码需要加入允许的头部，content-type

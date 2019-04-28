@@ -21,6 +21,7 @@ app.all("*",(req,res,next)=>{
     //console.log(White_list[index])
     res.header("Access-Control-Allow-Origin", White_list[index])
     res.header("Access-Control-Allow-Credentials", true)
+    res.header("Access-Control-Allow-Headers", "Content-Type");
     next()
 })
 app.use(cookieParser("123456"))
