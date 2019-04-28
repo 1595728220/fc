@@ -78,11 +78,19 @@
   export default {
     data() {
       return {
+        //保存当前用户id
+        person_uid:null,
+        //三角形的底边方向是否在左
         is_triangle_left: false,
+        //三角形的底边方向是否在上
         is_triangle_top: true,
+        //分类框是否显示
         class_is_show_dropdown: false,
+        //搜索关键字是否显示
         search_is_show_dropdown: false,
+        //搜索关键字
         keywords:{all:null,me:null},
+        //分类关键字
         classfywords:null
       }
     },
@@ -97,10 +105,13 @@
       }
     },
     mounted:function(){
-      this.$axios.get("http://127.0.0.1:8079/user/search").then((result)=>{
-        // console.log(result.data.data.all[0].content)
+      this.$axios.get("http://127.0.0.1:8079/user/search",{
+        uid:this.person_uid
+      }).then((result)=>{
+        // console.log(result.data.data.all)
+        // this.keywords = JSON.parse(JSON.stringify(result.data.data.all))
         this.keywords = result.data.data.all
-        // console.log(this.keywords)
+        console.log(this.keywords)
       }).catch((error)=>{
         console.log(error)
       })
@@ -199,5 +210,9 @@
   }
   .header .search_area{
     width:23rem;
+  }
+  .header .search_area a{
+    margin-left:1rem;
+    margin-bottom:1rem;
   }
 </style>
