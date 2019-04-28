@@ -11,14 +11,16 @@
                 <div class="col-sm-12 mb-3">
                     <!-- 手机表单开始 -->
                     <div class="phone_err text-right text-danger" :class="{v_hidden:state_phone}">手机号格式错误</div>
-                    <input type="text" class="input_form" placeholder="手机号" @blur="func_phone_blur" v-model="input_phone" :class="{input_form_error:!state_phone}">
+                    <input type="text" class="input_form" placeholder="手机号" @blur="func_phone_blur"
+                        v-model="input_phone" :class="{input_form_error:!state_phone}">
                     <!-- 手机表单结束 -->
                 </div>
 
                 <div class="col-sm-12 mb-3">
                     <!-- 密码表单开始 -->
                     <div class="upwd_err text-right text-danger" :class="{v_hidden:state_upwd}">包含数字、字母、下划线的6-18位</div>
-                    <input type="password" class="input_form" placeholder="密码" @blur="func_upwd_blur" v-model="input_upwd" :class="{input_form_error:!state_upwd}">
+                    <input type="password" class="input_form" placeholder="密码" @blur="func_upwd_blur"
+                        v-model="input_upwd" :class="{input_form_error:!state_upwd}">
                     <!-- 密码表单结束 -->
                 </div>
 
@@ -51,8 +53,8 @@
             return {
                 phoneRegex: /^1[34578]\d{9}$/, //手机号正则
                 upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
-                input_phone:"",//保存用户输入的手机号
-                input_upwd:"",//保存用户输入的密码
+                input_phone: "",//保存用户输入的手机号
+                input_upwd: "",//保存用户输入的密码
                 state_phone: true, //手机号验证状态
                 state_upwd: true //密码验证状态
             };
@@ -63,15 +65,15 @@
              */
             func_phone_blur() {
                 console.log("鼠标从手机号失去焦点");
-                //验证手机号格式，并将结果赋值给手机号验证状态
+                //验证手机号格式，并将结果赋值给手机号的验证状态
                 this.state_phone = this.phoneRegex.test(this.input_phone)
-                console.log(this.state_phone,this.phoneRegex,this.input_phone)
             },
             /**
              * 密码表单失去焦点时调用的方法
              */
             func_upwd_blur() {
                 console.log("鼠标从密码失去焦点");
+                //验证密码格式，并将结果赋值给密码的验证状态
                 this.state_upwd = this.upwdRegex.test(this.input_upwd)
             },
             /**
@@ -84,6 +86,35 @@
     };
 </script>
 <style>
+    @media screen and (max-width:575px){
+        .login{
+            width:18rem;
+        }
+    }
+    @media screen and (min-width: 576px) {
+        .login{
+            width:70%;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .login{
+            width:60%;
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+        .login{
+            width:50%;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        .login{
+            width:40%;
+        }
+    }
+
     .login {
         border-radius: 0.5rem;
     }
@@ -91,10 +122,9 @@
     .login .breadcrumb {
         background: transparent;
         font-size: 16px;
-        /* align-items: center; */
         padding-left: 0;
         margin: 0;
-        /* justify-content: space-around; */
+        justify-content: flex-end;
     }
 
     .login .breadcrumb-item+.breadcrumb-item::before {
@@ -105,11 +135,13 @@
     .login .breadcrumb .breadcrumb-item a {
         font-size: 16px;
     }
-    .login h2{
-        font-size:1.25rem;
+
+    .login h2 {
+        font-size: 1.25rem;
     }
+
     .login .input_form {
-        width:100%;
+        width: 100%;
         display: block;
         height: 2.5rem;
         background: #fff;
@@ -119,32 +151,35 @@
         border-radius: 0.25rem;
         box-sizing: border-box;
     }
+
     .login .input_form_error {
         outline: none;
         border-color: #f44336;
     }
-    /* 
-
-    
 
     .login .btn {
-        height: 40px;
+        width: 100%;
+        height: 2.5rem;
         display: block;
         background: #4b95ff;
         border: #4b95ff;
-        border-radius: 4px;
+        border-radius: 0.25rem;
         text-align: center;
         color: #fff;
-        font-size: 14px;
+        font-size: 1rem;
         cursor: pointer;
-        margin: 0 auto 18px;
-        padding: 0 10px;
     }
 
     .login .btn:hover {
         background: rgb(42, 117, 254);
         border: rgb(42, 117, 254);
     }
+
+    /* 
+
+    
+
+    
 
     .login>.phone_err {
         width: 340px;
