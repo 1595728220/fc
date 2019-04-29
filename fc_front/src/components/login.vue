@@ -3,11 +3,11 @@
         <myheader></myheader>
         <!-- content start -->
         <div class="container">
-            <!-- 消息提示模态框开始 -->
-            <myalert :mymsg="login_result" v-if="login_result"></myalert>
-            <!-- 消息提示模态框结束 -->
             <!-- loginForm start-->
-            <div class="login row mt-5 mb-5 ml-auto mr-auto">
+            <div class="login row mt-5 mb-5 ml-auto mr-auto pr" ref="father_area">
+                <!-- 消息提示模态框开始 -->
+                <myalert :mymsg="login_result" v-if="login_result"></myalert>
+                <!-- 消息提示模态框结束 -->
                 <div class="col-sm-12 mb-3">
                     <h2 class="text-center">登录</h2>
                 </div>
@@ -61,7 +61,8 @@
                 state_phone: true, //手机号验证状态
                 state_upwd: true, //密码验证状态
                 login_result: null, //登录的结果对象
-                test:"这是测试消息"
+                test: "这是测试消息",
+                login_timer:null //登录方法中使用的定时器
             };
         },
         methods: {
@@ -91,13 +92,26 @@
                     //登录的密码
                     upwd: this.input_upwd
                 }).then(result => {
-                    console.log(result)
+                    // console.log(result)
+                    //将请求数据放入变量中
                     this.login_result = result.data
                     console.log(this.login_result)
+                    //如果登录成功
+                    if(this.login_result.code === 200){
+                        //2s后跳转回首页
+                        this.login_timer = setTimeout(()=>{
+                            console.log("登录成功，2秒后跳转回首页")
+                            this.$router.push("/")
+                        },2000)
+                    }
                 }).catch(error => {
                     console.log(error)
                 })
             }
+        },
+        //组件销毁后清空定时器
+        destroyed() {
+            clearTimeout(this.login_timer)
         }
     };
 </script>
