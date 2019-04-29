@@ -4,7 +4,7 @@
         <!-- content start -->
         <div class="container">
             <!-- 消息提示模态框开始 -->
-            <myalert></myalert>
+            <myalert :mymsg="login_result" v-if="login_result"></myalert>
             <!-- 消息提示模态框结束 -->
             <!-- loginForm start-->
             <div class="login row mt-5 mb-5 ml-auto mr-auto">
@@ -56,11 +56,12 @@
             return {
                 phoneRegex: /^1[34578]\d{9}$/, //手机号正则
                 upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
-                input_phone: "",//保存用户输入的手机号
-                input_upwd: "",//保存用户输入的密码
+                input_phone: "", //保存用户输入的手机号
+                input_upwd: "", //保存用户输入的密码
                 state_phone: true, //手机号验证状态
                 state_upwd: true, //密码验证状态
-                login_result:null//登录的结果对象
+                login_result: null, //登录的结果对象
+                test:"这是测试消息"
             };
         },
         methods: {
@@ -84,16 +85,16 @@
              * 登录按钮的点击事件所调用的方法
              */
             login() {
-                this.$axios.post("http://127.0.0.1:8081/user/login",{
+                this.$axios.post("http://127.0.0.1:8081/user/login", {
                     //登录的手机号
-                    phone:this.input_phone,
+                    phone: this.input_phone,
                     //登录的密码
-                    upwd:this.input_upwd
-                }).then(result=>{
+                    upwd: this.input_upwd
+                }).then(result => {
                     console.log(result)
                     this.login_result = result.data
                     console.log(this.login_result)
-                }).catch(error=>{
+                }).catch(error => {
                     console.log(error)
                 })
             }
@@ -133,8 +134,8 @@
 
     .login {
         border-radius: 0.5rem;
-        box-shadow:0 0 1rem 0.01rem #333;
-        padding-top:2rem;
+        box-shadow: 0 0 1rem 0.01rem #333;
+        padding-top: 2rem;
     }
 
     .login .breadcrumb {

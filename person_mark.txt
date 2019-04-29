@@ -4,3 +4,4 @@
   这是因为我在后端设置跨域请求的时候没有所需的请求类型
   res.header("Access-Control-Allow-Headers", "Content-Type");
   上面代码需要加入允许的头部，content-type
+4.使用porps实现父子间通信，将要提示的消息传给子组件myalert,并在子组件中监听消息数据的变化，变化时提示框显示，过1.5s后隐藏
