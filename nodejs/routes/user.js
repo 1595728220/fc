@@ -39,6 +39,7 @@ router.post("/login", (req, res) => {
       //将用户数据存入session
       req.session.uid = result[0].uid
       req.session.nick = result[0].nick
+      console.log(req.session.uid)
       //响应json数据
       res.send({
         code: 200,
@@ -55,6 +56,7 @@ router.post("/login", (req, res) => {
 })
 //用户登录状态验证,登录状态则返回用户昵称
 router.get("/state", (req, res) => {
+  console.log(req.session.uid)
   if (req.session.uid === undefined) //根据cookie凭证验证session中有无uid数据
     //session为空
     res.send({
@@ -538,7 +540,7 @@ router.get("/search",(req,res)=>{
       sql,
 			//存储数据
       data = {}
-  console.log(uid)
+  // console.log(uid)
   sql = "select content from keywords group by content order by sum(count) desc"
 	//查询数据库的关键词内容，热度降序排列
     pool.query(sql,(err,result)=>{

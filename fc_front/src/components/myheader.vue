@@ -164,7 +164,11 @@
       }).catch((error) => {
         console.log(error)
       })
-      this.$axios.get("http://127.0.0.1:8081/user/state")
+      this.$axios.get("http://127.0.0.1:8081/user/state").then((result)=>{
+        console.log(result)
+      }).catch((error)=>{
+        console.log(error)
+      })
     }
   }
 </script>
