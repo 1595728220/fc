@@ -3,10 +3,10 @@
     <div class="col-sm-12">
       <div class="navbar navbar-expand-md navbar-light header_nav">
         <router-link to="/" class="navbar-brand">对庄翡翠</router-link>
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#header_area">
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#header_area"  @click="collapse_click">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div id="header_area" class="collapse navbar-collapse">
+        <div id="header_area" class="collapse navbar-collapse" :class="{show:collapse_is_show}">
           <ul class="navbar-nav w-100">
             <li class="nav-item">
               <router-link to="/" class="nav-link">逛市场</router-link>
@@ -97,6 +97,8 @@
         class_is_show_dropdown: false,
         //搜索关键字是否显示
         search_is_show_dropdown: false,
+        //导航栏的是否折叠状态
+        collapse_is_show:false,
         //搜索关键字
         keywords: {
           all: null,
@@ -123,6 +125,9 @@
         } else {
           this.search_is_show_dropdown = !this.search_is_show_dropdown
         }
+      },
+      collapse_click:function(){
+        this.collapse_is_show = !this.collapse_is_show
       }
     },
     mounted: function () {

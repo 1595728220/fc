@@ -134,7 +134,7 @@
     .login {
         border-radius: 0.5rem;
         box-shadow:0 0 1rem 0.01rem #333;
-        padding-top:1.5rem;
+        padding-top:2rem;
     }
 
     .login .breadcrumb {
