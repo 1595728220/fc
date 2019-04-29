@@ -180,7 +180,7 @@
   @media (min-width: 1200px) {}
 
   .header {
-    border-bottom: 1px solid #ccc;
+    box-shadow:0 0 1rem 0.01rem #333;
   }
 
 
