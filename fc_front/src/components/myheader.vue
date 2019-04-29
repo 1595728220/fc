@@ -28,27 +28,29 @@
                 <div class="mb-5 p-3">
                   <h5 class="mb-2">吊坠/挂坠</h5>
                   <div>
-                    <router-link to="/product" class="btn btn-primary w-25">佛</router-link>
+                    <router-link to="/product/佛" class="btn btn-primary w-25">佛</router-link>
                   </div>
                 </div>
                 <div class="mb-5 p-3">
                   <h5 class="mb-2">手镯</h5>
                   <div>
-                    <router-link to="/product" class="btn btn-primary w-25">圆圈</router-link>
+                    <router-link to="/product/圆圈" class="btn btn-primary w-25">圆圈</router-link>
                   </div>
                 </div>
                 <div class="mb-5 p-3">
                   <h5 class="mb-2">界面裸石</h5>
                   <div>
-                    <router-link to="/product" class="btn btn-primary w-25">水滴形</router-link>
+                    <router-link to="/product/水滴形" class="btn btn-primary w-25">水滴形</router-link>
                   </div>
                 </div>
               </div>
             </li>
             <li class="nav-item pr">
-              <input type="text" class="form-control dib search_input" @focus="search_click" @blur="search_click"
-                placeholder="翡翠手镯">
-              <button class="btn btn-primary">搜索</button>
+              <div>
+                <input type="text" class="form-control dib search_input" @focus="search_click" @blur="search_click"
+                  placeholder="翡翠手镯" v-model="person_input_search">
+                <router-link class="btn btn-primary pl-3 pr-3" :to="'/product/'+person_input_search">搜索</router-link>
+              </div>
               <div class="dropdown-menu text-dark mb-1 search_area" :class="{show:search_is_show_dropdown}">
                 <div class="mb-5 p-3">
                   <div v-if="person_uid">
@@ -61,7 +63,7 @@
                   </div>
                   <h5 class="mb-2">热门搜索</h5>
                   <div>
-                    <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.all"
+                    <router-link :to="'/product/'+keyword.content" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.all"
                       :key="ind"><span v-if="keyword">{{keyword.content}}</span></router-link>
                   </div>
                 </div>
@@ -119,7 +121,9 @@
         //分类关键字
         classfywords: null,
         //是否有个人的搜索关键字记录
-        is_person_keywords: false
+        is_person_keywords: false,
+        //保存用户输入的搜索关键词
+        person_input_search: null
       }
     },
     methods: {
@@ -213,7 +217,11 @@
       })
       //检查用户当前状态
       this.check_person_state()
-    }
+    },
+    //监听数据变化
+    watch: {
+
+    },
   }
 </script>
 <style>
@@ -264,23 +272,13 @@
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
-
-  .header_nav li button {
-    height: 38px;
-    border: 0;
-    outline: 0;
-    font-size: 16px;
-    font-weight: bold;
-    /* color: rgba(255, 255, 255, 0.5); */
-  }
-
   .header_nav li .triangle_area {
     width: 12px;
     height: 12px;
     display: inline-block;
   }
 
-  .header_nav .form-control {
+  .header_nav .nav-item>div>.form-control {
     width: 75%;
     vertical-align: middle;
     border-top-right-radius: 0px;
@@ -288,9 +286,10 @@
     cursor: text;
   }
 
-  .header_nav .nav-item>.btn {
+  .header_nav .nav-item>div>.btn {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+    height: 38px;
   }
 
   .header_nav .breadcrumb {
