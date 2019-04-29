@@ -65,7 +65,8 @@ router.get("/state", (req, res) => {
   else
     res.send({
       code: 200,
-      msg: req.session.nick //返回用户昵称
+      nick: req.session.nick, //返回用户昵称
+      uid:  req.session.uid //返回用户编号
     })
 })
 //用户注销登录

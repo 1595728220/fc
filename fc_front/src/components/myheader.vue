@@ -3,7 +3,7 @@
     <div class="col-sm-12">
       <div class="navbar navbar-expand-md navbar-light header_nav">
         <router-link to="/" class="navbar-brand">对庄翡翠</router-link>
-        <button class="navbar-toggler" data-toggle="collapse" data-target="#header_area"  @click="collapse_click">
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#header_area" @click="collapse_click">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div id="header_area" class="collapse navbar-collapse" :class="{show:collapse_is_show}">
@@ -67,13 +67,23 @@
                 </div>
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" v-if="!person_uid">
               <ul class="breadcrumb">
                 <li class="breadcrumb-item">
                   <router-link to="/login">登录</router-link>
                 </li>
                 <li class="breadcrumb-item">
                   <router-link to="/register">注册</router-link>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item" v-if="person_uid">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <router-link>欢迎回来！{{person_name}}</router-link>
+                </li>
+                <li class="breadcrumb-item">
+                  <router-link to="/register">退出</router-link>
                 </li>
               </ul>
             </li>
@@ -89,6 +99,8 @@
       return {
         //保存当前用户id
         person_uid: null,
+        //保存当前用户名字
+        person_name: null,
         //三角形的底边方向是否在左
         is_triangle_left: false,
         //三角形的底边方向是否在上
@@ -98,7 +110,7 @@
         //搜索关键字是否显示
         search_is_show_dropdown: false,
         //导航栏的是否折叠状态
-        collapse_is_show:false,
+        collapse_is_show: false,
         //搜索关键字
         keywords: {
           all: null,
@@ -126,7 +138,7 @@
           this.search_is_show_dropdown = !this.search_is_show_dropdown
         }
       },
-      collapse_click:function(){
+      collapse_click: function () {
         this.collapse_is_show = !this.collapse_is_show
       }
     },
@@ -152,6 +164,7 @@
       }).catch((error) => {
         console.log(error)
       })
+      this.$axios.get("http://127.0.0.1:8081/user/state")
     }
   }
 </script>
@@ -185,7 +198,7 @@
   @media (min-width: 1200px) {}
 
   .header {
-    box-shadow:0 0 1rem 0.01rem #333;
+    box-shadow: 0 0 1rem 0.01rem #333;
   }
 
 
