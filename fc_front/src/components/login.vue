@@ -86,7 +86,7 @@
              * 登录按钮的点击事件所调用的方法
              */
             login() {
-                this.$axios.post("http://127.0.0.1:8081/user/login", {
+                this.$axios.post("/user/login", {
                     //登录的手机号
                     phone: this.input_phone,
                     //登录的密码

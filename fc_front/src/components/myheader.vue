@@ -80,10 +80,10 @@
             <li class="nav-item" v-if="person_uid">
               <ul class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <router-link>欢迎回来！{{person_name}}</router-link>
+                  <span class="person_welcome">{{person_name}} 欢迎回来</span>
                 </li>
                 <li class="breadcrumb-item">
-                  <router-link to="/register">退出</router-link>
+                  <a @click="logout_click" href="#">退出</a>
                 </li>
               </ul>
             </li>
@@ -123,27 +123,74 @@
       }
     },
     methods: {
+      //点击分类标签，展开/收起下拉列表
       class_click: function () {
         console.log("鼠标点击分类标签，展开下拉列表");
+        //三角形的状态交换
         [this.is_triangle_left, this.is_triangle_top] = [this.is_triangle_top, this.is_triangle_left]
+        //下拉列表的显示/隐藏状态
         this.class_is_show_dropdown = !this.class_is_show_dropdown
       },
+      //搜索栏失去焦点/获得焦点时执行的方法
       search_click: function () {
+        //如果搜索栏的下拉列表处于显示状态
         if (this.search_is_show_dropdown) {
           console.log("1秒后搜索关键字栏隐藏")
           setTimeout(() => {
+            //改变状态
             this.search_is_show_dropdown = !this.search_is_show_dropdown
           }, 1000)
-        } else {
+        } else { //处于隐藏状态
+          //改变状态
           this.search_is_show_dropdown = !this.search_is_show_dropdown
         }
       },
+      //点击按钮控制导航栏的隐藏或显示方法
       collapse_click: function () {
+        //切换显示/隐藏的状态
         this.collapse_is_show = !this.collapse_is_show
+      },
+      //点击登出的事件
+      logout_click: function () {
+        //向/user/logout发送请求携带uid和对应的cookie
+        this.$axios.get("/user/logout", {
+          params: {
+            uid: this.person_uid
+          }
+        }).then((result) => {
+          console.log("用户成功登出")
+          //检查当前登录状态
+          this.check_person_state()
+        }).catch((error) => {
+          console.log(error)
+        })
+      },
+      //检查用户的登录状态的方法
+      check_person_state: function () {
+        //发送请求查看用户的登录状态
+        this.$axios.get("/user/state").then((result) => {
+          console.log(result)
+          //如果已登录
+          if (result.data.code === 200) {
+            //保存该用户的编号
+            this.person_uid = result.data.uid
+            //保存该用户的昵称
+            this.person_name = result.data.nick
+          } else {
+            //清空用户的编号
+            this.person_uid = null
+            //清空用户的昵称
+            this.person_name = null
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
       }
     },
+    //当组件挂载后
     mounted: function () {
-      this.$axios.get("http://127.0.0.1:8081/user/search", {
+      //发送请求
+      this.$axios.get("/user/search", {
         params: {
           uid: this.person_uid
         }
@@ -164,11 +211,8 @@
       }).catch((error) => {
         console.log(error)
       })
-      this.$axios.get("http://127.0.0.1:8081/user/state").then((result)=>{
-        console.log(result)
-      }).catch((error)=>{
-        console.log(error)
-      })
+      //检查用户当前状态
+      this.check_person_state()
     }
   }
 </script>
@@ -188,7 +232,7 @@
     }
 
     .header .navbar-nav {
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
     }
 
@@ -206,6 +250,13 @@
   }
 
 
+  .header .navbar-light .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 0.7)
+  }
+
+  .header .navbar-light .navbar-nav .nav-link:hover {
+    color: rgba(0, 0, 0, 0.8)
+  }
 
   .header_nav li>a {
     font-size: 16px;
@@ -215,6 +266,7 @@
   }
 
   .header_nav li button {
+    height: 38px;
     border: 0;
     outline: 0;
     font-size: 16px;
@@ -272,6 +324,10 @@
   .header .search_area a {
     margin-left: 1rem;
     margin-bottom: 1rem;
+  }
+
+  .header .person_welcome {
+    font-weight: bold;
   }
 
   .btn.disabled {
