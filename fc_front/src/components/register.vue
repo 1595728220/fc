@@ -10,43 +10,53 @@
                 <!-- 消息提示模态框开始 -->
                 <myalert :mymsg="register_result" v-if="register_result"></myalert>
                 <!-- 消息提示模态框结束 -->
-                
-                <!-- 注册表单的内容主体开始 -->
-                <div class="area clear">
-
+                <div class="col-sm-12 mb-3">
                     <!-- 表单标题部分开始 -->
-                    <div class="register_title ">
+                    <div class="register_title">
                         <h2 class="">手机注册</h2>
                         <a href="#" class="icon_btn"></a>
                     </div>
                     <!-- 表单标题部分结束 -->
+                </div>
 
+                <div class="col-sm-12 mb-3">
                     <!-- 手机号表单开始 -->
-                    <div class="phone_err">手机号格式错误</div>
-                    <input type="text" placeholder="手机号" class="input_form">
+                    <div class="input_form_error">手机号格式错误</div>
+                    <input type="text" placeholder="手机号" class="input_form" v-model="input_phone">
                     <!-- 手机号表单结束 -->
+                </div>
 
+                <div class="col-sm-12 mb-3">
                     <!-- 密码表单开始 -->
-                    <div class="upwd_err">包含数字、字母、下划线的6-18位</div>
-                    <input type="password" placeholder="密码" class="input_form">
+                    <div class="input_form_error">包含数字、字母、下划线的6-18位</div>
+                    <input type="password" placeholder="密码" class="input_form" v-model="input_upwd">
                     <!-- 密码表单结束 -->
+                </div>
 
+                <div class="col-sm-12 mb-3">
                     <!-- 重复密码表单开始 -->
-                    <div class="cpwd_err">两次密码输入不一致</div>
-                    <input type="password" placeholder="确认密码" class="input_form">
+                    <div class="input_form_error">两次密码输入不一致</div>
+                    <input type="password" placeholder="确认密码" class="input_form" v-model="input_cpwd">
                     <!-- 重复密码表单结束 -->
+                </div>
 
+                <div class="col-sm-12 mb-3">
                     <!-- 验证码表单开始 -->
-                    <div class="iden_err">验证码错误</div>
-                    <div class="iden_area">
-                        <input type="text" placeholder="验证码" class="input_form iden_form">
-                        <img src="asets/picture/yzm.png" class="pa">
+                    <div class="input_form_error">验证码错误</div>
+                    <div class="">
+                        <input type="text" placeholder="验证码" class="input_form w-50 d-inline-block" v-model="input_iden">
+                        <img :src="yzm_result_img">
+                        <a class="w-25" @click="require_yzm">看不清楚，换一张</a>
                     </div>
                     <!-- 验证码表单结束 -->
+                </div>
 
+                <div class="col-sm-12 mb-3">
                     <!-- 注册按钮 -->
                     <button class="btn">注册</button>
+                </div>
 
+                <div class="col-sm-12 mb-3">
                     <!-- 同意用户协议复选框开始 -->
                     <div class="agree pr">
                         <input type="checkbox" class="" id="register_agree">
@@ -54,16 +64,16 @@
                             </router-link></label>
                     </div>
                     <!-- 同意用户协议复选框结束 -->
+                </div>
 
+                <div class="col-sm-12 mb-3">
                     <!-- 跳转登录链接开始 -->
                     <div class="have">
                         已有账号？
                         <router-link to="/login">立即登录</router-link>
                     </div>
                     <!-- 跳转登录链接结束 -->
-
                 </div>
-                <!-- 注册表单的内容主体结束 -->
 
             </div>
             <!-- registerForm end -->
@@ -79,9 +89,36 @@
     export default {
         data() {
             return {
-                register_result: "1"
+                register_result: "1",
+                input_phone:null,//手机号表单的输入
+                input_upwd:null,//密码表单的输入
+                input_cpwd:null,//确认密码表单的输入
+                input_iden:null,//验证码表单的输入
+                state_phone:true, //手机号验证状态
+                state_upwd:true, //密码验证状态
+                state_cpwd:true, //确认密码验证状态
+                state_iden:true, //验证码验证状态
+                state_agree:true, //同意协议验证状态
+                yzm_result_img:null //请求验证码的图片
             }
-        }
+        },
+        mounted() {
+            this.require_yzm()
+        },
+        methods: {
+            require_yzm(){
+                console.log(this.input_phone)
+                this.$axios.get("/user/yzm",{
+                    phone:this.input_phone
+                }).then(result=>{
+                    console.log(result)
+                    if(typeof result !== "object")
+                        this.yzm_result_img = result
+                }).catch((error)=>{
+                    console.log(error)
+                })
+            },
+        },
     }
 </script>
 <style>
@@ -119,5 +156,44 @@
         border-radius: 0.5rem;
         box-shadow: 0 0 1rem 0.01rem #333;
         padding-top: 2rem;
+    }
+
+    .register h2 {
+        font-size: 1.25rem;
+    }
+
+    .register .input_form {
+        width: 100%;
+        display: block;
+        height: 2.5rem;
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 0 1.125rem;
+        color: #262e39;
+        border-radius: 0.25rem;
+        box-sizing: border-box;
+    }
+
+    .register .input_form_error {
+        outline: none;
+        border-color: #f44336;
+    }
+
+    .register .btn {
+        width: 100%;
+        height: 2.5rem;
+        display: block;
+        background: #4b95ff;
+        border: #4b95ff;
+        border-radius: 0.25rem;
+        text-align: center;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .register .btn:hover {
+        background: rgb(42, 117, 254);
+        border: rgb(42, 117, 254);
     }
 </style>
