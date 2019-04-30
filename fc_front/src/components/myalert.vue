@@ -56,6 +56,7 @@
             //组件挂载2s后修改提示框的显示状态为false
             this.delayHiding()
         },
+        //组件更新时重新定位提示框位置
         updated() {
             //获取当前提示框所需的位置属性
             this.func_position()
