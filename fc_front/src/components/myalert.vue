@@ -56,6 +56,10 @@
             //组件挂载2s后修改提示框的显示状态为false
             this.delayHiding()
         },
+        updated() {
+            //获取当前提示框所需的位置属性
+            this.func_position()
+        },
         //组件被销毁后清空定时器
         destroyed() {
             clearTimeout(this.hidden_timer)

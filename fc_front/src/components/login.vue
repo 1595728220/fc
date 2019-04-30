@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="col-sm-12 mb-3">
-                    <button class="btn" @click="login">登录</button>
+                    <button class="btn" @click="login" :disabled="check_input_right">登录</button>
                 </div>
                 <!-- 登录按钮 -->
                 <div class="col-sm-12 mb-3">
@@ -60,6 +60,7 @@
                 input_upwd: "", //保存用户输入的密码
                 state_phone: true, //手机号验证状态
                 state_upwd: true, //密码验证状态
+                blur_once:false,//是否失去过焦点
                 login_result: null, //登录的结果对象
                 test: "这是测试消息",
                 login_timer:null //登录方法中使用的定时器
@@ -71,6 +72,8 @@
              */
             func_phone_blur() {
                 console.log("鼠标从手机号失去焦点");
+                //已经触发过一次失去焦点事件
+                this.blur_once = true
                 //验证手机号格式，并将结果赋值给手机号的验证状态
                 this.state_phone = this.phoneRegex.test(this.input_phone)
             },
@@ -79,6 +82,8 @@
              */
             func_upwd_blur() {
                 console.log("鼠标从密码失去焦点");
+                //已经触发过一次失去焦点事件
+                this.blur_once = true
                 //验证密码格式，并将结果赋值给密码的验证状态
                 this.state_upwd = this.upwdRegex.test(this.input_upwd)
             },
@@ -112,7 +117,12 @@
         //组件销毁后清空定时器
         destroyed() {
             clearTimeout(this.login_timer)
-        }
+        },
+        computed: {
+            check_input_right(){
+                return !this.state_phone || !this.state_upwd || !this.blur_once
+            }
+        },
     };
 </script>
 <style>
