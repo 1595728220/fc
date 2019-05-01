@@ -19,42 +19,57 @@
 
         <div class="col-sm-12 mb-3">
           <!-- 手机号表单开始 -->
-          <div  :class="{v_hidden:state_phone}" class="text-right text-danger">{{phone_msg}}</div>
+          <div :class="{v_hidden:state_form.phone}" class="text-right text-danger">{{phone_msg}}</div>
           <input
             type="text"
             placeholder="手机号"
             class="input_form"
-            v-model="input_phone"
+            v-model="input_form.phone"
             @blur="func_phone_blur"
-            :class="{input_form_error:!state_phone}"
+            :class="{input_form_error:!state_form.phone}"
           >
           <!-- 手机号表单结束 -->
         </div>
 
         <div class="col-sm-12 mb-3">
           <!-- 密码表单开始 -->
-          <div :class="{v_hidden:state_upwd}" class="text-right text-danger">包含数字、字母、下划线的6-18位</div>
-          <input type="password" placeholder="密码" class="input_form" v-model="input_upwd" :class="{input_form_error:!state_upwd}">
+          <div :class="{v_hidden:state_form.upwd}" class="text-right text-danger">包含数字、字母、下划线的6-18位</div>
+          <input
+            type="password"
+            placeholder="密码"
+            class="input_form"
+            v-model="input_form.upwd"
+            :class="{input_form_error:!state_form.upwd}"
+            @blur="func_upwd_blur"
+          >
           <!-- 密码表单结束 -->
         </div>
 
         <div class="col-sm-12 mb-3">
           <!-- 重复密码表单开始 -->
-          <div :class="{v_hidden:state_cpwd}" class="text-right text-danger">两次密码输入不一致</div>
-          <input type="password" placeholder="确认密码" class="input_form" v-model="input_cpwd" :class="{input_form_error:!state_cpwd}">
+          <div :class="{v_hidden:state_form.cpwd}" class="text-right text-danger">两次密码输入不一致</div>
+          <input
+            type="password"
+            placeholder="确认密码"
+            class="input_form"
+            v-model="input_form.cpwd"
+            :class="{input_form_error:!state_form.cpwd}"
+            @blur="func_cpwd_blur"
+          >
           <!-- 重复密码表单结束 -->
         </div>
 
         <div class="col-sm-12 mb-3">
           <!-- 验证码表单开始 -->
-          <div :class="{v_hidden:state_iden}" class="text-right text-danger">验证码错误</div>
+          <div :class="{v_hidden:state_form.iden}" class="text-right text-danger">验证码错误</div>
           <div class="row m-0">
             <input
               type="text"
               placeholder="验证码"
               class="input_form col-sm-6 d-inline-block"
-              v-model="input_iden"
-              :class="{input_form_error:!state_iden}"
+              v-model="input_form.iden"
+              :class="{input_form_error:!state_form.iden}"
+              @blur="func_iden_blur"
             >
             <div class="col-sm-6 p-0 align-self-center">
               <div class="row m-0">
@@ -109,18 +124,28 @@ export default {
       phoneRegex: /^1[34578]\d{9}$/, //手机号正则
       upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
       register_result: null,
-      input_phone: null, //手机号表单的输入
-      input_upwd: null, //密码表单的输入
-      input_cpwd: null, //确认密码表单的输入
-      input_iden: null, //验证码表单的输入
-      state_phone: true, //手机号验证状态
-      state_upwd: true, //密码验证状态
-      state_cpwd: true, //确认密码验证状态
-      state_iden: true, //验证码验证状态
-      state_agree: true, //同意协议验证状态
+      input_form: {
+        phone: null, //手机号表单的输入
+        upwd: null, //密码表单的输入
+        cpwd: null, //确认密码表单的输入
+        iden: null //验证码表单的输入
+      }, //保存表单输入值
+      state_form: {
+        phone: true, //手机号验证状态
+        upwd: true, //密码验证状态
+        cpwd: true, //确认密码验证状态
+        iden: true, //验证码验证状态
+        agree: true //同意协议验证状态
+      },//保存表单状态值
+
       phone_msg: "手机号格式不正确", //保存手机号的提示信息
       active_yzm: null, //从服务器端返回的验证码
-      blur_once: false, //是否验证过一次表单
+      blur_once: {
+        phone: false,
+        upwd: false,
+        cpwd: false,
+        iden: false
+      }, //是否验证过一次表单
       yzm_result_img: "" //请求验证码的图片
     };
   },
@@ -133,21 +158,22 @@ export default {
      * 请求yzm的方法，通过axios的get方法请求 /user/yzm
      */
     require_yzm() {
-      console.log(this.input_phone);
+      // console.log(this.input_phone);
       this.$axios
         .get("/user/yzm", {
           params: {
-            phone: this.input_phone
+            phone: this.input_form.phone
           }
         })
         .then(result => {
           //请求成功
-          //   console.log(result);
+          console.log(result);
           //如果返回的结果的data属性不是一个对象
-          if (typeof result.data.code === undefined) {
+          if (result.data.code === undefined) {
             //取出值
-            this.yzm_result_img = result.data.svg || "请再次获取验证码";
-            this.active_yzm = result.data.yzm || "请再次获取验证码";
+            this.yzm_result_img = result.data.yzm.data || "请再次获取验证码";
+            this.active_yzm = result.data.yzm.text || "请再次获取验证码";
+            // console.log(this.yzm_result_img)
           }
           //否则
           else {
@@ -166,17 +192,17 @@ export default {
      * 手机号表单失去焦点时调用的方法
      */
     func_phone_blur() {
-      console.log("失去焦点")
-      if (!this.phoneRegex.test(this.input_phone)) {
+      console.log("失去焦点");
+      if (!this.phoneRegex.test(this.input_form.phone)) {
         //手机号验证不通过
         //改变手机号验证状态
-        this.state_phone = false;
+        this.state_form.phone = false;
         this.phone_msg = "手机号格式不正确";
       } else {
         //手机号验证通过
-        this.func_phone_blur_yanzheng()
+        this.func_phone_blur_yanzheng();
       }
-      this.blur_once = true;
+      this.blur_once.phone = true;
     },
     /**
      * 根据请求的状态码，提示消息，内部使用方法，外部无法访问
@@ -191,27 +217,22 @@ export default {
         })
         .then(result => {
           if (result.data.code === 200) {
-            this.state_phone = true;
+            this.state_form.phone = true;
           } else {
-            this.state_phone = false;
+            this.state_form.phone = false;
             this.phone_msg = result.data.msg;
           }
-        }).catch(error=>{
-          console.log(error)
         })
-        
+        .catch(error => {
+          console.log(error);
+        });
     },
     /**
      * 密码表单失去焦点时调用的方法
      */
     func_upwd_blur() {
-      if (!upwdRegex.test(upwd.value)) {
-        //密码验证不通过
-        //修改密码验证状态为false
-      } else {
-        //密码验证通过
-        //修改密码验证状态为true
-      }
+      this.state_form.upwd = this.upwdRegex.test(this.input_form.upwd);
+      this.blur_once.upwd = true;
     },
     /**
      * 重复密码表单失去焦点时调用的方法
@@ -240,14 +261,10 @@ export default {
   computed: {
     //检查表单格式是否正确，需要至少进行一次表单的失去焦点验证
     check_input_right() {
-      return (
-        !this.state_iden ||
-        !this.state_agree ||
-        !this.state_phone ||
-        !this.state_upwd ||
-        !this.state_cpwd ||
-        !this.blur_once
-      );
+      return Object.values(this.blur_once).concat(Object.values(this.state_form)).filter(val=>{
+          console.log(Object.values(this.blur_once).concat(Object.values(this.state_form)))
+          return val === false
+        }).length !== 0
     }
   },
   watch: {

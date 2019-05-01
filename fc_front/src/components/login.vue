@@ -100,7 +100,7 @@
                     // console.log(result)
                     //将请求数据放入变量中
                     this.login_result = result.data
-                    console.log(this.login_result)
+                    // console.log(this.login_result)
                     //如果登录成功
                     if(this.login_result.code === 200){
                         //2s后跳转回首页
