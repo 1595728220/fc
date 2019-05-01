@@ -123,7 +123,6 @@ export default {
     return {
       phoneRegex: /^1[34578]\d{9}$/, //手机号正则
       upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
-      register_result: null,
       input_form: {
         phone: null, //手机号表单的输入
         upwd: null, //密码表单的输入
@@ -136,16 +135,16 @@ export default {
         cpwd: true, //确认密码验证状态
         iden: true, //验证码验证状态
         agree: true //同意协议验证状态
-      },//保存表单状态值
-
-      phone_msg: "手机号格式不正确", //保存手机号的提示信息
-      active_yzm: null, //从服务器端返回的验证码
+      }, //保存表单状态值
       blur_once: {
         phone: false,
         upwd: false,
         cpwd: false,
         iden: false
       }, //是否验证过一次表单
+      phone_msg: "手机号格式不正确", //保存手机号的提示信息
+      active_yzm: null, //从服务器端返回的验证码
+      register_result: null,
       yzm_result_img: "" //请求验证码的图片
     };
   },
@@ -167,7 +166,7 @@ export default {
         })
         .then(result => {
           //请求成功
-          console.log(result);
+          // console.log(result);
           //如果返回的结果的data属性不是一个对象
           if (result.data.code === undefined) {
             //取出值
@@ -261,10 +260,13 @@ export default {
   computed: {
     //检查表单格式是否正确，需要至少进行一次表单的失去焦点验证
     check_input_right() {
-      return Object.values(this.blur_once).concat(Object.values(this.state_form)).filter(val=>{
-          console.log(Object.values(this.blur_once).concat(Object.values(this.state_form)))
-          return val === false
-        }).length !== 0
+      return (
+        Object.values(this.blur_once)
+          .concat(Object.values(this.state_form))
+          .filter(val => {
+            return val === false;
+          }).length !== 0
+      );
     }
   },
   watch: {

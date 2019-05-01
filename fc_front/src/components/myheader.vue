@@ -173,7 +173,7 @@
       check_person_state: function () {
         //发送请求查看用户的登录状态
         this.$axios.get("/user/state").then((result) => {
-          console.log(result)
+          // console.log(result)
           //如果已登录
           if (result.data.code === 200) {
             //保存该用户的编号
