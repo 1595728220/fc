@@ -61,6 +61,7 @@
                 state_phone: true, //手机号验证状态
                 state_upwd: true, //密码验证状态
                 blur_once:false,//是否失去过焦点
+                blur_two:false,//是否失去焦点
                 login_result: null, //登录的结果对象
                 test: "这是测试消息",
                 login_timer:null //登录方法中使用的定时器
@@ -83,7 +84,7 @@
             func_upwd_blur() {
                 console.log("鼠标从密码失去焦点");
                 //已经触发过一次失去焦点事件
-                this.blur_once = true
+                this.blur_two = true
                 //验证密码格式，并将结果赋值给密码的验证状态
                 this.state_upwd = this.upwdRegex.test(this.input_upwd)
             },
@@ -120,7 +121,7 @@
         },
         computed: {
             check_input_right(){
-                return !this.state_phone || !this.state_upwd || !this.blur_once
+                return !this.state_phone || !this.state_upwd || !this.blur_once || !this.blur_two
             }
         },
     };
