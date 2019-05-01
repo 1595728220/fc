@@ -108,6 +108,7 @@ export default {
       state_cpwd: true, //确认密码验证状态
       state_iden: true, //验证码验证状态
       state_agree: true, //同意协议验证状态
+      active_yzm:null,//从服务器端返回的验证码
       blur_once: false, //是否验证过一次表单
       yzm_result_img: "" //请求验证码的图片
     };
@@ -132,12 +133,16 @@ export default {
           //请求成功
           //   console.log(result);
           //如果返回的结果的data属性不是一个对象
-          if (typeof result.data !== "object")
+          if (typeof result.data.code === undefined){
             //取出值
-            this.yzm_result_img = result.data || "请再次获取验证码";
+            this.yzm_result_img = result.data.svg || "请再次获取验证码"
+            this.active_yzm = result.data.yzm || "请再次获取验证码"
+          }
           //否则
-          //取出对象中msg属性值
-          else this.yzm_result_img = result.data.msg;
+          else{
+            //取出对象中msg属性值
+            this.yzm_result_img = result.data.msg
+          } 
           //   console.log(this.yzm_result_img)
         })
         .catch(error => {
@@ -198,7 +203,7 @@ export default {
     },
     //验证码表单失去焦点时调用的方法
     func_iden_blur() {
-      if (iden.value.toLowerCase() !== "kfax") {
+      if (iden.value.toLowerCase() !== this.active_yzm) {
         //验证码验证不通过
         //修改验证码验证状态为 false
       } else {

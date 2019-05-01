@@ -439,7 +439,7 @@ router.get("/yzm", (req, res) => {
     // 设置响应类型为svg
     res.type('svg');
   //返回数据
-    res.status(200).send(captcha.data)
+    res.status(200).send({svg:captcha.data,yzm:captcha})
 })
 //获取用户信息
 router.get("/detail", (req, res) => {
