@@ -6,7 +6,7 @@ const userRouter = require("./routes/user")
 const productRouter = require("./routes/product")
 const orderRouter = require("./routes/order")
 //定义允许跨域访问的origin列表
-let White_list = ["http://47.103.4.25:5501","http://127.0.0.1:5501","http://127.0.0.1","http://192.168.137.1:8081","http://127.0.0.1:8080"],
+let White_list = ["http://47.103.4.25:5501","http://127.0.0.1:5501","http://127.0.0.1","http://192.168.137.1:8081","http://127.0.0.1:8080","http://localhost:8080"],
 index
 let app = express()
 app.listen(8081)
