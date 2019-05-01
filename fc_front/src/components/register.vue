@@ -92,7 +92,7 @@
         <div class="col-sm-12 mb-3">
           <!-- 同意用户协议复选框开始 -->
           <div class="agree pr">
-            <input type="checkbox" class id="register_agree">
+            <input type="checkbox" class id="register_agree" v-model="state_form.agree">
             <label for="register_agree" class="agree_label">
               我已阅读并同意
               <router-link to="/register" class="text-primary">《用户注册协议》</router-link>
@@ -124,17 +124,17 @@ export default {
       phoneRegex: /^1[34578]\d{9}$/, //手机号正则
       upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
       input_form: {
-        phone: null, //手机号表单的输入
-        upwd: null, //密码表单的输入
-        cpwd: null, //确认密码表单的输入
-        iden: null //验证码表单的输入
+        phone: "", //手机号表单的输入
+        upwd: "", //密码表单的输入
+        cpwd: "", //确认密码表单的输入
+        iden: "" //验证码表单的输入
       }, //保存表单输入值
       state_form: {
         phone: true, //手机号验证状态
         upwd: true, //密码验证状态
         cpwd: true, //确认密码验证状态
         iden: true, //验证码验证状态
-        agree: true //同意协议验证状态
+        agree: false //同意协议验证状态
       }, //保存表单状态值
       blur_once: {
         phone: false,
@@ -143,8 +143,8 @@ export default {
         iden: false
       }, //是否验证过一次表单
       phone_msg: "手机号格式不正确", //保存手机号的提示信息
-      active_yzm: null, //从服务器端返回的验证码
-      register_result: null,
+      active_yzm: "", //从服务器端返回的验证码
+      register_result: "",
       yzm_result_img: "" //请求验证码的图片
     };
   },
@@ -201,6 +201,7 @@ export default {
         //手机号验证通过
         this.func_phone_blur_yanzheng();
       }
+      //手机号失去过一次焦点
       this.blur_once.phone = true;
     },
     /**
@@ -211,14 +212,17 @@ export default {
       this.$axios
         .get("/user/hasreg", {
           params: {
-            phone: this.input_phone
+            phone: this.input_form.phone
           }
         })
         .then(result => {
+          //用户名可用
           if (result.data.code === 200) {
             this.state_form.phone = true;
           } else {
+            //用户名不可用
             this.state_form.phone = false;
+            //将提示信息保存到变量
             this.phone_msg = result.data.msg;
           }
         })
@@ -230,30 +234,39 @@ export default {
      * 密码表单失去焦点时调用的方法
      */
     func_upwd_blur() {
+      //保存正则的验证结果
       this.state_form.upwd = this.upwdRegex.test(this.input_form.upwd);
+      //密码表单失去过一次焦点
       this.blur_once.upwd = true;
     },
     /**
      * 重复密码表单失去焦点时调用的方法
      */
     func_cpwd_blur() {
-      if (cpwd.value !== upwd.value) {
-        //重复密码验证不通过
-        //修改重复密码状态为false
+      //如果两次密码输入相同
+      if (this.input_form.cpwd === this.input_form.upwd) {
+        this.state_form.cpwd = true;
       } else {
-        //重复密码验证通过
-        //修改重复密码状态为true
+        //两次密码输入不同
+        this.state_form.cpwd = false;
       }
+      // 再次输入密码失去一次焦点
+      this.blur_once.cpwd = true;
     },
     //验证码表单失去焦点时调用的方法
     func_iden_blur() {
-      if (iden.value.toLowerCase() !== this.active_yzm) {
+      console.log(this.input_form.iden,this.active_yzm)
+      if (this.input_form.iden.toLowerCase() !== this.active_yzm.toLowerCase()) {
         //验证码验证不通过
         //修改验证码验证状态为 false
+        this.state_form.iden = false;
       } else {
         //验证码验证通过
         //修改验证码状态为 true
+        this.state_form.iden = true
       }
+      //验证码表单失去过一次焦点
+      this.blur_once.iden = true
     }
   },
   //计算属性
