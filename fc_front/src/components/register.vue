@@ -86,7 +86,7 @@
 
         <div class="col-sm-12 mb-3">
           <!-- 注册按钮 -->
-          <button class="btn" :disabled="check_input_right">注册</button>
+          <button class="btn" :disabled="check_input_right" @click="send_register">注册</button>
         </div>
 
         <div class="col-sm-12 mb-3">
@@ -124,9 +124,9 @@ export default {
       phoneRegex: /^1[34578]\d{9}$/, //手机号正则
       upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
       input_form: {
-        phone: "", //手机号表单的输入
-        upwd: "", //密码表单的输入
-        cpwd: "", //确认密码表单的输入
+        phone: "15057391901", //手机号表单的输入
+        upwd: "123456", //密码表单的输入
+        cpwd: "123456", //确认密码表单的输入
         iden: "" //验证码表单的输入
       }, //保存表单输入值
       state_form: {
@@ -137,15 +137,20 @@ export default {
         agree: false //同意协议验证状态
       }, //保存表单状态值
       blur_once: {
-        phone: false,
-        upwd: false,
-        cpwd: false,
-        iden: false
+        // phone: false,
+        // upwd: false,
+        // cpwd: false,
+        // iden: false
+        phone: true,
+        upwd: true,
+        cpwd: true,
+        iden: true
       }, //是否验证过一次表单
       phone_msg: "手机号格式不正确", //保存手机号的提示信息
       active_yzm: "", //从服务器端返回的验证码
       register_result: "",
-      yzm_result_img: "" //请求验证码的图片
+      yzm_result_img: "", //请求验证码的图片
+      register_timer:null //注册页面的定时器
     };
   },
   mounted() {
@@ -267,6 +272,31 @@ export default {
       }
       //验证码表单失去过一次焦点
       this.blur_once.iden = true
+    },
+    //发送注册请求
+    send_register(){
+      this.$axios.post("/user/register",{
+        phone:this.input_form.phone,
+        upwd:this.input_form.upwd,
+        cpwd:this.input_form.cpwd,
+        identify:this.input_form.iden,
+      }).then(result=>{
+        console.log(result)
+        //将注册请求的结果消息存入变量
+        this.register_result = result.data.msg
+        //如果注册成功
+        if(result.data.code === 200) {
+          // 2秒后跳转到首页
+          setTimeout(()=>{
+            console.log("注册成功，2秒后跳转回首页")
+            this.$router.push("/")
+          },2000)
+        }
+        this.require_yzm()
+      }).catch(error=>{
+        console.log(error)
+        this.require_yzm()
+      })
     }
   },
   //计算属性
@@ -281,6 +311,9 @@ export default {
           }).length !== 0
       );
     }
+  },
+  destroyed() {
+            clearTimeout(this.register_timer)
   },
   watch: {
     // input_phone:function(){

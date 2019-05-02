@@ -38,7 +38,7 @@ router.post("/login", (req, res) => {
     if (result.length > 0) { //用户名密码正确
       //将用户数据存入session
       req.session.uid = result[0].uid
-      req.session.nick = result[0].nick
+      req.session.nick = result[0].nick 
       //console.log(req.session.uid)
       //响应json数据
       res.send({
@@ -67,7 +67,7 @@ router.get("/state", (req, res) => {
   else
     res.send({
       code: 200,
-      nick: req.session.nick, //返回用户昵称
+      nick: req.session.nick || "", //返回用户昵称
       uid:  req.session.uid //返回用户编号
     })
 })
@@ -89,8 +89,7 @@ router.post("/register", (req, res) => {
     upwd,
     identify
   } = req.body
-  //强制转为数值
-  identify = parseInt(identify)
+	// console.log(!req.session.captcha)
   //验证手机格式
   if (!phoneRegex.test(phone)) {
     res.send({
@@ -108,7 +107,7 @@ router.post("/register", (req, res) => {
     return
   }
   //验证手机验证码格式
-  if (identify !== req.session.captcha) {
+if (identify.toLowerCase() !== (req.session.captcha && req.session.captcha.toLowerCase())) {
     res.send({
       code: 403,
       msg: "验证码不正确"
@@ -130,6 +129,8 @@ router.post("/register", (req, res) => {
       pool.query(sql, [phone, upwd], (err, result) => {
         if (err) throw err
         if (result.affectedRows > 0) { //插入影响的行数大于0，成功注册
+          console.log(result)
+          req.session.uid = result.insertId
           res.send({
             code: 200,
             msg: "注册成功"
@@ -202,7 +203,7 @@ router.post("/forget", (req, res) => {
     return
   }
   //手机验证码校对
-  if (identify !== req.session.captcha) {
+  if (identify.toLowerCase() !== (req.session.captcha && req.session.captcha.toLowerCase())) {
     res.send({
       code: 404,
       msg: "验证码不正确"
