@@ -148,7 +148,7 @@ export default {
       }, //是否验证过一次表单
       phone_msg: "手机号格式不正确", //保存手机号的提示信息
       active_yzm: "", //从服务器端返回的验证码
-      register_result: "",
+      register_result: null,
       yzm_result_img: "", //请求验证码的图片
       register_timer:null //注册页面的定时器
     };
@@ -282,8 +282,9 @@ export default {
         identify:this.input_form.iden,
       }).then(result=>{
         console.log(result)
-        //将注册请求的结果消息存入变量
-        this.register_result = result.data.msg
+        //将注册请求的结果对象存入变量
+        this.register_result = result.data
+        // console.log(this.register_result)
         //如果注册成功
         if(result.data.code === 200) {
           // 2秒后跳转到首页
@@ -292,6 +293,7 @@ export default {
             this.$router.push("/")
           },2000)
         }
+        //重新请求验证码
         this.require_yzm()
       }).catch(error=>{
         console.log(error)
