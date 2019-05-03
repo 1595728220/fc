@@ -1,5 +1,5 @@
 <template>
-  <div class="row header">
+  <div class="row header m-0">
     <div class="col-sm-12">
       <div class="navbar navbar-expand-md navbar-light header_nav">
         <router-link to="/" class="navbar-brand">对庄翡翠</router-link>

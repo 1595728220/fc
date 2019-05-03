@@ -98,11 +98,16 @@ input:-webkit-autofill{
 }
 .small_font{
   font-size:12px;
+  color:#333;
 }
 .v_hidden {
   visibility:hidden;
 }
 .v_show{
   visibility: visible;
+}
+.middle_font{
+  font-size:1rem;
+  color:#333;
 }
 
