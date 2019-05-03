@@ -26,9 +26,15 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-12 col-lg-4">
-        <img :src="img_erweima" class="w-50">
-        <img :src="img_erweima" class="w-50">
+      <div class="col-sm-12 col-lg-4 d-flex">
+        <div class="w-50">
+          <img :src="img_erweima" class="w-100" >
+          <p class="text-center m-0">安装对庄APP</p>
+        </div>
+        <div class="w-50">
+          <img :src="img_erweima" class="w-100" >
+          <p class="text-center m-0">添加对庄客服微信</p>
+        </div>    
       </div>
     </div>
   </div>
@@ -65,5 +71,8 @@ export default {
 }
 .footer .footer_icon_text {
   font-size: 1rem;
+}
+.footer .col-list{
+  border-right:1px solid #ddd;
 }
 </style>
