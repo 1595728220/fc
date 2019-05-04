@@ -117,37 +117,37 @@
       <p class="text-center">© 2015-2020 www.urlip.com ALL RIGHT RESERVED</p>
       <h4 class="middle_font text-center">买翡翠，找源头，就在对庄</h4>
      <ul class="d-flex mr-auto ml-auto justify-content-between flex-wrap mb-4">
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>  
-        <li class="mr-2">
+        <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
         
