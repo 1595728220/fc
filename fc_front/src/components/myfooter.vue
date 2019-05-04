@@ -18,7 +18,7 @@
         <span class="footer_icon_text tag">对庄标签</span>
       </router-link>
     </div>
-    <div class="row m-0 pb-3 mb-4">
+    <div class="row m-0 mb-4">
       <div class="col-list col-sm-12 col-lg-8 pt-3">
         <div class="d-flex flex-wrap justify-content-between">
           <div class="pr-3 pl-3">

@@ -12,7 +12,7 @@ create table user(
   nick varchar(12) comment "昵称",
   user_imgId int comment "用户头像图片编号" 
 );
-insert into user values(null,"123456","丁丁","13811111111","杭州市西湖区中心路11号","zero",1);
+insert into user values(null,"123456","丁丁","15057391900","杭州市西湖区中心路11号","zero",1);
 insert into user values(null,"123456","当当","13811111112","杭州市西湖区中心路12号","旧日憾事",1);
 insert into user values(null,"123456","东东","13811111113","杭州市西湖区中心路13号","失去派大",1);
 insert into user values(null,"123456","端端","13811111114","杭州市西湖区中心路14号","朕好萌i",1);
@@ -39,9 +39,9 @@ create table product(
 );
 #http://www.cuihui.cn/cuihuiw/products/13321583.html
 insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,1);
-insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,1);
-insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,1);
-insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,1);
+insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,2);
+insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,3);
+insert into product values(null,3100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","圆圈","冰种","白底青",1553604596095,1000,4);
 #订单表
 create table user_order(
   oid int primary key auto_increment comment "订单编号",
@@ -57,27 +57,24 @@ create table product_img(
   sm3 varchar(128) comment "小图",
   sm4 varchar(128) comment "小图",
   sm5 varchar(128) comment "小图",
-  sm6 varchar(128) comment "小图",
   md1 varchar(128) comment "中图",
   md2 varchar(128) comment "中图",
   md3 varchar(128) comment "中图",
   md4 varchar(128) comment "中图",
   md5 varchar(128) comment "中图",
-  md6 varchar(128) comment "中图",
   lg1 varchar(128) comment "大图",
   lg2 varchar(128) comment "大图",
   lg3 varchar(128) comment "大图",
   lg4 varchar(128) comment "大图",
   lg5 varchar(128) comment "大图",
-  lg6 varchar(128) comment "大图",
   detail varchar(128) comment "产品详情",
   promise varchar(128) comment "产品保障",
   recommond boolean comment "是否为推荐商品"
 );
-insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg","fo_detail.png","fo_promise.png",true);
-insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg","fo_detail.png","fo_promise.png",true);
-insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg","fo_detail.png","fo_promise.png",true);
-insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_sm_6.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_md_6.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_lg_6.jpg","fo_detail.png","fo_promise.png",true);
+insert into product_img values(null,"fo_sm_2.jpg","fo_sm_1.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_md_2.jpg","fo_md_1.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_lg_2.jpg","fo_lg_1.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_detail.png","fo_promise.png",true);
+insert into product_img values(null,"fo_sm_3.jpg","fo_sm_2.jpg","fo_sm_1.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_md_3.jpg","fo_md_2.jpg","fo_md_1.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_lg_3.jpg","fo_lg_2.jpg","fo_lg_1.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_detail.png","fo_promise.png",true);
+insert into product_img values(null,"fo_sm_4.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_1.jpg","fo_sm_5.jpg","fo_md_4.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_1.jpg","fo_md_5.jpg","fo_lg_4.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_1.jpg","fo_lg_5.jpg","fo_detail.png","fo_promise.png",true);
+insert into product_img values(null,"fo_sm_1.jpg","fo_sm_2.jpg","fo_sm_3.jpg","fo_sm_4.jpg","fo_sm_5.jpg","fo_md_1.jpg","fo_md_2.jpg","fo_md_3.jpg","fo_md_4.jpg","fo_md_5.jpg","fo_lg_1.jpg","fo_lg_2.jpg","fo_lg_3.jpg","fo_lg_4.jpg","fo_lg_5.jpg","fo_detail.png","fo_promise.png",true);
 create table user_img(
   uiid int primary key auto_increment,
   img_addr varchar(32) comment "用户头像的文件名称"
