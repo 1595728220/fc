@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="d-flex justify-content-around mb-5">
+    <div class="d-flex justify-content-around mb-4">
       <router-link to="/classroom" class="p-0">
         <p class="footer_icon classroom"></p>
         <span class="footer_icon_text">珠宝课堂</span>
@@ -18,7 +18,7 @@
         <span class="footer_icon_text tag">对庄标签</span>
       </router-link>
     </div>
-    <div class="row m-0 pb-3 mb-5">
+    <div class="row m-0 pb-3 mb-4">
       <div class="col-list col-sm-12 col-lg-8 pt-3">
         <div class="d-flex flex-wrap justify-content-between">
           <div class="pr-3 pl-3">
@@ -85,6 +85,74 @@
         </div>    
       </div>
     </div>
+    <div class="pt-4">
+      <ul class="d-flex mr-auto ml-auto justify-content-around flex-wrap mb-4">
+        <li class="mr-3">
+          <router-link to="/unknow">关于对庄</router-link>
+        </li>
+        <li class="mr-3">
+          <router-link to="/unknow">翡翠图片</router-link>
+        </li>
+        <li class="mr-3">
+          <router-link to="/unknow">翡翠知识</router-link>
+        </li>
+        <li class="mr-3">
+          <router-link to="/unknow">翡翠戒指</router-link>
+        </li>
+        <li class="mr-3">
+          <router-link to="/unknow">对庄口碑</router-link>
+        </li>
+        <li class="mr-3">
+          <router-link to="/unknow">对庄客服</router-link>
+        </li>
+        <li class="mr-3">
+          <router-link to="/unknow">交易规则</router-link>
+        </li>
+        <li>
+          <router-link to="/unknow">鉴定宝服务</router-link>
+        </li>
+        
+      </ul>  
+      <p class="text-center">对庄翡翠 版权所有 2015-2020 ICP备案证数：XXXXXXXX  增值业务许可证：XXXXXXXX</p>
+      <p class="text-center">© 2015-2020 www.urlip.com ALL RIGHT RESERVED</p>
+      <h4 class="middle_font text-center">买翡翠，找源头，就在对庄</h4>
+     <ul class="d-flex mr-auto ml-auto justify-content-between flex-wrap mb-4">
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>  
+        <li class="mr-2">
+          <a href="http://www.baidu.com" target="_blank">百度</a>
+        </li>
+        
+      </ul> 
+    </div>
   </div>
 </template>
 <script>
@@ -123,5 +191,7 @@ export default {
 .footer .col-list{
   border-right:1px solid #ddd;
 }
-
+.footer>div:nth-child(3){
+  border-top:1px solid #ddd;
+}
 </style>
