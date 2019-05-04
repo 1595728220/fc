@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <div class="d-flex justify-content-around mb-3">
+    <div class="d-flex justify-content-around mb-5">
       <router-link to="/classroom" class="p-0">
         <p class="footer_icon classroom"></p>
         <span class="footer_icon_text">珠宝课堂</span>
@@ -18,11 +18,59 @@
         <span class="footer_icon_text tag">对庄标签</span>
       </router-link>
     </div>
-    <div class="row m-0">
-      <div class="col-list col-sm-12 col-lg-8">
-        <div class="row m-0">
-          <div class="col-sm-12 col-lg-4">
-            <h4 class="small_font font-weight-bold">交易方式</h4>
+    <div class="row m-0 pb-3 mb-5">
+      <div class="col-list col-sm-12 col-lg-8 pt-3">
+        <div class="d-flex flex-wrap justify-content-between">
+          <div class="pr-3 pl-3">
+            <h4 class="middle_font font-weight-bold mb-2">交易方式</h4>
+            <ul>
+              <li class="mb-2">
+                <router-link to="/zfb">支付宝支付</router-link>
+              </li>
+              <li class="mb-2">
+                <router-link to="/wx">微信支付</router-link>
+              </li>
+              <li class="mb-2">
+                <router-link to="/bank">银行转账汇款</router-link>
+              </li>
+              <li class="mb-2">
+                <router-link to="/zfbfaq">支付宝常见问题</router-link>
+              </li>
+            </ul>
+          </div>
+          <div class="">
+            <h4 class="middle_font font-weight-bold mb-2">对庄保障</h4>
+            <ul>
+              <li class="mb-2">
+                <router-link to="/picc">PICC承保</router-link>
+              </li>
+              <li class="mb-2">
+                <span>手机如实拍摄</span>
+              </li>
+              <li class="mb-2">
+                <span>源头底价</span>
+              </li>
+              <li class="mb-2">
+                <span>无理由退货</span>
+              </li>
+            </ul>
+          </div>
+          <div class="pr-3 pl-3">
+            <h4 class="middle_font font-weight-bold mb-2">关于对庄</h4>
+            <ul>
+              <li class="mb-2">
+                <router-link to="/forus">关于我们</router-link>
+              </li>
+              <li class="mb-2">
+                <router-link to="/pinzhi">品质保障</router-link>
+              </li>
+              <li class="mb-2">
+                <router-link to="/miandian">缅甸原石之旅</router-link>
+              </li>
+              <li class="mb-2">
+                <router-link to="/media">媒体报道</router-link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -75,4 +123,5 @@ export default {
 .footer .col-list{
   border-right:1px solid #ddd;
 }
+
 </style>
