@@ -25,22 +25,24 @@
                 </div>
               </a>
               <div class="dropdown-menu text-dark mb-1 class_area" :class="{show:class_is_show_dropdown}">
-                <div class="mb-5 p-3">
-                  <h5 class="mb-2">吊坠/挂坠</h5>
+                <div class="p-3">
+                  <h5 class="mb-2">挂坠</h5>
                   <div>
-                    <router-link to="/product/佛" class="btn btn-primary w-25">佛</router-link>
+                    <router-link to="/product/项链" class="btn btn-primary w-25 mr-2">项链</router-link>
                   </div>
                 </div>
-                <div class="mb-5 p-3">
-                  <h5 class="mb-2">手镯</h5>
+                <div class="p-3">
+                  <h5 class="mb-2">饰品</h5>
                   <div>
-                    <router-link to="/product/圆圈" class="btn btn-primary w-25">圆圈</router-link>
+                    <router-link to="/product/手镯" class="btn btn-primary w-25 mr-2">手镯</router-link>
+                    <router-link to="/product/戒指" class="btn btn-primary w-25 mr-2">戒指</router-link>
                   </div>
                 </div>
-                <div class="mb-5 p-3">
-                  <h5 class="mb-2">界面裸石</h5>
+                <div class="p-3">
+                  <h5 class="mb-2">种水</h5>
                   <div>
-                    <router-link to="/product/水滴形" class="btn btn-primary w-25">水滴形</router-link>
+                    <router-link to="/product/冰种" class="btn btn-primary w-25 mr-2">冰种</router-link>
+                    <router-link to="/product/冰种" class="btn btn-primary w-25 mr-2">糯种</router-link>
                   </div>
                 </div>
               </div>
@@ -123,7 +125,13 @@
         //是否有个人的搜索关键字记录
         is_person_keywords: false,
         //保存用户输入的搜索关键词
-        person_input_search: null
+        person_input_search: null,
+        //产品的分类情况
+        product_classfy:{
+          class:null,
+          thick:null,
+          color:null
+        }
       }
     },
     methods: {
@@ -213,6 +221,12 @@
         }
         // console.log(this.is_person_keywords)
       }).catch((error) => {
+        console.log(error)
+      })
+      //请求产品的分类信息
+      this.$axios.get("/product/classfy").then(result=>{
+        console.log(result.data)
+      }).catch(error=>{
         console.log(error)
       })
       //检查用户当前状态

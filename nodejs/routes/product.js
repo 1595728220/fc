@@ -137,6 +137,12 @@ router.get("/list", (req, res) => {
     res.send(result)
   })
 })
-
+router.get("/classfy",(req,res)=>{
+	let sql = "select classify,style,thickness,color from product "
+	pool.query(sql,(err,result)=>{
+		if(err) throw err
+		res.send(result)
+	})
+})
 //导出产品模块
 module.exports = router
