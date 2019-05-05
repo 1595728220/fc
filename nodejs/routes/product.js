@@ -56,6 +56,8 @@ router.get("/list", (req, res) => {
   if(!uid) {
     uid = 0
   }
+	//当用户通过关键字搜索产品时
+	if(!!keywords){
   //添加搜索的关键字到keywords表中
     let sql1 = "select count,kid from keywords where content = ? and key_userId = ?",
       count = 1,
@@ -82,8 +84,8 @@ router.get("/list", (req, res) => {
           // console.log("插入关键词表完成")
         })
       }
-
     })
+	}
   //计算分页的开始下标
   let start = (pno - 1) * size,
     sql = "select described,price,md1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
@@ -137,9 +139,18 @@ router.get("/list", (req, res) => {
     res.send(result)
   })
 })
+//获取产品的分类信息 /get 
 router.get("/classfy", (req,res)=>{
   // console.log("请求产品分类模块")
 	let sql = "select classify,style,thickness,color from product "
+	pool.query(sql,(err,result)=>{
+		if(err) throw err
+		res.send(result)
+	})
+})
+//获取首页轮播图 /get
+router.get("/banner",(req,res)=>{
+	let sql = "select banner,pid from product,product_img where product_imgId = iid and recommond = 1"
 	pool.query(sql,(err,result)=>{
 		if(err) throw err
 		res.send(result)
