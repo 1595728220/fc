@@ -25,7 +25,13 @@
                 </div>
               </a>
               <div class="dropdown-menu text-dark mb-1 class_area" :class="{show:class_is_show_dropdown}">
-                <div class="p-3">
+                <div class="p-3" v-for="(key,ind) in product_classfy">
+                  <h5 class="mb-2">{{ind}}</h5>
+                  <div>
+                    <router-link :to="'/product/'+val" class="btn btn-primary w-25 mr-2 mb-2" v-for="(val,aind) in product_classfy[ind]" :key="aind">{{val}}</router-link>
+                  </div>
+                </div>
+                <!-- <div class="p-3" >
                   <h5 class="mb-2">挂坠</h5>
                   <div>
                     <router-link to="/product/项链" class="btn btn-primary w-25 mr-2">项链</router-link>
@@ -44,7 +50,7 @@
                     <router-link to="/product/冰种" class="btn btn-primary w-25 mr-2">冰种</router-link>
                     <router-link to="/product/冰种" class="btn btn-primary w-25 mr-2">糯种</router-link>
                   </div>
-                </div>
+                </div> -->
               </div>
             </li>
             <li class="nav-item pr">
@@ -65,8 +71,9 @@
                   </div>
                   <h5 class="mb-2">热门搜索</h5>
                   <div>
-                    <router-link :to="'/product/'+keyword.content" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.all"
-                      :key="ind"><span v-if="keyword">{{keyword.content}}</span></router-link>
+                    <router-link :to="'/product/'+keyword.content" class="btn btn-primary w-25"
+                      v-for="(keyword,ind) in keywords.all" :key="ind"><span v-if="keyword">{{keyword.content}}</span>
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -127,10 +134,9 @@
         //保存用户输入的搜索关键词
         person_input_search: null,
         //产品的分类情况
-        product_classfy:{
-          class:null,
-          thick:null,
-          color:null
+        product_classfy: {
+          "颜色":[],
+          "种水":[]
         }
       }
     },
@@ -197,6 +203,13 @@
         }).catch((error) => {
           console.log(error)
         })
+      },
+      //检查元素是否存在数组中
+      check_array:function(arr,el){
+        if(arr.indexOf(el) === -1) {
+          arr.push(el)
+        }
+        return arr
       }
     },
     //当组件挂载后
@@ -224,9 +237,19 @@
         console.log(error)
       })
       //请求产品的分类信息
-      this.$axios.get("/product/classfy").then(result=>{
-        console.log(result.data)
-      }).catch(error=>{
+      this.$axios.get("/product/classfy").then(result => {
+        // console.log(result.data)
+        //遍历结果消息的数组
+        for(let row of result.data){
+          //如果存在分类则新增分类下的样式，如果不存在分类，则创建分类，并添加样式
+          this.product_classfy[row.classify] ? this.check_array(this.product_classfy[row.classify],row.style) : this.product_classfy[row.classify] = [row.style] 
+          //往产品分类对象的颜色属性所对应的数组中插入原本没有的值
+          this.check_array(this.product_classfy["颜色"],row.color) 
+          //往产品分类对象的种水属性所对应的数组中插入原本没有的值
+          this.check_array(this.product_classfy["种水"],row.thickness)
+        }
+        // console.log(this.product_classfy)
+      }).catch(error => {
         console.log(error)
       })
       //检查用户当前状态
@@ -286,6 +309,7 @@
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
+
   .header_nav li .triangle_area {
     width: 12px;
     height: 12px;

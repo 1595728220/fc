@@ -137,7 +137,8 @@ router.get("/list", (req, res) => {
     res.send(result)
   })
 })
-router.get("/classfy",(req,res)=>{
+router.get("/classfy", (req,res)=>{
+  console.log("请求产品分类模块")
 	let sql = "select classify,style,thickness,color from product "
 	pool.query(sql,(err,result)=>{
 		if(err) throw err
