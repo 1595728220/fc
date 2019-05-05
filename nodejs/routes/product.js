@@ -72,14 +72,14 @@ router.get("/list", (req, res) => {
         sql1 = "update keywords set count = ? where kid = ?"
         pool.query(sql1, [count, kid], (err, result) => {
           if (err) throw err
-          console.log("更新关键词表完成")
+          // console.log("更新关键词表完成")
         })
       } else { //不存在
         //插入新的关键字搜索记录
         sql1 = "insert into keywords values(null,?,?,?)"
         pool.query(sql1, [keywords, uid, count], (err, result) => {
           if (err) throw err
-          console.log("插入关键词表完成")
+          // console.log("插入关键词表完成")
         })
       }
 
@@ -138,7 +138,7 @@ router.get("/list", (req, res) => {
   })
 })
 router.get("/classfy", (req,res)=>{
-  console.log("请求产品分类模块")
+  // console.log("请求产品分类模块")
 	let sql = "select classify,style,thickness,color from product "
 	pool.query(sql,(err,result)=>{
 		if(err) throw err

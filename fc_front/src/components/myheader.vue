@@ -25,7 +25,8 @@
                 <div class="p-3" v-for="(key,ind) in product_classfy">
                   <h5 class="mb-2">{{ind}}</h5>
                   <div>
-                    <router-link :to="'/product/'+val" class="btn btn-primary w-25 mr-2 mb-2" v-for="(val,aind) in product_classfy[ind]" :key="aind">{{val}}</router-link>
+                    <router-link :to="'/product/'+val" class="btn btn-primary w-25 mr-2 mb-2"
+                      v-for="(val,aind) in product_classfy[ind]" :key="aind">{{val}}</router-link>
                   </div>
                 </div>
                 <!-- <div class="p-3" >
@@ -135,15 +136,15 @@
         person_input_search: null,
         //产品的分类情况
         product_classfy: {
-          "颜色":[],
-          "种水":[]
+          "颜色": [],
+          "种水": []
         }
       }
     },
     methods: {
       //点击分类标签，展开/收起下拉列表
       class_click: function () {
-        console.log("鼠标点击分类标签，展开下拉列表");
+        // console.log("鼠标点击分类标签，展开下拉列表");
         //三角形的状态交换
         [this.is_triangle_left, this.is_triangle_top] = [this.is_triangle_top, this.is_triangle_left]
         //下拉列表的显示/隐藏状态
@@ -153,7 +154,7 @@
       search_click: function () {
         //如果搜索栏的下拉列表处于显示状态
         if (this.search_is_show_dropdown) {
-          console.log("1秒后搜索关键字栏隐藏")
+          // console.log("1秒后搜索关键字栏隐藏")
           setTimeout(() => {
             //改变状态
             this.search_is_show_dropdown = !this.search_is_show_dropdown
@@ -176,7 +177,7 @@
             uid: this.person_uid
           }
         }).then((result) => {
-          console.log("用户成功登出")
+          // console.log("用户成功登出")
           //检查当前登录状态
           this.check_person_state()
         }).catch((error) => {
@@ -205,8 +206,8 @@
         })
       },
       //检查元素是否存在数组中
-      check_array:function(arr,el){
-        if(arr.indexOf(el) === -1) {
+      check_array: function (arr, el) {
+        if (arr.indexOf(el) === -1) {
           arr.push(el)
         }
         return arr
@@ -240,13 +241,14 @@
       this.$axios.get("/product/classfy").then(result => {
         // console.log(result.data)
         //遍历结果消息的数组
-        for(let row of result.data){
+        for (let row of result.data) {
           //如果存在分类则新增分类下的样式，如果不存在分类，则创建分类，并添加样式
-          this.product_classfy[row.classify] ? this.check_array(this.product_classfy[row.classify],row.style) : this.product_classfy[row.classify] = [row.style] 
+          this.product_classfy[row.classify] ? this.check_array(this.product_classfy[row.classify], row.style) :
+            this.product_classfy[row.classify] = [row.style]
           //往产品分类对象的颜色属性所对应的数组中插入原本没有的值
-          this.check_array(this.product_classfy["颜色"],row.color) 
+          this.check_array(this.product_classfy["颜色"], row.color)
           //往产品分类对象的种水属性所对应的数组中插入原本没有的值
-          this.check_array(this.product_classfy["种水"],row.thickness)
+          this.check_array(this.product_classfy["种水"], row.thickness)
         }
         // console.log(this.product_classfy)
       }).catch(error => {

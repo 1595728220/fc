@@ -60,11 +60,11 @@
                 input_upwd: "", //保存用户输入的密码
                 state_phone: true, //手机号验证状态
                 state_upwd: true, //密码验证状态
-                blur_once:false,//是否失去过焦点
-                blur_two:false,//是否失去焦点
+                blur_once: false, //是否失去过焦点
+                blur_two: false, //是否失去焦点
                 login_result: null, //登录的结果对象
                 test: "这是测试消息",
-                login_timer:null //登录方法中使用的定时器
+                login_timer: null //登录方法中使用的定时器
             };
         },
         methods: {
@@ -72,7 +72,7 @@
              * 手机号表单失去焦点时调用的方法
              */
             func_phone_blur() {
-                console.log("鼠标从手机号失去焦点");
+                // console.log("鼠标从手机号失去焦点");
                 //已经触发过一次失去焦点事件
                 this.blur_once = true
                 //验证手机号格式，并将结果赋值给手机号的验证状态
@@ -82,7 +82,7 @@
              * 密码表单失去焦点时调用的方法
              */
             func_upwd_blur() {
-                console.log("鼠标从密码失去焦点");
+                // console.log("鼠标从密码失去焦点");
                 //已经触发过一次失去焦点事件
                 this.blur_two = true
                 //验证密码格式，并将结果赋值给密码的验证状态
@@ -103,12 +103,12 @@
                     this.login_result = result.data
                     // console.log(this.login_result)
                     //如果登录成功
-                    if(this.login_result.code === 200){
+                    if (this.login_result.code === 200) {
                         //2s后跳转回首页
-                        this.login_timer = setTimeout(()=>{
-                            console.log("登录成功，2秒后跳转回首页")
+                        this.login_timer = setTimeout(() => {
+                            // console.log("登录成功，2秒后跳转回首页")
                             this.$router.push("/")
-                        },2000)
+                        }, 2000)
                     }
                 }).catch(error => {
                     console.log(error)
@@ -120,7 +120,7 @@
             clearTimeout(this.login_timer)
         },
         computed: {
-            check_input_right(){
+            check_input_right() {
                 return !this.state_phone || !this.state_upwd || !this.blur_once || !this.blur_two
             }
         },

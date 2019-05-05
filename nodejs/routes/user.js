@@ -129,7 +129,7 @@ if (identify.toLowerCase() !== (req.session.captcha && req.session.captcha.toLow
       pool.query(sql, [phone, upwd], (err, result) => {
         if (err) throw err
         if (result.affectedRows > 0) { //插入影响的行数大于0，成功注册
-          console.log(result)
+          // console.log(result)
           req.session.uid = result.insertId
           res.send({
             code: 200,
