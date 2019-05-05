@@ -162,7 +162,7 @@
           .catch(error => {
             //请求失败
             //在控制台输出错误信息
-            console.log(error);
+            throw error
           });
       },
       /**
@@ -205,7 +205,7 @@
             }
           })
           .catch(error => {
-            console.log(error);
+            throw error;
           });
       },
       /**
@@ -269,7 +269,7 @@
           //重新请求验证码
           this.require_yzm()
         }).catch(error => {
-          console.log(error)
+          throw error
           this.require_yzm()
         })
       }

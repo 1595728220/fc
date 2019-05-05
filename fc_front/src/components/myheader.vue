@@ -181,7 +181,7 @@
           //检查当前登录状态
           this.check_person_state()
         }).catch((error) => {
-          console.log(error)
+          throw error
         })
       },
       //检查用户的登录状态的方法
@@ -202,7 +202,7 @@
             this.person_name = null
           }
         }).catch((error) => {
-          console.log(error)
+          throw error
         })
       },
       //检查元素是否存在数组中
@@ -235,7 +235,7 @@
         }
         // console.log(this.is_person_keywords)
       }).catch((error) => {
-        console.log(error)
+        throw error
       })
       //请求产品的分类信息
       this.$axios.get("/product/classfy").then(result => {
@@ -252,7 +252,7 @@
         }
         // console.log(this.product_classfy)
       }).catch(error => {
-        console.log(error)
+        throw error
       })
       //检查用户当前状态
       this.check_person_state()
