@@ -14,9 +14,6 @@
             <li class="nav-item">
               <router-link to="/" class="nav-link">新品</router-link>
             </li>
-            <li class="nav-item">
-              <router-link to="/" class="nav-link">对庄APP</router-link>
-            </li>
             <li class="nav-item pr">
               <a @click="class_click" class="nav-link cp"> 分类
                 <div class="triangle_area">
@@ -52,6 +49,9 @@
                   </div>
                 </div> -->
               </div>
+            </li>
+            <li class="nav-item">
+              <router-link to="/" class="nav-link">对庄APP</router-link>
             </li>
             <li class="nav-item pr">
               <div>
