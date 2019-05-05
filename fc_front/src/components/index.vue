@@ -3,7 +3,9 @@
     <div class="">
         <myheader></myheader>
         <div class="container mt-3 mb-3">
-            <h1>{{msg}}</h1>
+            <div class="banner bg-secondary row m-0">
+
+            </div>
         </div>
         <myfooter></myfooter>
     </div>

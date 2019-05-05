@@ -269,8 +269,8 @@
           //重新请求验证码
           this.require_yzm()
         }).catch(error => {
-          throw error
           this.require_yzm()
+          throw error
         })
       }
     },

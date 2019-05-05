@@ -22,11 +22,11 @@
                 </div>
               </a>
               <div class="dropdown-menu text-dark mb-1 class_area" :class="{show:class_is_show_dropdown}">
-                <div class="p-3" v-for="(key,ind) in product_classfy">
-                  <h5 class="mb-2">{{ind}}</h5>
+                <div class="p-3" v-for="(values,keys,indexs) in product_classfy" :key="indexs">
+                  <h5 class="mb-2">{{keys}}</h5>
                   <div>
                     <router-link :to="'/product/'+val" class="btn btn-primary w-25 mr-2 mb-2"
-                      v-for="(val,aind) in product_classfy[ind]" :key="aind">{{val}}</router-link>
+                      v-for="(val,key) in product_classfy[keys]" :key="key">{{val}}</router-link>
                   </div>
                 </div>
                 <!-- <div class="p-3" >
@@ -176,7 +176,7 @@
           params: {
             uid: this.person_uid
           }
-        }).then((result) => {
+        }).then(() => {
           // console.log("用户成功登出")
           //检查当前登录状态
           this.check_person_state()
