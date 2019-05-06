@@ -110,4 +110,6 @@ input:-webkit-autofill{
   font-size:1rem;
   color:#333;
 }
-
+.oh{
+  overflow:hidden;
+}
