@@ -1,5 +1,5 @@
 <template>
-<!-- http://www.aitaocui.cn/daquan/feicui/94312.html -->
+    <!-- http://www.aitaocui.cn/daquan/feicui/94312.html -->
     <div class="">
         <myheader></myheader>
         <div class="container mt-3 mb-3">
@@ -8,8 +8,9 @@
                 <div class="col-lg-2 col-sm-12 ">
                     <ul class="d-flex flex-sm-row flex-lg-column">
                         <li v-for="(val,key,index) in banner.imgMsg" :key="index">
-                            <router-link :to="'/detail/'+val.pid">
-                                <img :src="val.src" class="w-100">
+                            <router-link :to="'/detail/'+val.pid" class="mr-1 ml-1 d-block">
+                                <img :src="val.bannerSrc" class="w-100 asideImg">
+                                <span class="text-white text-center d-block">{{val.described}}</span>
                             </router-link>
                         </li>
                     </ul>
@@ -24,26 +25,52 @@
     export default {
         data() {
             return {
-                banner:{
-                    imgMsg:{},
+                banner: {
+                    imgMsg: {},
                 },
             }
         },
         mounted() {
-            this.$axios.get("/product/banner").then(result=>{
+            this.$axios.get("/product/banner").then(result => {
                 this.banner.imgMsg = result.data
-                this.banner.imgMsg.forEach(el=>{
-                    el.src = require("../assets/imgs/banner/"+el.banner)
+                this.banner.imgMsg.forEach(el => {
+                    el.bannerSrc = require("../assets/imgs/banner/" + el.banner)
+                    // el.asideSrc = require("../assets/imgs/product/"+el.photo1)
                 })
-            }).catch(error=>{
+            }).catch(error => {
                 throw error
             })
+            console.log(this.banner)
         },
         computed: {
-            
+
         },
     }
 </script>
 <style>
+    @media screen and (max-width: 575px) {.banner .asideImg {
+        height: 40px;
+    }}
 
+    @media screen and (min-width: 576px) {.banner .asideImg {
+        height: 50px;
+    }}
+
+    @media screen and (min-width: 768px) {.banner .asideImg {
+        height: 80px;
+    }}
+
+    @media screen and (min-width: 992px) {.banner .asideImg {
+        height: 50px;
+    }}
+
+    @media screen and (min-width: 1200px) {.banner .asideImg {
+        height: 65px;
+    }}
+    .banner .asideImg:hover{
+        border:3px solid #28a745
+    }
+    .banner .asideImg{
+        border:3px solid transparent
+    }
 </style>

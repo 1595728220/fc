@@ -150,7 +150,7 @@ router.get("/classfy", (req,res)=>{
 })
 //获取首页轮播图 /get
 router.get("/banner",(req,res)=>{
-	let sql = "select banner,pid from product,product_img where product_imgId = iid and recommond = 1"
+	let sql = "select banner,pid,described,photo1 from product,product_img where product_imgId = iid and recommond = 1"
 	pool.query(sql,(err,result)=>{
 		if(err) throw err
 		res.send(result)
