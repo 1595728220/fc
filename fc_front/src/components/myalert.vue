@@ -78,7 +78,7 @@
         },
         computed: {
             //利用计算属性将偏移属性拼接成为一个内联的样式
-            alert_position: function () {
+            alert_position() {
                 return `left:${this.alert_left}px;top:${this.alert_top}px`
             }
         },

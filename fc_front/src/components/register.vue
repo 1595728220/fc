@@ -49,7 +49,7 @@
               :class="{input_form_error:!state_form.iden}" @blur="func_iden_blur">
             <div class="col-sm-6 p-0 align-self-center">
               <div class="row m-0">
-                <myyzm :yzmImg="yzm_result_img" v-if="yzm_result_img" :fatherfunc="require_yzm"></myyzm>
+                <myyzm :yzmimg="yzm_result_img" v-if="yzm_result_img" :fatherfunc="require_yzm"></myyzm>
                 <a class="col-sm-6 align-self-center cp text-primary p-0" @click="require_yzm">看不清楚，换一张</a>
               </div>
             </div>
@@ -97,9 +97,9 @@
         phoneRegex: /^1[34578]\d{9}$/, //手机号正则
         upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
         input_form: {
-          phone: "15057391901", //手机号表单的输入
-          upwd: "123456", //密码表单的输入
-          cpwd: "123456", //确认密码表单的输入
+          phone: "", //手机号表单的输入
+          upwd: "", //密码表单的输入
+          cpwd: "", //确认密码表单的输入
           iden: "" //验证码表单的输入
         }, //保存表单输入值
         state_form: {

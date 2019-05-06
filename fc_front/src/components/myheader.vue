@@ -143,7 +143,7 @@
     },
     methods: {
       //点击分类标签，展开/收起下拉列表
-      class_click: function () {
+      class_click() {
         // console.log("鼠标点击分类标签，展开下拉列表");
         //三角形的状态交换
         [this.is_triangle_left, this.is_triangle_top] = [this.is_triangle_top, this.is_triangle_left]
@@ -151,7 +151,7 @@
         this.class_is_show_dropdown = !this.class_is_show_dropdown
       },
       //搜索栏失去焦点/获得焦点时执行的方法
-      search_click: function () {
+      search_click() {
         //如果搜索栏的下拉列表处于显示状态
         if (this.search_is_show_dropdown) {
           // console.log("1秒后搜索关键字栏隐藏")
@@ -165,12 +165,12 @@
         }
       },
       //点击按钮控制导航栏的隐藏或显示方法
-      collapse_click: function () {
+      collapse_click () {
         //切换显示/隐藏的状态
         this.collapse_is_show = !this.collapse_is_show
       },
       //点击登出的事件
-      logout_click: function () {
+      logout_click () {
         //向/user/logout发送请求携带uid和对应的cookie
         this.$axios.get("/user/logout", {
           params: {
@@ -185,7 +185,7 @@
         })
       },
       //检查用户的登录状态的方法
-      check_person_state: function () {
+      check_person_state () {
         //发送请求查看用户的登录状态
         this.$axios.get("/user/state").then((result) => {
           // console.log(result)
@@ -206,7 +206,7 @@
         })
       },
       //检查元素是否存在数组中
-      check_array: function (arr, el) {
+      check_array (arr, el) {
         if (arr.indexOf(el) === -1) {
           arr.push(el)
         }
@@ -214,7 +214,7 @@
       }
     },
     //当组件挂载后
-    mounted: function () {
+    mounted () {
       //发送请求
       this.$axios.get("/user/search", {
         params: {
