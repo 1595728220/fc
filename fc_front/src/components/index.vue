@@ -61,26 +61,31 @@
                         speed: 2,
                         //轮播的距离
                         left:0,
-                        //表示一张图片轮播完的临界值
+                        //轮播到下一张图片距离的临界值
                         critical:0,
                         //构造一个在最后重复第一张图的数组
                         imgMsg:[]
                     },
                 },
-                screenWidth: document.documentElement.clientWidth, //屏幕宽度
+                //屏幕宽度
+                screenWidth: document.documentElement.clientWidth, 
             }
         },
         mounted() {
             //获取当前轮播一张图的宽度
             this.banner.lunbo.onceWidth = this.$refs.banner_area.offsetWidth
+            // 计算当前到下一张图片距离的临界值
             this.banner.lunbo.critical = (this.banner.lunbo.currentIndex+1)*this.banner.lunbo.onceWidth
             // 定义窗口大小变更通知事件
             window.onresize =  () => {
-                this.screenWidth = document.documentElement.clientWidth; //窗口宽度
+                 //窗口宽度
+                this.screenWidth = document.documentElement.clientWidth;
             };
             //请求banner数据
             this.$axios.get("/product/banner").then(result => {
+                //将结果图片存入变量
                 this.banner.imgMsg = result.data
+                //轮播的图片的数量
                 this.banner.lunbo.imgCount = result.data.length
                 //使用map遍历banner响应结果，进行一些数据的处理
                 // this.banner.imgMsg = this.banner.imgMsg.map(el => {
@@ -97,6 +102,7 @@
                     // el.isshow = false
                     this.$set(el, "isshow", false)
                 })
+                //构造成一个适合轮播的数组
                 this.banner.lunbo.imgMsg = [...this.banner.imgMsg,this.banner.imgMsg[0]]
             }).catch(error => {
                 throw error
@@ -133,8 +139,11 @@
             lunbo() {
                 //如果累计的边界不小于父元素的宽度，那么重置参数
                 if ( this.banner.lunbo.left >= this.banner.lunbo.imgCount*this.banner.lunbo.onceWidth) {
+                    //向左的移动距离初始化
                     this.banner.lunbo.left = 0
+                    //当前图片所对应下标初始化
                     this.banner.lunbo.currentIndex = 0
+                    //重新计算当前轮播到下一张图片距离的临界值
                     this.banner.lunbo.critical = (this.banner.lunbo.currentIndex+1)*this.banner.lunbo.onceWidth
                 }
                 //限制时间间隔在40ms以内
@@ -146,9 +155,13 @@
 
                  //left属性超出累积的边界值时，将left属性值规范化，并计算新的累积边界值，
                  if (this.banner.lunbo.left >= this.banner.lunbo.critical) {
+                    //使轮播延时4秒
                     this.banner.lunbo.sign = 0
+                    //切换到下一张图片
                     this.banner.lunbo.currentIndex ++
+                    //修正图片的左移动距离
                     this.banner.lunbo.left = this.banner.lunbo.critical
+                    //计算当前到下一张图片距离的临界值
                     this.banner.lunbo.critical = this.banner.lunbo.onceWidth * (this.banner.lunbo.currentIndex + 1)
                 }
             },
@@ -160,10 +173,12 @@
                 let now = new Date()
                 //计算中间的时间间隔
                 this.banner.lunbo.deltaTime = now - this.banner.lunbo.lastTime
+                //不延迟轮播
                 if (this.banner.lunbo.sign === 1) {
                     this.lunbo()
                     requestAnimationFrame(this.smartLoop)
-                } else {
+
+                } else { //延迟轮播
                     //当图片到达边界点时，等待3秒继续
                     this.banner.lunbo.timer = setTimeout( ()=> {
                         this.lunbo()
