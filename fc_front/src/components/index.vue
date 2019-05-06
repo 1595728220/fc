@@ -9,7 +9,7 @@
                     <ul class="d-flex flex-sm-row flex-lg-column">
                         <li v-for="(val,key,index) in banner.imgMsg" :key="index">
                             <router-link :to="'/detail/'+val.pid" class="mr-1 ml-1 d-block">
-                                <img :src="val.bannerSrc" class="w-100 asideImg" :hover>
+                                <img :src="val.bannerSrc" class="w-100 asideImg">
                                 <span class="text-white text-center d-block">{{val.described}}</span>
                             </router-link>
                         </li>
