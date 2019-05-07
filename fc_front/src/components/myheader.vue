@@ -21,8 +21,8 @@
                   </span>
                 </div>
               </a>
-              <div class="dropdown-menu text-dark mb-1 class_area" :class="{show:class_is_show_dropdown}">
-                <div class="p-3" v-for="(values,keys,indexs) in product_classfy" :key="indexs">
+              <div class="dropdown-menu text-dark mb-1 class_area d-block oh tr" :class="{v_hidden:!class_is_show_dropdown}">
+                <div class="pt-1 pl-3 pr-3 pb-2" v-for="(values,keys) in product_classfy" :key="keys">
                   <h5 class="mb-2">{{keys}}</h5>
                   <div>
                     <router-link :to="'/product/'+val" class="btn btn-primary w-25 mr-2 mb-2"
@@ -60,7 +60,7 @@
                   placeholder="翡翠手镯" v-model="person_input_search">
                 <router-link class="btn btn-primary pl-3 pr-3" :to="'/product/'+person_input_search">搜索</router-link>
               </div>
-              <div class="dropdown-menu text-dark mb-1 search_area" :class="{show:search_is_show_dropdown}">
+              <div class="dropdown-menu text-dark mb-1 search_area d-block tr oh" :class="{v_hidden:!search_is_show_dropdown}">
                 <div class="mb-5 p-3">
                   <div v-if="person_uid">
                     <h5>搜索记录</h5>
@@ -158,7 +158,7 @@
           setTimeout(() => {
             //改变状态
             this.search_is_show_dropdown = !this.search_is_show_dropdown
-          }, 1000)
+          }, 500)
         } else { //处于隐藏状态
           //改变状态
           this.search_is_show_dropdown = !this.search_is_show_dropdown
@@ -352,11 +352,13 @@
   }
 
   .header .class_area {
+    height:28rem;
     width: 23rem;
     top: 33px;
   }
 
   .header .search_area {
+    height:23rem;
     width: 23rem;
   }
 

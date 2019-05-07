@@ -30,6 +30,12 @@
                     </ul>
                 </div>
             </div>
+            <div class="d-flex justify-content-around mb-4">
+                <div class="p-0">
+                    <p class="index_icon"></p>
+                    <span class="footer_icon_text">翡翠保A承若</span>
+                </div>
+            </div>
             <div class="floors">
                 <div :class="key" v-for="(floor,key) in floors" :key="key">
                     <h3>{{floor.title}}</h3>
@@ -100,8 +106,8 @@
                         color: null,
                         minprice: 0,
                         maxprice: 999999999999,
-                        rexiao: null,
-                        xinpin: true,
+                        rexiao: true,
+                        xinpin: null,
                         recommond: null,
                         pno: 1,
                         size: 4,
@@ -116,8 +122,8 @@
                         minprice: 0,
                         maxprice: 999999999999,
                         rexiao: null,
-                        xinpin: true,
-                        recommond: null,
+                        xinpin: null,
+                        recommond: true,
                         pno: 1,
                         size: 4,
                     },
@@ -347,5 +353,16 @@
 
     .banner .asideImg {
         border: 3px solid transparent;
+    }
+    .index_icon{
+        width: 4rem;
+        height: 4rem;
+        background:url(../assets/imgs/icon/icons.png) -235px -22px;
+        background-size: 20rem;
+    }
+    .floors {
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        border-top: 2px solid #ddd;
     }
 </style>

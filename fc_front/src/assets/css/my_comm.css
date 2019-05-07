@@ -102,6 +102,7 @@ input:-webkit-autofill{
 }
 .v_hidden {
   visibility:hidden;
+  height:0px !important;
 }
 .v_show{
   visibility: visible;
