@@ -13,7 +13,7 @@ router.get("/detail", (req, res) => {
     return
   }
   //查询商品的详情
-  let sql = "select * from product where pid = ?"
+  let sql = "select * from product,product_img where pid = ? and product_imgId = iid"
   pool.query(sql, [pid], (err, result) => {
     if (err) throw err
     if (result.length > 0) { //查询到产品的详情结果不为空，返回详情数据
@@ -102,7 +102,7 @@ router.get("/list", (req, res) => {
 	}
   //计算分页的开始下标
   let start = (pno - 1) * size,
-    sql = "select described,price,photo1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
+    sql = "select pid,described,price,photo1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
     arr = [] //存储查询的参数
   if (!!classify) { //如果分类不为空
     sql += " and classify = ?" //拼接查询条件
