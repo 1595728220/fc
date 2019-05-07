@@ -114,6 +114,9 @@ router.get("/list", (req, res) => {
     sql += " and price <= ?"
     arr.push(maxprice)
   }
+  if(!!recommond){ //推荐产品不为空
+    sql += " and recommond = 1"
+  }
   if (!!keywords) { //关键字不为空
     let keyword = "%" + keywords + "%"
     sql += " and described like ?"

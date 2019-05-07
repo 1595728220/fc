@@ -9,14 +9,20 @@
 </template>
 <script>
   export default {
-    // props:['classify','style','thickness','color','new_pro','recommond','min_price','max_price'],
+    props:['mymsg'],
     data(){
       return{
         product:{}
       }
     },
     mounted() {
-      // console.log(this.classify,this.style,this.thickness,this.color,this.new_pro,this.recomment,this.min_price,this.max_price)
+      console.log(this.mymsg)
+      let {}
+      // this.$axios.get("/product/list",{
+      //   params:{
+
+      //   }
+      // })
     },
   }
 </script>
