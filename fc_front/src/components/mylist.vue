@@ -46,6 +46,11 @@
     font-size: 20px;
     color: #00C17B;
   }
+  .productlist .described{
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+  }
   .productlist>li{
     border:1px solid #ddd;
   }

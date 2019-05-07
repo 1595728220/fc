@@ -1,14 +1,15 @@
 <template>
   <div id="app" class="container-fluid p-0">
+    <myheader></myheader>
     <router-view></router-view>
+    <myfooter></myfooter>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'app'
-}
+  name: "app"
+};
 </script>
 
 <style>
