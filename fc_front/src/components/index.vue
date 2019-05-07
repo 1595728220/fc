@@ -30,10 +30,22 @@
                     </ul>
                 </div>
             </div>
-            <div class="d-flex justify-content-around mb-4">
+            <div class="d-flex justify-content-around mt-5">
                 <div class="p-0">
-                    <p class="index_icon"></p>
-                    <span class="footer_icon_text">翡翠保A承若</span>
+                    <p class="index_icon promise"></p>
+                    <span class="icon_text">翡翠保A承若</span>
+                </div>
+                <div class="p-0">
+                    <p class="index_icon pifa"></p>
+                    <span class="icon_text">源头批发</span>
+                </div>
+                <div class="p-0">
+                    <p class="index_icon rushi"></p>
+                    <span class="icon_text">手机如实拍摄</span>
+                </div>
+                <div class="p-0">
+                    <p class="index_icon tuikuan"></p>
+                    <span class="icon_text">7天无理由退款</span>
                 </div>
             </div>
             <div class="floors">
@@ -355,10 +367,23 @@
         border: 3px solid transparent;
     }
     .index_icon{
-        width: 4rem;
-        height: 4rem;
-        background:url(../assets/imgs/icon/icons.png) -235px -22px;
+        width: 4.1rem;
+        height: 4.2rem;
+        background:url(../assets/imgs/icon/icons.png) -233px -125px;
         background-size: 20rem;
+        margin:0 auto;
+    }
+    .icon_text{
+        font-size:20px;
+    }
+    .index_icon.pifa{
+        background-position: -341px -19px;
+    }
+    .index_icon.rushi{
+        background-position: -341px -125px;
+    }
+    .index_icon.tuikuan{
+        background-position: -127px -125px;        
     }
     .floors {
         margin-top: 2.5rem;
