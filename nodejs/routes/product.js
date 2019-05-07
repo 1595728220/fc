@@ -39,10 +39,24 @@ router.get("/list", (req, res) => {
     maxprice,
     rexiao,
     xinpin,
+    recommond,
     pno,
     size,
     keywords
   } = req.query;
+  // console.log(uid,
+  //   classify,
+  //   style,
+  //   thickness,
+  //   color,
+  //   minprice,
+  //   maxprice,
+  //   rexiao,
+  //   xinpin,
+  //   recommond,
+  //   pno,
+  //   size,
+  //   keywords)
   //默认值
   !pno && (pno = 1);
   !size && (size = 6);
@@ -88,7 +102,7 @@ router.get("/list", (req, res) => {
 	}
   //计算分页的开始下标
   let start = (pno - 1) * size,
-    sql = "select described,price,md1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
+    sql = "select described,price,photo1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
     arr = [] //存储查询的参数
   if (!!classify) { //如果分类不为空
     sql += " and classify = ?" //拼接查询条件
@@ -115,20 +129,22 @@ router.get("/list", (req, res) => {
     arr.push(maxprice)
   }
   if(!!recommond){ //推荐产品不为空
-    sql += " and recommond = 1"
+    sql += " and recommond = 1 "
   }
   if (!!keywords) { //关键字不为空
     let keyword = "%" + keywords + "%"
-    sql += " and described like ?"
+    sql += " and described like ? "
     arr.push(keyword)
   }
   if (!!rexiao || !!xinpin) { //热销和新品中至少有一个不为空
     sql += " order by "
     if (!!rexiao) { //热销不为空
       sql += " month_buy desc"
-    }
-    if (!!xinpin) { //新品不为空
-      sql += " ,shelf_time desc"
+      if(!!xinpin) {//新品不为空
+        sql += " ,shelf_time desc"
+      }
+    } else if (!!xinpin) { //新品不为空
+      sql += " shelf_time desc"
     }
   }
   sql += " limit ?,?"

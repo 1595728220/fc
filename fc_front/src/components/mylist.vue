@@ -17,12 +17,9 @@
     },
     mounted() {
       console.log(this.mymsg)
-      let {}
-      // this.$axios.get("/product/list",{
-      //   params:{
-
-      //   }
-      // })
+      this.$axios.get("/product/list",{
+        params:this.mymsg
+      })
     },
   }
 </script>
