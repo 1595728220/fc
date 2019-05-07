@@ -23,10 +23,13 @@ import MyHeader from "@/components/myheader"
 import MyFooter from "@/components/myfooter"
 import MyAlert from "@/components/myalert"
 import MyYzm from "@/components/myyzm"
+import MyList from "@/components/mylist"
+
 Vue.component('myheader',MyHeader)
 Vue.component('myfooter',MyFooter)
 Vue.component('myalert',MyAlert)
 Vue.component('myyzm',MyYzm)
+Vue.component('mylist',MyList)
 Vue.config.productionTip = false
 
 new Vue({

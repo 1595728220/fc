@@ -35,6 +35,12 @@
           </ul>
         </div>
       </div>
+      <div class="floors">
+          <div class="floor1">
+              <h1>新品推荐</h1>
+              <mylist></mylist>
+          </div>
+      </div>
     </div>
     <myfooter></myfooter>
   </div>
@@ -205,14 +211,14 @@ export default {
         requestAnimationFrame(this.smartLoop);
       } else {
         //延迟轮播
-        // console.log("当前显示的图片下标为" + this.banner.lunbo.currentIndex);
-
         //当图片到达边界点时，等待3秒继续
         this.banner.lunbo.timer = setTimeout(() => {
+        //   console.log("运行定时器"+this.banner.lunbo.timer)
           this.lunbo();
           this.banner.lunbo.sign = 1;
           requestAnimationFrame(this.smartLoop);
         }, 4000);
+        // console.log("当前等待运行的定时器" + this.banner.lunbo.timer);
       }
     }
   },
