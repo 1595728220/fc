@@ -15,7 +15,7 @@
               <router-link to="/" class="nav-link">新品</router-link>
             </li>
             <li class="nav-item pr">
-              <a @click="class_click" class="nav-link cp" href="javascript:;"> 分类{{person_uid}}
+              <a @click="class_click" class="nav-link cp" href="javascript:;"> 分类
                 <div class="triangle_area">
                   <span :class="{'triangle-left':is_triangle_left,'triangle-top':is_triangle_top}">
                   </span>
@@ -113,6 +113,7 @@
       return {
         //保存当前用户id
         // person_uid: null,
+        //改用store中的person_uid
         //保存当前用户名字
         person_name: null,
         //三角形的底边方向是否在左
