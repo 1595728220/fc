@@ -128,7 +128,7 @@ router.get("/list", (req, res) => {
     sql += " and price <= ?"
     arr.push(maxprice)
   }
-  if(!!recommond){ //推荐产品不为空
+  if(!recommond){ //推荐产品不为空 状态量使用一次"!"
     sql += " and recommond = 1 "
   }
   if (!!keywords) { //关键字不为空
@@ -136,14 +136,14 @@ router.get("/list", (req, res) => {
     sql += " and described like ? "
     arr.push(keyword)
   }
-  if (!!rexiao || !!xinpin) { //热销和新品中至少有一个不为空
+  if (!rexiao || !xinpin) { //热销和新品中至少有一个不为空 , 状态量使用一次"!"
     sql += " order by "
-    if (!!rexiao) { //热销不为空
+    if (!rexiao) { //热销不为空
       sql += " month_buy desc"
-      if(!!xinpin) {//新品不为空
+      if(!xinpin) {//新品不为空
         sql += " ,shelf_time desc"
       }
-    } else if (!!xinpin) { //新品不为空
+    } else if (!xinpin) { //新品不为空
       sql += " shelf_time desc"
     }
   }
