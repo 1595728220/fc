@@ -102,7 +102,7 @@ router.get("/list", (req, res) => {
   }
   //计算分页的开始下标
   let start = (pno - 1) * size,
-    sql = "select pid,described,price,photo1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
+    sql = "select sql_calc_found_rows pid,described,price,photo1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
     arr = [] //存储查询的参数
   if (!!classify) { //如果分类不为空
     sql += " and classify = ?" //拼接查询条件
@@ -128,7 +128,7 @@ router.get("/list", (req, res) => {
     sql += " and price <= ?"
     arr.push(maxprice)
   }
-  if ( recommond === "true" ) { //推荐产品不为空 
+  if (recommond === "true") { //推荐产品不为空 
     sql += " and recommond = 1 "
   }
   if (!!keywords) { //关键字不为空
@@ -147,13 +147,20 @@ router.get("/list", (req, res) => {
       sql += " shelf_time desc"
     }
   }
-  sql += " limit ?,?"
+  sql += " limit ?,?;select found_rows();"
   arr = arr.concat([start, size])
   // console.log(sql)
   // console.log(arr)
   //查询数据库
   pool.query(sql, arr, (err, result) => {
     if (err) throw err
+    // sql = "select found_rows()"
+    // pool.query(sql, (err, result) => {
+    //   if (err) throw err
+    //   console.log(result)
+    //   res.send(result)
+
+    // })
     //返回查询结果
     res.send(result)
   })
@@ -161,7 +168,7 @@ router.get("/list", (req, res) => {
 //获取产品的分类信息 /get 
 router.get("/classfy", (req, res) => {
   // console.log("请求产品分类模块")
-  let sql = "select classify,style,thickness,color from product "
+  let sql = "select  classify,style,thickness,color from product "
   pool.query(sql, (err, result) => {
     if (err) throw err
     res.send(result)

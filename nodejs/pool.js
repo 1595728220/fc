@@ -5,6 +5,7 @@ let pool = mysql.createPool({
     user:"root",
     password:"",
     database:"fc",
-    connectionLimit:15
+    connectionLimit:15,
+    multipleStatements: true
 })
 module.exports = pool

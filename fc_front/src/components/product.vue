@@ -1,6 +1,11 @@
 <template>
   <div>
     <mylist :mymsg="search"></mylist>
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="javascript:;">2</a>
+      </li>
+    </ul>
   </div>
 </template>
 <script>

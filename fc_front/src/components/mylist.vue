@@ -29,7 +29,7 @@ export default {
           params: this.mymsg
         })
         .then(result => {
-          // console.log(result.data)
+          console.log(result.data)
           //将结果保存在产品列表中
           this.products = result.data;
           this.products.forEach(el => {
@@ -49,7 +49,7 @@ export default {
     mymsg: {
       handler() {
         // console.log("监听mymsg整个对象的变化");
-        // console.log(this.mymsg)
+        console.log(this.mymsg)
         this.query_product();
       },
       deep: true
