@@ -1,6 +1,7 @@
 <template>
   <div>
-
+    <button @click="search">aa</button>
+    <mylist :mymsg="search"></mylist>
   </div>
 </template>
 <script>
@@ -23,11 +24,7 @@
         }
       }
     },
-    methods: {
-      route_query() {
-
-      }
-    },
+   
     mounted() {
       // console.log(this.$route.query)
       //将参数放入search
@@ -39,6 +36,9 @@
         // 保存路由中的参数
         this.save_search()
         // console.log(this.search)
+      },
+      search(){
+        console.log(1)
       }
     },
     methods: {
@@ -62,9 +62,15 @@
             this.search[key] = tmp[key]
           }
         }
-
+      },
+      test(){
+        this.search.size--
+        console.log(this.search.size)
       }
-    }
+    },
+    computed: {
+      
+    },
   }
 </script>
 <style>

@@ -226,7 +226,7 @@
           uid: this.person_uid
         }
       }).then((result) => {
-        console.log(result)
+        // console.log(result)
         // this.keywords = JSON.parse(JSON.stringify(result.data.data.all))
         this.keywords.all = result.data.data.all
         this.keywords.me = result.data.data.me || []

@@ -18,40 +18,53 @@
       }
     },
     mounted() {
-      // console.log(this.mymsg)
-      //根据父组件给定的参数查询相符合条件的产品信息
-      this.$axios.get("/product/list", {
-          params: this.mymsg
-        }).then(result => {
-          // console.log(result.data)
-          //将结果保存在产品列表中
-          this.products = result.data
-          this.products.forEach(el => {
-            this.$set(el, "imgSrc", require("../assets/imgs/product/" + el.photo1))
+      console.log(this.mymsg)
+      this.query_product()
+    },
+    methods: {
+      query_product() {
+        //根据父组件给定的参数查询相符合条件的产品信息
+        this.$axios.get("/product/list", {
+            params: this.mymsg
+          }).then(result => {
+            // console.log(result.data)
+            //将结果保存在产品列表中
+            this.products = result.data
+            this.products.forEach(el => {
+              this.$set(el, "imgSrc", require("../assets/imgs/product/" + el.photo1))
+            })
           })
-        })
-        .catch(error => {
-          throw error
-        })
+          .catch(error => {
+            throw error
+          })
+      },
+    },
+    watch: {
+      mymsg() {
+        this.query_product()
+      }
     },
   }
 </script>
 <style>
-  .productlist a{
-    background:rgba(242, 242, 242, 1);
+  .productlist a {
+    background: rgba(242, 242, 242, 1);
     /* background:#000 !important; */
   }
+
   .productlist .price {
     font-weight: 700;
     font-size: 20px;
     color: #00C17B;
   }
-  .productlist .described{
+
+  .productlist .described {
     text-overflow: ellipsis;
-    white-space:nowrap;
-    overflow:hidden;
+    white-space: nowrap;
+    overflow: hidden;
   }
-  .productlist>li{
-    border:1px solid #ddd;
+
+  .productlist>li {
+    border: 1px solid #ddd;
   }
 </style>
