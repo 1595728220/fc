@@ -67,12 +67,12 @@ router.get("/list", (req, res) => {
   minprice < 0 && (minprice = 0)
   maxprice < minprice && (maxprice = 99999999)
   //检查用户是否输入用户编号，如果没有统一改为0，表示游客的搜索关键词
-  if(!uid) {
+  if (!uid) {
     uid = 0
   }
-	//当用户通过关键字搜索产品时
-	if(!!keywords){
-  //添加搜索的关键字到keywords表中
+  //当用户通过关键字搜索产品时
+  if (!!keywords) {
+    //添加搜索的关键字到keywords表中
     let sql1 = "select count,kid from keywords where content = ? and key_userId = ?",
       count = 1,
       kid
@@ -99,7 +99,7 @@ router.get("/list", (req, res) => {
         })
       }
     })
-	}
+  }
   //计算分页的开始下标
   let start = (pno - 1) * size,
     sql = "select pid,described,price,photo1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
@@ -128,7 +128,7 @@ router.get("/list", (req, res) => {
     sql += " and price <= ?"
     arr.push(maxprice)
   }
-  if(!recommond){ //推荐产品不为空 状态量使用一次"!"
+  if ( recommond === "true" ) { //推荐产品不为空 
     sql += " and recommond = 1 "
   }
   if (!!keywords) { //关键字不为空
@@ -136,14 +136,14 @@ router.get("/list", (req, res) => {
     sql += " and described like ? "
     arr.push(keyword)
   }
-  if (!rexiao || !xinpin) { //热销和新品中至少有一个不为空 , 状态量使用一次"!"
+  if (rexiao === "true" || xinpin === "true") { //热销和新品中至少有一个不为空 , 
     sql += " order by "
-    if (!rexiao) { //热销不为空
+    if (rexiao === "true") { //热销不为空
       sql += " month_buy desc"
-      if(!xinpin) {//新品不为空
+      if (xinpin === "true") { //新品不为空
         sql += " ,shelf_time desc"
       }
-    } else if (!xinpin) { //新品不为空
+    } else if (xinpin === "true") { //新品不为空
       sql += " shelf_time desc"
     }
   }
@@ -159,21 +159,21 @@ router.get("/list", (req, res) => {
   })
 })
 //获取产品的分类信息 /get 
-router.get("/classfy", (req,res)=>{
+router.get("/classfy", (req, res) => {
   // console.log("请求产品分类模块")
-	let sql = "select classify,style,thickness,color from product "
-	pool.query(sql,(err,result)=>{
-		if(err) throw err
-		res.send(result)
-	})
+  let sql = "select classify,style,thickness,color from product "
+  pool.query(sql, (err, result) => {
+    if (err) throw err
+    res.send(result)
+  })
 })
 //获取首页轮播图 /get
-router.get("/banner",(req,res)=>{
-	let sql = "select banner,pid,described,photo1 from product,product_img where product_imgId = iid and recommond = 1"
-	pool.query(sql,(err,result)=>{
-		if(err) throw err
-		res.send(result)
-	})
+router.get("/banner", (req, res) => {
+  let sql = "select banner,pid,described,photo1 from product,product_img where product_imgId = iid and recommond = 1"
+  pool.query(sql, (err, result) => {
+    if (err) throw err
+    res.send(result)
+  })
 })
 //导出产品模块
 module.exports = router
