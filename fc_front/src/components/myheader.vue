@@ -26,7 +26,7 @@
                 <div class="pt-1 pl-3 pr-3 pb-2" v-for="(values,keys) in product_classfy" :key="keys">
                   <h5 class="mb-2">{{keys}}</h5>
                   <div>
-                    <router-link :to="'/product/'+val" class="btn btn-primary w-25 mr-2 mb-2"
+                    <router-link :to="{path:'/product',query:{form:'class',keys,val}}" class="btn btn-primary w-25 mr-2 mb-2"
                       v-for="(val,key) in product_classfy[keys]" :key="key">{{val}}</router-link>
                   </div>
                 </div>
@@ -59,7 +59,7 @@
               <div>
                 <input type="text" class="form-control dib search_input" @focus="search_click" @blur="search_click"
                   placeholder="翡翠手镯" v-model="person_input_search">
-                <router-link class="btn btn-primary pl-3 pr-3" :to="{path:'/product',query:{keywords:person_input_search}}">搜索</router-link>
+                <router-link class="btn btn-primary pl-3 pr-3" :to="{path:'product',query:{keywords:person_input_search}}">搜索</router-link>
               </div>
               <div class="dropdown-menu text-dark mb-1 search_area d-block tr oh"
                 :class="{v_hidden:!search_is_show_dropdown}">
@@ -67,14 +67,14 @@
                   <div v-if="person_uid">
                     <h5>搜索记录</h5>
                     <div>
-                      <router-link to="/product" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.me"
+                      <router-link to="{path:'/product',query:{keywords:keyword.content}}" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.me"
                         :key="ind" :class="{disabled:!is_person_keywords}"><span
                           v-if="keyword">{{keyword.content}}</span></router-link>
                     </div>
                   </div>
                   <h5 class="mb-2">热门搜索</h5>
                   <div>
-                    <router-link :to="'/product/'+keyword.content" class="btn btn-primary w-25"
+                    <router-link :to="{path:'/product',query:{keywords:keyword.content}}" class="btn btn-primary w-25"
                       v-for="(keyword,ind) in keywords.all" :key="ind"><span v-if="keyword">{{keyword.content}}</span>
                     </router-link>
                   </div>
@@ -226,7 +226,7 @@
           uid: this.person_uid
         }
       }).then((result) => {
-        // console.log(result)
+        console.log(result)
         // this.keywords = JSON.parse(JSON.stringify(result.data.data.all))
         this.keywords.all = result.data.data.all
         this.keywords.me = result.data.data.me || []
@@ -271,7 +271,7 @@
     computed: {
       person_uid() {
         return this.$store.getters.get_uid
-      }
+      },
     },
   }
 </script>
