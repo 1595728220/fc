@@ -36,10 +36,15 @@
         // 保存路由中的参数
         this.save_search()
         // console.log(this.search)
-      },
-      search(){
         console.log(1)
-      }
+      },
+      search: {
+            handler(newVal, oldVal) {
+                console.log('监听search整个对象的变化');
+                this.$forceUpdate()
+            },
+            deep: true
+        }
     },
     methods: {
       save_search() {
