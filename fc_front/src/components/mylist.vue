@@ -10,61 +10,72 @@
   </ul>
 </template>
 <script>
-  export default {
-    props: ['mymsg'],
-    data() {
-      return {
-        products: [] //保存产品列表的数组
-      }
-    },
-    mounted() {
-      console.log(this.mymsg)
-      this.query_product()
-    },
-    methods: {
-      query_product() {
-        //根据父组件给定的参数查询相符合条件的产品信息
-        this.$axios.get("/product/list", {
-            params: this.mymsg
-          }).then(result => {
-            // console.log(result.data)
-            //将结果保存在产品列表中
-            this.products = result.data
-            this.products.forEach(el => {
-              this.$set(el, "imgSrc", require("../assets/imgs/product/" + el.photo1))
-            })
-          })
-          .catch(error => {
-            throw error
-          })
+export default {
+  props: ["mymsg"],
+  data() {
+    return {
+      products: [] //保存产品列表的数组
+    };
+  },
+  mounted() {
+    // console.log(this.mymsg);
+    this.query_product();
+  },
+  methods: {
+    query_product() {
+      //根据父组件给定的参数查询相符合条件的产品信息
+      this.$axios
+        .get("/product/list", {
+          params: this.mymsg
+        })
+        .then(result => {
+          // console.log(result.data)
+          //将结果保存在产品列表中
+          this.products = result.data;
+          this.products.forEach(el => {
+            this.$set(
+              el,
+              "imgSrc",
+              require("../assets/imgs/product/" + el.photo1)
+            );
+          });
+        })
+        .catch(error => {
+          throw error;
+        });
+    }
+  },
+  watch: {
+    mymsg: {
+      handler() {
+        // console.log("监听mymsg整个对象的变化");
+        // console.log(this.mymsg)
+        this.query_product();
       },
-    },
-    watch: {
-      mymsg() {
-        this.query_product()
-      }
-    },
+      deep: true
+    }
   }
+};
 </script>
 <style>
-  .productlist a {
-    background: rgba(242, 242, 242, 1);
-    /* background:#000 !important; */
-  }
+.productlist a {
+  background: rgba(242, 242, 242, 1);
+  /* background:#000 !important; */
+}
 
-  .productlist .price {
-    font-weight: 700;
-    font-size: 20px;
-    color: #00C17B;
-  }
+.productlist .price {
+  font-weight: 700;
+  font-size: 20px;
+  color: #00c17b;
+}
 
-  .productlist .described {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.productlist .described {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-  .productlist>li {
-    border: 1px solid #ddd;
-  }
+.productlist > li {
+  border: 1px solid #ddd;
+}
 </style>
