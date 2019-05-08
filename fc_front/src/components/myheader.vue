@@ -59,7 +59,7 @@
               <div>
                 <input type="text" class="form-control dib search_input" @focus="search_click" @blur="search_click"
                   placeholder="翡翠手镯" v-model="person_input_search">
-                <router-link class="btn btn-primary pl-3 pr-3" :to="'/product/'+person_input_search">搜索</router-link>
+                <router-link class="btn btn-primary pl-3 pr-3" :to="{path:'/product',query:{keywords:person_input_search}}">搜索</router-link>
               </div>
               <div class="dropdown-menu text-dark mb-1 search_area d-block tr oh"
                 :class="{v_hidden:!search_is_show_dropdown}">

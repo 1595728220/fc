@@ -4,6 +4,7 @@ import Index from '@/components/index'
 import NotFound from "@/components/notfound"
 import Login from '@/components/login'
 import Register from '@/components/register'
+import Product from "@/components/product"
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -18,6 +19,10 @@ export default new Router({
     {
       path:'/register',
       component:Register
+    },
+    {
+      path:'/product',
+      component:Product
     },
     {
       path:"*",

@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-center text-danger">404 Not Found!{{time}}秒后返回原网页</h1>
+  <h1 class="text-center text-danger">404 Not Found!{{time}}秒后返回首页</h1>
 </template>
 <script>
   export default {
@@ -16,7 +16,9 @@
         if (this.time < 1) {
           clearInterval(this.timer)
           this.timer = null
-          this.$router.go(-1)
+          this.$router.push({
+            path:"/"
+          })
         }
       }, 1000)
     },
