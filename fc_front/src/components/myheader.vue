@@ -15,13 +15,14 @@
               <router-link to="/" class="nav-link">新品</router-link>
             </li>
             <li class="nav-item pr">
-              <a @click="class_click" class="nav-link cp"> 分类
+              <a @click="class_click" class="nav-link cp" href="javascript:;"> 分类{{person_uid}}
                 <div class="triangle_area">
                   <span :class="{'triangle-left':is_triangle_left,'triangle-top':is_triangle_top}">
                   </span>
                 </div>
               </a>
-              <div class="dropdown-menu text-dark mb-1 class_area d-block oh tr" :class="{v_hidden:!class_is_show_dropdown}">
+              <div class="dropdown-menu text-dark mb-1 class_area d-block oh tr"
+                :class="{v_hidden:!class_is_show_dropdown}">
                 <div class="pt-1 pl-3 pr-3 pb-2" v-for="(values,keys) in product_classfy" :key="keys">
                   <h5 class="mb-2">{{keys}}</h5>
                   <div>
@@ -60,7 +61,8 @@
                   placeholder="翡翠手镯" v-model="person_input_search">
                 <router-link class="btn btn-primary pl-3 pr-3" :to="'/product/'+person_input_search">搜索</router-link>
               </div>
-              <div class="dropdown-menu text-dark mb-1 search_area d-block tr oh" :class="{v_hidden:!search_is_show_dropdown}">
+              <div class="dropdown-menu text-dark mb-1 search_area d-block tr oh"
+                :class="{v_hidden:!search_is_show_dropdown}">
                 <div class="mb-5 p-3">
                   <div v-if="person_uid">
                     <h5>搜索记录</h5>
@@ -95,7 +97,7 @@
                   <span class="person_welcome">{{person_name}} 欢迎回来</span>
                 </li>
                 <li class="breadcrumb-item">
-                  <a @click="logout_click" href="#">退出</a>
+                  <a @click="logout_click" href="javascript:;">退出</a>
                 </li>
               </ul>
             </li>
@@ -110,7 +112,7 @@
     data() {
       return {
         //保存当前用户id
-        person_uid: null,
+        // person_uid: null,
         //保存当前用户名字
         person_name: null,
         //三角形的底边方向是否在左
@@ -165,12 +167,12 @@
         }
       },
       //点击按钮控制导航栏的隐藏或显示方法
-      collapse_click () {
+      collapse_click() {
         //切换显示/隐藏的状态
         this.collapse_is_show = !this.collapse_is_show
       },
       //点击登出的事件
-      logout_click () {
+      logout_click() {
         //向/user/logout发送请求携带uid和对应的cookie
         this.$axios.get("/user/logout", {
           params: {
@@ -185,19 +187,21 @@
         })
       },
       //检查用户的登录状态的方法
-      check_person_state () {
+      check_person_state() {
         //发送请求查看用户的登录状态
         this.$axios.get("/user/state").then((result) => {
           // console.log(result)
           //如果已登录
           if (result.data.code === 200) {
             //保存该用户的编号
-            this.person_uid = result.data.uid
+            this.$store.dispatch("set_uid", result.data.uid)
+            // this.person_uid = result.data.uid
             //保存该用户的昵称
             this.person_name = result.data.nick
           } else {
             //清空用户的编号
-            this.person_uid = null
+            // this.person_uid = null
+            this.$store.dispatch("set_uid", 0)
             //清空用户的昵称
             this.person_name = null
           }
@@ -206,7 +210,7 @@
         })
       },
       //检查元素是否存在数组中
-      check_array (arr, el) {
+      check_array(arr, el) {
         if (arr.indexOf(el) === -1) {
           arr.push(el)
         }
@@ -214,7 +218,7 @@
       }
     },
     //当组件挂载后
-    mounted () {
+    mounted() {
       //发送请求
       this.$axios.get("/user/search", {
         params: {
@@ -259,7 +263,14 @@
     },
     //监听数据变化
     watch: {
-
+      $route( /*to,from*/ ) { //跳转组件页面后，监听路由参数中对应的当前页面以及上一个页面
+        this.check_person_state()
+      }
+    },
+    computed: {
+      person_uid() {
+        return this.$store.getters.get_uid
+      }
     },
   }
 </script>
@@ -352,13 +363,13 @@
   }
 
   .header .class_area {
-    height:28rem;
+    height: 28rem;
     width: 23rem;
     top: 33px;
   }
 
   .header .search_area {
-    height:23rem;
+    height: 23rem;
     width: 23rem;
   }
 

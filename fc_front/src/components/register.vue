@@ -1,6 +1,5 @@
 <template>
   <div>
-    <myheader></myheader>
     <!-- content start -->
     <div class="container">
       <!-- registerForm start -->
@@ -87,7 +86,6 @@
     </div>
     <!-- content end -->
 
-    <myfooter></myfooter>
   </div>
 </template>
 <script>

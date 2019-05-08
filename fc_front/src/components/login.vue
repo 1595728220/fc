@@ -1,6 +1,5 @@
 <template>
     <div>
-        <myheader></myheader>
         <!-- content start -->
         <div class="container">
             <!-- loginForm start-->
@@ -47,7 +46,6 @@
             <!-- loginForm end -->
         </div>
         <!-- content end -->
-        <myfooter></myfooter>
     </div>
 </template>
 <script>
