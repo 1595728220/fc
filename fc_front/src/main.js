@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import App from './App.vue'
 import router from './router'
 import axios from "axios"
+import store from './store'
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = "http://127.0.0.1:8081"
 Vue.prototype.$axios = axios
@@ -35,5 +36,6 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')

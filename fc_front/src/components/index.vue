@@ -212,9 +212,12 @@
                     el.isshow = false;
                     return el;
                 });
+                //如果当前图片的下标小于图片数量
                 if (this.banner.lunbo.currentIndex < this.banner.imgMsg.length) {
+                    //当前图片高亮显示状态改为true
                     this.banner.imgMsg[this.banner.lunbo.currentIndex].isshow = true;
-                } else {
+                } else { //如果当前图片的下标不小于图片数量
+                    //将第一张图片的高亮显示状态改为true
                     this.banner.imgMsg[0].isshow = true;
                 }
             },
