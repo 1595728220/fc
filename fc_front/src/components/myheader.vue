@@ -12,10 +12,10 @@
               <router-link to="/" class="nav-link">逛市场</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/" class="nav-link">新品</router-link>
+              <router-link :to="{path:'/product',query:{xinpin:true}}" class="nav-link">新品</router-link>
             </li>
             <li class="nav-item pr">
-              <a @mouseenter="class_click" @mouseleave="class_click" class="nav-link cp" href="javascript:;"> 分类
+              <a @click="class_click" class="nav-link cp" href="javascript:;"> 分类
                 <div class="triangle_area">
                   <span :class="{'triangle-left':is_triangle_left,'triangle-top':is_triangle_top}">
                   </span>
@@ -26,8 +26,9 @@
                 <div class="pt-1 pl-3 pr-3 pb-2" v-for="(values,keys) in product_classfy" :key="keys">
                   <h5 class="mb-2">{{keys}}</h5>
                   <div>
-                    <router-link :to="{path:'/product',query:{form:'class',keys,val}}" class="btn btn-primary w-25 mr-2 mb-2"
-                      v-for="(val,key) in product_classfy[keys]" :key="key">{{val}}</router-link>
+                    <router-link :to="{path:'/product',query:{form:'class',keys,val}}"
+                      class="btn btn-primary w-25 mr-2 mb-2" v-for="(val,key) in product_classfy[keys]" :key="key">
+                      {{val}}</router-link>
                   </div>
                 </div>
                 <!-- <div class="p-3" >
@@ -59,7 +60,8 @@
               <div>
                 <input type="text" class="form-control dib search_input" @focus="search_click" @blur="search_click"
                   placeholder="翡翠手镯" v-model="person_input_search">
-                <router-link class="btn btn-primary pl-3 pr-3" :to="{path:'product',query:{keywords:person_input_search}}">搜索</router-link>
+                <router-link class="btn btn-primary pl-3 pr-3"
+                  :to="{path:'product',query:{keywords:person_input_search}}">搜索</router-link>
               </div>
               <div class="dropdown-menu text-dark mb-1 search_area d-block tr oh"
                 :class="{v_hidden:!search_is_show_dropdown}">
@@ -67,8 +69,8 @@
                   <div v-if="person_uid">
                     <h5>搜索记录</h5>
                     <div>
-                      <router-link :to="{path:'/product',query:{keywords:keyword.content}}" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.me"
-                        :key="ind" :class="{disabled:!is_person_keywords}"><span
+                      <router-link :to="{path:'/product',query:{keywords:keyword.content}}" class="btn btn-primary w-25"
+                        v-for="(keyword,ind) in keywords.me" :key="ind" :class="{disabled:!is_person_keywords}"><span
                           v-if="keyword">{{keyword.content}}</span></router-link>
                     </div>
                   </div>
@@ -141,13 +143,15 @@
         product_classfy: {
           "颜色": [],
           "种水": []
-        }
+        },
+        mytimer: null
       }
     },
     methods: {
       //点击分类标签，展开/收起下拉列表
       class_click() {
         // console.log("鼠标点击分类标签，展开下拉列表");
+        //如果下拉列表处于显示状态
         //三角形的状态交换
         [this.is_triangle_left, this.is_triangle_top] = [this.is_triangle_top, this.is_triangle_left]
         //下拉列表的显示/隐藏状态
@@ -158,10 +162,10 @@
         //如果搜索栏的下拉列表处于显示状态
         if (this.search_is_show_dropdown) {
           // console.log("1秒后搜索关键字栏隐藏")
-          setTimeout(() => {
+          this.mytimer = setTimeout(() => {
             //改变状态
             this.search_is_show_dropdown = !this.search_is_show_dropdown
-          }, 500)
+          }, 1000)
         } else { //处于隐藏状态
           //改变状态
           this.search_is_show_dropdown = !this.search_is_show_dropdown
@@ -273,6 +277,9 @@
         return this.$store.getters.get_uid
       },
 
+    },
+    destroyed() {
+      clearTimeout(this.timer)
     },
   }
 </script>
