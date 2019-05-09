@@ -15,7 +15,7 @@
               <router-link to="/" class="nav-link">新品</router-link>
             </li>
             <li class="nav-item pr">
-              <a @click="class_click" class="nav-link cp" href="javascript:;"> 分类
+              <a @mouseenter="class_click" @mouseleave="class_click" class="nav-link cp" href="javascript:;"> 分类
                 <div class="triangle_area">
                   <span :class="{'triangle-left':is_triangle_left,'triangle-top':is_triangle_top}">
                   </span>
