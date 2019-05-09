@@ -67,7 +67,7 @@
                   <div v-if="person_uid">
                     <h5>搜索记录</h5>
                     <div>
-                      <router-link to="{path:'/product',query:{keywords:keyword.content}}" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.me"
+                      <router-link :to="{path:'/product',query:{keywords:keyword.content}}" class="btn btn-primary w-25" v-for="(keyword,ind) in keywords.me"
                         :key="ind" :class="{disabled:!is_person_keywords}"><span
                           v-if="keyword">{{keyword.content}}</span></router-link>
                     </div>
@@ -272,6 +272,7 @@
       person_uid() {
         return this.$store.getters.get_uid
       },
+
     },
   }
 </script>

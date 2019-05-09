@@ -8,8 +8,11 @@ const orderRouter = require("./routes/order")
 //定义允许跨域访问的origin列表
 let White_list = ["http://47.103.4.25:5501","http://127.0.0.1:5501","http://127.0.0.1","http://192.168.137.1:8081","http://127.0.0.1:8080","http://localhost:8080","http://localhost:8082"],
 index
+let port = 8081
 let app = express()
-app.listen(8081)
+app.listen(port, ()=>{
+    console.log('Server Listening on %d ...', port);
+})
 //用于后台测试用的静态资源目录
 app.use(express.static("public"))
 //利用中间件对访问的origin进行白名单验证，通过则添加对应的origin到响应头中，如果未匹配则默认返回白名单中的第一个url

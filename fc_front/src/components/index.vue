@@ -282,7 +282,7 @@
             }
         },
         watch: {
-            screenWidth: function () {
+            screenWidth() {
                 //监听屏幕宽度变化
                 this.banner.lunbo.onceWidth = this.$refs.banner_area.offsetWidth;
                 this.banner.lunbo.left =
