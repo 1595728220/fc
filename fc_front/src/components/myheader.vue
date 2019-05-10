@@ -248,7 +248,8 @@
       })
       //请求产品的分类信息
       this.$axios.get("/product/classfy").then(result => {
-        // console.log(result.data)
+        console.log(result.data)
+        let tmpArr = []
         //遍历结果消息的数组
         for (let row of result.data) {
           //如果存在分类则新增分类下的样式，如果不存在分类，则创建分类，并添加样式
@@ -258,6 +259,9 @@
           this.check_array(this.product_classfy["颜色"], row.color)
           //往产品分类对象的种水属性所对应的数组中插入原本没有的值
           this.check_array(this.product_classfy["种水"], row.thickness)
+          
+          //将分类信息保存到tmpArr,再保存到Vuex仓库中
+          
         }
         // console.log(this.product_classfy)
       }).catch(error => {
