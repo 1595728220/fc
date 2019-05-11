@@ -62,7 +62,7 @@ export default {
     },
     //监视产品总记录数，如果改变就向父组件发送该值
     productsCount(){
-      console.log("子组件查询数据库获取产品总数："+this.productsCount)
+      // console.log("子组件查询数据库获取产品总数："+this.productsCount)
       this.$emit("sendfatherevent",this.productsCount)
     }
     

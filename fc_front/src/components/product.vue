@@ -2,15 +2,16 @@
   <div>
     <div class="row m-0 middle_font">
       <div class="col-12">
-        <div class="row m-0">
-          <div class="col-1 text-right">分类：</div>
-          <div class="col-11">
-            <ul class="d-flex justify-content-start my_pills">
-              <li>
-                <a href="javascript:;" :class="{checked:!search.classify}">全部</a>
-              </li>
-            </ul>
-          </div>
+        <div class="row m-0 mb-2" v-for="(title,index) in get_product_classify" :key="index">
+          <div class="text-right col-1">分类：</div>
+          <ul class="col-11 d-flex justify-content-start my_pills">
+            <li>
+              <a href="javascript:;" :class="{checked:!search.classify}" class="d-block">全部</a>
+            </li>
+            <li>
+              <a href="javascript:;"></a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -72,6 +73,7 @@ export default {
     // console.log(this.$route.query)
     //将参数放入search
     this.save_route_search();
+
   },
   watch: {
     $route() {
@@ -91,7 +93,7 @@ export default {
       } else {
         this.pageBtnCount = 5;
       }
-    }
+    },
   },
   methods: {
     //保存通过路由传参的数据到search_info中
@@ -185,20 +187,24 @@ export default {
       }
       // console.log(arr)
       return arr;
+    },
+    get_product_classify() {
+      console.log(this.$store.getters.get_product_class)
+      return this.$store.getters.get_product_class;
     }
   }
 };
 </script>
 <style scoped>
-ul.my_pills>li>a{
-  font-size:1rem;
-  color:#333;
+ul.my_pills > li > a {
+  font-size: 1rem;
+  color: #333;
 }
-ul.my_pills>li>a.checked{
-  border-radius:0.5rem;
-  background:#3ec13e;
-  color:#fff;
-  padding:0.5rem 1.2rem;
+ul.my_pills > li > a.checked {
+  border-radius: 0.5rem;
+  background: #3ec13e;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
 }
 a.page-link {
   width: 2rem;
