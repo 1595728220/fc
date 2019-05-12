@@ -3,7 +3,7 @@
     <div class="row m-0 middle_font">
       <div class="col-12">
         <div class="row m-0 mb-2" v-for="(title,index) in get_product_classify" :key="index">
-          <div class="text-right col-1">分类：</div>
+          <div class="text-right col-1">{{index|fanyi}}:</div>
           <ul class="col-11 d-flex justify-content-start my_pills">
             <li>
               <a href="javascript:;" :class="{checked:!search.classify}" class="d-block">全部</a>

@@ -26,6 +26,15 @@ import MyFooter from "@/components/myfooter"
 import MyAlert from "@/components/myalert"
 import MyYzm from "@/components/myyzm"
 import MyList from "@/components/mylist"
+//引入过滤器
+import * as filters from "./assets/filter/filter"
+//取出对象中的属性名构成数组
+Object.keys(filters)
+//遍历数组
+.forEach(key => {
+  //将每个过滤器挂载到Vue实例上
+  Vue.filter(key,filters[key])
+})
 
 Vue.component('myheader',MyHeader)
 Vue.component('myfooter',MyFooter)
