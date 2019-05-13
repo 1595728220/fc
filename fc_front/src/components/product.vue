@@ -1,6 +1,10 @@
 <template>
   <div>
     <div class="row m-0 middle_font">
+      <div :class="{v_hidden:!search.keywords}" class="d-flex">
+        <div class="text-light bg-primary p-2 ">{{search.keywords}}</div>
+        <div class="bg-primary text-light pr-1 key_close cp" @click="save_click_search({keywords:''})">×</div>
+      </div>
       <div class="col-12">
         <div class="row m-0 mb-2" v-for="(title,index) in get_product_classify" :key="index">
           <div class="col-sm-2 col-lg-1 pt-3 font-weight-bold class_title">{{index|fanyi}}:</div>
@@ -29,7 +33,7 @@
       </li>
       <li class="page-item mr-3">
         <a class="page-link fanye" href="javascript:;" @click="page_click_change(1)"
-          :class="{disabled:search.pno === pageNo}">下一页</a>
+          :class="{disabled:search.pno >= pageNo}">下一页</a>
       </li>
     </ul>
   </div>
@@ -83,6 +87,7 @@
         } else {
           this.pageBtnCount = 5;
         }
+        console.log(this.pageNo)
       },
     },
     methods: {
@@ -117,6 +122,7 @@
       },
       //保存页面点击对应的数据到search_info中
       save_click_search(
+        arg
         //   {
         //   classify,
         //   style,
@@ -132,11 +138,15 @@
         // } = {}
       ) {
         // console.log(arguments)
-        let arg = arguments[0];
+        //遍历传入的实参
         for (let key in arg) {
+          // 如果实参的属性名不为pno
+          if (key !== "pno")
+            //重置当前页
+            this.search.pno = 1
+          //保存实参的属性值到search_info对应属性名中
           this.search[key] = arg[key];
         }
-        console.log(arguments)
       },
       //接收子组件传递的产品总数值
       rcvMsg(msg) {
@@ -202,27 +212,19 @@
   };
 </script>
 <style scoped>
-  @media screen and (max-width: 575px) {
-    
-  }
+  @media screen and (max-width: 575px) {}
 
   @media screen and (min-width: 576px) {
-    .class_title{
-      text-align:right;
+    .class_title {
+      text-align: right;
     }
   }
 
-  @media screen and (min-width: 768px) {
-    
-  }
+  @media screen and (min-width: 768px) {}
 
-  @media screen and (min-width: 992px) {
-   
-  }
+  @media screen and (min-width: 992px) {}
 
-  @media screen and (min-width: 1200px) {
-    
-  }
+  @media screen and (min-width: 1200px) {}
 
   ul.my_pills>li {
     padding: 0.5rem 1.2rem;
