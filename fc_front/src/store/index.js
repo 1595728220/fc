@@ -7,7 +7,9 @@ const state = {
   // 保存用户id
   person_uid: 0,
   //保存所有的产品分类信息
-  product_class: {}
+  product_class: {},
+  //分类框是否显示
+  class_is_show_dropdown: false,
 };
 const getters = { //实时监听state值的变化(最新状态)
   get_uid(state) { //方法名随意,主要是来承载变化的值
@@ -15,6 +17,9 @@ const getters = { //实时监听state值的变化(最新状态)
   },
   get_product_class() {
     return state.product_class
+  },
+  get_class_is_show_dropdown(){
+    return state.class_is_show_dropdown
   }
 };
 const mutations = {
@@ -26,8 +31,11 @@ const mutations = {
   //修改产品分类信息的方法
   _set_product_class(state, newVal) {
     state.product_class = newVal;
+  },
+  //修改产品分类下拉菜单的显示状态的方法
+  _set_class_is_show_dropdown(state,val){
+    state.class_is_show_dropdown = val
   }
-
 };
 const actions = { //this.$store.dispatch('set_uid'，6)
   //自定义触发mutations里函数的方法，context与store 实例具有相同方法和属性  
@@ -39,6 +47,10 @@ const actions = { //this.$store.dispatch('set_uid'，6)
   set_product_class(context,newVal) {
     context.commit("_set_product_class",newVal)
   },
+  //触发_set_class_is_show_dropdown
+  set_class_is_show_dropdown(context,val){
+    context.commit("_set_class_is_show_dropdown",val)
+  }
 };
 const store = new Vuex.Store({
   state,

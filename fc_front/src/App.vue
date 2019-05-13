@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container-fluid p-0">
+  <div id="app" class="container-fluid p-0" @click="click_hidden_class_dropdown">
     <myheader></myheader>
     <router-view></router-view>
     <myfooter></myfooter>
@@ -8,7 +8,12 @@
 
 <script>
 export default {
-  name: "app"
+  name: "app",
+  methods: {
+    click_hidden_class_dropdown(){
+      this.$store.dispatch("set_class_is_show_dropdown",false)
+    }
+  },
 };
 </script>
 
