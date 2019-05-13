@@ -6,10 +6,10 @@
           <div class="text-right col-1">{{index|fanyi}}:</div>
           <ul class="col-11 d-flex justify-content-start my_pills">
             <li>
-              <a href="javascript:;" :class="{checked:!search.classify}" class="d-block">全部</a>
+              <a href="javascript:;" :class="{checked:!search[index]}" class="d-block" @click="save_click_search(as_key_fanhui_obj(index,''))">全部</a>
             </li>
-            <li>
-              <a href="javascript:;"></a>
+            <li v-for="(detail,ind) in title" :key="ind" class="">
+              <a href="javascript:;" class="d-block" @click="save_click_search(as_key_fanhui_obj(index,detail))" :class="{checked:search[index]===detail}">{{detail}}</a>
             </li>
           </ul>
         </div>
@@ -85,7 +85,7 @@ export default {
       // console.log(1);
     },
     productCount() {
-      console.log("父组件接收到子组件传入的产品总记录数" + this.productCount);
+      // console.log("父组件接收到子组件传入的产品总记录数" + this.productCount);
       //计算总页数并赋值
       this.pageNo = Math.ceil(this.productCount / this.search.size);
       if (this.pageNo < 6) {
@@ -126,24 +126,27 @@ export default {
       }
     },
     //保存页面点击对应的数据到search_info中
-    save_click_search({
-      classify,
-      style,
-      thickness,
-      color,
-      minprice,
-      maxprice,
-      rexiao,
-      xinpin,
-      recommond,
-      pno,
-      keywords
-    } = {}) {
+    save_click_search(
+    //   {
+    //   classify,
+    //   style,
+    //   thickness,
+    //   color,
+    //   minprice,
+    //   maxprice,
+    //   rexiao,
+    //   xinpin,
+    //   recommond,
+    //   pno,
+    //   keywords
+    // } = {}
+    ) {
       // console.log(arguments)
       let arg = arguments[0];
       for (let key in arg) {
         this.search[key] = arg[key];
       }
+      console.log(arguments)
     },
     //接收子组件传递的产品总数值
     rcvMsg(msg) {
@@ -157,12 +160,23 @@ export default {
       } else if (sign === -1 && this.search.pno > 1) {
         this.search.pno--;
       }
+    },
+    //根据键和值返回一个对象
+    as_key_fanhui_obj(key,val){
+      // console.log(key)
+      // console.log(val)
+      let obj = {}
+      obj[key] = val
+      // console.log(obj)
+      return obj
     }
   },
   computed: {
+    //返回搜索的基本信息
     search() {
       return this.search_info;
     },
+    //生成页码的数组
     create_arr() {
       //创建一个空数组
       let arr = [];
@@ -188,14 +202,19 @@ export default {
       // console.log(arr)
       return arr;
     },
+    //返回产品的分类信息
     get_product_classify() {
-      console.log(this.$store.getters.get_product_class)
+      // console.log(this.$store.getters.get_product_class)
       return this.$store.getters.get_product_class;
-    }
+    },
+    
   }
 };
 </script>
 <style scoped>
+ul.my_pills > li{
+  padding:0.5rem 1.2rem;
+}
 ul.my_pills > li > a {
   font-size: 1rem;
   color: #333;

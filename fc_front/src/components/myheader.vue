@@ -319,7 +319,7 @@ export default {
         }
           //将分类信息保存到tmpArr,再保存到Vuex仓库中
            this.$store.dispatch("set_product_class", tmpArr);
-        console.log(this.$store.getters.get_product_class)
+        // console.log(this.$store.getters.get_product_class)
       })
       .catch(error => {
         throw error;
