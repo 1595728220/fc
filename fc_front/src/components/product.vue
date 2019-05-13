@@ -23,7 +23,7 @@
             <li>
               <a
                 href="javascript:;"
-                :class="{checked:!search[index]}"
+                :class="{checked:!search[index],unchecked:search[index]}"
                 class="d-block"
                 @click="save_click_search(as_key_fanhui_obj(index,''))"
               >全部</a>
@@ -33,7 +33,7 @@
                 href="javascript:;"
                 class="d-block"
                 @click="save_click_search(as_key_fanhui_obj(index,detail))"
-                :class="{checked:search[index]===detail}"
+                :class="{checked:search[index]===detail,unchecked:search[index]!==detail}"
               >{{detail}}</a>
             </li>
           </ul>
@@ -286,16 +286,19 @@ ul.my_pills > li {
 
 ul.my_pills > li > a {
   font-size: 1rem;
-  color: #333;
+  border-radius: 0.5rem;
   padding: 0.5rem 1.2rem;
+  color: #333;
 }
 
 ul.my_pills > li > a.checked {
-  border-radius: 0.5rem;
   background: #3ec13e;
-  color: #fff;
+  color:#fff;
 }
+ul.my_pills > li > a.unchecked{
+  background: #ddd;
 
+}
 a.page-link {
   width: 2rem;
   height: 2rem;
