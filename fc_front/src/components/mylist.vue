@@ -30,7 +30,7 @@ export default {
           params: this.mymsg
         })
         .then(result => {
-          console.log(result.data)
+          // console.log(result.data)
           //将结果保存在产品列表中
           this.products = result.data[0];
           //讲搜索的总记录数存入变量
@@ -55,7 +55,7 @@ export default {
     mymsg: {
       handler() {
         // console.log("监听mymsg整个对象的变化");
-        // console.log(this.mymsg)
+        console.dir(this.mymsg)
         this.query_product();
       },
       deep: true

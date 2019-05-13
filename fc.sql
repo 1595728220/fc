@@ -39,15 +39,21 @@ create table product(
   recommond boolean comment "是否为推荐商品"
 );
 #http://www.cuihui.cn/cuihuiw/products/13321583.html
-insert into product values(null,13100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","吊坠","冰种","白底青",1553604596095,5000,1,true);
-insert into product values(null,3100,"冰种冰白无脸佛天然翡翠吊坠","ch602295","挂件","吊坠","冰种","冰白",1553604596095,48000,2,true);
-insert into product values(null,30100,"冰种冰白蛋面天然翡翠项链","ch602295","挂件","项链","冰种","无色",1553604596095,4700,3,true);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,true);
+insert into product values(null,13100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","吊坠","冰种","白底青",1553604596091,5000,1,true);
+insert into product values(null,3100,"冰种冰白无脸佛天然翡翠吊坠","ch602295","挂件","吊坠","冰种","冰白",1553604596092,48000,2,true);
+insert into product values(null,30100,"冰种冰白蛋面天然翡翠项链","ch602295","挂件","项链","冰种","无色",1553604596093,4700,3,true);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596094,4400,4,true);
 insert into product values(null,53100,"糯种紫罗兰蛋面金镶钻天然翡翠戒指","ch602295","饰品","戒指","糯种","紫罗兰",1553604596095,4500,5,false);
-insert into product values(null,53100,"糯种紫罗兰蛋面金镶钻天然翡翠戒指","ch602295","饰品","戒指","糯种","紫罗兰",1553604596095,4500,5,false);
-insert into product values(null,53100,"糯种紫罗兰蛋面金镶钻天然翡翠戒指","ch602295","饰品","戒指","糯种","紫罗兰",1553604596095,4500,5,false);
-insert into product values(null,53100,"糯种紫罗兰蛋面金镶钻天然翡翠戒指","ch602295","饰品","戒指","糯种","紫罗兰",1553604596095,4500,5,false);
-insert into product values(null,53100,"糯种紫罗兰蛋面金镶钻天然翡翠戒指","ch602295","饰品","戒指","糯种","紫罗兰",1553604596095,4500,5,false);
+insert into product values(null,53100,"糯种紫罗兰蛋面金镶钻天然翡翠戒指","ch602295","饰品","戒指","糯种","紫罗兰",1553604596096,4500,5,false);
+insert into product values(null,53100,"糯种紫罗兰蛋面金镶钻天然翡翠戒指","ch602295","饰品","戒指","糯种","紫罗兰",1553604596097,4500,5,false);
+insert into product values(null,53100,"糯种紫罗兰蛋面金镶钻天然翡翠戒指","ch602295","饰品","戒指","糯种","紫罗兰",1553604596098,4500,5,false);
+insert into product values(null,53100,"糯种紫罗兰蛋面金镶钻天然翡翠戒指","ch602295","饰品","戒指","糯种","紫罗兰",1553604596099,4500,5,false);
+insert into product values(null,13100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","吊坠","冰种","白底青",1553604596010,5000,1,false);
+insert into product values(null,3100,"冰种冰白无脸佛天然翡翠吊坠","ch602295","挂件","吊坠","冰种","冰白",1553604596020,48000,2,false);
+insert into product values(null,30100,"冰种冰白蛋面天然翡翠项链","ch602295","挂件","项链","冰种","无色",1553604596030,4700,3,false);
+insert into product values(null,13100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","吊坠","冰种","白底青",1553604596040,5000,1,false);
+insert into product values(null,3100,"冰种冰白无脸佛天然翡翠吊坠","ch602295","挂件","吊坠","冰种","冰白",1553604596055,48000,2,false);
+insert into product values(null,30100,"冰种冰白蛋面天然翡翠项链","ch602295","挂件","项链","冰种","无色",1553604596065,4700,3,false);
 insert into product values(null,13100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","吊坠","冰种","白底青",1553604596095,5000,1,false);
 insert into product values(null,3100,"冰种冰白无脸佛天然翡翠吊坠","ch602295","挂件","吊坠","冰种","冰白",1553604596095,48000,2,false);
 insert into product values(null,30100,"冰种冰白蛋面天然翡翠项链","ch602295","挂件","项链","冰种","无色",1553604596095,4700,3,false);
@@ -96,12 +102,6 @@ insert into product values(null,30100,"冰种冰白蛋面天然翡翠项链","ch
 insert into product values(null,13100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","吊坠","冰种","白底青",1553604596095,5000,1,false);
 insert into product values(null,3100,"冰种冰白无脸佛天然翡翠吊坠","ch602295","挂件","吊坠","冰种","冰白",1553604596095,48000,2,false);
 insert into product values(null,30100,"冰种冰白蛋面天然翡翠项链","ch602295","挂件","项链","冰种","无色",1553604596095,4700,3,false);
-insert into product values(null,13100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","吊坠","冰种","白底青",1553604596095,5000,1,false);
-insert into product values(null,3100,"冰种冰白无脸佛天然翡翠吊坠","ch602295","挂件","吊坠","冰种","冰白",1553604596095,48000,2,false);
-insert into product values(null,30100,"冰种冰白蛋面天然翡翠项链","ch602295","挂件","项链","冰种","无色",1553604596095,4700,3,false);
-insert into product values(null,13100,"超值精品冰种观音翡翠吊坠","ch602295","挂件","吊坠","冰种","白底青",1553604596095,5000,1,false);
-insert into product values(null,3100,"冰种冰白无脸佛天然翡翠吊坠","ch602295","挂件","吊坠","冰种","冰白",1553604596095,48000,2,false);
-insert into product values(null,30100,"冰种冰白蛋面天然翡翠项链","ch602295","挂件","项链","冰种","无色",1553604596095,4700,3,false);
 insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
 insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
 insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
@@ -134,23 +134,23 @@ insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch6
 insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
 insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
 insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1583604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1593604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1883604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1573604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1563604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1543604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1533604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1523604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1513604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1953604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1853604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1753604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1653604596095,4400,4,false);
 insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
-insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1553604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1453604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1353604596095,4400,4,false);
+insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch602295","饰品","手镯","糯种","满绿",1253604596095,4400,4,false);
 #订单表
 create table user_order(
   oid int primary key auto_increment comment "订单编号",

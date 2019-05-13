@@ -12,7 +12,7 @@
               <router-link to="/" class="nav-link">逛市场</router-link>
             </li>
             <li class="nav-item">
-              <router-link :to="{path:'/product',query:{xinpin:true}}" class="nav-link">新品</router-link>
+              <router-link :to="{path:'/product',query:{xinpin:'true'}}" class="nav-link">新品</router-link>
             </li>
             <li class="nav-item pr">
               <a @click.stop="class_click" class="nav-link cp" href="javascript:;">
