@@ -6,11 +6,11 @@
           <p class="font-weight-bold col-sm-1 text-right pt-3">关键词:</p>
           <div v-if="search.keywords" class="d-flex btn-group col-sm-11 key_close">
             <div class="text-light bg-primary pr-2 pl-3 btn ">{{search.keywords}}</div>
-            <div class="bg-primary text-light pr-1  cp" @click="save_click_search({keywords:''})">×</div>
+            <router-link class="bg-primary text-light pr-1 cp d-block middle_font" :to="{path:'product',query:{keywords:''}}">×</router-link>
           </div>
           <div class=" col-sm-11 key_none">
-          <div class="bg-secondary text-light btn  " v-if="!search.keywords">无</div>
-        </div>
+            <div class="bg-secondary text-light btn  " v-if="!search.keywords">无</div>
+          </div>
         </div>
       </div>
       <div class="col-12">
@@ -289,15 +289,18 @@
     padding: 0.5rem 1.25rem;
   }
 
-  .key_close>div:last-child {
+  .key_close>a{
     border-bottom-right-radius: .25rem;
     border-top-right-radius: .25rem;
   }
-
+  .key_close>a:hover{
+    background:#007bff !important;
+  }
   .key_none {
     padding: 0.5rem 1.25rem;
   }
-  .key_none>div{
-    width:71px;
+
+  .key_none>div {
+    width: 71px;
   }
 </style>
