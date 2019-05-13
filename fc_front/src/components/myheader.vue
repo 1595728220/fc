@@ -58,7 +58,7 @@
             </li>
             <li class="nav-item pr">
               <div>
-                <input type="text" class="form-control dib search_input" @focus="search_click" @blur="search_click"
+                <input type="text" class="form-control dib search_input" @click.stop="search_click"
                   placeholder="翡翠手镯" v-model="person_input_search">
                 <router-link class="btn btn-primary pl-3 pr-3"
                   :to="{path:'product',query:{keywords:person_input_search}}">搜索</router-link>
@@ -120,8 +120,6 @@
         //改用store中的person_uid
         //保存当前用户名字
         person_name: null,
-        //搜索关键字是否显示
-        search_is_show_dropdown: false,
         //导航栏的是否折叠状态
         collapse_is_show: false,
         //搜索关键字
@@ -152,18 +150,8 @@
       },
       //搜索栏失去焦点/获得焦点时执行的方法
       search_click() {
-        //如果搜索栏的下拉列表处于显示状态
-        if (this.search_is_show_dropdown) {
-          // console.log("1秒后搜索关键字栏隐藏")
-          this.mytimer = setTimeout(() => {
-            //改变状态
-            this.search_is_show_dropdown = !this.search_is_show_dropdown;
-          }, 1000);
-        } else {
-          //处于隐藏状态
-          //改变状态
-          this.search_is_show_dropdown = !this.search_is_show_dropdown;
-        }
+        //搜索栏的下拉菜单显示
+        this.$store.dispatch("set_search_is_show_dropdown",true)
       },
       //点击按钮控制导航栏的隐藏或显示方法
       collapse_click() {
@@ -307,6 +295,9 @@
       },
       class_is_show_dropdown(){
         return this.$store.getters.get_class_is_show_dropdown
+      },
+      search_is_show_dropdown(){
+        return this.$store.getters.get_search_is_show_dropdown
       }
     },
     destroyed() {

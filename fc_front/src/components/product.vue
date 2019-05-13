@@ -1,14 +1,23 @@
 <template>
   <div>
     <div class="row m-0 middle_font">
-      <div :class="{v_hidden:!search.keywords}" class="d-flex">
-        <div class="text-light bg-primary p-2 ">{{search.keywords}}</div>
-        <div class="bg-primary text-light pr-1 key_close cp" @click="save_click_search({keywords:''})">×</div>
+      <div class="col-12">
+        <div class="row m-0 mb-2">
+          <p class="font-weight-bold col-sm-1 text-right pt-3">关键词:</p>
+          <div v-if="search.keywords" class="d-flex btn-group col-sm-11 key_close">
+            <div class="text-light bg-primary pr-2 pl-3 btn ">{{search.keywords}}</div>
+            <div class="bg-primary text-light pr-1  cp" @click="save_click_search({keywords:''})">×</div>
+          </div>
+          <div class=" col-sm-11 key_none">
+          <div class="bg-secondary text-light btn  " v-if="!search.keywords">无</div>
+        </div>
+        </div>
       </div>
       <div class="col-12">
         <div class="row m-0 mb-2" v-for="(title,index) in get_product_classify" :key="index">
+
           <div class="col-sm-2 col-lg-1 pt-3 font-weight-bold class_title">{{index|fanyi}}:</div>
-          <ul class=" col-sm-10 col-lg-11 d-flex justify-content-start my_pills flex-wrap">
+          <ul class=" col-sm-10 col-lg-11 d-flex justify-content-start my_pills flex-wrap pl-0">
             <li>
               <a href="javascript:;" :class="{checked:!search[index]}" class="d-block"
                 @click="save_click_search(as_key_fanhui_obj(index,''))">全部</a>
@@ -274,5 +283,21 @@
 
   a.page-link.disabled:focus {
     box-shadow: 0 0 0;
+  }
+
+  .key_close {
+    padding: 0.5rem 1.25rem;
+  }
+
+  .key_close>div:last-child {
+    border-bottom-right-radius: .25rem;
+    border-top-right-radius: .25rem;
+  }
+
+  .key_none {
+    padding: 0.5rem 1.25rem;
+  }
+  .key_none>div{
+    width:71px;
   }
 </style>
