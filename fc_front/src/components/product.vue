@@ -3,22 +3,22 @@
     <div class="row m-0 middle_font">
       <div class="col-12">
         <div class="row m-0 mb-2">
-          <p class="font-weight-bold col-sm-1 text-right pt-3">关键词:</p>
-          <div v-if="search.keywords" class="d-flex btn-group col-sm-11 key_close">
+          <p class="font-weight-bold col-sm-2  col-lg-1  pt-3 pl-0 class_title">关键词:</p>
+          <div v-if="search.keywords" class="d-flex btn-group col-sm-10 col-lg-11 key_close">
             <div class="text-light bg-primary pr-2 pl-3 btn">{{search.keywords}}</div>
             <router-link
               class="bg-primary text-light pr-1 cp d-block middle_font"
               :to="{path:'product',query:{keywords:''}}"
             >×</router-link>
           </div>
-          <div class="col-sm-11 key_none">
+          <div class="col-sm-10 col-lg-11 key_none">
             <div class="bg-secondary text-light btn" v-if="!search.keywords">无</div>
           </div>
         </div>
       </div>
       <div class="col-12">
         <div class="row m-0 mb-2" v-for="(title,index) in get_product_classify" :key="index">
-          <div class="col-sm-2 col-lg-1 pt-3 font-weight-bold class_title">{{index|fanyi}}:</div>
+          <div class="col-sm-2 col-lg-1 pt-3 font-weight-bold class_title pl-0">{{index|fanyi}}:</div>
           <ul class="col-sm-10 col-lg-11 d-flex justify-content-start my_pills flex-wrap pl-0">
             <li>
               <a
@@ -39,11 +39,26 @@
           </ul>
         </div>
       </div>
-      <div class="col-12 product_state btn-group">
-            <a href="javascript:;" class="btn" @click="save_click_search({xinpin:'true',rexiao:''})" :class="{active:search.xinpin}">新品</a>
-          <a href="javascript:;" class="btn" @click="save_click_search({rexiao:'true',xinpin:''})" :class="{active:search.rexiao}">热销</a>
-          
-          
+      <div class="col-12 product_state d-flex">
+        <div class="btn-group">
+          <a
+            href="javascript:;"
+            class="btn"
+            @click="save_click_search({xinpin:'true',rexiao:''})"
+            :class="{active:search.xinpin}"
+          >新品</a>
+          <a
+            href="javascript:;"
+            class="btn"
+            @click="save_click_search({rexiao:'true',xinpin:''})"
+            :class="{active:search.rexiao}"
+          >热销</a>
+        </div>
+        <span class="">￥</span>
+        <input type="text" placeholder="￥" class="pl-3 w-25" v-model="search.minprice">
+        <span>—</span>
+        <span class="ml-3">￥</span>
+        <input type="text" placeholder="￥" class="pl-3 w-25" v-model="search.maxprice">
       </div>
     </div>
     <mylist :mymsg="search" @sendfatherevent="rcvMsg($event)"></mylist>
@@ -332,10 +347,19 @@ a.page-link.disabled:focus {
 .key_none > div {
   width: 71px;
 }
-.product_state a.active{
-  background:#0aa1ed;
+.product_state a.active {
+  background: #0aa1ed;
 }
-.product_state a{
-  background:#ddd;
+.product_state a {
+  background: #ddd;
+}
+.product_state span {
+  line-height: 2.375rem;
+  position: relative;
+  left: 1.125rem;
+}
+.product_state input{
+  max-width:9rem;
+  min-width: 5.75rem;
 }
 </style>
