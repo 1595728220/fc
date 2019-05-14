@@ -76,7 +76,7 @@
       </div>
       <div class="col-sm-12 col-lg-4 d-flex">
         <div class="w-50">
-          <img :src="img_erweima" class="w-100">
+          <img :src="img_app" class="w-100">
           <p class="text-center m-0">安装对庄APP</p>
         </div>
         <div class="w-50">
@@ -159,6 +159,7 @@
   export default {
     data() {
       return {
+        img_app: require("../assets/imgs/download/downapp.png"),
         img_erweima: require("../assets/imgs/footer/erweima.png")
       }
     }
