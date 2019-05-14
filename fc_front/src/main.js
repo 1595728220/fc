@@ -26,6 +26,7 @@ import MyFooter from "@/components/myfooter"
 import MyAlert from "@/components/myalert"
 import MyYzm from "@/components/myyzm"
 import MyList from "@/components/mylist"
+import MyTuwen from "@/components/mytuwen"
 //引入过滤器
 import * as filters from "./assets/filter/filter"
 //取出对象中的属性名构成数组
@@ -41,6 +42,7 @@ Vue.component('myfooter',MyFooter)
 Vue.component('myalert',MyAlert)
 Vue.component('myyzm',MyYzm)
 Vue.component('mylist',MyList)
+Vue.component('mytuwen',MyTuwen)
 Vue.config.productionTip = false
 
 new Vue({
