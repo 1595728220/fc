@@ -3,7 +3,7 @@
     <div class="row m-0 middle_font">
       <div class="col-12">
         <div class="row m-0 mb-2">
-          <p class="font-weight-bold col-sm-2  col-lg-1  pt-3 pl-0 class_title">关键词:</p>
+          <p class="font-weight-bold col-sm-2 col-lg-1 pt-3 pl-0 class_title">关键词:</p>
           <div v-if="search.keywords" class="d-flex btn-group col-sm-10 col-lg-11 key_close">
             <div class="text-light bg-primary pr-2 pl-3 btn">{{search.keywords}}</div>
             <router-link
@@ -54,7 +54,7 @@
             :class="{active:search.rexiao}"
           >热销</a>
         </div>
-        <span class="">￥</span>
+        <span class>￥</span>
         <input type="text" placeholder="￥" class="pl-3 w-25" v-model="search.minprice">
         <span>—</span>
         <span class="ml-3">￥</span>
@@ -293,11 +293,10 @@ ul.my_pills > li > a {
 
 ul.my_pills > li > a.checked {
   background: #3ec13e;
-  color:#fff;
+  color: #fff;
 }
-ul.my_pills > li > a.unchecked{
+ul.my_pills > li > a.unchecked {
   background: #ddd;
-
 }
 a.page-link {
   width: 2rem;
@@ -361,8 +360,8 @@ a.page-link.disabled:focus {
   position: relative;
   left: 1.125rem;
 }
-.product_state input{
-  max-width:9rem;
+.product_state input {
+  max-width: 9rem;
   min-width: 5.75rem;
 }
 </style>
