@@ -5,6 +5,7 @@ import NotFound from "@/components/notfound"
 import Login from '@/components/login'
 import Register from '@/components/register'
 import Product from "@/components/product"
+import AppDown from "@/components/appdown"
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -23,6 +24,10 @@ export default new Router({
     {
       path:'/product',
       component:Product
+    },
+    {
+      path:"/appdown",
+      component:AppDown
     },
     {
       path:"*",

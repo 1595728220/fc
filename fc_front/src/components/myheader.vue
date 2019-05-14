@@ -2,7 +2,7 @@
   <div class="row header m-0 mb-4">
     <div class="col-sm-12">
       <div class="navbar navbar-expand-md navbar-light header_nav">
-        <router-link to="/" class="navbar-brand">对庄翡翠</router-link>
+        <router-link to="/" class="navbar-brand"><img src="../assets/imgs/header/logo.png" alt=""></router-link>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#header_area" @click="collapse_click">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -54,7 +54,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <router-link to="/" class="nav-link">对庄APP</router-link>
+              <router-link to="/appdown" class="nav-link">对庄APP</router-link>
             </li>
             <li class="nav-item pr">
               <div>
