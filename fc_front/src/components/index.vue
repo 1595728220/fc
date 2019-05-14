@@ -1,8 +1,8 @@
 <template>
   <!-- http://www.aitaocui.cn/daquan/feicui/94312.html -->
   <div>
-    <div class="container mt-3 mb-3">
-      <div class="banner bg-secondary row m-0">
+    <div class="container mt-3 mb-3" >
+      <div class="banner bg-secondary row m-0" id="banner">
         <div class="col-lg-10 col-sm-12 p-0 oh banner_area" ref="banner_area">
           <ul class="clear main d-flex" :style="calcMarginLeft">
             <li v-for="(val,key) in banner.lunbo.imgMsg" :key="key" class="fl h-100">
@@ -58,12 +58,6 @@
           <mylist :mymsg="floor"></mylist>
         </div>
       </div>
-    </div>
-    <div class="aside_nav" :class="{show:aside_nav_state}" @mouseenter="enter_aside_nav" @mouseleave="leave_aside_nav">
-      <span @click.stop=""></span>
-      <span @click.stop=""></span>
-      <span @click.stop=""></span>
-      <span @click.stop=""></span>
     </div>
   </div>
 </template>
@@ -146,7 +140,6 @@ export default {
           size: 4
         }
       },
-      aside_nav_state: false
     };
   },
   mounted() {
@@ -293,13 +286,7 @@ export default {
         // console.log("当前等待运行的定时器" + this.banner.lunbo.timer);
       }
     },
-    //点击侧边导航
-    enter_aside_nav() {
-      this.aside_nav_state = true;
-    },
-    leave_aside_nav(){
-        this.aside_nav_state = false
-    }
+    
   },
   watch: {
     screenWidth() {
@@ -408,40 +395,5 @@ export default {
   padding-top: 1.5rem;
   border-top: 2px solid #ddd;
 }
-.aside_nav {
-  position: fixed;
-  height: 15rem;
-  width: 3rem;
-  right: 0rem;
-  opacity: .3;
-  top: 50%;
-  background: #333;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content:space-around;
-  z-index: 1000;
-}
-.aside_nav.show {
-  opacity: .5;
-}
-.aside_nav > span {
-  width: 32px;
-  height: 32px;
-  margin-right: 0;
-  background-image: url("../assets/imgs/index/icon.png");
-  cursor:pointer;
-}
-.aside_nav > span:nth-child(2) {
-  background-position: -10px -10px;
-}
-.aside_nav > span:nth-child(3) {
-  background-position: -62px -10px;
-}
-.aside_nav > span:nth-child(4) {
-  background-position: -10px -62px;
-}
-.aside_nav > span:nth-child(1) {
-  background-position: -62px -62px;
-}
+
 </style>
