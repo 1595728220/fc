@@ -1,6 +1,6 @@
 <template>
     <!-- http://www.aitaocui.cn/daquan/feicui/94312.html -->
-    <div class>
+    <div>
         <div class="container mt-3 mb-3">
             <div class="banner bg-secondary row m-0">
                 <div class="col-lg-10 col-sm-12 p-0 oh banner_area" ref="banner_area">
@@ -53,6 +53,9 @@
                     <mylist :mymsg="floor"></mylist>
                 </div>
             </div>
+        </div>
+        <div class="aside_nav">
+
         </div>
     </div>
 </template>
@@ -300,7 +303,8 @@
         }
     };
 </script>
-<style>
+<style scoped>
+
     @media screen and (max-width: 575px) {
         .banner .asideImg {
             height: 40px;
@@ -387,5 +391,13 @@
         margin-top: 2.5rem;
         padding-top: 1.5rem;
         border-top: 2px solid #ddd;
+    }
+    .aside_nav{
+        position: fixed;
+        height:35rem;
+        width:5rem;
+        right:0rem;
+        top:50%;
+        margin-top:-17.5rem;
     }
 </style>

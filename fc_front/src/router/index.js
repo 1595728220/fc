@@ -14,24 +14,24 @@ export default new Router({
       component: Index
     },
     {
-      path:'/login',
-      component:Login
+      path: '/login',
+      component: Login
     },
     {
-      path:'/register',
-      component:Register
+      path: '/register',
+      component: Register
     },
     {
-      path:'/product',
-      component:Product
+      path: '/product',
+      component: Product
     },
     {
-      path:"/appdown",
-      component:AppDown
+      path: "/appdown",
+      component: AppDown
     },
     {
-      path:"*",
-      component:NotFound
+      path: "*",
+      component: NotFound
     }
-  ]
+  ],
 })
