@@ -1,33 +1,32 @@
 <template>
-  <div class="row m-0 detail ">
-    <div class="col-lg-7 tu">
+  <div class="row m-0 detail">
+    <div class="col-lg-7 tu col-sm-12">
       <div class="row m-0">
-        <div class="col-lg-10">
+        <div class="col-lg-10 col-sm-12">
           <img :src="imgSrc.product[showIndex]" alt class="w-100">
         </div>
-        <div class="col-lg-2 d-flex flex-column justify-content-between">
+        <div class="col-lg-2 col-sm-12 d-flex flex-lg-column justify-content-between">
           <img
             :src="val"
             v-for="(val,index) in imgSrc.product"
             :key="index"
-            class="w-100"
+            class="small_img"
             @click="qiehuan(index)"
           >
         </div>
       </div>
     </div>
-    <div class="col-lg-5 wen d-flex flex-column justify-content-around">
-      <!-- <div class=" "> -->
+    <div class="col-lg-5 col-sm-12 wen d-flex flex-column justify-content-around">
       <div>
         <h3 class="font-weight-bold">{{product.described}}</h3>
         <h5>货号:{{product.artNo}}</h5>
         <h5 class="text-danger">建议零售价:￥{{product.price}}</h5>
       </div>
-      <div class="">
+      <div>
         <h5 class="text-secondary">提示:该宝贝只能在对庄APP内购买</h5>
         <router-link to="/appdown" class="btn btn-success w-100">APP内购买</router-link>
       </div>
-        <div class="d-flex justify-content-around pt-5">
+      <div class="d-flex justify-content-around pt-5">
         <div class="p-0">
           <p class="index_icon promise"></p>
           <span class="icon_text">翡翠保A承若</span>
@@ -45,8 +44,8 @@
           <span class="icon_text">7天无理由退款</span>
         </div>
       </div>
-      <!-- </div> -->
     </div>
+
   </div>
 </template>
 <script>
@@ -107,8 +106,45 @@ export default {
 };
 </script>
 <style scoped>
-.wen>div:nth-child(3){
-  border-top:1px solid #ccc;
+@media screen and (max-width: 575px) {
+  .small_img{
+    height:4rem;
+    width:4rem;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .small_img{
+    width:6.25rem;
+    height:6.25rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .small_img{
+    width:8rem;
+    height:8rem;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .small_img{
+    width:6.25rem;
+    height:6.25rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+ .small_img{
+    width:8rem;
+    height:8rem;
+  }
+}
+.small_img{
+  cursor: pointer;
+}
+.wen > div:nth-child(3) {
+  border-top: 1px solid #ccc;
 }
 .index_icon {
   width: 4.1rem;
