@@ -45,7 +45,16 @@
         </div>
       </div>
     </div>
-    <div class="changtu"></div>
+    <div class="changtu mt-3 pl-4">
+      <div class="btn-group">
+        <a href="#" class="btn btn-secondary">详情</a>
+        <a href="#" class="btn btn-secondary">保障</a>
+        <a href="#" class="btn btn-secondary">评价</a>
+      </div>
+      <div>
+        <img src="" alt="">
+      </div>
+    </div>
   </div>
 </template>
 <script>
