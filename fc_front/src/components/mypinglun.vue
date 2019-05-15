@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       words: [],
-      user: [],
+      imgSrc : [],
       nothing: ""
     };
   },
@@ -36,11 +36,13 @@ export default {
           throw err;
         });
     },
-    words(){
-      if(words.length > 0) {
-        
-      }
-    }
+    // words(){
+    //   if(words.length > 0) {
+    //     for(let val of words){
+    //       imgSrc.push(require("../"+val))
+    //     }
+    //   }
+    // }
   }
 };
 </script>

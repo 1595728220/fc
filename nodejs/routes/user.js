@@ -276,7 +276,7 @@ router.post("/add", (req, res) => {
 router.post("/avatar", (req, res) => {
   //创建表单对象
   let form = new multiparty.Form()
-  form.uploadDir = "../public/img/user" //设置图片存储路径
+  form.uploadDir = "./public/user" //设置图片存储路径
   form.keepExtensions = true //保留后缀
   form.maxFiledsSize = 2 * 1024 * 1024 //内存大小
   form.maxFilesSize = 5 * 1024 * 1024 //文件字节大小限制，超出时会报错
@@ -357,7 +357,7 @@ router.post("/avatar", (req, res) => {
       //为待登记的图片取名
       fileName = "avatar_" + imgId + suffix
       //为待登记的图片的路径取值
-      let url = "../public/img/user/" + fileName
+      let url = "./public/user/" + fileName
       //将原图片改名为新取的名称
       fs.renameSync(oldpath, url)
       //将该图片信息插入到数据库中的用户头像表
