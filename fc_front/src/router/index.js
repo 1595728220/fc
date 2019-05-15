@@ -7,6 +7,7 @@ import Register from '@/components/register'
 import Product from "@/components/product"
 import AppDown from "@/components/appdown"
 import Detail from "@/components/detail"
+import Person from "@/components/person"
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -33,6 +34,10 @@ export default new Router({
     {
       path:"/detail/:pid",
       component:Detail
+    },
+    {
+      path:"/person",
+      component:Person
     },
     {
       path: "*",
