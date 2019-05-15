@@ -191,6 +191,7 @@
               // this.person_uid = result.data.uid
               //保存该用户的昵称
               this.person_name = result.data.nick;
+              console.log(this.person_uid)
             } else {
               //清空用户的编号
               // this.person_uid = null

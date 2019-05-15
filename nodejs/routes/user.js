@@ -38,7 +38,7 @@ router.post("/login", (req, res) => {
     if (result.length > 0) { //用户名密码正确
       //将用户数据存入session
       req.session.uid = result[0].uid
-      req.session.nick = result[0].nick 
+      req.session.nick = result[0].nick
       //console.log(req.session.uid)
       //响应json数据
       res.send({
@@ -68,7 +68,7 @@ router.get("/state", (req, res) => {
     res.send({
       code: 200,
       nick: req.session.nick || "", //返回用户昵称
-      uid:  req.session.uid //返回用户编号
+      uid: req.session.uid //返回用户编号
     })
 })
 //用户注销登录
@@ -89,7 +89,7 @@ router.post("/register", (req, res) => {
     upwd,
     identify
   } = req.body
-	// console.log(!req.session.captcha)
+  // console.log(!req.session.captcha)
   //验证手机格式
   if (!phoneRegex.test(phone)) {
     res.send({
@@ -107,7 +107,7 @@ router.post("/register", (req, res) => {
     return
   }
   //验证手机验证码格式
-if (identify.toLowerCase() !== (req.session.captcha && req.session.captcha.toLowerCase())) {
+  if (identify.toLowerCase() !== (req.session.captcha && req.session.captcha.toLowerCase())) {
     res.send({
       code: 403,
       msg: "验证码不正确"
@@ -414,12 +414,12 @@ router.get("/yzm", (req, res) => {
 
   //取出请求中的查询字符串的phone值
   let phone = req.query.phone
-    // {
-    //   random,
-    //   floor
-    // } = Math
+  // {
+  //   random,
+  //   floor
+  // } = Math
   //验证手机号格式
-	console.log(req.query)
+  console.log(req.query)
   if (!phoneRegex.test(phone)) {
     res.send({
       code: 401,
@@ -435,12 +435,12 @@ router.get("/yzm", (req, res) => {
   //创建一个对象
   var captcha = svgCaptcha.create();
   //生成验证码，存入session
-    req.session.captcha = captcha.text;
-    console.log(req.session.captcha)
-    // 设置响应类型为svg
-    res.type('svg');
+  req.session.captcha = captcha.text;
+  console.log(req.session.captcha)
+  // 设置响应类型为svg
+  res.type('svg');
   //返回数据
-    res.status(200).send({yzm:captcha})
+  res.status(200).send({ yzm: captcha })
 })
 //获取用户信息
 router.get("/detail", (req, res) => {
@@ -535,36 +535,36 @@ router.post("/user_words", (req, res) => {
   }
 })
 //用户搜索记录
-router.get("/search",(req,res)=>{
-	//获取用户id
+router.get("/search", (req, res) => {
+  //获取用户id
   let uid = req.query.uid,
-			//存储sql语句
-      sql,
-			//存储数据
-      data = {}
+    //存储sql语句
+    sql,
+    //存储数据
+    data = {}
   // console.log(uid)
   sql = "select content from keywords group by content order by sum(count) desc"
-	//查询数据库的关键词内容，热度降序排列
-    pool.query(sql,(err,result)=>{
-      if(err) throw err
-			//将结果关键词放在data对象的all属性
-      data.all = result
-			//如果用户编号不为空即登录状态
-      if(!!uid) {
-        sql = "select content from keywords where key_userId = ? order by count desc limit 0,3"
-				//查询个人搜索次数前三的关键词
-        pool.query(sql,[uid],(err,result)=>{
-          if(err) throw err
-					//将查询的关键词结果放入data对象的me属性中
-          data.me = result
-					//返回json对象包含个人和全部的搜索关键词结果
-          res.send({code:200,msg:"获取数据成功",data})
-        })
-      }else{
-						//返回json对象包含全部的搜索关键词结果
-        res.send({code:200,msg:"获取数据成功",data})
-      }
-    })
+  //查询数据库的关键词内容，热度降序排列
+  pool.query(sql, (err, result) => {
+    if (err) throw err
+    //将结果关键词放在data对象的all属性
+    data.all = result
+    //如果用户编号不为空即登录状态
+    if (!!uid) {
+      sql = "select content from keywords where key_userId = ? order by count desc limit 0,3"
+      //查询个人搜索次数前三的关键词
+      pool.query(sql, [uid], (err, result) => {
+        if (err) throw err
+        //将查询的关键词结果放入data对象的me属性中
+        data.me = result
+        //返回json对象包含个人和全部的搜索关键词结果
+        res.send({ code: 200, msg: "获取数据成功", data })
+      })
+    } else {
+      //返回json对象包含全部的搜索关键词结果
+      res.send({ code: 200, msg: "获取数据成功", data })
+    }
+  })
 })
 // //批量查询用户基本信息
 // router.get("/simple",(req,res)=>{
