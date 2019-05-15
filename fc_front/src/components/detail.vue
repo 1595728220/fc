@@ -17,13 +17,13 @@
       </div>
     </div>
     <div class="col-lg-5 col-sm-12 wen d-flex flex-column justify-content-around">
-      <div>
+      <div class=" mt-3">
         <h3 class="font-weight-bold">{{product.described}}</h3>
-        <h5>货号:{{product.artNo}}</h5>
-        <h5 class="text-danger">建议零售价:￥{{product.price}}</h5>
+        <h5 class="middle_font">货号:{{product.artNo}}</h5>
+        <h5 class="text-danger ">建议零售价:￥{{product.price}}</h5>
       </div>
       <div>
-        <h5 class="text-secondary">提示:该宝贝只能在对庄APP内购买</h5>
+        <h5 class="text-secondary middle_font">提示:该宝贝只能在对庄APP内购买</h5>
         <router-link to="/appdown" class="btn btn-success w-100">APP内购买</router-link>
       </div>
       <div class="d-flex justify-content-around pt-5">
@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-
+    <div class="changtu"></div>
   </div>
 </template>
 <script>

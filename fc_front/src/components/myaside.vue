@@ -1,10 +1,6 @@
 <template>
-  <div
-    class="aside_nav"
-    :class="{show:aside_nav_state}"
-    @mouseenter="enter_aside_nav"
-    @mouseleave="leave_aside_nav"
-  > <div v-for="(obj,index) in jump_list" :key="index" class="icon">
+  <div class="aside_nav">
+    <div v-for="(obj,index) in jump_list" :key="index" class="icon">
       <router-link v-if="obj.hasOwnProperty('to')" :to="obj.to"></router-link>
       <a :href="obj.href" v-if="obj.hasOwnProperty('href')"></a>
     </div>
@@ -14,20 +10,10 @@
 export default {
   data() {
     return {
-      aside_nav_state: false,
-      jump_list:[{to:"/"},{to:"/appdown"},{to:"/"},{href:"#"}]
+      jump_list: [{ to: "/" }, { to: "/appdown" }, { to: "/" }, { href: "#" }]
     };
   },
-  methods: {
-    //进入侧边导航栏修改其显示状态为true
-    enter_aside_nav() {
-      this.aside_nav_state = true;
-    },
-    //离开侧边导航栏修改其显示状态为false
-    leave_aside_nav() {
-      this.aside_nav_state = false;
-    },
-  }
+  methods: {}
 };
 </script>
 <style scoped>
@@ -36,7 +22,7 @@ export default {
   height: 15rem;
   width: 3rem;
   right: 0rem;
-  opacity: 0.2;
+  opacity: 0.1;
   top: 90%;
   margin-top: -15rem;
   background: #333;
@@ -47,27 +33,27 @@ export default {
   z-index: 1000;
   transition: all 0.5s linear;
 }
-.aside_nav.show {
+.aside_nav:hover {
   opacity: 0.6;
 }
-.aside_nav .icon a{
+.aside_nav .icon a {
   width: 32px;
   height: 32px;
   margin-right: 0;
-  display:block;
+  display: block;
   background-image: url("../assets/imgs/index/icon.png");
   cursor: pointer;
 }
-.aside_nav  .icon:nth-child(2) a{
+.aside_nav .icon:nth-child(2) a {
   background-position: -10px -10px;
 }
-.aside_nav  .icon:nth-child(3) a{
+.aside_nav .icon:nth-child(3) a {
   background-position: -62px -10px;
 }
-.aside_nav  .icon:nth-child(4) a{
+.aside_nav .icon:nth-child(4) a {
   background-position: -10px -62px;
 }
-.aside_nav  .icon:nth-child(1) a{
+.aside_nav .icon:nth-child(1) a {
   background-position: -62px -62px;
 }
 </style>
