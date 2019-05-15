@@ -42,7 +42,7 @@ export default {
 .zi:first-child{
   font-size:1.875rem;
   font-weight: bold;
-  margin-top:3.125rem;
+  margin-top:15rem;
 }
 </style>
 
