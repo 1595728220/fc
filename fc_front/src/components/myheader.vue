@@ -98,7 +98,8 @@
             <li class="nav-item" v-if="person_uid">
               <ul class="breadcrumb">
                 <li class="breadcrumb-item">
-                  <span class="person_welcome">{{person_name}} 欢迎回来</span>
+                  <span class="person_welcome">{{person_name}} 欢迎,</span>
+                  <router-link to="/person">个人中心</router-link>
                 </li>
                 <li class="breadcrumb-item">
                   <a @click="logout_click" href="javascript:;">退出</a>
