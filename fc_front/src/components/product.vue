@@ -55,10 +55,10 @@
           >热销</a>
         </div>
         <span class>￥</span>
-        <input type="text" placeholder="￥" class="pl-3 w-25" v-model="search.minprice">
+        <input type="text" placeholder="￥" class="pl-3 w-25 input-group-text text-left bg-light" v-model="search.minprice">
         <span>—</span>
         <span class="ml-3">￥</span>
-        <input type="text" placeholder="￥" class="pl-3 w-25" v-model="search.maxprice">
+        <input type="text" placeholder="￥" class="pl-3 w-25 input-group-text text-left bg-light" v-model="search.maxprice">
       </div>
     </div>
     <mylist :mymsg="search" @sendfatherevent="rcvMsg($event)"></mylist>
