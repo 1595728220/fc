@@ -13,7 +13,10 @@ export default {
       jump_list: [{ to: "/" }, { to: "/appdown" }, { to: "/" }, { href: "#" }]
     };
   },
-  methods: {}
+  methods: {},
+  watch: {
+    
+  },
 };
 </script>
 <style scoped>

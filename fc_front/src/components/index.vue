@@ -1,6 +1,8 @@
 <template>
   <!-- http://www.aitaocui.cn/daquan/feicui/94312.html -->
   <div>
+    <myaside></myaside>
+
     <div class="container mt-3 mb-3" >
       <div class="banner bg-secondary row m-0" id="banner">
         <div class="col-lg-10 col-sm-12 p-0 oh banner_area" ref="banner_area">

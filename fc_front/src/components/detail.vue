@@ -47,13 +47,15 @@
     </div>
     <div class="changtu mt-3 pl-4">
       <div class="btn-group">
-        <a href="#" class="btn btn-secondary">详情</a>
-        <a href="#" class="btn btn-secondary">保障</a>
-        <a href="#" class="btn btn-secondary">评价</a>
+        <a href="javascript:;" class="btn btn-secondary" @click="bottom_qiehuan(ind)" :class="{btnPrimary:bottom_index===ind}" v-for="(val,ind) in bottom" :key="ind">{{val}}</a>
       </div>
-      <div>
-        <img src="" alt="">
+      <div  :class="{show:bottom_index === 0}" class="hide">
+        <img :src="val" v-for="(val,index) in imgSrc.product" :key="index" class="w-100">
       </div>
+      <div :class="{show:bottom_index === 1}" class="hide">
+        <img :src="val" v-for="(val,index) in imgSrc.promise" :key="index" class="w-100">
+      </div>
+      <div :class="{show:bottom_index === 2}" class="hide">评论</div>
     </div>
   </div>
 </template>
@@ -64,13 +66,18 @@ export default {
       pid: 0,
       product: {},
       imgSrc: { product: [], promise: [] },
-      showIndex: 0
+      showIndex: 0,
+      bottom_index: 0,
+      bottom:["详情","保障","评论"]
     };
   },
   methods: {
     qiehuan(val) {
       // console.log(val)
       this.showIndex = val;
+    },
+    bottom_qiehuan(ind){
+      this.bottom_index = ind
     }
   },
   mounted() {
@@ -173,5 +180,29 @@ export default {
 }
 .index_icon.tuikuan {
   background-position: -127px -125px;
+}
+.hide{
+  display:none;
+}
+.show{
+  display:block;
+}
+.btnPrimary{
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+.btnPrimary:hover{
+  color: #fff;
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+.btnPrimary:focus{
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+.btnPrimary:not(:disabled):not(.disabled):active{
+  color: #fff;
+  background-color: #0062cc;
+  border-color: #005cbf;
 }
 </style>

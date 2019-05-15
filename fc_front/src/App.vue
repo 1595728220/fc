@@ -2,7 +2,6 @@
   <div id="app" class="container-fluid p-0" @click="click_hidden_dropdown">
     <myheader></myheader>
     <router-view></router-view>
-    <myaside></myaside>
     <myfooter></myfooter>
   </div>
 </template>
