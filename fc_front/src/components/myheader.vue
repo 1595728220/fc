@@ -59,9 +59,9 @@
             <li class="nav-item pr">
               <div>
                 <input type="text" class="form-control dib search_input" @click.stop="search_click"
-                  placeholder="翡翠手镯" v-model="person_input_search">
+                  placeholder="翡翠手镯" v-model="person_input_search" @keyup="keyup_search">
                 <router-link class="btn btn-primary pl-3 pr-3"
-                  :to="{path:'product',query:{keywords:person_input_search}}">搜索</router-link>
+                  :to="{path:'/product',query:{keywords:person_input_search}}">搜索</router-link>
               </div>
               <div class="dropdown-menu text-dark mb-1 search_area d-block tr oh"
                 :class="{v_hidden:!search_is_show_dropdown}">
@@ -208,6 +208,12 @@
           arr.push(el);
         }
         return arr;
+      },
+      //当回车时跳转路由
+      keyup_search(e){
+        if(e.keyCode === 13){
+          this.$router.push({path:'/product',query:{keywords:this.person_input_search}})
+        }
       }
     },
     //当组件挂载后
