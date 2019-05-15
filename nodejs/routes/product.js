@@ -182,5 +182,16 @@ router.get("/banner", (req, res) => {
     res.send(result)
   })
 })
+//获取产品的评论信息
+router.get("/get_words", (req, res) => {
+  let pid = req.query.pid,
+    sql = "select content,nick,img_addr from words,user,user_img where productId = ? and uid = userId and user_imgId = uiid"
+  pool.query(sql, [pid], (err, result) => {
+    if (err) throw err
+    if (result.length > 0)
+      res.send({ code: 200, msg: result })
+    else res.send({ code: 301, msg: "暂无评论" })
+  })
+})
 //导出产品模块
 module.exports = router

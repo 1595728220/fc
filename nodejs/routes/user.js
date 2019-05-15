@@ -566,4 +566,9 @@ router.get("/search",(req,res)=>{
       }
     })
 })
+// //批量查询用户基本信息
+// router.get("/simple",(req,res)=>{
+//   let uid = req.query.uid,
+
+// })
 module.exports = router

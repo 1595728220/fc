@@ -55,7 +55,9 @@
       <div :class="{show:bottom_index === 1}" class="hide">
         <img :src="val" v-for="(val,index) in imgSrc.promise" :key="index" class="w-100">
       </div>
-      <div :class="{show:bottom_index === 2}" class="hide">评论</div>
+      <div :class="{show:bottom_index === 2}" class="hide">
+        <mypinglun :mymsg="pid"></mypinglun>
+      </div>
     </div>
   </div>
 </template>
@@ -86,7 +88,7 @@ export default {
     //根据产品编号查找对应的产品信息
     this.$axios
       .get("/product/detail", {
-        params: { pid: this.pid }
+        params: { pid: this.pid}
       })
       .then(result => {
         for (let key in result.data[0]) {
@@ -109,12 +111,17 @@ export default {
           }
         }
         // console.log(this.imgSrc)
-        console.log(result.data[0]);
+        // console.log(result.data[0]);
       })
       .catch(err => {
         throw err;
       });
-  }
+  },
+  // computed: {
+  //   get_pid(){
+  //     return this.pid
+  //   }
+  // },
   // watch: {
   //   //监听pid的变化,如果变化就请求新的产品详情信息
   //   pid() {}

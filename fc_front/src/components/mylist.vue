@@ -55,7 +55,7 @@ export default {
     mymsg: {
       handler() {
         // console.log("监听mymsg整个对象的变化");
-        console.dir(this.mymsg)
+        // console.dir(this.mymsg)
         this.query_product();
       },
       deep: true
