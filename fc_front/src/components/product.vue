@@ -138,7 +138,7 @@ export default {
       } else {
         this.pageBtnCount = 5;
       }
-      console.log(this.pageNo);
+      // console.log(this.pageNo);
     }
   },
   methods: {

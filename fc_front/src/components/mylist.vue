@@ -1,10 +1,10 @@
 <template>
   <ul class="productlist row m-0 mb-3">
-    <li v-for="(product,key) in products" class="col-sm-12 col-md-6 col-lg-3 p-0 mt-5" :key="key">
-      <router-link :to="'/detail/'+product.pid" class="d-block p-1">
-        <img :src="product.imgSrc" class="w-100 img-thumbnail p-1">
-        <p class="described middle_font">{{product.described}}</p>
-        <p class="text-success price">￥{{product.price}}</p>
+    <li v-for="(product,key) in products" class="col-sm-12 col-md-6 col-lg-3 mt-5" :key="key">
+      <router-link :to="'/detail/'+product.pid" class="d-block p-2">
+        <img :src="product.imgSrc" class="w-100">
+        <p class="described middle_font product_title">{{product.described}}</p>
+        <p class="text-success product_price ">￥{{product.price}}</p>
       </router-link>
     </li>
   </ul>
@@ -72,22 +72,30 @@ export default {
 <style>
 .productlist a {
   background: rgba(242, 242, 242, 1);
+  border-radius:1rem;
   /* background:#000 !important; */
 }
-
-.productlist .price {
-  font-weight: 700;
-  font-size: 20px;
-  color: #00c17b;
+.productlist > li{
+  padding:0 .8rem; 
+  /* border: 1px solid #ddd; */
 }
-
+.productlist .product_title{
+  margin-left:.625rem;
+}
+.productlist .product_price {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #00c17b;
+  margin-left:.625rem;
+}
 .productlist .described {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
-
-.productlist > li {
-  border: 1px solid #ddd;
+.productlist img {
+  /* border-radius: 1rem; */
 }
+
+
 </style>

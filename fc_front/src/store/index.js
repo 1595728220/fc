@@ -61,7 +61,7 @@ const actions = { //this.$store.dispatch('set_uid'，6)
   set_user(context) {
     // console.log(this)
     //返回一个promise对象
-    return new Promise(function (callback,reject) {
+    return new Promise(function (callback) {
       axios
         .get("/user/state")
         .then(result => {
@@ -85,7 +85,6 @@ const actions = { //this.$store.dispatch('set_uid'，6)
             //清空用户的昵称
             // this.person_name = null;
             context.commit("_set_nick", "");
-            reject()
           }
         }).catch(err => {
           throw err
