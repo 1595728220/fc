@@ -18,3 +18,4 @@
 15.在做分页功能时，需要查询总记录数并获取分页信息，采用SELECT SQL_CALC_FOUND_ROWS  * FROM apps limit 2,6;
 SELECT FOUND_ROWS();执行一次查询同时获得数据，该方法查询效率较低，并且需要在创建pool的时候开启多条查询语句的功能，设置multipleStatements: true,返回的结果为两个数组，
 16.在产品页做产品的分类信息按钮时，由于保存的分类信息的大类名为对象的属性名，为英文显示，想把这个属性名转为中文，我考虑使用自定义的过滤去实现英文转为对应中文
+17.在将请求用户登录状态的方法转移到vuex仓库中时，无法this.$axios报错，原因为即使已经在 main.js 中引入了 axios，并改写了原型链，也无法在 store.js 中直接使用 $ajax 命令，需要在Vuex中再次引入axios模块import axios from 'axios'

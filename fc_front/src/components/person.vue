@@ -10,7 +10,7 @@
         <a href="javascript:;" class="middle_font" @click="click_change_show(ind)">{{val}}</a>
       </li>
     </ul>
-    <div class="col-lg-10 col-md-9 col-sm-8">
+    <div class="col-lg-10 col-md-9 col-sm-8 person_msg">
       <div>
         <p>个人信息</p>
         <p>{{user.img_addr}}</p>
@@ -78,5 +78,9 @@ export default {
 }
 .person_area li a:hover {
   color: #333;
+}
+.person_msg{
+  padding: 1rem 0 1rem 0.5rem;
+
 }
 </style>

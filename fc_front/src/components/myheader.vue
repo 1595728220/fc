@@ -120,7 +120,7 @@
         // person_uid: null,
         //改用store中的person_uid
         //保存当前用户名字
-        person_name: null,
+        // person_name: null,
         //导航栏的是否折叠状态
         collapse_is_show: false,
         //搜索关键字
@@ -180,29 +180,31 @@
       //检查用户的登录状态的方法
       check_person_state() {
         //发送请求查看用户的登录状态
-        this.$axios
-          .get("/user/state")
-          .then(result => {
-            // console.log(result)
-            //如果已登录
-            if (result.data.code === 200) {
-              //保存该用户的编号
-              this.$store.dispatch("set_uid", result.data.uid);
-              // this.person_uid = result.data.uid
-              //保存该用户的昵称
-              this.person_name = result.data.nick;
-              console.log(this.person_uid)
-            } else {
-              //清空用户的编号
-              // this.person_uid = null
-              this.$store.dispatch("set_uid", 0);
-              //清空用户的昵称
-              this.person_name = null;
-            }
-          })
-          .catch(error => {
-            throw error;
-          });
+        // this.$axios
+        //   .get("/user/state")
+        //   .then(result => {
+        //     // console.log(result)
+        //     //如果已登录
+        //     if (result.data.code === 200) {
+        //       //保存该用户的编号
+        //       this.$store.dispatch("set_uid", result.data.uid);
+        //       // this.person_uid = result.data.uid
+        //       //保存该用户的昵称
+        //       this.person_name = result.data.nick;
+        //       console.log(this.person_uid)
+        //     } else {
+        //       //清空用户的编号
+        //       // this.person_uid = null
+        //       this.$store.dispatch("set_uid", 0);
+        //       //清空用户的昵称
+        //       this.person_name = null;
+        //     }
+        //   })
+        //   .catch(error => {
+        //     throw error;
+        //   });
+        //转移到store中统一调度
+        this.$store.dispatch("set_user")
       },
       //检查元素是否存在数组中
       check_array(arr, el) {
@@ -300,6 +302,9 @@
     computed: {
       person_uid() {
         return this.$store.getters.get_uid;
+      },
+      person_name(){
+        return this.$store.getters.get_nick;
       },
       class_is_show_dropdown(){
         return this.$store.getters.get_class_is_show_dropdown
