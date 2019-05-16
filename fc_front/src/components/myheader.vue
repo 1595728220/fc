@@ -291,7 +291,11 @@
       //     this.class_is_show_dropdown = false;
       //   }
       // })
+      // console.log(this.$store.getters.get_uid)
     },
+    // beforeCreate() {
+    //   this.$store.dispatch("set_user");
+    // },
     //监听数据变化
     watch: {
       $route( /*to,from*/ ) {

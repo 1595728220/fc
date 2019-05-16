@@ -11,11 +11,12 @@
       </li>
     </ul>
     <div class="col-lg-10 col-md-9 col-sm-8 person_msg">
-      <div>
-        <p>个人信息</p>
-        <p>{{user.img_addr}}</p>
-        <p>{{user.nick}}</p>
-        <p>{{user.addr}}</p>
+      <div v-if="show_index === 0">
+        <h4>个人信息</h4>
+        <span>头像：</span>
+        <img :src="'http:\/\/127.0.0.1:8081/user/'+user.img_addr" v-if="user.img_addr">
+        <p>昵称：{{user.nick}}</p>
+        <p>所在地：{{get_local}}</p>
       </div>
     </div>
   </div>
@@ -26,7 +27,7 @@ export default {
     return {
       left_nav: ["个人信息", "收货地址", "订单详情"],
       show_index: 0,
-      user: {}
+      user: ""
     };
   },
   methods: {
@@ -34,24 +35,33 @@ export default {
       this.show_index = ind;
     },
     get_user_info() {
-      console.log(this.person_uid)
+      console.log(this.$store.getters.get_uid)
       this.$axios
         .get("/user/detail", {
-          params: { uid: this.person_uid }
+          params: { uid: this.$store.getters.get_uid }
         })
         .then(result => {
-          console.log(result);
+          // console.log(result);
           if(result.data.code === 200)
             this.user = result.data.data
+          else 
+            this.user = {}
         })
         .catch(err => {
           throw err;
         });
     }
   },
+    // this.$store.dispatch("set_user")
   mounted() {
-    this.get_user_info()
+    this.$store.dispatch("set_user").then(this.get_user_info).catch(function(){
+      console.log("用户未登录")
+    })   
+    // this.get_user_info() 
   },
+  // created() {
+  //   this.get_user_info()
+  // },
   // watch: {
   //   $route(){
   //     this.get_user_info()
@@ -60,6 +70,9 @@ export default {
   computed: {
     person_uid() {
       return this.$store.getters.get_uid;
+    },
+    get_local(){
+      return this.user.addr && this.user.addr.split("市")[0]
     }
   }
 };
@@ -81,6 +94,5 @@ export default {
 }
 .person_msg{
   padding: 1rem 0 1rem 0.5rem;
-
 }
 </style>

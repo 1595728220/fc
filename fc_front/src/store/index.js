@@ -60,32 +60,37 @@ const actions = { //this.$store.dispatch('set_uid'，6)
   //触发_set_uid,_set_nick
   set_user(context) {
     // console.log(this)
-    axios
-      .get("/user/state")
-      .then(result => {
-        // console.log(result)
-        //如果已登录
-        if (result.data.code === 200) {
-          //保存该用户的编号
-          context.commit("_set_uid", result.data.uid);
-          // this.$store.dispatch("set_uid", );
-          // this.person_uid = result.data.uid
-          //保存该用户的昵称
-          context.commit("_set_nick", result.data.nick);
-          // this.person_name = result.data.nick;
-          // console.log(this.person_uid)
-        } else {
-          //清空用户的编号
-          // this.person_uid = null
-          // this.$store.dispatch("set_uid", 0);
-          context.commit("_set_uid", 0);
-          //清空用户的昵称
-          // this.person_name = null;
-          context.commit("_set_nick", "");
-        }
-      }).catch(err=>{
-        throw err
-      })
+    //返回一个promise对象
+    return new Promise(function (callback,reject) {
+      axios
+        .get("/user/state")
+        .then(result => {
+          // console.log(result)
+          //如果已登录
+          if (result.data.code === 200) {
+            //保存该用户的编号
+            context.commit("_set_uid", result.data.uid);
+            // this.$store.dispatch("set_uid", );
+            // this.person_uid = result.data.uid
+            //保存该用户的昵称
+            context.commit("_set_nick", result.data.nick);
+            // this.person_name = result.data.nick;
+            // console.log(this.person_uid)
+            callback()
+          } else {
+            //清空用户的编号
+            // this.person_uid = null
+            // this.$store.dispatch("set_uid", 0);
+            context.commit("_set_uid", 0);
+            //清空用户的昵称
+            // this.person_name = null;
+            context.commit("_set_nick", "");
+            reject()
+          }
+        }).catch(err => {
+          throw err
+        })
+    })
   },
   //触发_set_product_class
   set_product_class(context, newVal) {
