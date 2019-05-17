@@ -6,11 +6,11 @@ use fc;
 create table user(
   uid int primary key auto_increment comment "用户编号",
   upwd varchar(16) comment "密码",
-  userName varchar(8) comment "姓名",
+  userName varchar(8) default "不详" comment "姓名",
   phone varchar(11) comment "手机",
-  addr varchar(32) comment "收货地址",
-  nick varchar(12) comment "昵称",
-  user_imgId int comment "用户头像图片编号" 
+  addr varchar(32) default "无" comment "收货地址",
+  nick varchar(12) default "无" comment "昵称",
+  user_imgId int default 1 comment "用户头像图片编号" 
 );
 insert into user values(null,"123456","丁丁","15057391900","杭州市西湖区中心路11号","zero",1);
 insert into user values(null,"123456","当当","13811111112","杭州市西湖区中心路12号","旧日憾事",1);

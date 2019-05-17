@@ -75,6 +75,7 @@ router.get("/state", (req, res) => {
 router.get("/logout", (req, res) => {
   //删除session的uid属性
   delete req.session.uid
+  delete req.session.nick
   //响应操作成功
   res.send({
     code: 200,
@@ -446,7 +447,7 @@ router.get("/yzm", (req, res) => {
 router.get("/detail", (req, res) => {
   //获取用户的编号
   let uid = req.query.uid,
-    sql = "select phone,userName,addr,nick,img_addr from user,user_img where user_imgId = uiid and uid = ?"
+    sql = "select phone,userName,addr,nick,img_addr from user,user_img where user_imgId = uiid and uid = ?" 
   if (!uid) { //用户编号为空
     res.send({
       code: 401,
@@ -456,6 +457,7 @@ router.get("/detail", (req, res) => {
   }
   pool.query(sql, [uid], (err, result) => {
     if (err) throw err
+    console.log(result)
     //对查询结果集进行判断
     if (result.length > 0) { //查询结果不为空，返回查询数据
       res.send({

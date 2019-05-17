@@ -76,6 +76,8 @@ const actions = { //this.$store.dispatch('set_uid'，6)
             context.commit("_set_nick", result.data.nick);
             // this.person_name = result.data.nick;
             // console.log(this.person_uid)
+            // console.log(result.data.nick)
+            // console.log(result.data.uid)
             callback()
           } else {
             //清空用户的编号

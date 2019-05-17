@@ -22,9 +22,9 @@
         <h5 class="middle_font">货号:{{product.artNo}}</h5>
         <h5 class="text-danger ">建议零售价:￥{{product.price}}</h5>
       </div>
-      <div>
-        <h5 class="text-secondary middle_font">提示:该宝贝只能在对庄APP内购买</h5>
-        <router-link to="/appdown" class="btn btn-success w-100">APP内购买</router-link>
+      <div class="text-center">
+        <h5 class="text-secondary middle_font text-left">提示:该宝贝只能在对庄APP内购买</h5>
+        <router-link to="/appdown" class="btn btn-success w-50 mb-3">APP内购买</router-link>
       </div>
       <div class="d-flex justify-content-around pt-5">
         <div class="p-0">
@@ -93,6 +93,7 @@ export default {
       .then(result => {
         for (let key in result.data[0]) {
           this.$set(this.product, key, result.data[0][key]);
+          // 将图片资源保存进专门的变量中
           switch (key) {
             case "photo1":
             case "photo2":
@@ -117,15 +118,7 @@ export default {
         throw err;
       });
   },
-  // computed: {
-  //   get_pid(){
-  //     return this.pid
-  //   }
-  // },
-  // watch: {
-  //   //监听pid的变化,如果变化就请求新的产品详情信息
-  //   pid() {}
-  // }
+  
 };
 </script>
 <style scoped>

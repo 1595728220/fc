@@ -21,26 +21,33 @@
         <p class="mt-5">所在地：{{get_local}}</p>
         <p class="mt-5">手机号：{{user.phone}}</p>
       </div>
-      <div v-if="show_index === 1">
+      <div v-else-if="show_index === 1">
         <h4>收货地址</h4>
         <p class="mt-5">姓名：{{user.userName}}</p>
         <p class="mt-5">联系方式：{{user.phone}}</p>
         <p class="mt-5">详细地址：{{user.addr}}</p>
       </div>
-      <div v-if="show_index === 2">
+      <div v-else-if="show_index === 2">
         <h4>订单详情</h4>
         <div class="text-center mt-5">
           <p class="text-center mb-5">请在对庄APP 内查看订单信息</p>
           <router-link to="/appdown" class="btn btn-primary">下载对庄APP</router-link>
         </div>
       </div>
-      <div v-if="show_index === 3" class="change_user_info">
+      <div v-else class="change_user_info">
         <h4>修改信息</h4>
         <div v-for="(val,ind) in user" :key="ind" class="mt-5">
           <span>{{ind|fanyi}}：</span>
-          <input type="text" :disabled="ind === 'phone'" v-model="user[ind]" v-if="ind !== 'img_addr' ">
-          <input type="file" v-if=" ind === 'img_addr'" @change="get_input_file" ref="file">
-          <img src="" alt="">
+          <input
+            type="text"
+            :disabled="ind === 'phone'"
+            v-model="user[ind]"
+            v-if="ind !== 'img_addr' "
+          >
+          <div v-else>
+            <input type="file" @change="getFile" id="file" ref="file">
+            <label for="file">画像変更</label>
+          </div>
         </div>
       </div>
     </div>
@@ -52,9 +59,23 @@ export default {
     return {
       left_nav: ["个人信息", "收货地址", "订单详情", "修改信息"],
       show_index: 0,
-      user: "",
-      newImg:"",
-      newImg_addr:""
+      //用于用户信息重置
+      user_info: {
+        phone: "",
+        nick: "",
+        userName: "",
+        addr: "",
+        img_addr: ""
+      },
+      user: {
+        phone: "",
+        nick: "",
+        userName: "",
+        addr: "",
+        img_addr: ""
+      },
+      newImg: "",
+      newImg_addr: "http://127.0.0.1:8081/user/avatar_1.png"
     };
   },
   methods: {
@@ -68,20 +89,36 @@ export default {
           params: { uid: this.$store.getters.get_uid }
         })
         .then(result => {
-          // console.log(result);
-          if (result.data.code === 200) this.user = result.data.data;
-          else this.user = {};
+          console.log(result);
+          if (result.data.code === 200) {
+            for (let key in result.data.data) {
+              // this.$set(this.user,key,result.data.data[key])
+              this.user[key] = result.data.data[key];
+            }
+          } else {
+            this.user = this.user_info;
+          }
           console.log(this.user);
         })
         .catch(err => {
           throw err;
         });
     },
-    get_input_file(){
-      this.newImg = this.$refs.file[0].files
-      this.newImg_addr = window.URL.createObjectURL(this.$refs.file[0])
-      console.log(this.newImg)
-      console.log(this.newImg_addr)
+    get_input_file() {
+      this.newImg = this.$refs.file[0].files;
+      this.newImg_addr = window.URL.createObjectURL(this.$refs.file[0]);
+      console.log(this.newImg);
+      console.log(this.newImg_addr);
+    },
+    getFile(e) {
+      let _this = this;
+      var files = e.target.files[0];
+      if (!e || !window.FileReader) return; // 看支持不支持FileReader
+      let reader = new FileReader();
+      reader.readAsDataURL(files); // 这里是最关键的一步，转换就在这里
+      reader.onloadend = function() {
+        _this.src = this.result;
+      };
     }
   },
   // this.$store.dispatch("set_user")
@@ -103,7 +140,7 @@ export default {
     },
     get_local() {
       return this.user.addr && this.user.addr.split("市")[0];
-    },
+    }
   }
 };
 </script>
@@ -155,12 +192,28 @@ export default {
 }
 .person_msg h4 {
   margin-bottom: 0;
-  text-align:center;
+  text-align: center;
   padding: 3.125rem 0;
   background: #eee;
-  border-radius:.625rem;
+  border-radius: 0.625rem;
 }
 .person_msg p {
   margin-bottom: 0;
+}
+.person_msg label {
+  width: 120px;
+  display: block;
+  border-radius: 2px;
+  color: #fff;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+}
+input[type="file"] {
+  display: none;
+  z-index: 10;
+  width: 120px;
+  font-size: 0;
+  height: 30px;
 }
 </style>
