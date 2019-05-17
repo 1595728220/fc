@@ -352,6 +352,7 @@ router.post("/avatar", (req, res) => {
      */
     function upload(err, result) {
       console.log("正在为图片重命名...")
+      console.log(result)
       if (err) throw err
       //获取当前用户头像表的数据条数，并+1作为待登记的图片Id
       imgId = result[0].uid + 1

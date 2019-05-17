@@ -34,9 +34,10 @@
           <router-link to="/appdown" class="btn btn-primary">下载对庄APP</router-link>
         </div>
       </div>
-      <div v-else class="change_user_info">
+      <div v-else class="change_user_info" ref="father_area">
+        <myalert :mymsg="result_msg" v-if="result_msg"></myalert>
         <h4>修改信息</h4>
-        <div v-for="(val,ind) in user" :key="ind" class="mt-5">
+        <div v-for="(val,ind) in user" :key="ind" class="mt-4">
           <span>{{ind|fanyi}}：</span>
           <input
             type="text"
@@ -44,9 +45,11 @@
             v-model="user[ind]"
             v-if="ind !== 'img_addr' "
           >
-          <div v-else>
+          <div v-else class="file_box">
             <input type="file" @change="getFile" id="file" ref="file">
-            <label for="file">画像変更</label>
+            <label for="file">选择头像</label>
+            <img :src="newImg_addr" alt>
+            <button @click="save_img">保存头像</button>
           </div>
         </div>
       </div>
@@ -75,7 +78,9 @@ export default {
         img_addr: ""
       },
       newImg: "",
-      newImg_addr: "http://127.0.0.1:8081/user/avatar_1.png"
+      // newImg_addr: "http://127.0.0.1:8081/user/avatar_1.png"
+      newImg_addr:"",
+      result_msg:""
     };
   },
   methods: {
@@ -104,21 +109,44 @@ export default {
           throw err;
         });
     },
-    get_input_file() {
-      this.newImg = this.$refs.file[0].files;
-      this.newImg_addr = window.URL.createObjectURL(this.$refs.file[0]);
-      console.log(this.newImg);
-      console.log(this.newImg_addr);
-    },
     getFile(e) {
       let _this = this;
       var files = e.target.files[0];
+      this.newImg = files;
       if (!e || !window.FileReader) return; // 看支持不支持FileReader
       let reader = new FileReader();
       reader.readAsDataURL(files); // 这里是最关键的一步，转换就在这里
       reader.onloadend = function() {
-        _this.src = this.result;
+        _this.newImg_addr = this.result;
       };
+    },
+    save_img(){
+      let x = this.newImg
+      console.log(x)
+      console.log(this.person_uid)
+      //创建一个form对象
+      let params = new FormData()
+      //向表单添加数据
+      params.append("avatar",x,x.name)
+      params.append("uid",this.person_uid)
+
+      console.log(params.get("uid"))
+      console.log(params.get("file"))
+      let config = {
+        headers:{'Content-Type':'multipart/form-data'}
+      }
+      this.$axios.post("/user/avatar",params,config).then(result=>{
+        console.log(result)
+        if(result.data.code === 200) {
+          this.result_msg = result.data
+        }
+        //清空旧数据
+        this.newImg_addr = ""
+        this.newImg = ""
+        console.log(this.result_msg)
+      }).catch(err=>{
+        throw err
+      })
     }
   },
   // this.$store.dispatch("set_user")
@@ -200,20 +228,55 @@ export default {
 .person_msg p {
   margin-bottom: 0;
 }
-.person_msg label {
-  width: 120px;
-  display: block;
-  border-radius: 2px;
-  color: #fff;
-  text-align: center;
-  margin-top: 10px;
-  font-size: 12px;
+.person_msg .change_user_info span{
+  display:inline-block;
+  width:7rem;
+  height:2.5rem;
+  line-height:2.5rem;
+  text-align:right
 }
-input[type="file"] {
-  display: none;
-  z-index: 10;
-  width: 120px;
-  font-size: 0;
-  height: 30px;
+.person_msg .change_user_info input{
+  height:2.5rem;
+  box-shadow: 0 0 0;
+  border:0;
+  border-bottom:1px solid #333;
+  outline: 0;
+  vertical-align: bottom;
+}
+.person_msg .change_user_info input:disabled{
+  background:rgba(0,0,0,0.1);
+}
+.person_msg .change_user_info .file_box {
+  position: relative;
+  display:inline-block;
+  width:7.25rem
+}
+.person_msg .change_user_info .file_box label,.person_msg .change_user_info .file_box button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor:pointer;
+  z-index: 10; 
+  background-image:linear-gradient(to bottom, #27b1f6 0%, #0aa1ed 100%);
+  font-size:inherit;
+  padding:0.42rem .625rem;
+  border-radius:.3125rem;
+  color:#fff;
+  margin-bottom:0px;
+}
+.person_msg .change_user_info .file_box button{
+  top:3.125rem;
+  padding:0.42rem .625rem;
+  box-shadow:0 0 0;
+  border:0;
+}
+.person_msg .change_user_info .file_box img{
+  margin-left:7.625rem;
+  width:2.5rem;
+  /* margin-top:-3rem; */
+}
+.person_msg .change_user_info .file_box input[type="file"] {
+  position: absolute;
+  left: -9999px;
 }
 </style>
