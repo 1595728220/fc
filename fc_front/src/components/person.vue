@@ -10,26 +10,37 @@
         <a href="javascript:;" class="middle_font" @click="click_change_show(ind)">{{val}}</a>
       </li>
     </ul>
-    <div class="col-lg-10 col-md-9 col-sm-8 person_msg">
+    <div class="col-lg-10 col-md-9 col-sm-8 person_msg pt-0">
       <div v-if="show_index === 0">
-        <h4 class="mb-5">个人信息</h4>
-        <span>头像：</span>
-        <img :src="'http:\/\/127.0.0.1:8081/user/'+user.img_addr" v-if="user.img_addr">
+        <h4>个人信息</h4>
+        <div class="mt-5">
+          <span>头像：</span>
+          <img :src="'http:\/\/127.0.0.1:8081/user/'+user.img_addr" v-if="user.img_addr">
+        </div>
         <p class="mt-5">昵称：{{user.nick}}</p>
         <p class="mt-5">所在地：{{get_local}}</p>
         <p class="mt-5">手机号：{{user.phone}}</p>
       </div>
       <div v-if="show_index === 1">
-        <h4 class="mb-5">收货地址</h4>
+        <h4>收货地址</h4>
         <p class="mt-5">姓名：{{user.userName}}</p>
         <p class="mt-5">联系方式：{{user.phone}}</p>
         <p class="mt-5">详细地址：{{user.addr}}</p>
       </div>
       <div v-if="show_index === 2">
-        <h4 class="mb-5">订单详情</h4>
-        <div class="text-center">
+        <h4>订单详情</h4>
+        <div class="text-center mt-5">
           <p class="text-center mb-5">请在对庄APP 内查看订单信息</p>
           <router-link to="/appdown" class="btn btn-primary">下载对庄APP</router-link>
+        </div>
+      </div>
+      <div v-if="show_index === 3" class="change_user_info">
+        <h4>修改信息</h4>
+        <div v-for="(val,ind) in user" :key="ind" class="mt-5">
+          <span>{{ind|fanyi}}：</span>
+          <input type="text" :disabled="ind === 'phone'" v-model="user[ind]" v-if="ind !== 'img_addr' ">
+          <input type="file" v-if=" ind === 'img_addr'" @change="get_input_file" ref="file">
+          <img src="" alt="">
         </div>
       </div>
     </div>
@@ -39,9 +50,11 @@
 export default {
   data() {
     return {
-      left_nav: ["个人信息", "收货地址", "订单详情"],
+      left_nav: ["个人信息", "收货地址", "订单详情", "修改信息"],
       show_index: 0,
-      user: ""
+      user: "",
+      newImg:"",
+      newImg_addr:""
     };
   },
   methods: {
@@ -58,18 +71,22 @@ export default {
           // console.log(result);
           if (result.data.code === 200) this.user = result.data.data;
           else this.user = {};
-          // console.log(this.user);
+          console.log(this.user);
         })
         .catch(err => {
           throw err;
         });
+    },
+    get_input_file(){
+      this.newImg = this.$refs.file[0].files
+      this.newImg_addr = window.URL.createObjectURL(this.$refs.file[0])
+      console.log(this.newImg)
+      console.log(this.newImg_addr)
     }
   },
   // this.$store.dispatch("set_user")
   mounted() {
-    this.$store
-      .dispatch("set_user")
-      .then(this.get_user_info)
+    this.$store.dispatch("set_user").then(this.get_user_info);
     // this.get_user_info()
   },
   // created() {
@@ -86,34 +103,30 @@ export default {
     },
     get_local() {
       return this.user.addr && this.user.addr.split("市")[0];
-    }
+    },
   }
 };
 </script>
 <style scoped>
 @media screen and (max-width: 575px) {
-  .aside_nav{
-    width:6.25rem;
+  .aside_nav {
+    width: 6.25rem;
   }
-  .person_msg{
-    width:14rem;
+  .person_msg {
+    width: 14rem;
   }
 }
 
 @media screen and (min-width: 576px) {
-  
 }
 
 @media screen and (min-width: 768px) {
-  
 }
 
 @media screen and (min-width: 992px) {
- 
 }
 
 @media screen and (min-width: 1200px) {
-
 }
 .person_area {
   border-top: 1px solid #eee;
@@ -139,5 +152,15 @@ export default {
 }
 .btn {
   margin: 0 auto;
+}
+.person_msg h4 {
+  margin-bottom: 0;
+  text-align:center;
+  padding: 3.125rem 0;
+  background: #eee;
+  border-radius:.625rem;
+}
+.person_msg p {
+  margin-bottom: 0;
 }
 </style>
