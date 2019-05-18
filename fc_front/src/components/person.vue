@@ -1,5 +1,5 @@
 <template>
-  <div class="person_area row m-4 pt-2 pb-4">
+  <div class="person_area row m-4 pt-2 pr">
     <ul class="col-lg-2 col-md-3 col-sm-4 text-center aside_nav">
       <li
         class="pt-3 pb-3"
@@ -46,7 +46,7 @@
             v-model="user[ind]"
             v-if="ind !== 'img_addr' "
           >
-          <div v-else class="file_box">
+          <div v-else class="file_box pr">
             <input type="file" @change="getFile" id="file" ref="file">
             <label for="file">选择头像</label>
             <img :src="newImg_addr" alt>
@@ -223,9 +223,17 @@ export default {
   .person_msg {
     width: 14rem;
   }
+  /* .person_area{
+    height:40rem;
+  } */
 }
-
+@media screen and (max-width:622px)  {
+  .person_area{
+    height:760px;
+  }
+}
 @media screen and (min-width: 576px) {
+  
 }
 
 @media screen and (min-width: 768px) {
@@ -254,6 +262,7 @@ export default {
   height: 35rem;
   padding: 1rem 0 1rem 1rem;
   font-size: 1.25rem;
+ position: static;
 }
 .person_msg img {
   width: 2.5rem;
@@ -271,6 +280,7 @@ export default {
 .person_msg p {
   margin-bottom: 0;
 }
+
 .person_msg .change_user_info span {
   display: inline-block;
   width: 7rem;
@@ -305,12 +315,16 @@ export default {
 }
 .person_msg .change_user_info .user_submit:disabled {
   background: rgba(0, 0, 0, 0.5);
+  cursor:default;
   /* color: #333; */
 }
 .person_msg .change_user_info .file_box {
-  position: relative;
+  /* position: relative; */
   display: inline-block;
   width: 7.25rem;
+}
+.person_msg .change_user_info div:nth-child(6){
+  width:18.75rem;
 }
 .person_msg .change_user_info .file_box label,
 .person_msg .change_user_info .file_box button {

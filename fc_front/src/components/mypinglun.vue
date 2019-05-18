@@ -34,7 +34,7 @@ export default {
             this.nothing = result.data.msg;
             this.words = [];
           }
-          console.log(this.words);
+          // console.log(this.words);
         })
         .catch(err => {
           throw err;
