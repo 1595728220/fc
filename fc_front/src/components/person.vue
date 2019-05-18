@@ -36,7 +36,7 @@
         </div>
       </div>
       <div v-else class="change_user_info pr" ref="father_area">
-        <myalert v-if="alert_show"></myalert>
+        <myalert></myalert>
         <h4>修改信息</h4>
         <div v-for="(val,ind) in user" :key="ind" class="mt-4">
           <span>{{ind|fanyi}}：</span>
@@ -82,7 +82,7 @@ export default {
       newImg: "",
       // newImg_addr: "http://127.0.0.1:8081/user/avatar_1.png"
       newImg_addr: "",
-      alert_show: false,
+      // alert_show: false,
       user_no_change: true
     };
   },
@@ -160,7 +160,7 @@ export default {
           // if(result.data.code === 200) {
           //将结果对象保存进alert组件展示的变量中
           this.$store.dispatch("set_mymsg", result.data.msg);
-          this.alert_show = this.$store.getters.get_mymsg;
+          // this.alert_show = this.$store.getters.get_mymsg;
 
           // }
           //清空旧数据
@@ -190,7 +190,7 @@ export default {
             // console.log(result)
             //将结果对象保存进alert组件展示的变量中
             this.$store.dispatch("set_mymsg", result.data.msg);
-            this.alert_show = this.$store.getters.get_mymsg;
+            // this.alert_show = this.$store.getters.get_mymsg;
             //修改成功个人信息后重新获取个人信息
             this.get_user_info();
             // console.log(this.alert_show)

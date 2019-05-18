@@ -5,7 +5,7 @@
             <!-- loginForm start-->
             <div class="login row mt-5 mb-5 ml-auto mr-auto pr" ref="father_area">
                 <!-- 消息提示模态框开始 -->
-                <myalert v-if="alert_show"></myalert>
+                <myalert ></myalert>
                 <!-- 消息提示模态框结束 -->
                 <div class="col-sm-12 mb-3">
                     <h2 class="text-center">登录</h2>
@@ -61,7 +61,7 @@
                 state_upwd: true, //密码验证状态
                 blur_once: false, //是否失去过焦点
                 blur_two: false, //是否失去焦点
-                alert_show: "", //登录的结果对象
+                // alert_show: "", //登录的结果对象
                 test: "这是测试消息",
                 login_timer: null //登录方法中使用的定时器
             };
@@ -100,7 +100,7 @@
                     // console.log(result)
                     //将请求数据放入变量中
                     this.$store.dispatch("set_mymsg", result.data.msg);
-                    this.alert_show = result.data.msg
+                    // this.alert_show = result.data.msg
                     // console.log(this.login_result)
                     //如果登录成功
                     if (result.data.code === 200) {
