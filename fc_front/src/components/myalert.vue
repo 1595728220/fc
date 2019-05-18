@@ -47,6 +47,9 @@
                 //计算提示框的偏移属性
                 this.alert_left = (this.father_width - this.alert_width) / 2
                 this.alert_top = this.father_height / 2 - 30
+                // console.log(this.father_height,this.father_width)
+                // console.log(this.alert_width)
+                // console.log(this.alert_left,this.alert_top)
             }
         },
         mounted() {
@@ -103,10 +106,12 @@
         /* animation:fadeInDown 0.5s linear 0s; */
         transition: opacity 0.5s linear 0s, height 0.5s linear 0s;
         z-index: 100;
+        /* display:none; */
     }
 
     .alert_area.show {
         opacity: 1;
         height: 3.75rem;
+        /* display:block; */
     }
 </style>

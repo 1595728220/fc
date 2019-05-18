@@ -90,6 +90,7 @@
 </template>
 <script>
   export default {
+    //取消是否失去过焦点的验证，体验不好
     data() {
       return {
         phoneRegex: /^1[34578]\d{9}$/, //手机号正则
@@ -107,16 +108,16 @@
           iden: true, //验证码验证状态
           agree: false //同意协议验证状态
         }, //保存表单状态值
-        blur_once: {
-          // phone: false,
-          // upwd: false,
-          // cpwd: false,
-          // iden: false
-          phone: true,
-          upwd: true,
-          cpwd: true,
-          iden: true
-        }, //是否验证过一次表单
+        // blur_once: {
+        //   // phone: false,
+        //   // upwd: false,
+        //   // cpwd: false,
+        //   // iden: false
+        //   phone: true,
+        //   upwd: true,
+        //   cpwd: true,
+        //   iden: true
+        // }, //是否验证过一次表单
         phone_msg: "手机号格式不正确", //保存手机号的提示信息
         active_yzm: "", //从服务器端返回的验证码
         register_result: null,
@@ -178,7 +179,7 @@
           this.func_phone_blur_yanzheng();
         }
         //手机号失去过一次焦点
-        this.blur_once.phone = true;
+        // this.blur_once.phone = true;
       },
       /**
        * 根据请求的状态码，提示消息，内部使用方法，外部无法访问
@@ -213,7 +214,7 @@
         //保存正则的验证结果
         this.state_form.upwd = this.upwdRegex.test(this.input_form.upwd);
         //密码表单失去过一次焦点
-        this.blur_once.upwd = true;
+        // this.blur_once.upwd = true;
       },
       /**
        * 重复密码表单失去焦点时调用的方法
@@ -227,7 +228,7 @@
           this.state_form.cpwd = false;
         }
         // 再次输入密码失去一次焦点
-        this.blur_once.cpwd = true;
+        // this.blur_once.cpwd = true;
       },
       //验证码表单失去焦点时调用的方法
       func_iden_blur() {
@@ -242,7 +243,7 @@
           this.state_form.iden = true
         }
         //验证码表单失去过一次焦点
-        this.blur_once.iden = true
+        // this.blur_once.iden = true
       },
       //发送注册请求
       send_register() {
@@ -277,8 +278,7 @@
       //检查表单格式是否正确，需要至少进行一次表单的失去焦点验证
       check_input_right() {
         return (
-          Object.values(this.blur_once)
-          .concat(Object.values(this.state_form))
+         Object.values(this.state_form)
           .filter(val => {
             return val === false;
           }).length !== 0

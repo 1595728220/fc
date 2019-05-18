@@ -52,6 +52,7 @@
     export default {
         data() {
             return {
+                
                 phoneRegex: /^1[34578]\d{9}$/, //手机号正则
                 upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
                 input_phone: "", //保存用户输入的手机号
@@ -72,7 +73,7 @@
             func_phone_blur() {
                 // console.log("鼠标从手机号失去焦点");
                 //已经触发过一次失去焦点事件
-                this.blur_once = true
+                // this.blur_once = true
                 //验证手机号格式，并将结果赋值给手机号的验证状态
                 this.state_phone = this.phoneRegex.test(this.input_phone)
             },
@@ -82,7 +83,7 @@
             func_upwd_blur() {
                 // console.log("鼠标从密码失去焦点");
                 //已经触发过一次失去焦点事件
-                this.blur_two = true
+                // this.blur_two = true
                 //验证密码格式，并将结果赋值给密码的验证状态
                 this.state_upwd = this.upwdRegex.test(this.input_upwd)
             },
@@ -118,8 +119,9 @@
             clearTimeout(this.login_timer)
         },
         computed: {
+            //去除失去焦点验证
             check_input_right() {
-                return !this.state_phone || !this.state_upwd || !this.blur_once || !this.blur_two
+                return !this.state_phone || !this.state_upwd
             }
         },
     };

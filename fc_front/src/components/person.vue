@@ -35,7 +35,7 @@
           <router-link to="/appdown" class="btn btn-primary">下载对庄APP</router-link>
         </div>
       </div>
-      <div v-else class="change_user_info" ref="father_area">
+      <div v-else class="change_user_info pr" ref="father_area">
         <myalert :mymsg="result_msg" v-if="result_msg"></myalert>
         <h4>修改信息</h4>
         <div v-for="(val,ind) in user" :key="ind" class="mt-4">
@@ -83,7 +83,7 @@ export default {
       // newImg_addr: "http://127.0.0.1:8081/user/avatar_1.png"
       newImg_addr: "",
       result_msg: "",
-      user_no_change:false
+      user_no_change:true
     };
   },
   methods: {
@@ -93,6 +93,8 @@ export default {
     },
     //获取用户基本信息
     get_user_info() {
+      //在还未获取用户基本信息之前，认为user信息未修改
+      this.user_no_change = true
       // console.log(this.$store.getters.get_uid)
       this.$axios
         .get("/user/detail", {
@@ -122,6 +124,7 @@ export default {
           throw err;
         });
     },
+    // 得到file表单的值，保存在data的变量中
     getFile(e) {
       let _this = this;
       var files = e.target.files[0];
@@ -134,25 +137,29 @@ export default {
       };
     },
     save_img() {
+      //取出完整的文件信息
       let x = this.newImg;
       // console.log(x)
       // console.log(this.person_uid)
       //创建一个form对象
       let params = new FormData();
-      //向表单添加数据
+      //向表单对象添加数据
       params.append("avatar", x, x.name);
       params.append("uid", this.person_uid);
 
       // console.log(params.get("uid"))
       // console.log(params.get("file"))
+      //设置请求头
       let config = {
         headers: { "Content-Type": "multipart/form-data" }
       };
+      //发送请求
       this.$axios
         .post("/user/avatar", params, config)
         .then(result => {
           // console.log(result)
           // if(result.data.code === 200) {
+          //将结果对象保存进alert组件展示的变量中
           this.result_msg = result.data;
           // }
           //清空旧数据
@@ -164,10 +171,12 @@ export default {
           throw err;
         });
     },
+    //点击事件处理函数，发送添加用户信息的请求
     save_msg() {
       // console.log(this.user)
       // console.log(this.user_info)
       // console.log(JSON.stringify(this.user) === JSON.stringify(this.user_info) )
+      //如果用户修改个人信息，则发送请求，否则什么也不做
       this.user_is_change ||
         this.$axios
           .post("/user/add", {
@@ -178,7 +187,10 @@ export default {
           })
           .then(result => {
             // console.log(result)
+             //将结果对象保存进alert组件展示的变量中
             this.result_msg = result.data;
+            //修改成功个人信息后重新获取个人信息
+            this.get_user_info()
             // console.log(this.result_msg)
           })
           .catch(err => {
@@ -188,26 +200,31 @@ export default {
   },
   // this.$store.dispatch("set_user")
   mounted() {
+    //组件挂载后,获取当前用户信息
     this.$store.dispatch("set_user").then(this.get_user_info);
     // this.get_user_info()
   },
   computed: {
+    //向vuex获取当前用户id
     person_uid() {
       return this.$store.getters.get_uid;
     },
+    //取出市级信息以上的地址
     get_local() {
       return this.user.addr && this.user.addr.split("市")[0];
     }
   },
   watch: {
+    //监听user对象的变化
     user: {
+      //变化后执行的事件处理函数
       handler() {
         // console.log(this.user)
         // console.log(this.user_info)
         //保存用户信息是否未修改
         this.user_no_change =
           JSON.stringify(this.user) === JSON.stringify(this.user_info);
-        console.log(this.user_no_change);
+        // console.log(this.user_no_change);
 
       },
       deep: true
@@ -280,7 +297,9 @@ export default {
 .person_msg p {
   margin-bottom: 0;
 }
-
+.person_msg .change_user_info>div{
+  text-align: center;
+}
 .person_msg .change_user_info span {
   display: inline-block;
   width: 7rem;
@@ -321,11 +340,9 @@ export default {
 .person_msg .change_user_info .file_box {
   /* position: relative; */
   display: inline-block;
-  width: 7.25rem;
+  width: 15.1875rem;
 }
-.person_msg .change_user_info div:nth-child(6){
-  width:18.75rem;
-}
+
 .person_msg .change_user_info .file_box label,
 .person_msg .change_user_info .file_box button {
   position: absolute;
