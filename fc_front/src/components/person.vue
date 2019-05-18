@@ -36,7 +36,7 @@
         </div>
       </div>
       <div v-else class="change_user_info pr" ref="father_area">
-        <myalert :mymsg="result_msg" v-if="result_msg"></myalert>
+        <myalert v-if="alert_show"></myalert>
         <h4>修改信息</h4>
         <div v-for="(val,ind) in user" :key="ind" class="mt-4">
           <span>{{ind|fanyi}}：</span>
@@ -82,8 +82,8 @@ export default {
       newImg: "",
       // newImg_addr: "http://127.0.0.1:8081/user/avatar_1.png"
       newImg_addr: "",
-      result_msg: "",
-      user_no_change:true
+      alert_show: false,
+      user_no_change: true
     };
   },
   methods: {
@@ -94,7 +94,7 @@ export default {
     //获取用户基本信息
     get_user_info() {
       //在还未获取用户基本信息之前，认为user信息未修改
-      this.user_no_change = true
+      this.user_no_change = true;
       // console.log(this.$store.getters.get_uid)
       this.$axios
         .get("/user/detail", {
@@ -110,9 +110,8 @@ export default {
               // this.$set(this.user,key,result.data.data[key])
               this.user[key] = data[key];
               //保存部分信息到用于比较的user_info
-              this.user_info[key] = data[key]
+              this.user_info[key] = data[key];
             }
-            
           } else {
             //查询用户失败
             // 将user初始化
@@ -160,7 +159,9 @@ export default {
           // console.log(result)
           // if(result.data.code === 200) {
           //将结果对象保存进alert组件展示的变量中
-          this.result_msg = result.data;
+          this.$store.dispatch("set_mymsg", result.data.msg);
+          this.alert_show = this.$store.getters.get_mymsg;
+
           // }
           //清空旧数据
           this.newImg_addr = "";
@@ -187,11 +188,12 @@ export default {
           })
           .then(result => {
             // console.log(result)
-             //将结果对象保存进alert组件展示的变量中
-            this.result_msg = result.data;
+            //将结果对象保存进alert组件展示的变量中
+            this.$store.dispatch("set_mymsg", result.data.msg);
+            this.alert_show = this.$store.getters.get_mymsg;
             //修改成功个人信息后重新获取个人信息
-            this.get_user_info()
-            // console.log(this.result_msg)
+            this.get_user_info();
+            // console.log(this.alert_show)
           })
           .catch(err => {
             throw err;
@@ -225,7 +227,6 @@ export default {
         this.user_no_change =
           JSON.stringify(this.user) === JSON.stringify(this.user_info);
         // console.log(this.user_no_change);
-
       },
       deep: true
     }
@@ -244,13 +245,12 @@ export default {
     height:40rem;
   } */
 }
-@media screen and (max-width:622px)  {
-  .person_area{
-    height:760px;
+@media screen and (max-width: 622px) {
+  .person_area {
+    height: 760px;
   }
 }
 @media screen and (min-width: 576px) {
-  
 }
 
 @media screen and (min-width: 768px) {
@@ -279,7 +279,7 @@ export default {
   height: 35rem;
   padding: 1rem 0 1rem 1rem;
   font-size: 1.25rem;
- position: static;
+  position: static;
 }
 .person_msg img {
   width: 2.5rem;
@@ -297,7 +297,7 @@ export default {
 .person_msg p {
   margin-bottom: 0;
 }
-.person_msg .change_user_info>div{
+.person_msg .change_user_info > div {
   text-align: center;
 }
 .person_msg .change_user_info span {
@@ -334,7 +334,7 @@ export default {
 }
 .person_msg .change_user_info .user_submit:disabled {
   background: rgba(0, 0, 0, 0.5);
-  cursor:default;
+  cursor: default;
   /* color: #333; */
 }
 .person_msg .change_user_info .file_box {

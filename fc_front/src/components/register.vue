@@ -5,7 +5,7 @@
       <!-- registerForm start -->
       <div class="register pr ml-auto mr-auto mt-5 mb-5 row" ref="father_area">
         <!-- 消息提示模态框开始 -->
-        <myalert :mymsg="register_result" v-if="register_result"></myalert>
+        <myalert v-if="alert_show"></myalert>
         <!-- 消息提示模态框结束 -->
         <div class="col-sm-12 mb-3">
           <!-- 表单标题部分开始 -->
@@ -120,7 +120,7 @@
         // }, //是否验证过一次表单
         phone_msg: "手机号格式不正确", //保存手机号的提示信息
         active_yzm: "", //从服务器端返回的验证码
-        register_result: null,
+        alert_show: this.$store.getters.get_mymsg,
         yzm_result_img: "", //请求验证码的图片
         register_timer: null //注册页面的定时器
       };
@@ -255,15 +255,16 @@
         }).then(result => {
           // console.log(result)
           //将注册请求的结果对象存入变量
-          this.register_result = result.data
+          this.$store.dispatch("set_mymsg", result.data.msg)
           // console.log(this.register_result)
+          this.alert_show = result.data.msg
           //如果注册成功
           if (result.data.code === 200) {
             // 2秒后跳转到首页
             setTimeout(() => {
               // console.log("注册成功，2秒后跳转回首页")
               this.$router.push("/")
-            }, 2000)
+            }, 3000)
           }
           //重新请求验证码
           this.require_yzm()

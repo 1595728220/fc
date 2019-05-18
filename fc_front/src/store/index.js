@@ -13,7 +13,9 @@ const state = {
   //分类框是否显示
   class_is_show_dropdown: false,
   //搜索关键词框是否显示
-  search_is_show_dropdown: false
+  search_is_show_dropdown: false,
+  //alert组件需要展示的消息
+  mymsg:""
 };
 const getters = { //实时监听state值的变化(最新状态)
   get_uid(state) { //方法名随意,主要是来承载变化的值
@@ -31,6 +33,9 @@ const getters = { //实时监听state值的变化(最新状态)
   get_search_is_show_dropdown() {
     return state.search_is_show_dropdown
   },
+  get_mymsg(){
+    return state.mymsg
+  }
 };
 const mutations = {
   //自定义改变state初始值的方法，这里面的参数除了state之外还可以再传额外的参数(变量或对象);
@@ -53,6 +58,10 @@ const mutations = {
   //修改搜索关键词下拉菜单的显示状态的方法
   _set_search_is_show_dropdown(state, val) {
     state.search_is_show_dropdown = val
+  },
+  //修改alert需要展示的信息
+  _set_mymsg(state,val){
+    state.mymsg = val
   }
 };
 const actions = { //this.$store.dispatch('set_uid'，6)
@@ -104,6 +113,10 @@ const actions = { //this.$store.dispatch('set_uid'，6)
   //触发_set_search_is_show_dropdown
   set_search_is_show_dropdown(context, val) {
     context.commit("_set_search_is_show_dropdown", val)
+  },
+  //触发_set_mymsg
+  set_mymsg(context,val){
+    context.commit("_set_mymsg",val)
   }
 };
 const store = new Vuex.Store({
