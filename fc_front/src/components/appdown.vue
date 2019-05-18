@@ -5,7 +5,7 @@
       <p class="mt-3 text-center">对庄翡翠，100万用户都在</p>
       <img src="../assets/imgs/download/downapp.png" class="mb-5">
     </div>
-    <mytuwen :mymsg="tuwen"></mytuwen>  
+    <mytuwen :mymsg="tuwen"></mytuwen>
   </div>
 </template>
 <script>

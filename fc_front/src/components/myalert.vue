@@ -27,7 +27,7 @@ export default {
       //获取当前元素的高度
       // alert_height:null
       //隐藏的定时器
-      hidden_timer: null,
+      hidden_timer: null
     };
   },
   methods: {
@@ -35,11 +35,10 @@ export default {
     delayHiding() {
       this.hidden_timer = setTimeout(() => {
         // console.log("1.5s后提示模态框隐藏")
-        //修改提示框的显示状态为false
-        // console.log(this.$store.getters.get_mymsg)
+        //清空vuex中的待展示信息
         this.$store.dispatch("set_mymsg", "");
-        this.myalert_is_show = this.$store.getters.get_mymsg
-        // console.log(this.myalert_is_show)
+        //更新提示框的显示状态
+        this.myalert_is_show = this.$store.getters.get_mymsg;
       }, 2000);
     },
     //获取页面可视区域的宽高，并修改偏移量
@@ -58,15 +57,15 @@ export default {
       // console.log(this.alert_left,this.alert_top)
     }
   },
-  mounted() {
-    // console.log(this.mymsg)
-    //根据当前的mymsg设置提示框的显示状态
-    this.myalert_is_show = this.mymsg;
-    //获取当前提示框所需的位置属性
-    this.func_position();
-    //组件挂载2s后修改提示框的显示状态为false
-    this.delayHiding();
-  },
+  //   mounted() {
+  //     // console.log(this.mymsg)
+  //     //根据当前的mymsg设置提示框的显示状态
+  //     this.myalert_is_show = this.mymsg;
+  //     //获取当前提示框所需的位置属性
+  //     this.func_position();
+  //     //组件挂载2s后修改提示框的显示状态为false
+  //     this.delayHiding();
+  //   },
   //组件更新时重新定位提示框位置
   updated() {
     //获取当前提示框所需的位置属性
@@ -80,12 +79,12 @@ export default {
   watch: {
     //监听消息数据的变化，如果变化，显示我的提示框，并在2s后关闭
     mymsg: function() {
-    //   console.log(this.mymsg)
-      //根据当前的mymsg设置提示框的显示状态
-      this.myalert_is_show = this.mymsg;
-    //   console.log(this.myalert_is_show)
+      //   console.log(this.mymsg)
       //清空当前的定时器
       clearTimeout(this.hidden_timer);
+      //根据当前的mymsg设置提示框的显示状态
+      this.myalert_is_show = this.mymsg;
+      //   console.log(this.myalert_is_show)
       //调用延时隐藏的方法
       this.delayHiding();
     }
@@ -95,10 +94,11 @@ export default {
     alert_position() {
       return `left:${this.alert_left}px;top:${this.alert_top}px`;
     },
-    mymsg(){
-        return this.$store.state.mymsg
+    //返回对vuex仓库的变量
+    mymsg() {
+      return this.$store.state.mymsg;
     }
-  },
+  }
 };
 </script>
 <style>

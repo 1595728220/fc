@@ -14,9 +14,7 @@ export default {
     };
   },
   methods: {},
-  watch: {
-    
-  },
+  watch: {}
 };
 </script>
 <style scoped>

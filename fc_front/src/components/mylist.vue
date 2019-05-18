@@ -4,7 +4,7 @@
       <router-link :to="'/detail/'+product.pid" class="d-block p-2">
         <img :src="product.imgSrc" class="w-100">
         <p class="described middle_font product_title">{{product.described}}</p>
-        <p class="text-success product_price ">￥{{product.price}}</p>
+        <p class="text-success product_price">￥{{product.price}}</p>
       </router-link>
     </li>
   </ul>
@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       products: [], //保存产品列表的数组
-      productsCount:0
+      productsCount: 0
     };
   },
   mounted() {
@@ -34,7 +34,7 @@ export default {
           //将结果保存在产品列表中
           this.products = result.data[0];
           //讲搜索的总记录数存入变量
-          this.productsCount = result.data[1][0]["found_rows()"]
+          this.productsCount = result.data[1][0]["found_rows()"];
           this.products.forEach(el => {
             this.$set(
               el,
@@ -47,8 +47,7 @@ export default {
           throw error;
         });
     },
-    sendValToFather(){
-    }
+    sendValToFather() {}
   },
   watch: {
     //监视props中的的mymsg变化，变化后执行查询产品操作
@@ -61,32 +60,31 @@ export default {
       deep: true
     },
     //监视产品总记录数，如果改变就向父组件发送该值
-    productsCount(){
+    productsCount() {
       // console.log("子组件查询数据库获取产品总数："+this.productsCount)
-      this.$emit("sendfatherevent",this.productsCount)
+      this.$emit("sendfatherevent", this.productsCount);
     }
-    
   }
 };
 </script>
 <style>
 .productlist a {
   background: rgba(242, 242, 242, 1);
-  border-radius:1rem;
+  border-radius: 1rem;
   /* background:#000 !important; */
 }
-.productlist > li{
-  padding:0 .8rem; 
+.productlist > li {
+  padding: 0 0.8rem;
   /* border: 1px solid #ddd; */
 }
-.productlist .product_title{
-  margin-left:.625rem;
+.productlist .product_title {
+  margin-left: 0.625rem;
 }
 .productlist .product_price {
   font-weight: 700;
   font-size: 1.25rem;
   color: #00c17b;
-  margin-left:.625rem;
+  margin-left: 0.625rem;
 }
 .productlist .described {
   text-overflow: ellipsis;
@@ -96,6 +94,4 @@ export default {
 .productlist img {
   /* border-radius: 1rem; */
 }
-
-
 </style>

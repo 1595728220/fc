@@ -1,10 +1,10 @@
 <template>
-  <div class="">
+  <div class>
     <h2 v-if="!!nothing">{{nothing}}</h2>
     <div class="w-100 user" v-for="(obj,index) in words" :key="index">
-        <img :src="'http:\/\/127.0.0.1:8081/user/'+obj.img_addr" class="fl mt-2">
-        <span>{{obj.nick}}</span>
-        <p>{{obj.content}}</p>
+      <img :src="'http:\/\/127.0.0.1:8081/user/'+obj.img_addr" class="fl mt-2">
+      <span>{{obj.nick}}</span>
+      <p>{{obj.content}}</p>
     </div>
   </div>
 </template>
@@ -68,6 +68,6 @@ export default {
 .user p {
   padding-left: 3.25rem;
   font-size: 1.25rem;
-  margin-top:.625rem;
+  margin-top: 0.625rem;
 }
 </style>

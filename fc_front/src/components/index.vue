@@ -3,7 +3,7 @@
   <div>
     <myaside></myaside>
 
-    <div class="container mt-3 mb-3" >
+    <div class="container mt-3 mb-3">
       <div class="banner bg-secondary row m-0" id="banner">
         <div class="col-lg-10 col-sm-12 p-0 oh banner_area" ref="banner_area">
           <ul class="clear main d-flex" :style="calcMarginLeft">
@@ -141,7 +141,7 @@ export default {
           pno: 1,
           size: 4
         }
-      },
+      }
     };
   },
   mounted() {
@@ -287,8 +287,7 @@ export default {
         }, 4000);
         // console.log("当前等待运行的定时器" + this.banner.lunbo.timer);
       }
-    },
-    
+    }
   },
   watch: {
     screenWidth() {
@@ -397,5 +396,4 @@ export default {
   padding-top: 1.5rem;
   border-top: 2px solid #ddd;
 }
-
 </style>

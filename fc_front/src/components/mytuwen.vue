@@ -1,6 +1,11 @@
 <template>
   <div class="d-flex flex-column">
-    <div v-for="(obj,index) in mymsg" :key="index" class="w-100 pt-5 pb-5 d-flex justify-content-around" :class="{gray_bg:index%2 === 1}">
+    <div
+      v-for="(obj,index) in mymsg"
+      :key="index"
+      class="w-100 pt-5 pb-5 d-flex justify-content-around"
+      :class="{gray_bg:index%2 === 1}"
+    >
       <!-- <img :src="imgSrc(obj.tu)" class="tu" :class="{fr:index%2 === 1,fl:index%2 === 0}"> -->
       <img :src="imgSrc(obj.tu)">
       <div>
@@ -33,16 +38,15 @@ export default {
 };
 </script>
 <style scoped>
-
 .gray_bg {
   background: #ddd;
   justify-content: space-around;
-  flex-direction: row-reverse
+  flex-direction: row-reverse;
 }
-.zi:first-child{
-  font-size:1.875rem;
+.zi:first-child {
+  font-size: 1.875rem;
   font-weight: bold;
-  margin-top:15rem;
+  margin-top: 15rem;
 }
 </style>
 

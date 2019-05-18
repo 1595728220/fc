@@ -38,7 +38,7 @@
               </li>
             </ul>
           </div>
-          <div class="">
+          <div class>
             <h4 class="middle_font font-weight-bold mb-2">对庄保障</h4>
             <ul>
               <li class="mb-2">
@@ -111,7 +111,6 @@
         <li>
           <router-link to="/unknow">鉴定宝服务</router-link>
         </li>
-
       </ul>
       <p class="text-center">对庄翡翠 版权所有 2015-2020 ICP备案证数：XXXXXXXX 增值业务许可证：XXXXXXXX</p>
       <p class="text-center">© 2015-2020 www.urlip.com ALL RIGHT RESERVED</p>
@@ -150,56 +149,55 @@
         <li class="mr-2 ml-2">
           <a href="http://www.baidu.com" target="_blank">百度</a>
         </li>
-
       </ul>
     </div>
   </div>
 </template>
 <script>
-  export default {
-    data() {
-      return {
-        img_app: require("../assets/imgs/download/downapp.png"),
-        img_erweima: require("../assets/imgs/footer/erweima.png")
-      }
-    }
-  };
+export default {
+  data() {
+    return {
+      img_app: require("../assets/imgs/download/downapp.png"),
+      img_erweima: require("../assets/imgs/footer/erweima.png")
+    };
+  }
+};
 </script>
 <style>
-  .footer>div:first-child {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    padding: 1.2rem 0;
-  }
+.footer > div:first-child {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 1.2rem 0;
+}
 
-  .footer .footer_icon {
-    width: 4rem;
-    height: 4rem;
-    background: transparent url(../assets/imgs/footer/icon.png) -10px -10px;
-    margin-bottom: 0;
-  }
+.footer .footer_icon {
+  width: 4rem;
+  height: 4rem;
+  background: transparent url(../assets/imgs/footer/icon.png) -10px -10px;
+  margin-bottom: 0;
+}
 
-  .footer .footer_icon.faq {
-    background-position: -94px -10px;
-  }
+.footer .footer_icon.faq {
+  background-position: -94px -10px;
+}
 
-  .footer .footer_icon.trends {
-    background-position: -10px -94px;
-  }
+.footer .footer_icon.trends {
+  background-position: -10px -94px;
+}
 
-  .footer .footer_icon.tag {
-    background-position: -94px -94px;
-  }
+.footer .footer_icon.tag {
+  background-position: -94px -94px;
+}
 
-  .footer .footer_icon_text {
-    font-size: 1rem;
-  }
+.footer .footer_icon_text {
+  font-size: 1rem;
+}
 
-  .footer .col-list {
-    border-right: 1px solid #ddd;
-  }
+.footer .col-list {
+  border-right: 1px solid #ddd;
+}
 
-  .footer>div:nth-child(3) {
-    border-top: 1px solid #ddd;
-  }
+.footer > div:nth-child(3) {
+  border-top: 1px solid #ddd;
+}
 </style>

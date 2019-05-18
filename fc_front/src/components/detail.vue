@@ -93,7 +93,7 @@ export default {
       mask_top: 0,
       mask_left: 0,
       scop_scale: 4,
-      imgWidth:0
+      imgWidth: 0
     };
   },
   methods: {
@@ -127,7 +127,7 @@ export default {
       top -= revise;
       left -= revise;
       //保存当前图片的宽度
-      this.imgWidth = width
+      this.imgWidth = width;
       // console.log(max)
       // console.log(left);
       // console.log(top);
@@ -185,7 +185,11 @@ export default {
       return `left:${this.mask_left}px;top:${this.mask_top}px`;
     },
     return_bgImg() {
-      return `background-image:url("${this.imgSrc.product[this.showIndex]}");background-size:${this.scop_scale*this.imgWidth}px,${this.scop_scale*this.imgWidth}px;background-position:${-this.scop_scale*this.mask_left}px ${-this.scop_scale*this.mask_top}px`;
+      return `background-image:url("${
+        this.imgSrc.product[this.showIndex]
+      }");background-size:${this.scop_scale * this.imgWidth}px,${this
+        .scop_scale * this.imgWidth}px;background-position:${-this.scop_scale *
+        this.mask_left}px ${-this.scop_scale * this.mask_top}px`;
     }
   }
 };
@@ -211,10 +215,10 @@ export default {
     height: 8rem;
   }
 }
-@media screen and (max-width: 991px){
-  .bg_img{
+@media screen and (max-width: 991px) {
+  .bg_img {
     bottom: -100%;
-    left:0;
+    left: 0;
   }
 }
 @media screen and (min-width: 992px) {
@@ -222,9 +226,9 @@ export default {
     width: 6.25rem;
     height: 6.25rem;
   }
-  .bg_img{
+  .bg_img {
     right: -100%;
-    top:0;
+    top: 0;
   }
 }
 
