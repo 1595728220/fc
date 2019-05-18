@@ -237,6 +237,7 @@ router.post("/add", (req, res) => {
     addr = null,
     nick = null
   } = req.body
+  console.log(req.body)
   //验证用户编号格式
   if (!uidRegex.test(uid)) {
     res.send({
@@ -278,6 +279,7 @@ router.post("/avatar", (req, res) => {
   //创建表单对象
   let form = new multiparty.Form()
   form.uploadDir = "./public/user" //设置图片存储路径
+  // form.uploadDir = "http://file.urlip.cn/fc_assets/avatar/" //oa服务器
   form.keepExtensions = true //保留后缀
   form.maxFiledsSize = 2 * 1024 * 1024 //内存大小
   form.maxFilesSize = 5 * 1024 * 1024 //文件字节大小限制，超出时会报错
@@ -286,7 +288,7 @@ router.post("/avatar", (req, res) => {
     // console.log(files)
     // console.log(fields.uid)
     if (err) { //上传文件大小超出限制
-      console.log(err)
+      // console.log(err)
       res.send({
         code: 401,
         msg: "请上传5m以下的图片"
@@ -352,7 +354,7 @@ router.post("/avatar", (req, res) => {
      */
     function upload(err, result) {
       console.log("正在为图片重命名...")
-      console.log(result)
+      // console.log(result)
       if (err) throw err
       //获取当前用户头像表的数据条数，并+1作为待登记的图片Id
       imgId = result[0].uid + 1
@@ -421,7 +423,7 @@ router.get("/yzm", (req, res) => {
   //   floor
   // } = Math
   //验证手机号格式
-  console.log(req.query)
+  // console.log(req.query)
   if (!phoneRegex.test(phone)) {
     res.send({
       code: 401,
@@ -438,7 +440,7 @@ router.get("/yzm", (req, res) => {
   var captcha = svgCaptcha.create();
   //生成验证码，存入session
   req.session.captcha = captcha.text;
-  console.log(req.session.captcha)
+  // console.log(req.session.captcha)
   // 设置响应类型为svg
   res.type('svg');
   //返回数据
@@ -458,7 +460,7 @@ router.get("/detail", (req, res) => {
   }
   pool.query(sql, [uid], (err, result) => {
     if (err) throw err
-    console.log(result)
+    // console.log(result)
     //对查询结果集进行判断
     if (result.length > 0) { //查询结果不为空，返回查询数据
       res.send({

@@ -5,6 +5,7 @@
 </template>
 <script>
     export default {
+        //mymsg需要传入一个完整的消息对象，即包含msg属性的对象
         props: ['mymsg'],
         data() {
             return {
@@ -49,6 +50,7 @@
             }
         },
         mounted() {
+            // console.log(this.mymsg)
             //提示框的显示状态为true
             this.myalert_is_show = true
             //获取当前提示框所需的位置属性

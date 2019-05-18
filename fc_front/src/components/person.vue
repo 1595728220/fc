@@ -16,6 +16,7 @@
         <div class="mt-5">
           <span>头像：</span>
           <img :src="'http:\/\/127.0.0.1:8081/user/'+user.img_addr" v-if="user.img_addr">
+          <!-- <img src="http://file.urlip.cn/fc_assets/avatar/avatar_1.png" alt=""> -->
         </div>
         <p class="mt-5">昵称：{{user.nick}}</p>
         <p class="mt-5">所在地：{{get_local}}</p>
@@ -52,6 +53,7 @@
             <button @click="save_img">保存头像</button>
           </div>
         </div>
+        <button @click="save_msg" class="user_submit" :disabled="this.user_no_change">保存用户信息</button>
       </div>
     </div>
   </div>
@@ -64,11 +66,11 @@ export default {
       show_index: 0,
       //用于用户信息重置
       user_info: {
-        phone: "",
-        nick: "",
-        userName: "",
-        addr: "",
-        img_addr: ""
+        phone: "无",
+        nick: "无",
+        userName: "不详",
+        addr: "无",
+        img_addr: "avatar_1.png"
       },
       user: {
         phone: "",
@@ -79,14 +81,17 @@ export default {
       },
       newImg: "",
       // newImg_addr: "http://127.0.0.1:8081/user/avatar_1.png"
-      newImg_addr:"",
-      result_msg:""
+      newImg_addr: "",
+      result_msg: "",
+      user_no_change:false
     };
   },
   methods: {
+    //更换当前显示的右侧内容下标
     click_change_show(ind) {
       this.show_index = ind;
     },
+    //获取用户基本信息
     get_user_info() {
       // console.log(this.$store.getters.get_uid)
       this.$axios
@@ -94,16 +99,24 @@ export default {
           params: { uid: this.$store.getters.get_uid }
         })
         .then(result => {
-          console.log(result);
+          // console.log(result);
+          //如果查询用户基本信息成功
           if (result.data.code === 200) {
-            for (let key in result.data.data) {
+            let data = result.data.data;
+            //遍历结果保存入本地变量user
+            for (let key in data) {
               // this.$set(this.user,key,result.data.data[key])
-              this.user[key] = result.data.data[key];
+              this.user[key] = data[key];
+              //保存部分信息到用于比较的user_info
+              this.user_info[key] = data[key]
             }
+            
           } else {
+            //查询用户失败
+            // 将user初始化
             this.user = this.user_info;
           }
-          console.log(this.user);
+          // console.log(this.user);
         })
         .catch(err => {
           throw err;
@@ -120,33 +133,57 @@ export default {
         _this.newImg_addr = this.result;
       };
     },
-    save_img(){
-      let x = this.newImg
-      console.log(x)
-      console.log(this.person_uid)
+    save_img() {
+      let x = this.newImg;
+      // console.log(x)
+      // console.log(this.person_uid)
       //创建一个form对象
-      let params = new FormData()
+      let params = new FormData();
       //向表单添加数据
-      params.append("avatar",x,x.name)
-      params.append("uid",this.person_uid)
+      params.append("avatar", x, x.name);
+      params.append("uid", this.person_uid);
 
-      console.log(params.get("uid"))
-      console.log(params.get("file"))
+      // console.log(params.get("uid"))
+      // console.log(params.get("file"))
       let config = {
-        headers:{'Content-Type':'multipart/form-data'}
-      }
-      this.$axios.post("/user/avatar",params,config).then(result=>{
-        console.log(result)
-        if(result.data.code === 200) {
-          this.result_msg = result.data
-        }
-        //清空旧数据
-        this.newImg_addr = ""
-        this.newImg = ""
-        console.log(this.result_msg)
-      }).catch(err=>{
-        throw err
-      })
+        headers: { "Content-Type": "multipart/form-data" }
+      };
+      this.$axios
+        .post("/user/avatar", params, config)
+        .then(result => {
+          // console.log(result)
+          // if(result.data.code === 200) {
+          this.result_msg = result.data;
+          // }
+          //清空旧数据
+          this.newImg_addr = "";
+          this.newImg = "";
+          // console.log(this.result_msg)
+        })
+        .catch(err => {
+          throw err;
+        });
+    },
+    save_msg() {
+      // console.log(this.user)
+      // console.log(this.user_info)
+      // console.log(JSON.stringify(this.user) === JSON.stringify(this.user_info) )
+      this.user_is_change ||
+        this.$axios
+          .post("/user/add", {
+            uid: this.$store.getters.get_uid,
+            addr: this.user.addr,
+            userName: this.user.userName,
+            nick: this.user.nick
+          })
+          .then(result => {
+            // console.log(result)
+            this.result_msg = result.data;
+            // console.log(this.result_msg)
+          })
+          .catch(err => {
+            throw err;
+          });
     }
   },
   // this.$store.dispatch("set_user")
@@ -154,20 +191,26 @@ export default {
     this.$store.dispatch("set_user").then(this.get_user_info);
     // this.get_user_info()
   },
-  // created() {
-  //   this.get_user_info()
-  // },
-  // watch: {
-  //   $route(){
-  //     this.get_user_info()
-  //   }
-  // },
   computed: {
     person_uid() {
       return this.$store.getters.get_uid;
     },
     get_local() {
       return this.user.addr && this.user.addr.split("市")[0];
+    }
+  },
+  watch: {
+    user: {
+      handler() {
+        // console.log(this.user)
+        // console.log(this.user_info)
+        //保存用户信息是否未修改
+        this.user_no_change =
+          JSON.stringify(this.user) === JSON.stringify(this.user_info);
+        console.log(this.user_no_change);
+
+      },
+      deep: true
     }
   }
 };
@@ -228,51 +271,70 @@ export default {
 .person_msg p {
   margin-bottom: 0;
 }
-.person_msg .change_user_info span{
-  display:inline-block;
-  width:7rem;
-  height:2.5rem;
-  line-height:2.5rem;
-  text-align:right
+.person_msg .change_user_info span {
+  display: inline-block;
+  width: 7rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  text-align: right;
 }
-.person_msg .change_user_info input{
-  height:2.5rem;
+.person_msg .change_user_info input {
+  height: 2.5rem;
   box-shadow: 0 0 0;
-  border:0;
-  border-bottom:1px solid #333;
+  border: 0;
+  border-bottom: 1px solid #333;
   outline: 0;
   vertical-align: bottom;
 }
-.person_msg .change_user_info input:disabled{
-  background:rgba(0,0,0,0.1);
+.person_msg .change_user_info input:disabled {
+  background: rgba(0, 0, 0, 0.1);
+}
+.person_msg .change_user_info .user_submit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 10;
+  background-image: linear-gradient(to bottom, #27b1f6 0%, #0aa1ed 100%);
+  font-size: inherit;
+  padding: 0.42rem 0.625rem;
+  border-radius: 0.3125rem;
+  color: #fff;
+  margin-bottom: 0px;
+  border: 0;
+}
+.person_msg .change_user_info .user_submit:disabled {
+  background: rgba(0, 0, 0, 0.5);
+  /* color: #333; */
 }
 .person_msg .change_user_info .file_box {
   position: relative;
-  display:inline-block;
-  width:7.25rem
+  display: inline-block;
+  width: 7.25rem;
 }
-.person_msg .change_user_info .file_box label,.person_msg .change_user_info .file_box button {
+.person_msg .change_user_info .file_box label,
+.person_msg .change_user_info .file_box button {
   position: absolute;
   top: 0;
   left: 0;
-  cursor:pointer;
-  z-index: 10; 
-  background-image:linear-gradient(to bottom, #27b1f6 0%, #0aa1ed 100%);
-  font-size:inherit;
-  padding:0.42rem .625rem;
-  border-radius:.3125rem;
-  color:#fff;
-  margin-bottom:0px;
+  cursor: pointer;
+  z-index: 10;
+  background-image: linear-gradient(to bottom, #27b1f6 0%, #0aa1ed 100%);
+  font-size: inherit;
+  padding: 0.42rem 0.625rem;
+  border-radius: 0.3125rem;
+  color: #fff;
+  margin-bottom: 0px;
 }
-.person_msg .change_user_info .file_box button{
-  top:3.125rem;
-  padding:0.42rem .625rem;
-  box-shadow:0 0 0;
-  border:0;
+.person_msg .change_user_info .file_box button {
+  top: 3.125rem;
+  padding: 0.42rem 0.625rem;
+  box-shadow: 0 0 0;
+  border: 0;
 }
-.person_msg .change_user_info .file_box img{
-  margin-left:7.625rem;
-  width:2.5rem;
+.person_msg .change_user_info .file_box img {
+  margin-left: 7.625rem;
+  width: 2.5rem;
   /* margin-top:-3rem; */
 }
 .person_msg .change_user_info .file_box input[type="file"] {
