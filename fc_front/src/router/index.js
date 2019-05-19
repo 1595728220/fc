@@ -8,6 +8,7 @@ import Product from "@/components/product"
 import AppDown from "@/components/appdown"
 import Detail from "@/components/detail"
 import Person from "@/components/person"
+import Forget from "@/components/forget"
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -38,6 +39,10 @@ export default new Router({
     {
       path:"/person",
       component:Person
+    },
+    {
+      path:"/forget",
+      component:Forget
     },
     {
       path: "*",

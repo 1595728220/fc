@@ -52,7 +52,7 @@
               <router-link to="/register">注册</router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link to="/">忘记密码</router-link>
+              <router-link to="/forget">忘记密码</router-link>
             </li>
           </ul>
           <!-- 注册忘记密码跳转链接结束 -->
