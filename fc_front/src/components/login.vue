@@ -37,6 +37,7 @@
             @blur="func_upwd_blur"
             v-model="input_upwd"
             :class="{input_form_error:!state_upwd}"
+            autocomplete="new-password"
           >
           <!-- 密码表单结束 -->
         </div>

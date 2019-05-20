@@ -3,7 +3,7 @@
     <div class="col-md-7 col-sm-0 oh pr-0">
       <img src="../assets/imgs/forget/bg.jpg" class>
     </div>
-    <div class="col-md-5 offset-sm offset-md-0 form_area">
+    <div class="col-md-5 offset-sm offset-md-0 form_area p-0">
       <div class="d-flex title">
         <p class="middle_font mb-0 justify-self-center">忘记密码</p>
         <router-link to="/login" class="btn btn-light mr-1">返回</router-link>
@@ -29,8 +29,8 @@
               </div>
             </div>
           </div>
-        <input type="password" placeholder="新密码" v-model="forget_data.upwd">
-        <input type="password" placeholder="确认密码" v-model="forget_data.cpwd">
+        <input type="password" placeholder="新密码" v-model="forget_data.upwd" autocomplete="new-password">
+        <input type="password" placeholder="确认密码" v-model="forget_data.cpwd" autocomplete="new-password">
         <button disabled>确认</button>
       </div>
     </div>
@@ -139,7 +139,7 @@ export default {
   font-weight: bold;
 }
 .forget_area .content {
-  padding: 1.5rem 0.5rem;
+  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -160,11 +160,11 @@ export default {
   display: block;
   height: 2.5rem;
   background: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid #aaa;
   padding: 0 1.125rem;
   color: #262e39;
   border-radius: 0.25rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 .forget_area .content input:nth-child(2) {
   width: 50%;

@@ -40,6 +40,7 @@
             v-model="input_form.upwd"
             :class="{input_form_error:!state_form.upwd}"
             @blur="func_upwd_blur"
+            autocomplete="new-password"
           >
           <!-- 密码表单结束 -->
         </div>
@@ -54,6 +55,7 @@
             v-model="input_form.cpwd"
             :class="{input_form_error:!state_form.cpwd}"
             @blur="func_cpwd_blur"
+            autocomplete="new-password"
           >
           <!-- 重复密码表单结束 -->
         </div>
