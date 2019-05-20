@@ -121,8 +121,8 @@ export default {
   //取消是否失去过焦点的验证，体验不好
   data() {
     return {
-      phoneRegex: /^1[34578]\d{9}$/, //手机号正则
-      upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
+      // phoneRegex: /^1[34578]\d{9}$/, //手机号正则
+      // upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
       input_form: {
         phone: "", //手机号表单的输入
         upwd: "", //密码表单的输入
@@ -316,7 +316,15 @@ export default {
           return val === false;
         }).length !== 0
       );
-    }
+    },
+    //获取vuex中的手机号正则
+    phoneRegex(){
+      return this.$store.getters.get_phoneRegex
+    },
+    //获取vuex中的密码正则
+    upwdRegex(){
+      return this.$store.getters.get_upwdRegex
+    },
   },
   destroyed() {
     clearTimeout(this.register_timer);

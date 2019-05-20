@@ -68,8 +68,8 @@
 export default {
   data() {
     return {
-      phoneRegex: /^1[34578]\d{9}$/, //手机号正则
-      upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
+      // phoneRegex: /^1[34578]\d{9}$/, //手机号正则
+      // upwdRegex: /^[a-zA-Z\d_]{6,18}$/, //密码正则
       input_phone: "", //保存用户输入的手机号
       input_upwd: "", //保存用户输入的密码
       state_phone: true, //手机号验证状态
@@ -141,7 +141,15 @@ export default {
     //去除失去焦点验证
     check_input_right() {
       return !this.state_phone || !this.state_upwd;
-    }
+    },
+    //获取vuex中的手机号正则
+    phoneRegex(){
+      return this.$store.getters.get_phoneRegex
+    },
+    //获取vuex中的密码正则
+    upwdRegex(){
+      return this.$store.getters.get_upwdRegex
+    },
   }
 };
 </script>

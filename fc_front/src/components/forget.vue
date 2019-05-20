@@ -12,25 +12,34 @@
         <input type="text" placeholder="手机号码" v-model="forget_data.phone">
         <!-- <input type="text" placeholder="验证码"> -->
         <div class="row mb-3 ml-0 mr-0">
-            <input
-              type="text"
-              placeholder="验证码"
-              class="input_form col-sm-6 d-inline-block mb-0"
-              v-model="forget_data.identify"
-              
-            >
-            <div class="col-sm-6 p-0 align-self-center">
-              <div class="row m-0">
-                <myyzm :yzmimg="yzm_result_img" v-if="yzm_result_img" :fatherfunc="require_yzm"></myyzm>
-                <a
-                  class="col-sm-6 align-self-center cp text-primary p-0"
-                  @click="require_yzm"
-                >看不清楚，换一张</a>
-              </div>
+          <input
+            type="text"
+            placeholder="验证码"
+            class="input_form col-sm-6 d-inline-block mb-0"
+            v-model="forget_data.identify"
+          >
+          <div class="col-sm-6 p-0 align-self-center">
+            <div class="row m-0">
+              <myyzm :yzmimg="yzm_result_img" v-if="yzm_result_img" :fatherfunc="require_yzm"></myyzm>
+              <a
+                class="col-sm-6 align-self-center cp text-primary p-0"
+                @click="require_yzm"
+              >看不清楚，换一张</a>
             </div>
           </div>
-        <input type="password" placeholder="新密码" v-model="forget_data.upwd" autocomplete="new-password">
-        <input type="password" placeholder="确认密码" v-model="forget_data.cpwd" autocomplete="new-password">
+        </div>
+        <input
+          type="password"
+          placeholder="新密码"
+          v-model="forget_data.upwd"
+          autocomplete="new-password"
+        >
+        <input
+          type="password"
+          placeholder="确认密码"
+          v-model="forget_data.cpwd"
+          autocomplete="new-password"
+        >
         <button disabled>确认</button>
       </div>
     </div>
@@ -46,7 +55,7 @@ export default {
         upwd: "",
         cpwd: ""
       },
-      data_state:{
+      data_state: {
         phone: "",
         identify: "",
         upwd: "",
@@ -59,7 +68,7 @@ export default {
     };
   },
   methods: {
-         /**
+    /**
      * 请求yzm的方法，通过axios的get方法请求 /user/yzm
      */
     require_yzm() {
@@ -71,7 +80,7 @@ export default {
           }
         })
         .then(result => {
-            console.log(this.forget_data.phone)
+          console.log(this.forget_data.phone);
           //请求成功
           console.log(result);
           //如果返回的结果的data属性不是一个对象
@@ -94,13 +103,21 @@ export default {
           throw error;
         });
     },
+    forget_event() {}
   },
   mounted() {
-      this.require_yzm()
+    this.require_yzm();
   },
-  forget_event(){
-
-  }
+  computed: {
+    //获取vuex中的手机号正则
+    phoneRegex(){
+      return this.$store.getters.get_phoneRegex
+    },
+    //获取vuex中的密码正则
+    upwdRegex(){
+      return this.$store.getters.get_upwdRegex
+    },
+  },
 };
 </script>
 <style scoped>
@@ -130,12 +147,12 @@ export default {
 .forget_area .form_area {
   max-width: 23.75rem;
   min-width: 17.5rem;
-  border: 1px solid #eee;
+  border: 1px solid #ccc;
 }
 .forget_area .title {
   height: 3rem;
   align-items: center;
-  background: #ddd;
+  background: #ccc;
 }
 .forget_area .title a {
   padding-top: 0;
@@ -157,7 +174,7 @@ export default {
   display: block;
   height: 2.5rem;
   background: #fff;
-  border: 1px solid #ccc;
+  border: 1px solid #aaa;
   padding: 0 1.125rem;
   color: #262e39;
   border-radius: 0.25rem;
@@ -190,7 +207,7 @@ export default {
   opacity: 1;
 }
 .forget_area .content button:disabled {
-  background: #ddd;
+  background: #ccc;
   opacity: 1;
 }
 </style>

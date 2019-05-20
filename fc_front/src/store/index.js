@@ -15,7 +15,11 @@ const state = {
   //搜索关键词框是否显示
   search_is_show_dropdown: false,
   //alert组件需要展示的消息
-  mymsg:""
+  mymsg:"",
+  //手机号正则
+  phoneRegex: /^1[34578]\d{9}$/, 
+  //密码正则
+  upwdRegex: /^[a-zA-Z\d_]{6,18}$/, 
 };
 const getters = { //实时监听state值的变化(最新状态)
   get_uid(state) { //方法名随意,主要是来承载变化的值
@@ -35,6 +39,12 @@ const getters = { //实时监听state值的变化(最新状态)
   },
   get_mymsg(){
     return state.mymsg
+  },
+  get_phoneRegex(){
+    return state.phoneRegex
+  },
+  get_upwdRegex(){
+    return state.upwdRegex
   }
 };
 const mutations = {
