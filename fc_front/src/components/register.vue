@@ -18,7 +18,7 @@
 
         <div class="col-sm-12 mb-3">
           <!-- 手机号表单开始 -->
-          <div :class="{v_hidden:state_form.phone}" class="text-right text-danger">{{phone_msg}}</div>
+          <div v-show="!state_form.phone" class="text-right text-danger">{{phone_msg}}</div>
           <input
             type="text"
             placeholder="手机号"
@@ -32,7 +32,7 @@
 
         <div class="col-sm-12 mb-3">
           <!-- 密码表单开始 -->
-          <div :class="{v_hidden:state_form.upwd}" class="text-right text-danger">包含数字、字母、下划线的6-18位</div>
+          <div v-show="!state_form.upwd" class="text-right text-danger">包含数字、字母、下划线的6-18位</div>
           <input
             type="password"
             placeholder="密码"
@@ -47,7 +47,7 @@
 
         <div class="col-sm-12 mb-3">
           <!-- 重复密码表单开始 -->
-          <div :class="{v_hidden:state_form.cpwd}" class="text-right text-danger">两次密码输入不一致</div>
+          <div v-show="!state_form.cpwd" class="text-right text-danger">两次密码输入不一致</div>
           <input
             type="password"
             placeholder="确认密码"
@@ -62,7 +62,7 @@
 
         <div class="col-sm-12 mb-3">
           <!-- 验证码表单开始 -->
-          <div :class="{v_hidden:state_form.iden}" class="text-right text-danger">验证码错误</div>
+          <div v-show="!state_form.iden" class="text-right text-danger">验证码错误</div>
           <div class="row m-0">
             <input
               type="text"
