@@ -46,6 +46,12 @@ export default {
         upwd: "",
         cpwd: ""
       },
+      data_state:{
+        phone: "",
+        identify: "",
+        upwd: "",
+        cpwd: ""
+      },
       phone_msg: "手机号格式不正确", //保存手机号的提示信息
       active_yzm: "", //从服务器端返回的验证码
       yzm_result_img: "", //请求验证码的图片
@@ -92,6 +98,9 @@ export default {
   mounted() {
       this.require_yzm()
   },
+  forget_event(){
+
+  }
 };
 </script>
 <style scoped>
