@@ -224,6 +224,7 @@ export default {
           //用户名可用
           if (result.data.code === 200) {
             this.state_form.phone = true;
+            this.require_yzm()
           } else {
             //用户名不可用
             this.state_form.phone = false;

@@ -175,7 +175,7 @@ router.post("/forget", (req, res) => {
     phone,
     identify,
     upwd,
-    repwd
+    cpwd
   } = req.body
   //强制转为整数
   identify = parseInt(identify)
@@ -196,7 +196,7 @@ router.post("/forget", (req, res) => {
     return
   }
   //两次输入密码一致性验证
-  if (upwd !== repwd) {
+  if (upwd !== cpwd) {
     res.send({
       code: 403,
       msg: "两次密码不一致"

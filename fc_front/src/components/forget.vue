@@ -8,15 +8,19 @@
         <p class="middle_font mb-0 justify-self-center">忘记密码</p>
         <router-link to="/login" class="btn btn-light mr-1">返回</router-link>
       </div>
-      <div class="content">
-        <input type="text" placeholder="手机号码" v-model="forget_data.phone">
+      <div class="content" ref="father_area">
+        <myalert></myalert>
+        <div v-show="!state_form.phone" class="text-right text-danger">{{phone_msg}}</div>
+        <input type="text" placeholder="手机号码" v-model="forget_data.phone" @blur="func_phone_blur">
         <!-- <input type="text" placeholder="验证码"> -->
+        <div v-show="!state_form.identify" class="text-right text-danger">验证码不正确</div>
         <div class="row mb-3 ml-0 mr-0">
           <input
             type="text"
             placeholder="验证码"
             class="input_form col-sm-6 d-inline-block mb-0"
             v-model="forget_data.identify"
+            @blur="func_iden_blur"
           >
           <div class="col-sm-6 p-0 align-self-center">
             <div class="row m-0">
@@ -28,19 +32,23 @@
             </div>
           </div>
         </div>
+        <div v-show="!state_form.upwd" class="text-right text-danger">包含数字、字母、下划线的6-18位</div>
         <input
           type="password"
           placeholder="新密码"
           v-model="forget_data.upwd"
           autocomplete="new-password"
+          @blur="func_upwd_blur"
         >
+        <div v-show="!state_form.cpwd" class="text-right text-danger">两次密码输入不一致</div>
         <input
           type="password"
           placeholder="确认密码"
           v-model="forget_data.cpwd"
           autocomplete="new-password"
+          @blur="func_cpwd_blur"
         >
-        <button disabled>确认</button>
+        <button :disabled="check_input_right" @click="forget_event">确认</button>
       </div>
     </div>
   </div>
@@ -55,11 +63,11 @@ export default {
         upwd: "",
         cpwd: ""
       },
-      data_state: {
-        phone: "",
-        identify: "",
-        upwd: "",
-        cpwd: ""
+      state_form: {
+        phone: true,
+        identify: true,
+        upwd: true,
+        cpwd: true
       },
       phone_msg: "手机号格式不正确", //保存手机号的提示信息
       active_yzm: "", //从服务器端返回的验证码
@@ -103,7 +111,68 @@ export default {
           throw error;
         });
     },
-    forget_event() {}
+    /**
+     * 手机号表单失去焦点时调用的方法
+     */
+    func_phone_blur() {
+      // console.log("失去焦点");
+      if (!this.phoneRegex.test(this.forget_data.phone)) {
+        //手机号验证不通过
+        //改变手机号验证状态
+        this.state_form.phone = false;
+        this.phone_msg = "手机号格式不正确";
+      }else{
+        this.state_form.phone = true
+        this.require_yzm()
+      }
+    },
+    /**
+     * 密码表单失去焦点时调用的方法
+     */
+    func_upwd_blur() {
+      //保存正则的验证结果
+      this.state_form.upwd = this.upwdRegex.test(this.forget_data.upwd);
+    },
+    /**
+     * 重复密码表单失去焦点时调用的方法
+     */
+    func_cpwd_blur() {
+      //如果两次密码输入相同
+      if (this.forget_data.cpwd === this.forget_data.upwd) {
+        this.state_form.cpwd = true;
+      } else {
+        //两次密码输入不同
+        this.state_form.cpwd = false;
+      }
+    },
+    //验证码表单失去焦点时调用的方法
+    func_iden_blur() {
+      // console.log(this.input_form.iden, this.active_yzm)
+      if (
+        this.forget_data.identify.toLowerCase() !== this.active_yzm.toLowerCase()
+      ) {
+        //验证码验证不通过
+        //修改验证码验证状态为 false
+        this.state_form.identify = false;
+      } else {
+        //验证码验证通过
+        //修改验证码状态为 true
+        this.state_form.identify = true;
+      }
+    },
+    forget_event() {
+      this.$axios.post("/user/forget",{
+        phone:this.forget_data.phone,
+        identify:this.forget_data.identify,
+        upwd:this.forget_data.upwd,
+        cpwd:this.forget_data.cpwd
+      }).then(result=>{
+        console.log(result)
+        this.$store.dispatch("set_mymsg", result.data.msg)
+      }).catch(err=>{
+        throw err
+      })
+    },
   },
   mounted() {
     this.require_yzm();
@@ -117,6 +186,14 @@ export default {
     upwdRegex(){
       return this.$store.getters.get_upwdRegex
     },
+    //判断button是否可以点击
+    check_input_right(){
+      return (
+        Object.values(this.state_form).filter(val => {
+          return val === false;
+        }).length !== 0
+      );
+    }
   },
 };
 </script>
@@ -192,9 +269,9 @@ export default {
   border-radius: 0.25rem;
   margin-bottom: 1.5rem;
 }
-.forget_area .content input:nth-child(2) {
+/* .forget_area .content input:nth-child(2) {
   width: 50%;
-}
+} */
 .forget_area .content button {
   color: #fff;
   background-image: linear-gradient(to bottom, #27b1f6 0%, #0aa1ed 100%);
