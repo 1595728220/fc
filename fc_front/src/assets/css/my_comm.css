@@ -117,3 +117,6 @@ input:-webkit-autofill{
 a:focus{
   box-shadow: 0 0 0 !important;
 }
+[v-cloak]{
+  display:none !important;
+}
