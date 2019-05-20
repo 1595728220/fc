@@ -87,67 +87,16 @@
     </div>
     <div class="pt-4">
       <ul class="d-flex mr-auto ml-auto justify-content-around flex-wrap mb-4">
-        <li class="mr-3">
-          <router-link to="/unknow">关于对庄</router-link>
-        </li>
-        <li class="mr-3">
-          <router-link to="/unknow">翡翠图片</router-link>
-        </li>
-        <li class="mr-3">
-          <router-link to="/unknow">翡翠知识</router-link>
-        </li>
-        <li class="mr-3">
-          <router-link to="/unknow">翡翠戒指</router-link>
-        </li>
-        <li class="mr-3">
-          <router-link to="/unknow">对庄口碑</router-link>
-        </li>
-        <li class="mr-3">
-          <router-link to="/unknow">对庄客服</router-link>
-        </li>
-        <li class="mr-3">
-          <router-link to="/unknow">交易规则</router-link>
-        </li>
-        <li>
-          <router-link to="/unknow">鉴定宝服务</router-link>
+        <li class="mr-3" v-for="(obj,index) of jump" :key="index">
+          <router-link :to="obj.to">{{obj.name}}</router-link>
         </li>
       </ul>
       <p class="text-center">对庄翡翠 版权所有 2015-2020 ICP备案证数：XXXXXXXX 增值业务许可证：XXXXXXXX</p>
       <p class="text-center">© 2015-2020 www.urlip.com ALL RIGHT RESERVED</p>
       <h4 class="middle_font text-center">买翡翠，找源头，就在对庄</h4>
       <ul class="d-flex mr-auto ml-auto justify-content-between flex-wrap mb-4">
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
-        </li>
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
-        </li>
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
-        </li>
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
-        </li>
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
-        </li>
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
-        </li>
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
-        </li>
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
-        </li>
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
-        </li>
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
-        </li>
-        <li class="mr-2 ml-2">
-          <a href="http://www.baidu.com" target="_blank">百度</a>
+        <li class="mr-2 ml-2" v-for="(obj,index) of youqing" :key="index">
+          <a :href="obj.href" target="_blank">{{obj.name}}</a>
         </li>
       </ul>
     </div>
@@ -158,7 +107,30 @@ export default {
   data() {
     return {
       img_app: require("../assets/imgs/download/downapp.png"),
-      img_erweima: require("../assets/imgs/footer/erweima.png")
+      img_erweima: require("../assets/imgs/footer/erweima.png"),
+      youqing: [
+        { href: "http://www.baidu.com", name: "百度" },
+        { href: "http://www.baidu.com", name: "百度" },
+        { href: "http://www.baidu.com", name: "百度" },
+        { href: "http://www.baidu.com", name: "百度" },
+        { href: "http://www.baidu.com", name: "百度" },
+        { href: "http://www.baidu.com", name: "百度" },
+        { href: "http://www.baidu.com", name: "百度" },
+        { href: "http://www.baidu.com", name: "百度" },
+        { href: "http://www.baidu.com", name: "百度" },
+        { href: "http://www.baidu.com", name: "百度" },
+        { href: "http://www.baidu.com", name: "百度" },
+      ],
+      jump: [
+        { to: "/unknow", name: "关于对庄" },
+        { to: "/unknow", name: "翡翠图片" },
+        { to: "/unknow", name: "翡翠知识" },
+        { to: "/unknow", name: "翡翠戒指" },
+        { to: "/unknow", name: "对庄口碑" },
+        { to: "/unknow", name: "对庄客服" },
+        { to: "/unknow", name: "交易规则" },
+        { to: "/unknow", name: "鉴定宝服务" },
+      ]
     };
   }
 };
