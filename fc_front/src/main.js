@@ -9,7 +9,7 @@ axios.defaults.baseURL = "http://127.0.0.1:8081"
 Vue.prototype.$axios = axios
 Vue.use(Vuex)
 //js
-import "./assets/js/jquery"
+import "./assets/js/jquery.js"
 // import "./assets/js/jquery.flot"
 // import "./assets/js/bootstrap"
 // import "./assets/js/bootstrap.bundle"

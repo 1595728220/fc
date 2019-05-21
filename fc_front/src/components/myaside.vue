@@ -2,7 +2,8 @@
   <div class="aside_nav">
     <div v-for="(obj,index) in jump_list" :key="index" class="icon">
       <router-link v-if="obj.hasOwnProperty('to')" :to="obj.to"></router-link>
-      <a :href="obj.href" v-if="obj.hasOwnProperty('href')"></a>
+      <a :href="obj.href" v-else></a>
+      <!-- <a :href="obj.href" v-if="obj.hasOwnProperty('href')"></a> -->
     </div>
   </div>
 </template>
@@ -17,7 +18,7 @@ export default {
   watch: {}
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .aside_nav {
   position: fixed;
   height: 15rem;
@@ -33,28 +34,28 @@ export default {
   justify-content: space-around;
   z-index: 1000;
   transition: all 0.5s linear;
-}
-.aside_nav:hover {
-  opacity: 0.6;
-}
-.aside_nav .icon a {
-  width: 32px;
-  height: 32px;
-  margin-right: 0;
-  display: block;
-  background-image: url("../assets/imgs/index/icon.png");
-  cursor: pointer;
-}
-.aside_nav .icon:nth-child(2) a {
-  background-position: -10px -10px;
-}
-.aside_nav .icon:nth-child(3) a {
-  background-position: -62px -10px;
-}
-.aside_nav .icon:nth-child(4) a {
-  background-position: -10px -62px;
-}
-.aside_nav .icon:nth-child(1) a {
-  background-position: -62px -62px;
+  &:hover {
+    opacity: 0.6;
+  }
+  .icon a {
+    width: 32px;
+    height: 32px;
+    margin-right: 0;
+    display: block;
+    background-image: url("../assets/imgs/index/icon.png");
+    cursor: pointer;
+  }
+  .icon:nth-child(2) a {
+    background-position: -10px -10px;
+  }
+  .icon:nth-child(3) a {
+    background-position: -62px -10px;
+  }
+  .icon:nth-child(4) a {
+    background-position: -10px -62px;
+  }
+  .icon:nth-child(1) a {
+    background-position: -62px -62px;
+  }
 }
 </style>
