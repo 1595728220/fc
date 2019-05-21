@@ -121,9 +121,9 @@ export default {
         //改变手机号验证状态
         this.state_form.phone = false;
         this.phone_msg = "手机号格式不正确";
-      }else{
-        this.state_form.phone = true
-        this.require_yzm()
+      } else {
+        this.state_form.phone = true;
+        this.require_yzm();
       }
     },
     /**
@@ -149,7 +149,8 @@ export default {
     func_iden_blur() {
       // console.log(this.input_form.iden, this.active_yzm)
       if (
-        this.forget_data.identify.toLowerCase() !== this.active_yzm.toLowerCase()
+        this.forget_data.identify.toLowerCase() !==
+        this.active_yzm.toLowerCase()
       ) {
         //验证码验证不通过
         //修改验证码验证状态为 false
@@ -161,43 +162,46 @@ export default {
       }
     },
     forget_event() {
-      this.$axios.post("/user/forget",{
-        phone:this.forget_data.phone,
-        identify:this.forget_data.identify,
-        upwd:this.forget_data.upwd,
-        cpwd:this.forget_data.cpwd
-      }).then(result=>{
-        console.log(result)
-        this.$store.dispatch("set_mymsg", result.data.msg)
-      }).catch(err=>{
-        throw err
-      })
-    },
+      this.$axios
+        .post("/user/forget", {
+          phone: this.forget_data.phone,
+          identify: this.forget_data.identify,
+          upwd: this.forget_data.upwd,
+          cpwd: this.forget_data.cpwd
+        })
+        .then(result => {
+          console.log(result);
+          this.$store.dispatch("set_mymsg", result.data.msg);
+        })
+        .catch(err => {
+          throw err;
+        });
+    }
   },
   mounted() {
     this.require_yzm();
   },
   computed: {
     //获取vuex中的手机号正则
-    phoneRegex(){
-      return this.$store.getters.get_phoneRegex
+    phoneRegex() {
+      return this.$store.getters.get_phoneRegex;
     },
     //获取vuex中的密码正则
-    upwdRegex(){
-      return this.$store.getters.get_upwdRegex
+    upwdRegex() {
+      return this.$store.getters.get_upwdRegex;
     },
     //判断button是否可以点击
-    check_input_right(){
+    check_input_right() {
       return (
         Object.values(this.state_form).filter(val => {
           return val === false;
         }).length !== 0
       );
     }
-  },
+  }
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 @media screen and (max-width: 767px) {
   .col-sm-0 {
     display: none;
@@ -209,82 +213,69 @@ export default {
     width: 75%;
   }
 }
-@media screen and (min-width: 576px) {
-}
-
-@media screen and (min-width: 768px) {
-}
-
-@media screen and (min-width: 992px) {
-}
-
-@media screen and (min-width: 1200px) {
-}
-
-.forget_area .form_area {
-  max-width: 23.75rem;
-  min-width: 17.5rem;
-  border: 1px solid #ccc;
-}
-.forget_area .title {
-  height: 3rem;
-  align-items: center;
-  background: #ccc;
-}
-.forget_area .title a {
-  padding-top: 0;
-  padding-bottom: 0;
-  line-height: 2rem;
-  height: 2rem;
-}
-.forget_area .title p {
-  margin: 0 auto;
-  font-weight: bold;
-}
-.forget_area .content {
-  padding: 1.5rem 1rem;
-  display: flex;
-  flex-direction: column;
-}
-.forget_area .content .input_form {
-  width: 100%;
-  display: block;
-  height: 2.5rem;
-  background: #fff;
-  border: 1px solid #aaa;
-  padding: 0 1.125rem;
-  color: #262e39;
-  border-radius: 0.25rem;
-  box-sizing: border-box;
-}
-.forget_area .content input,
-.forget_area .content button {
-  width: 100%;
-  display: block;
-  height: 2.5rem;
-  background: #fff;
-  border: 1px solid #aaa;
-  padding: 0 1.125rem;
-  color: #262e39;
-  border-radius: 0.25rem;
-  margin-bottom: 1.5rem;
-}
-/* .forget_area .content input:nth-child(2) {
-  width: 50%;
-} */
-.forget_area .content button {
-  color: #fff;
-  background-image: linear-gradient(to bottom, #27b1f6 0%, #0aa1ed 100%);
-  cursor: pointer;
-  border: 0;
-  outline: 0;
-  opacity: 0.8;
-}
-.forget_area .content button:active {
-  opacity: 1;
-}
-.forget_area .content button:disabled {
-  background: #ccc;
-  opacity: 1;
+.forget_area {
+  .form_area {
+    max-width: 23.75rem;
+    min-width: 17.5rem;
+    border: 1px solid #ccc;
+  }
+  .title {
+    height: 3rem;
+    align-items: center;
+    background: #ccc;
+    a {
+      padding-top: 0;
+      padding-bottom: 0;
+      line-height: 2rem;
+      height: 2rem;
+    }
+    p {
+      margin: 0 auto;
+      font-weight: bold;
+    }
+  }
+  .content {
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    .input_form {
+      width: 100%;
+      display: block;
+      height: 2.5rem;
+      background: #fff;
+      border: 1px solid #aaa;
+      padding: 0 1.125rem;
+      color: #262e39;
+      border-radius: 0.25rem;
+      box-sizing: border-box;
+    }
+    input,
+    button {
+      width: 100%;
+      display: block;
+      height: 2.5rem;
+      background: #fff;
+      border: 1px solid #aaa;
+      padding: 0 1.125rem;
+      color: #262e39;
+      border-radius: 0.25rem;
+      margin-bottom: 1.5rem;
+    }
+    button {
+      color: #fff;
+      background-image: linear-gradient(to bottom, #27b1f6 0%, #0aa1ed 100%);
+      cursor: pointer;
+      border: 0;
+      outline: 0;
+      opacity: 0.8;
+      &:active {
+        opacity: 1;
+      }
+      &:disabled {
+        background: #ccc;
+        opacity: 1;
+      }
+    }
+  }
 }
 </style>

@@ -48,13 +48,13 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .down_area {
   font-size: 1.875rem;
   font-weight: bold;
   background: #ddd;
-}
-.down_area > img:first-child {
-  border-radius: 0.875rem;
+  img:first-child {
+    border-radius: 0.875rem;
+  }
 }
 </style>
