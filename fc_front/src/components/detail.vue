@@ -194,7 +194,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 @media screen and (max-width: 575px) {
   .small_img {
     height: 4rem;
@@ -238,22 +238,25 @@ export default {
     height: 8rem;
   }
 }
-.middle_img .mask {
-  width: 25%;
-  height: 25%;
-  left: 0;
-  top: 0;
-  background: #ff0;
-  opacity: 0.2;
+.middle_img {
+  .mask {
+    width: 25%;
+    height: 25%;
+    left: 0;
+    top: 0;
+    background: #ff0;
+    opacity: 0.2;
+  }
+  .super_mask {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    cursor: move;
+  }
 }
-.middle_img .super_mask {
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  z-index: 10;
-  cursor: move;
-}
+
 .small_img {
   cursor: pointer;
 }
@@ -272,19 +275,20 @@ export default {
   background: url(../assets/imgs/icon/icons.png) -233px -125px;
   background-size: 20rem;
   margin: 0 auto;
+  &.pifa {
+    background-position: -341px -19px;
+  }
+  &.rushi {
+    background-position: -341px -125px;
+  }
+  &.tuikuan {
+    background-position: -127px -125px;
+  }
 }
 .icon_text {
   font-size: 20px;
 }
-.index_icon.pifa {
-  background-position: -341px -19px;
-}
-.index_icon.rushi {
-  background-position: -341px -125px;
-}
-.index_icon.tuikuan {
-  background-position: -127px -125px;
-}
+
 .hide {
   display: none;
 }
@@ -295,18 +299,18 @@ export default {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-}
-.btnPrimary:hover {
-  color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
-}
-.btnPrimary:focus {
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
-}
-.btnPrimary:not(:disabled):not(.disabled):active {
-  color: #fff;
-  background-color: #0062cc;
-  border-color: #005cbf;
+  &:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+  &:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: #0062cc;
+    border-color: #005cbf;
+  }
 }
 </style>
