@@ -257,24 +257,11 @@ export default {
 };
 </script>
 <style scoped>
-@media screen and (max-width: 575px) {
-}
-
 @media screen and (min-width: 576px) {
   .class_title {
     text-align: right;
   }
 }
-
-@media screen and (min-width: 768px) {
-}
-
-@media screen and (min-width: 992px) {
-}
-
-@media screen and (min-width: 1200px) {
-}
-
 ul.my_pills > li {
   padding: 0.5rem 1.2rem;
 }
