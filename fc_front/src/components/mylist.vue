@@ -24,10 +24,11 @@ export default {
   },
   methods: {
     query_product() {
+      console.log("查询产品信息")
       //根据父组件给定的参数查询相符合条件的产品信息
       this.$axios
         .get("/product/list", {
-          params: this.mymsg
+          params: {uid:this.$store.getters.get_uid,...this.mymsg}
         })
         .then(result => {
           // console.log(result.data)
@@ -59,6 +60,7 @@ export default {
       },
       deep: true
     },
+
     //监视产品总记录数，如果改变就向父组件发送该值
     productsCount() {
       // console.log("子组件查询数据库获取产品总数："+this.productsCount)

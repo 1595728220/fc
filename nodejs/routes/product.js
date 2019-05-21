@@ -58,6 +58,7 @@ router.get("/list", (req, res) => {
   //   size,
   //   keywords)
   //默认值
+  console.log("当前查询产品列表的用户编号为"+uid)
   !pno && (pno = 1);
   !size && (size = 6);
   //转换位整数
@@ -88,14 +89,14 @@ router.get("/list", (req, res) => {
         sql1 = "update keywords set count = ? where kid = ?"
         pool.query(sql1, [count, kid], (err, result) => {
           if (err) throw err
-          // console.log("更新关键词表完成")
+          console.log("更新关键词表完成")
         })
       } else { //不存在
         //插入新的关键字搜索记录
         sql1 = "insert into keywords values(null,?,?,?)"
         pool.query(sql1, [keywords, uid, count], (err, result) => {
           if (err) throw err
-          // console.log("插入关键词表完成")
+          console.log("插入关键词表完成")
         })
       }
     })

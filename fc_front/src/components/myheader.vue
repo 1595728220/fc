@@ -49,26 +49,6 @@
                     >{{val}}</router-link>
                   </div>
                 </div>
-                <!-- <div class="p-3" >
-                  <h5 class="mb-2">挂坠</h5>
-                  <div>
-                    <router-link to="/product/项链" class="btn btn-primary w-25 mr-2">项链</router-link>
-                  </div>
-                </div>
-                <div class="p-3">
-                  <h5 class="mb-2">饰品</h5>
-                  <div>
-                    <router-link to="/product/手镯" class="btn btn-primary w-25 mr-2">手镯</router-link>
-                    <router-link to="/product/戒指" class="btn btn-primary w-25 mr-2">戒指</router-link>
-                  </div>
-                </div>
-                <div class="p-3">
-                  <h5 class="mb-2">种水</h5>
-                  <div>
-                    <router-link to="/product/冰种" class="btn btn-primary w-25 mr-2">冰种</router-link>
-                    <router-link to="/product/冰种" class="btn btn-primary w-25 mr-2">糯种</router-link>
-                  </div>
-                </div>-->
               </div>
             </li>
             <li class="nav-item">
@@ -82,7 +62,7 @@
                   @click.stop="search_click"
                   placeholder="翡翠手镯"
                   v-model="person_input_search"
-                  @keyup="keyup_search"
+                  @keyup.13="keyup_search"
                 >
                 <router-link
                   class="btn btn-primary pl-3 pr-3"
@@ -208,41 +188,18 @@ export default {
         .then(() => {
           // console.log("用户成功登出")
           //检查当前登录状态
-          this.check_person_state();
+          this.$store.dispatch("set_user");
         })
         .catch(error => {
           throw error;
         });
     },
     //检查用户的登录状态的方法
-    check_person_state() {
-      //发送请求查看用户的登录状态
-      // this.$axios
-      //   .get("/user/state")
-      //   .then(result => {
-      //     // console.log(result)
-      //     //如果已登录
-      //     if (result.data.code === 200) {
-      //       //保存该用户的编号
-      //       this.$store.dispatch("set_uid", result.data.uid);
-      //       // this.person_uid = result.data.uid
-      //       //保存该用户的昵称
-      //       this.person_name = result.data.nick;
-      //       console.log(this.person_uid)
-      //     } else {
-      //       //清空用户的编号
-      //       // this.person_uid = null
-      //       this.$store.dispatch("set_uid", 0);
-      //       //清空用户的昵称
-      //       this.person_name = null;
-      //     }
-      //   })
-      //   .catch(error => {
-      //     throw error;
-      //   });
-      //转移到store中统一调度
-      this.$store.dispatch("set_user");
-    },
+    // check_person_state() {
+    //   //发送请求查看用户的登录状态
+    //   //转移到store中统一调度
+    //   this.$store.dispatch("set_user");
+    // },
     //检查元素是否存在数组中
     check_array(arr, el) {
       if (arr.indexOf(el) === -1) {
@@ -251,44 +208,45 @@ export default {
       return arr;
     },
     //当回车时跳转路由
-    keyup_search(e) {
-      if (e.keyCode === 13) {
-        this.$router.push({
-          path: "/product",
-          query: { keywords: this.person_input_search }
+    keyup_search() {
+      this.$router.push({
+        path: "/product",
+        query: { keywords: this.person_input_search }
+      });
+    },
+    //请求用户的搜索历史记录
+    get_user_search() {
+      //发送请求
+      this.$axios
+        .get("/user/search", {
+          params: {
+            uid: this.person_uid
+          }
+        })
+        .then(result => {
+          // console.log(result)
+          // this.keywords = JSON.parse(JSON.stringify(result.data.data.all))
+          this.keywords.all = result.data.data.all;
+          this.keywords.me = result.data.data.me || [];
+          // console.log(this.keywords)
+          if (this.keywords.me.length === 0) {
+            this.keywords.me = [
+              {
+                content: "无"
+              }
+            ];
+          } else {
+            this.is_person_keywords = true;
+          }
+          // console.log(this.is_person_keywords)
+        })
+        .catch(error => {
+          throw error;
         });
-      }
     }
   },
   //当组件挂载后
   mounted() {
-    //发送请求
-    this.$axios
-      .get("/user/search", {
-        params: {
-          uid: this.person_uid
-        }
-      })
-      .then(result => {
-        // console.log(result)
-        // this.keywords = JSON.parse(JSON.stringify(result.data.data.all))
-        this.keywords.all = result.data.data.all;
-        this.keywords.me = result.data.data.me || [];
-        // console.log(this.keywords)
-        if (this.keywords.me.length === 0) {
-          this.keywords.me = [
-            {
-              content: "无"
-            }
-          ];
-        } else {
-          this.is_person_keywords = true;
-        }
-        // console.log(this.is_person_keywords)
-      })
-      .catch(error => {
-        throw error;
-      });
     //请求产品的分类信息
     this.$axios
       .get("/product/classfy")
@@ -322,27 +280,15 @@ export default {
       .catch(error => {
         throw error;
       });
-    //检查用户当前状态
-    this.check_person_state();
-    // $(window).click(() => {
-    //   if (this.class_is_show_dropdown) {
-    //     [this.is_triangle_left, this.is_triangle_top] = [
-    //       this.is_triangle_top,
-    //       this.is_triangle_left
-    //     ]
-    //     this.class_is_show_dropdown = false;
-    //   }
-    // })
-    // console.log(this.$store.getters.get_uid)
+    //检查用户当前状态,并查找用户的搜索记录
+     this.$store.dispatch("set_user").then(this.get_user_search);
   },
-  // beforeCreate() {
-  //   this.$store.dispatch("set_user");
-  // },
+
   //监听数据变化
   watch: {
     $route(/*to,from*/) {
       //跳转组件页面后，监听路由参数中对应的当前页面以及上一个页面
-      this.check_person_state();
+      this.$store.dispatch("set_user");
     }
   },
   computed: {

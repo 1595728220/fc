@@ -182,22 +182,7 @@ export default {
       }
     },
     //保存页面点击对应的数据到search_info中
-    save_click_search(
-      arg
-      //   {
-      //   classify,
-      //   style,
-      //   thickness,
-      //   color,
-      //   minprice,
-      //   maxprice,
-      //   rexiao,
-      //   xinpin,
-      //   recommond,
-      //   pno,
-      //   keywords
-      // } = {}
-    ) {
+    save_click_search(arg) {
       // console.log(arguments)
       //遍历传入的实参
       for (let key in arg) {
