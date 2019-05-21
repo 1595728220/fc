@@ -64,10 +64,10 @@
                   v-model="person_input_search"
                   @keyup.13="keyup_search"
                 >
-                <router-link
+                <button
                   class="btn btn-primary pl-3 pr-3"
-                  :to="{path:'/product',query:{keywords:person_input_search}}"
-                >搜索</router-link>
+                  @click="keyup_search"
+                >搜索</button>
               </div>
               <div
                 class="dropdown-menu text-dark mb-1 search_area d-block tr oh"
@@ -209,6 +209,13 @@ export default {
     },
     //当回车时跳转路由
     keyup_search() {
+      console.log(this.$store.getters.get_uid)
+      this.$axios.get("/product/search",{
+        params:{
+          uid:this.$store.getters.get_uid,
+          keywords:this.person_input_search
+        }
+      })
       this.$router.push({
         path: "/product",
         query: { keywords: this.person_input_search }

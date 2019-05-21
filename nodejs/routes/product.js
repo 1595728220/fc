@@ -30,7 +30,6 @@ router.get("/detail", (req, res) => {
 router.get("/list", (req, res) => {
   //获取请求查询字符串中的classify style thickness color minprice maxprice rexiao xinpin pno size keywords
   let {
-    uid,
     classify,
     style,
     thickness,
@@ -58,7 +57,7 @@ router.get("/list", (req, res) => {
   //   size,
   //   keywords)
   //默认值
-  console.log("当前查询产品列表的用户编号为"+uid)
+  // console.log("当前查询产品列表的用户编号为"+uid)
   !pno && (pno = 1);
   !size && (size = 6);
   //转换位整数
@@ -67,40 +66,6 @@ router.get("/list", (req, res) => {
   //不规范的参数规范化
   minprice < 0 && (minprice = 0)
   maxprice < minprice && (maxprice = 99999999)
-  //检查用户是否输入用户编号，如果没有统一改为0，表示游客的搜索关键词
-  if (!uid) {
-    uid = 0
-  }
-  //当用户通过关键字搜索产品时
-  if (!!keywords) {
-    //添加搜索的关键字到keywords表中
-    let sql1 = "select count,kid from keywords where content = ? and key_userId = ?",
-      count = 1,
-      kid
-    //在keywords表中查询是否存在关键字
-    pool.query(sql1, [keywords, uid], (err, result) => {
-      if (err) throw err
-      if (result.length > 0) { //存在
-        //搜索次数+1
-        count = result[0].count + 1
-        //所搜关键词记录的编号
-        kid = result[0].kid
-        //更新关键字的搜索次数
-        sql1 = "update keywords set count = ? where kid = ?"
-        pool.query(sql1, [count, kid], (err, result) => {
-          if (err) throw err
-          console.log("更新关键词表完成")
-        })
-      } else { //不存在
-        //插入新的关键字搜索记录
-        sql1 = "insert into keywords values(null,?,?,?)"
-        pool.query(sql1, [keywords, uid, count], (err, result) => {
-          if (err) throw err
-          console.log("插入关键词表完成")
-        })
-      }
-    })
-  }
   //计算分页的开始下标
   let start = (pno - 1) * size,
     sql = "select sql_calc_found_rows pid,described,price,photo1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
@@ -193,6 +158,44 @@ router.get("/get_words", (req, res) => {
       res.send({ code: 200, msg: result })
     else res.send({ code: 301, msg: "暂无评论" })
   })
+})
+//用户搜索时添加搜索记录
+router.get("/search",(req,res)=>{
+  let {uid,keywords} = req.query
+   //检查用户是否输入用户编号，如果没有统一改为0，表示游客的搜索关键词
+   if (!uid) {
+    uid = 0
+  }
+  //当用户通过关键字搜索产品时
+  if (!!keywords) {
+    //添加搜索的关键字到keywords表中
+    let sql1 = "select count,kid from keywords where content = ? and key_userId = ?",
+      count = 1,
+      kid
+    //在keywords表中查询是否存在关键字
+    pool.query(sql1, [keywords, uid], (err, result) => {
+      if (err) throw err
+      if (result.length > 0) { //存在
+        //搜索次数+1
+        count = result[0].count + 1
+        //所搜关键词记录的编号
+        kid = result[0].kid
+        //更新关键字的搜索次数
+        sql1 = "update keywords set count = ? where kid = ?"
+        pool.query(sql1, [count, kid], (err, result) => {
+          if (err) throw err
+          console.log("更新关键词表完成")
+        })
+      } else { //不存在
+        //插入新的关键字搜索记录
+        sql1 = "insert into keywords values(null,?,?,?)"
+        pool.query(sql1, [keywords, uid, count], (err, result) => {
+          if (err) throw err
+          console.log("插入关键词表完成")
+        })
+      }
+    })
+  }
 })
 //导出产品模块
 module.exports = router

@@ -24,11 +24,10 @@ export default {
   },
   methods: {
     query_product() {
-      console.log("查询产品信息")
       //根据父组件给定的参数查询相符合条件的产品信息
       this.$axios
         .get("/product/list", {
-          params: {uid:this.$store.getters.get_uid,...this.mymsg}
+          params: this.mymsg
         })
         .then(result => {
           // console.log(result.data)
