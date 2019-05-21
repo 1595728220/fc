@@ -64,10 +64,7 @@
                   v-model="person_input_search"
                   @keyup.13="keyup_search"
                 >
-                <button
-                  class="btn btn-primary pl-3 pr-3"
-                  @click="keyup_search"
-                >搜索</button>
+                <button class="btn btn-primary pl-3 pr-3" @click="keyup_search">搜索</button>
               </div>
               <div
                 class="dropdown-menu text-dark mb-1 search_area d-block tr oh"
@@ -209,13 +206,13 @@ export default {
     },
     //当回车时跳转路由
     keyup_search() {
-      console.log(this.$store.getters.get_uid)
-      this.$axios.get("/product/search",{
-        params:{
-          uid:this.$store.getters.get_uid,
-          keywords:this.person_input_search
+      console.log(this.$store.getters.get_uid);
+      this.$axios.get("/product/search", {
+        params: {
+          uid: this.$store.getters.get_uid,
+          keywords: this.person_input_search
         }
-      })
+      });
       this.$router.push({
         path: "/product",
         query: { keywords: this.person_input_search }
@@ -288,7 +285,7 @@ export default {
         throw error;
       });
     //检查用户当前状态,并查找用户的搜索记录
-     this.$store.dispatch("set_user").then(this.get_user_search);
+    this.$store.dispatch("set_user").then(this.get_user_search);
   },
 
   //监听数据变化
@@ -298,7 +295,7 @@ export default {
       //当路由变化时检查用户登录状态
       this.$store.dispatch("set_user");
       //当路由变化时清空搜索栏
-      this.person_input_search = ""
+      this.person_input_search = "";
     }
   },
   computed: {
@@ -320,7 +317,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped lang="scss">
 @media (min-width: 576px) {
   .header .navbar-nav {
     align-items: flex-start;
@@ -345,90 +342,76 @@ export default {
   }
 }
 
-@media (min-width: 992px) {
-}
-
-@media (min-width: 1200px) {
-}
-
 .header {
   box-shadow: 0 0 1rem 0.01rem #333;
+  .navbar-light .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 0.7);
+    &:hover {
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
 }
 
-.header .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.7);
-}
+.header_nav {
+  li {
+    & > a {
+      font-size: 16px;
+      font-weight: bold;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .triangle_area {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+    }
+  }
+  .nav-item > div {
+    .form-control {
+      width: 75%;
+      vertical-align: middle;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      cursor: text;
+    }
+    .btn {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      height: 38px;
+    }
+  }
+  .breadcrumb {
+    background: transparent;
+    font-size: 16px;
+    padding-left: 0;
+    margin: 0;
+    .breadcrumb-item + .breadcrumb-item::before {
+      content: "|";
+    }
+    .breadcrumb-item a {
+      font-size: 16px;
+    }
+  }
+  .class_area {
+    height: 28rem;
+    width: 23rem;
+    top: 33px;
+  }
 
-.header .navbar-light .navbar-nav .nav-link:hover {
-  color: rgba(0, 0, 0, 0.8);
-}
+  .search_area {
+    height: 23rem;
+    width: 23rem;
+  }
 
-.header_nav li > a {
-  font-size: 16px;
-  font-weight: bold;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
+  .search_area a {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+  }
 
-.header_nav li .triangle_area {
-  width: 12px;
-  height: 12px;
-  display: inline-block;
+  .person_welcome {
+    font-weight: bold;
+  }
 }
-
-.header_nav .nav-item > div > .form-control {
-  width: 75%;
-  vertical-align: middle;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  cursor: text;
-}
-
-.header_nav .nav-item > div > .btn {
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-  height: 38px;
-}
-
-.header_nav .breadcrumb {
-  background: transparent;
-  font-size: 16px;
-  /* align-items: center; */
-  padding-left: 0;
-  margin: 0;
-  /* justify-content: space-around; */
-}
-
-.header_nav .breadcrumb-item + .breadcrumb-item::before {
-  content: "|";
-  /* color:#333; */
-  /* font-size:16px; */
-}
-
-.header_nav .breadcrumb .breadcrumb-item a {
-  font-size: 16px;
-}
-
-.header .class_area {
-  height: 28rem;
-  width: 23rem;
-  top: 33px;
-}
-
-.header .search_area {
-  height: 23rem;
-  width: 23rem;
-}
-
-.header .search_area a {
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-}
-
-.header .person_welcome {
-  font-weight: bold;
-}
-
 .btn.disabled {
   color: #ddd;
   pointer-events: none;
