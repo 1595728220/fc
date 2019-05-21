@@ -295,7 +295,10 @@ export default {
   watch: {
     $route(/*to,from*/) {
       //跳转组件页面后，监听路由参数中对应的当前页面以及上一个页面
+      //当路由变化时检查用户登录状态
       this.$store.dispatch("set_user");
+      //当路由变化时清空搜索栏
+      this.person_input_search = ""
     }
   },
   computed: {
