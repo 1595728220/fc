@@ -233,7 +233,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 @media screen and (max-width: 575px) {
   .aside_nav {
     width: 6.25rem;
@@ -241,135 +241,124 @@ export default {
   .person_msg {
     width: 14rem;
   }
-  /* .person_area{
-    height:40rem;
-  } */
 }
 @media screen and (max-width: 622px) {
   .person_area {
     height: 760px;
   }
 }
-@media screen and (min-width: 576px) {
-}
-
-@media screen and (min-width: 768px) {
-}
-
-@media screen and (min-width: 992px) {
-}
-
-@media screen and (min-width: 1200px) {
+.btn {
+  margin: 0 auto;
 }
 .person_area {
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
-}
-.person_area ul {
-  background: #ddd;
-  padding: 1rem 0 1rem 0.5rem;
-}
-.person_area li.active {
-  background: #fff;
-}
-.person_area li a:hover {
-  color: #333;
-}
-.person_msg {
-  height: 35rem;
-  padding: 1rem 0 1rem 1rem;
-  font-size: 1.25rem;
-  position: static;
-}
-.person_msg img {
-  width: 2.5rem;
-}
-.btn {
-  margin: 0 auto;
-}
-.person_msg h4 {
-  margin-bottom: 0;
-  text-align: center;
-  padding: 3.125rem 0;
-  background: #eee;
-  border-radius: 0.625rem;
-}
-.person_msg p {
-  margin-bottom: 0;
-}
-.person_msg .change_user_info > div {
-  text-align: center;
-}
-.person_msg .change_user_info span {
-  display: inline-block;
-  width: 7rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  text-align: right;
-}
-.person_msg .change_user_info input {
-  height: 2.5rem;
-  box-shadow: 0 0 0;
-  border: 0;
-  border-bottom: 1px solid #333;
-  outline: 0;
-  vertical-align: bottom;
-}
-.person_msg .change_user_info input:disabled {
-  background: rgba(0, 0, 0, 0.1);
-}
-.person_msg .change_user_info .user_submit {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  cursor: pointer;
-  z-index: 10;
-  background-image: linear-gradient(to bottom, #27b1f6 0%, #0aa1ed 100%);
-  font-size: inherit;
-  padding: 0.42rem 0.625rem;
-  border-radius: 0.3125rem;
-  color: #fff;
-  margin-bottom: 0px;
-  border: 0;
-}
-.person_msg .change_user_info .user_submit:disabled {
-  background: rgba(0, 0, 0, 0.5);
-  cursor: default;
-  /* color: #333; */
-}
-.person_msg .change_user_info .file_box {
-  /* position: relative; */
-  display: inline-block;
-  width: 15.1875rem;
+  ul {
+    background: #ddd;
+    padding: 1rem 0 1rem 0.5rem;
+    li.active {
+      background: #fff;
+      a:hover {
+        color: #333;
+      }
+    }
+  }
+  .person_msg {
+    height: 35rem;
+    padding: 1rem 0 1rem 1rem;
+    font-size: 1.25rem;
+    position: static;
+    img {
+      width: 2.5rem;
+    }
+    h4 {
+      margin-bottom: 0;
+      text-align: center;
+      padding: 3.125rem 0;
+      background: #eee;
+      border-radius: 0.625rem;
+    }
+    p {
+      margin-bottom: 0;
+    }
+    .change_user_info {
+      &>div {
+        text-align: center;
+      }
+      span {
+        display: inline-block;
+        width: 7rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        text-align: right;
+      }
+      input {
+        height: 2.5rem;
+        box-shadow: 0 0 0;
+        border: 0;
+        border-bottom: 1px solid #333;
+        outline: 0;
+        vertical-align: bottom;
+        &:disabled {
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+      .user_submit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+        z-index: 10;
+        background-image: linear-gradient(to bottom, #27b1f6 0%, #0aa1ed 100%);
+        font-size: inherit;
+        padding: 0.42rem 0.625rem;
+        border-radius: 0.3125rem;
+        color: #fff;
+        margin-bottom: 0px;
+        border: 0;
+        &:disabled {
+          background: rgba(0, 0, 0, 0.5);
+          cursor: default;
+        }
+      }
+      .file_box {
+        display: inline-block;
+        width: 15.1875rem;
+        label,
+        button {
+          position: absolute;
+          top: 0;
+          left: 0;
+          cursor: pointer;
+          z-index: 10;
+          background-image: linear-gradient(
+            to bottom,
+            #27b1f6 0%,
+            #0aa1ed 100%
+          );
+          font-size: inherit;
+          padding: 0.42rem 0.625rem;
+          border-radius: 0.3125rem;
+          color: #fff;
+          margin-bottom: 0px;
+        }
+        button {
+          top: 3.125rem;
+          padding: 0.42rem 0.625rem;
+          box-shadow: 0 0 0;
+          border: 0;
+        }
+        img {
+          margin-left: 7.625rem;
+          width: 2.5rem;
+        }
+        input[type="file"] {
+          position: absolute;
+          left: -9999px;
+        }
+      }
+    }
+  }
 }
 
-.person_msg .change_user_info .file_box label,
-.person_msg .change_user_info .file_box button {
-  position: absolute;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-  z-index: 10;
-  background-image: linear-gradient(to bottom, #27b1f6 0%, #0aa1ed 100%);
-  font-size: inherit;
-  padding: 0.42rem 0.625rem;
-  border-radius: 0.3125rem;
-  color: #fff;
-  margin-bottom: 0px;
-}
-.person_msg .change_user_info .file_box button {
-  top: 3.125rem;
-  padding: 0.42rem 0.625rem;
-  box-shadow: 0 0 0;
-  border: 0;
-}
-.person_msg .change_user_info .file_box img {
-  margin-left: 7.625rem;
-  width: 2.5rem;
-  /* margin-top:-3rem; */
-}
-.person_msg .change_user_info .file_box input[type="file"] {
-  position: absolute;
-  left: -9999px;
-}
 </style>
