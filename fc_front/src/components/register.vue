@@ -224,7 +224,7 @@ export default {
           //用户名可用
           if (result.data.code === 200) {
             this.state_form.phone = true;
-            this.require_yzm()
+            this.require_yzm();
           } else {
             //用户名不可用
             this.state_form.phone = false;
@@ -319,13 +319,13 @@ export default {
       );
     },
     //获取vuex中的手机号正则
-    phoneRegex(){
-      return this.$store.getters.get_phoneRegex
+    phoneRegex() {
+      return this.$store.getters.get_phoneRegex;
     },
     //获取vuex中的密码正则
-    upwdRegex(){
-      return this.$store.getters.get_upwdRegex
-    },
+    upwdRegex() {
+      return this.$store.getters.get_upwdRegex;
+    }
   },
   destroyed() {
     clearTimeout(this.register_timer);
@@ -340,7 +340,7 @@ export default {
   }
 };
 </script>
-<style>
+<style lang="scss" scoped>
 @media screen and (max-width: 575px) {
   .register {
     width: 18rem;
@@ -375,44 +375,39 @@ export default {
   border-radius: 0.5rem;
   box-shadow: 0 0 1rem 0.01rem #333;
   padding-top: 2rem;
-}
-
-.register h2 {
-  font-size: 1.25rem;
-}
-
-.register .input_form {
-  width: 100%;
-  display: block;
-  height: 2.5rem;
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 0 1.125rem;
-  color: #262e39;
-  border-radius: 0.25rem;
-  box-sizing: border-box;
-}
-
-.register .input_form_error {
-  outline: none;
-  border-color: #f44336;
-}
-
-.register .btn {
-  width: 100%;
-  height: 2.5rem;
-  display: block;
-  background: #4b95ff;
-  border: #4b95ff;
-  border-radius: 0.25rem;
-  text-align: center;
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.register .btn:hover {
-  background: rgb(42, 117, 254);
-  border: rgb(42, 117, 254);
+  h2 {
+    font-size: 1.25rem;
+  }
+  .input_form {
+    width: 100%;
+    display: block;
+    height: 2.5rem;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 0 1.125rem;
+    color: #262e39;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+  }
+  .input_form_error {
+    outline: none;
+    border-color: #f44336;
+  }
+  .btn {
+    width: 100%;
+    height: 2.5rem;
+    display: block;
+    background: #4b95ff;
+    border: #4b95ff;
+    border-radius: 0.25rem;
+    text-align: center;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    &:hover {
+      background: rgb(42, 117, 254);
+      border: rgb(42, 117, 254);
+    }
+  }
 }
 </style>
