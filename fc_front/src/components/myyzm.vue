@@ -17,10 +17,10 @@ export default {
 };
 </script>
 <style>
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 35.9375rem) {
   .my_yzm_area svg {
     width: 100% !important;
-    border: 1px solid #ddd;
+    border: .0625rem solid #ddd;
   }
 
   .my_yzm_area {
@@ -29,7 +29,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 36rem) {
   .my_yzm_area svg {
     width: 100% !important;
     height: 100% !important;

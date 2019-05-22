@@ -106,6 +106,7 @@ const actions = { //this.$store.dispatch('set_uid'，6)
             //清空用户的昵称
             // this.person_name = null;
             context.commit("_set_nick", "");
+            callback()
           }
         }).catch(err => {
           throw err

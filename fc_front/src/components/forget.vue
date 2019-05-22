@@ -202,7 +202,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.9375rem) {
   .col-sm-0 {
     display: none;
   }
@@ -217,7 +217,7 @@ export default {
   .form_area {
     max-width: 23.75rem;
     min-width: 17.5rem;
-    border: 1px solid #ccc;
+    border: .0625rem solid #ccc;
   }
   .title {
     height: 3rem;
@@ -243,7 +243,7 @@ export default {
       display: block;
       height: 2.5rem;
       background: #fff;
-      border: 1px solid #aaa;
+      border: .0625rem solid #aaa;
       padding: 0 1.125rem;
       color: #262e39;
       border-radius: 0.25rem;
@@ -255,7 +255,7 @@ export default {
       display: block;
       height: 2.5rem;
       background: #fff;
-      border: 1px solid #aaa;
+      border: .0625rem solid #aaa;
       padding: 0 1.125rem;
       color: #262e39;
       border-radius: 0.25rem;

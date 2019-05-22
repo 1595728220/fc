@@ -38,24 +38,24 @@ export default {
     opacity: 0.6;
   }
   .icon a {
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     margin-right: 0;
     display: block;
     background-image: url("../assets/imgs/index/icon.png");
     cursor: pointer;
   }
   .icon:nth-child(2) a {
-    background-position: -10px -10px;
+    background-position: -0.625rem -0.625rem;
   }
   .icon:nth-child(3) a {
-    background-position: -62px -10px;
+    background-position: -3.875rem -0.625rem;
   }
   .icon:nth-child(4) a {
-    background-position: -10px -62px;
+    background-position: -0.625rem -3.875rem;
   }
   .icon:nth-child(1) a {
-    background-position: -62px -62px;
+    background-position: -3.875rem -3.875rem;
   }
 }
 </style>

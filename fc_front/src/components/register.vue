@@ -341,31 +341,31 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 35.9375rem) {
   .register {
     width: 18rem;
   }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 36rem) {
   .register {
     width: 70%;
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48rem) {
   .register {
     width: 60%;
   }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 62rem) {
   .register {
     width: 50%;
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 75rem) {
   .register {
     width: 40%;
   }
@@ -383,7 +383,7 @@ export default {
     display: block;
     height: 2.5rem;
     background: #fff;
-    border: 1px solid #ccc;
+    border: .0625rem solid #ccc;
     padding: 0 1.125rem;
     color: #262e39;
     border-radius: 0.25rem;

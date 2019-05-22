@@ -300,7 +300,7 @@ export default {
   computed: {
     //将margin-left拼接成完整的内联样式
     calcMarginLeft() {
-      return `margin-left:${-this.banner.lunbo.left}px`;
+      return `margin-left:${-this.banner.lunbo.left/16}rem`;
     }
   },
   destroyed() {
@@ -309,53 +309,53 @@ export default {
 };
 </script>
 <style scoped>
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 35.9375rem) {
   .banner .asideImg {
-    height: 40px;
+    height: 2.5rem;
   }
 
   .banner .banner_area {
-    height: 165px;
+    height: 10.3125rem;
   }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 36rem) {
   .banner .asideImg {
-    height: 65px;
+    height: 4.0625rem;
   }
 
   .banner .banner_area {
-    height: calc(540px * 340 / 925);
+    height: calc(33.75rem * 340 / 925);
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48rem) {
   .banner .asideImg {
-    height: 86px;
+    height: 5.375rem;
   }
 
   .banner .banner_area {
-    height: calc(720px * 340 / 925);
+    height: calc(45rem * 340 / 925);
   }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 62rem) {
   .banner .asideImg {
-    height: 56px;
+    height: 3.5rem;
   }
 
   .banner .banner_area {
-    height: calc(960px * 340 / 925);
+    height: calc(60rem * 340 / 925);
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 75rem) {
   .banner .asideImg {
-    height: 84px;
+    height: 5.25rem;
   }
 
   .banner .banner_area {
-    height: calc(1140px * 340 / 925);
+    height: calc(71.25rem * 340 / 925);
   }
 }
 
@@ -366,34 +366,34 @@ export default {
 }
 
 .banner .asideImg.active {
-  border: 3px solid #28a745;
+  border: .1875rem solid #28a745;
 }
 
 .banner .asideImg {
-  border: 3px solid transparent;
+  border: .1875rem solid transparent;
 }
 .index_icon {
   width: 4.1rem;
   height: 4.2rem;
-  background: url(../assets/imgs/icon/icons.png) -233px -125px;
+  background: url(../assets/imgs/icon/icons.png) -14.5625rem -7.8125rem;
   background-size: 20rem;
   margin: 0 auto;
 }
 .icon_text {
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 .index_icon.pifa {
-  background-position: -341px -19px;
+  background-position: -21.3125rem -1.1875rem;
 }
 .index_icon.rushi {
-  background-position: -341px -125px;
+  background-position: -21.3125rem -7.8125rem;
 }
 .index_icon.tuikuan {
-  background-position: -127px -125px;
+  background-position: -7.9375rem -7.8125rem;
 }
 .floors {
   margin-top: 2.5rem;
   padding-top: 1.5rem;
-  border-top: 2px solid #ddd;
+  border-top: .125rem solid #ddd;
 }
 </style>

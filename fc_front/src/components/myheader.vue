@@ -220,6 +220,7 @@ export default {
     },
     //请求用户的搜索历史记录
     get_user_search() {
+      // console.log("请求用户的搜索历史记录")
       //发送请求
       this.$axios
         .get("/user/search", {
@@ -318,18 +319,18 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@media (min-width: 576px) {
+@media (min-width: 36rem) {
   .header .navbar-nav {
     align-items: flex-start;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 48rem) {
   .header_nav .class_area {
-    width: 500px;
+    width: 31.25rem;
     position: absolute;
-    left: 10px;
-    top: 10px;
+    left: .625rem;
+    top: .625rem;
   }
 
   .header .navbar-nav {
@@ -355,14 +356,14 @@ export default {
 .header_nav {
   li {
     & > a {
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: bold;
       padding-left: 0 !important;
       padding-right: 0 !important;
     }
     .triangle_area {
-      width: 12px;
-      height: 12px;
+      width: .75rem;
+      height: .75rem;
       display: inline-block;
     }
   }
@@ -370,32 +371,32 @@ export default {
     .form-control {
       width: 75%;
       vertical-align: middle;
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 0px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
       cursor: text;
     }
     .btn {
-      border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
-      height: 38px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      height: 2.375rem;
     }
   }
   .breadcrumb {
     background: transparent;
-    font-size: 16px;
+    font-size: 1rem;
     padding-left: 0;
     margin: 0;
     .breadcrumb-item + .breadcrumb-item::before {
       content: "|";
     }
     .breadcrumb-item a {
-      font-size: 16px;
+      font-size: 1rem;
     }
   }
   .class_area {
     height: 28rem;
     width: 23rem;
-    top: 33px;
+    top: 2.0625rem;
   }
 
   .search_area {

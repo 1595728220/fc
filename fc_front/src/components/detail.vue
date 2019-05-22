@@ -81,9 +81,9 @@
 </template>
 <script>
 export default {
+  props:["pid"],
   data() {
     return {
-      pid: 0,
       product: {},
       imgSrc: { product: [], promise: [] },
       showIndex: 0,
@@ -145,7 +145,7 @@ export default {
   },
   mounted() {
     //页面加载后将路由中的产品编号参数保存在本地变量中
-    this.pid = this.$route.params.pid;
+    // this.pid = this.$route.params.pid;
     //根据产品编号查找对应的产品信息
     this.$axios
       .get("/product/detail", {
@@ -182,46 +182,46 @@ export default {
   },
   computed: {
     return_position() {
-      return `left:${this.mask_left}px;top:${this.mask_top}px`;
+      return `left:${this.mask_left/16}rem;top:${this.mask_top/16}rem`;
     },
     return_bgImg() {
       return `background-image:url("${
         this.imgSrc.product[this.showIndex]
-      }");background-size:${this.scop_scale * this.imgWidth}px,${this
-        .scop_scale * this.imgWidth}px;background-position:${-this.scop_scale *
-        this.mask_left}px ${-this.scop_scale * this.mask_top}px`;
+      }");background-size:${this.scop_scale * this.imgWidth /16}rem,${this
+        .scop_scale * this.imgWidth /16}rem;background-position:${-this.scop_scale *
+        this.mask_left /16}rem ${-this.scop_scale * this.mask_top /16}rem`;
     }
   }
 };
 </script>
 <style scoped lang="scss">
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 35.9375rem) {
   .small_img {
     height: 4rem;
     width: 4rem;
   }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 36rem) {
   .small_img {
     width: 6.25rem;
     height: 6.25rem;
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48rem) {
   .small_img {
     width: 8rem;
     height: 8rem;
   }
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 61.9375rem) {
   .bg_img {
     bottom: -100%;
     left: 0;
   }
 }
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 62rem) {
   .small_img {
     width: 6.25rem;
     height: 6.25rem;
@@ -232,7 +232,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 75rem) {
   .small_img {
     width: 8rem;
     height: 8rem;
@@ -264,29 +264,29 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 10;
-  border: 1px solid #ccc;
+  border: .0625rem solid #ccc;
 }
 .wen > div:nth-child(3) {
-  border-top: 1px solid #ccc;
+  border-top: .0625rem solid #ccc;
 }
 .index_icon {
   width: 4.1rem;
   height: 4.2rem;
-  background: url(../assets/imgs/icon/icons.png) -233px -125px;
+  background: url(../assets/imgs/icon/icons.png) -14.5625rem -7.8125rem;
   background-size: 20rem;
   margin: 0 auto;
   &.pifa {
-    background-position: -341px -19px;
+    background-position: -21.3125rem -1.1875rem;
   }
   &.rushi {
-    background-position: -341px -125px;
+    background-position: -21.3125rem -7.8125rem;
   }
   &.tuikuan {
-    background-position: -127px -125px;
+    background-position: -7.9375rem -7.8125rem;
   }
 }
 .icon_text {
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .hide {

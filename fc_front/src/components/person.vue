@@ -234,7 +234,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 35.9375rem) {
   .aside_nav {
     width: 6.25rem;
   }
@@ -242,17 +242,17 @@ export default {
     width: 14rem;
   }
 }
-@media screen and (max-width: 622px) {
+@media screen and (max-width: 38.875rem) {
   .person_area {
-    height: 760px;
+    height: 47.5rem;
   }
 }
 .btn {
   margin: 0 auto;
 }
 .person_area {
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-top: .0625rem solid #eee;
+  border-bottom: .0625rem solid #eee;
   ul {
     background: #ddd;
     padding: 1rem 0 1rem 0.5rem;
@@ -296,7 +296,7 @@ export default {
         height: 2.5rem;
         box-shadow: 0 0 0;
         border: 0;
-        border-bottom: 1px solid #333;
+        border-bottom: .0625rem solid #333;
         outline: 0;
         vertical-align: bottom;
         &:disabled {
@@ -314,7 +314,7 @@ export default {
         padding: 0.42rem 0.625rem;
         border-radius: 0.3125rem;
         color: #fff;
-        margin-bottom: 0px;
+        margin-bottom: 0;
         border: 0;
         &:disabled {
           background: rgba(0, 0, 0, 0.5);
@@ -340,7 +340,7 @@ export default {
           padding: 0.42rem 0.625rem;
           border-radius: 0.3125rem;
           color: #fff;
-          margin-bottom: 0px;
+          margin-bottom: 0;
         }
         button {
           top: 3.125rem;
@@ -354,7 +354,7 @@ export default {
         }
         input[type="file"] {
           position: absolute;
-          left: -9999px;
+          left: -9999rem;
         }
       }
     }

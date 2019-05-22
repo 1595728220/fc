@@ -137,28 +137,28 @@ export default {
 </script>
 <style>
 .footer > div:first-child {
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-top: .0625rem solid #ddd;
+  border-bottom: .0625rem solid #ddd;
   padding: 1.2rem 0;
 }
 
 .footer .footer_icon {
   width: 4rem;
   height: 4rem;
-  background: transparent url(../assets/imgs/footer/icon.png) -10px -10px;
+  background: transparent url(../assets/imgs/footer/icon.png) -0.625rem -0.625rem;
   margin-bottom: 0;
 }
 
 .footer .footer_icon.faq {
-  background-position: -94px -10px;
+  background-position: -5.875rem -0.625rem;
 }
 
 .footer .footer_icon.trends {
-  background-position: -10px -94px;
+  background-position: -0.625rem -5.875rem;
 }
 
 .footer .footer_icon.tag {
-  background-position: -94px -94px;
+  background-position: -5.875rem -5.875rem;
 }
 
 .footer .footer_icon_text {
@@ -166,10 +166,10 @@ export default {
 }
 
 .footer .col-list {
-  border-right: 1px solid #ddd;
+  border-right: .0625rem solid #ddd;
 }
 
 .footer > div:nth-child(3) {
-  border-top: 1px solid #ddd;
+  border-top: .0625rem solid #ddd;
 }
 </style>

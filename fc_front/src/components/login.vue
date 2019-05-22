@@ -154,31 +154,31 @@ export default {
 };
 </script>
 <style>
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 35.9375rem) {
   .login {
     width: 18rem;
   }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 36rem) {
   .login {
     width: 70%;
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 48rem) {
   .login {
     width: 60%;
   }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 62rem) {
   .login {
     width: 50%;
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 75rem) {
   .login {
     width: 40%;
   }
@@ -192,7 +192,7 @@ export default {
 
 .login .breadcrumb {
   background: transparent;
-  font-size: 16px;
+  font-size: 1rem;
   padding-left: 0;
   margin: 0;
   justify-content: flex-end;
@@ -203,7 +203,7 @@ export default {
 }
 
 .login .breadcrumb .breadcrumb-item a {
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .login h2 {
@@ -215,7 +215,7 @@ export default {
   display: block;
   height: 2.5rem;
   background: #fff;
-  border: 1px solid #ccc;
+  border: .0625rem solid #ccc;
   padding: 0 1.125rem;
   color: #262e39;
   border-radius: 0.25rem;

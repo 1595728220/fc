@@ -92,7 +92,7 @@ export default {
   computed: {
     //利用计算属性将偏移属性拼接成为一个内联的样式
     alert_position() {
-      return `left:${this.alert_left}px;top:${this.alert_top}px`;
+      return `left:${this.alert_left/16}rem;top:${this.alert_top/16}rem`;
     },
     //返回对vuex仓库的变量
     mymsg() {

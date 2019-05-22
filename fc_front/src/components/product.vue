@@ -257,7 +257,7 @@ export default {
 };
 </script>
 <style scoped>
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 36rem) {
   .class_title {
     text-align: right;
   }
@@ -288,7 +288,7 @@ a.page-link {
   text-align: center;
   color: #0aa1ed;
   border-color: #ccc;
-  border-radius: 5px;
+  border-radius: .3125rem;
 }
 
 a.page-link.fanye {
@@ -329,7 +329,7 @@ a.page-link.disabled:focus {
 }
 
 .key_none > div {
-  width: 71px;
+  width: 4.4375rem;
 }
 .product_state a.active {
   background: #0aa1ed;

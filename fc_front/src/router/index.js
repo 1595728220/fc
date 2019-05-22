@@ -34,7 +34,8 @@ export default new Router({
     },
     {
       path:"/detail/:pid",
-      component:Detail
+      component:Detail,
+      props:true
     },
     {
       path:"/person",
