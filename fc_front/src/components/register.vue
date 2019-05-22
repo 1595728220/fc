@@ -74,7 +74,7 @@
             >
             <div class="col-sm-6 p-0 align-self-center">
               <div class="row m-0">
-                <myyzm :yzmimg="yzm_result_img" v-if="yzm_result_img" :fatherfunc="require_yzm"></myyzm>
+                <myyzm :yzmimg="yzm_result_img" v-if="yzm_result_img" @fatherfunc="require_yzm"></myyzm>
                 <a
                   class="col-sm-6 align-self-center cp text-primary p-0"
                   @click="require_yzm"
