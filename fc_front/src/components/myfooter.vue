@@ -38,7 +38,7 @@
               </li>
             </ul>
           </div>
-          <div class>
+          <div>
             <h4 class="middle_font font-weight-bold mb-2">对庄保障</h4>
             <ul>
               <li class="mb-2">
@@ -74,14 +74,14 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-12 col-lg-4 d-flex">
-        <div class="w-50">
-          <img :src="img_app" class="w-100">
-          <p class="text-center m-0">安装对庄APP</p>
+      <div class="col-sm-8 col-lg-4 d-flex">
+        <div class="w-50 text-center">
+          <img :src="img_app" class="img-fluid erweima">
+          <p class="m-0">安装对庄APP</p>
         </div>
-        <div class="w-50">
-          <img :src="img_erweima" class="w-100">
-          <p class="text-center m-0">添加对庄客服微信</p>
+        <div class="w-50 text-center">
+          <img :src="img_erweima" class="img-fluid erweima">
+          <p class=" m-0">添加对庄客服微信</p>
         </div>
       </div>
     </div>
@@ -171,5 +171,8 @@ export default {
 
 .footer > div:nth-child(3) {
   border-top: .0625rem solid #ddd;
+}
+.footer .erweima{
+  max-width:9.5rem;
 }
 </style>

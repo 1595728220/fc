@@ -3,7 +3,7 @@
     <!-- content start -->
     <div class="container">
       <!-- registerForm start -->
-      <div class="register pr ml-auto mr-auto mt-5 mb-5 row" ref="father_area">
+      <div class="register pr ml-auto mr-auto mt-5 mb-5 row">
         <!-- 消息提示模态框开始 -->
         <myalert></myalert>
         <!-- 消息提示模态框结束 -->

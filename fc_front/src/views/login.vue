@@ -3,7 +3,7 @@
     <!-- content start -->
     <div class="container">
       <!-- loginForm start-->
-      <div class="login row mt-5 mb-5 ml-auto mr-auto pr" ref="father_area">
+      <div class="login row mt-5 mb-5 ml-auto mr-auto pr" >
         <!-- 消息提示模态框开始 -->
         <myalert></myalert>
         <!-- 消息提示模态框结束 -->

@@ -1,6 +1,6 @@
 <template>
   <div class="row ml-0 mr-0 mb-3 forget_area">
-    <div class="col-md-7 col-sm-0 oh pr-0">
+    <div class="col-md-7 col-sm-0 oh pr-0 text-right">
       <img src="imgs/forget/bg.jpg" class>
     </div>
     <div class="col-md-5 offset-sm offset-md-0 form_area p-0">
@@ -8,25 +8,25 @@
         <p class="middle_font mb-0 justify-self-center">忘记密码</p>
         <router-link to="/login" class="btn btn-light mr-1">返回</router-link>
       </div>
-      <div class="content" ref="father_area">
+      <div class="content">
         <myalert></myalert>
         <div v-show="!state_form.phone" class="text-right text-danger">{{phone_msg}}</div>
         <input type="text" placeholder="手机号码" v-model="forget_data.phone" @blur="func_phone_blur">
         <!-- <input type="text" placeholder="验证码"> -->
         <div v-show="!state_form.identify" class="text-right text-danger">验证码不正确</div>
-        <div class="row mb-3 ml-0 mr-0">
+        <div class="mb-3 ml-0 mr-0 d-flex">
           <input
             type="text"
             placeholder="验证码"
-            class="input_form col-sm-6 d-inline-block mb-0"
+            class="input_form d-inline-block mb-0 w-50"
             v-model="forget_data.identify"
             @blur="func_iden_blur"
           >
-          <div class="col-sm-6 p-0 align-self-center">
-            <div class="row m-0">
-              <myyzm :yzmimg="yzm_result_img" v-if="yzm_result_img" :fatherfunc="require_yzm"></myyzm>
+          <div class=" p-0 align-self-center">
+            <div class="d-flex">
+              <myyzm :yzmimg="yzm_result_img" v-if="yzm_result_img" :fatherfunc="require_yzm" class="w-50"></myyzm>
               <a
-                class="col-sm-6 align-self-center cp text-primary p-0"
+                class="align-self-center cp text-primary p-0 w-50"
                 @click="require_yzm"
               >看不清楚，换一张</a>
             </div>
@@ -216,7 +216,7 @@ export default {
 .forget_area {
   .form_area {
     max-width: 23.75rem;
-    min-width: 17.5rem;
+    min-width: 19rem;
     border: .0625rem solid #ccc;
   }
   .title {
@@ -268,6 +268,7 @@ export default {
       border: 0;
       outline: 0;
       opacity: 0.8;
+      font-size:1rem;
       &:active {
         opacity: 1;
       }
