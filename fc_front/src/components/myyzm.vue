@@ -16,7 +16,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped lang="scss">
 @media screen and (max-width: 35.9375rem) {
   .my_yzm_area svg {
     width: 100% !important;

@@ -50,7 +50,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .user {
   padding: 1.875rem;
   border-top: 0.0625rem solid #ccc;

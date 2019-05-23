@@ -135,7 +135,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped lang="scss">
 .footer > div:first-child {
   border-top: .0625rem solid #ddd;
   border-bottom: .0625rem solid #ddd;

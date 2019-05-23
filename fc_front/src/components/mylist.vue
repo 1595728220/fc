@@ -68,7 +68,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped lang="scss">
 .productlist a {
   background: rgba(242, 242, 242, 1);
   border-radius: 1rem;

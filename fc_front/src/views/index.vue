@@ -308,7 +308,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 @media screen and (max-width: 35.9375rem) {
   .banner .asideImg {
     height: 2.5rem;

@@ -256,7 +256,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 @media screen and (min-width: 36rem) {
   .class_title {
     text-align: right;

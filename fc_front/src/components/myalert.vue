@@ -101,7 +101,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped lang="scss">
 .alert_area {
   height: 0rem;
   margin: auto;

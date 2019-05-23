@@ -9,6 +9,7 @@
   </div>
 </template>
 <script>
+import { Script } from 'vm';
 export default {
   data() {
     return {

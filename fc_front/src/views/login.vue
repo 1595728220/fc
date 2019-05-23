@@ -153,7 +153,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped lang="scss">
 @media screen and (max-width: 35.9375rem) {
   .login {
     width: 18rem;
