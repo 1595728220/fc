@@ -3,7 +3,7 @@
     <div class="col-sm-12">
       <div class="navbar navbar-expand-md navbar-light header_nav">
         <router-link to="/" class="navbar-brand">
-          <img src="../assets/imgs/header/logo.png" alt>
+          <img src="../../public/imgs/header/logo.png" alt>
         </router-link>
         <button
           class="navbar-toggler"

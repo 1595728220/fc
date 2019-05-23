@@ -39,7 +39,7 @@ export default {
             this.$set(
               el,
               "imgSrc",
-              require("../assets/imgs/product/" + el.photo1)
+              require("../../public/imgs/product/" + el.photo1)
             );
           });
         })

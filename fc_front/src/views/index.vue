@@ -169,7 +169,7 @@ export default {
           this.$set(
             el,
             "bannerSrc",
-            require("../assets/imgs/banner/" + el.banner)
+            require("../../public/imgs/banner/" + el.banner)
           );
           this.$set(el, "isshow", false);
         });
@@ -375,7 +375,7 @@ export default {
 .index_icon {
   width: 4.1rem;
   height: 4.2rem;
-  background: url(../assets/imgs/icon/icons.png) -14.5625rem -7.8125rem;
+  background: url(../../public/imgs/icon/icons.png) -14.5625rem -7.8125rem;
   background-size: 20rem;
   margin: 0 auto;
 }

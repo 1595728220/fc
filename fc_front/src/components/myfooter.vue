@@ -106,8 +106,8 @@
 export default {
   data() {
     return {
-      img_app: require("../assets/imgs/download/downapp.png"),
-      img_erweima: require("../assets/imgs/footer/erweima.png"),
+      img_app: require("../../public/imgs/download/downapp.png"),
+      img_erweima: require("../../public/imgs/footer/erweima.png"),
       youqing: [
         { href: "http://www.baidu.com", name: "百度" },
         { href: "http://www.baidu.com", name: "百度" },
@@ -145,7 +145,7 @@ export default {
 .footer .footer_icon {
   width: 4rem;
   height: 4rem;
-  background: transparent url(../assets/imgs/footer/icon.png) -0.625rem -0.625rem;
+  background: transparent url(../../public/imgs/footer/icon.png) -0.625rem -0.625rem;
   margin-bottom: 0;
 }
 

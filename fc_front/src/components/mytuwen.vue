@@ -27,7 +27,7 @@ export default {
   computed: {},
   methods: {
     imgSrc(name) {
-      return require("../assets/imgs/download/" + name);
+      return require("../../public/imgs/download/" + name);
     }
   }
   // watch: {
