@@ -42,7 +42,7 @@ export default {
     height: 2rem;
     margin-right: 0;
     display: block;
-    background-image: url("../../public/imgs/index/icon.png");
+    background-image: url("/imgs/index/icon.png");
     cursor: pointer;
   }
   .icon:nth-child(2) a {

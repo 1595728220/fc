@@ -114,15 +114,12 @@ export default {
   line-height: 4rem;
   opacity: 0;
   padding: 0 0.625rem;
-  /* animation:fadeInDown 0.5s linear 0s; */
   transition: opacity 0.5s linear 0s, height 0.5s linear 0s;
   z-index: 100;
-  /* display:none; */
 }
 
 .alert_area.show {
   opacity: 1;
   height: 3.75rem;
-  /* display:block; */
 }
 </style>

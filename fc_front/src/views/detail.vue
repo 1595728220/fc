@@ -161,12 +161,12 @@ export default {
             case "photo3":
             case "photo4":
               this.imgSrc.product.push(
-                require("../../public/imgs/product/" + result.data[0][key])
+                "imgs/product/" + result.data[0][key]
               );
               break;
             case "promise":
               this.imgSrc.promise.push(
-                require("../../public/imgs/product/" + result.data[0][key])
+                "imgs/product/" + result.data[0][key]
               );
               break;
             default:
@@ -272,7 +272,7 @@ export default {
 .index_icon {
   width: 4.1rem;
   height: 4.2rem;
-  background: url(../../public/imgs/icon/icons.png) -14.5625rem -7.8125rem;
+  background: url(/imgs/icon/icons.png) -14.5625rem -7.8125rem;
   background-size: 20rem;
   margin: 0 auto;
   &.pifa {

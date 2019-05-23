@@ -2,7 +2,7 @@
   <ul class="productlist row m-0 mb-3">
     <li v-for="(product,key) in products" class="col-sm-12 col-md-6 col-lg-3 mt-5" :key="key">
       <router-link :to="'/detail/'+product.pid" class="d-block p-2">
-        <img :src="product.imgSrc" class="w-100">
+        <img :src="`imgs/product/${product.photo1}`" class="w-100">
         <p class="described middle_font product_title">{{product.described}}</p>
         <p class="text-success product_price">￥{{product.price}}</p>
       </router-link>
@@ -33,15 +33,9 @@ export default {
           // console.log(result.data)
           //将结果保存在产品列表中
           this.products = result.data[0];
+          // console.log(this.products)
           //讲搜索的总记录数存入变量
           this.productsCount = result.data[1][0]["found_rows()"];
-          this.products.forEach(el => {
-            this.$set(
-              el,
-              "imgSrc",
-              require("../../public/imgs/product/" + el.photo1)
-            );
-          });
         })
         .catch(error => {
           throw error;
@@ -72,11 +66,9 @@ export default {
 .productlist a {
   background: rgba(242, 242, 242, 1);
   border-radius: 1rem;
-  /* background:#000 !important; */
 }
 .productlist > li {
   padding: 0 0.8rem;
-  /* border: 1px solid #ddd; */
 }
 .productlist .product_title {
   margin-left: 0.625rem;
@@ -91,8 +83,5 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
-.productlist img {
-  /* border-radius: 1rem; */
 }
 </style>

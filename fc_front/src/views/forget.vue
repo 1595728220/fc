@@ -1,7 +1,7 @@
 <template>
   <div class="row ml-0 mr-0 mb-3 forget_area">
     <div class="col-md-7 col-sm-0 oh pr-0">
-      <img src="../../public/imgs/forget/bg.jpg" class>
+      <img src="imgs/forget/bg.jpg" class>
     </div>
     <div class="col-md-5 offset-sm offset-md-0 form_area p-0">
       <div class="d-flex title">

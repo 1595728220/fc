@@ -7,7 +7,7 @@
       :class="{gray_bg:index%2 === 1}"
     >
       <!-- <img :src="imgSrc(obj.tu)" class="tu" :class="{fr:index%2 === 1,fl:index%2 === 0}"> -->
-      <img :src="imgSrc(obj.tu)">
+      <img :src="`imgs/download/${obj.tu}`">
       <div>
         <p class="zi">{{obj.wen_title}}</p>
         <p class="zi">{{obj.wen_detail}}</p>
@@ -25,16 +25,7 @@ export default {
     // console.log(this.mymsg);
   },
   computed: {},
-  methods: {
-    imgSrc(name) {
-      return require("../../public/imgs/download/" + name);
-    }
-  }
-  // watch: {
-  //   mymsg(){
-  //     console.log(this.mymsg)
-  //   }
-  // },
+  methods: {}
 };
 </script>
 <style scoped lang="scss">

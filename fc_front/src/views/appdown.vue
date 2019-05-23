@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="down_area text-center mb-5">
-      <img src="../../public/imgs/header/logo.png" class="mt-5">
+      <img src="imgs/header/logo.png" class="mt-5">
       <p class="mt-3 text-center">对庄翡翠，100万用户都在</p>
-      <img src="../../public/imgs/download/downapp.png" class="mb-5">
+      <img src="imgs/download/downapp.png" class="mb-5">
     </div>
     <mytuwen :mymsg="tuwen"></mytuwen>
   </div>
