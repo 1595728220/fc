@@ -154,31 +154,31 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@media screen and (max-width: 35.9375rem) {
+@media screen and (max-width: 575px) {
   .login {
     width: 18rem;
   }
 }
 
-@media screen and (min-width: 36rem) {
+@media screen and (min-width: 576px) {
   .login {
     width: 70%;
   }
 }
 
-@media screen and (min-width: 48rem) {
+@media screen and (min-width: 768px) {
   .login {
     width: 60%;
   }
 }
 
-@media screen and (min-width: 62rem) {
+@media screen and (min-width: 992px) {
   .login {
     width: 50%;
   }
 }
 
-@media screen and (min-width: 75rem) {
+@media screen and (min-width: 1200px) {
   .login {
     width: 40%;
   }

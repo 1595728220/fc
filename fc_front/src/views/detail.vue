@@ -195,33 +195,33 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@media screen and (max-width: 35.9375rem) {
+@media screen and (max-width: 575px) {
   .small_img {
     height: 4rem;
     width: 4rem;
   }
 }
 
-@media screen and (min-width: 36rem) {
+@media screen and (min-width: 576px) {
   .small_img {
     width: 6.25rem;
     height: 6.25rem;
   }
 }
 
-@media screen and (min-width: 48rem) {
+@media screen and (min-width: 768px) {
   .small_img {
     width: 8rem;
     height: 8rem;
   }
 }
-@media screen and (max-width: 61.9375rem) {
+@media screen and (max-width: 991px) {
   .bg_img {
     bottom: -100%;
     left: 0;
   }
 }
-@media screen and (min-width: 62rem) {
+@media screen and (min-width: 992px) {
   .small_img {
     width: 6.25rem;
     height: 6.25rem;
@@ -232,7 +232,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 75rem) {
+@media screen and (min-width: 1200px) {
   .small_img {
     width: 8rem;
     height: 8rem;

@@ -341,7 +341,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@media screen and (max-width: 35.9375rem) {
+@media screen and (max-width: 575px) {
   .banner .asideImg {
     height: 2.5rem;
   }
@@ -351,7 +351,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 36rem) {
+@media screen and (min-width: 576px) {
   .banner .asideImg {
     height: 4.0625rem;
   }
@@ -361,7 +361,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 48rem) {
+@media screen and (min-width: 768px) {
   .banner .asideImg {
     height: 5.375rem;
   }
@@ -371,7 +371,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 62rem) {
+@media screen and (min-width: 992px) {
   .banner .asideImg {
     height: 3.5rem;
   }
@@ -381,7 +381,7 @@ export default {
   }
 }
 
-@media screen and (min-width: 75rem) {
+@media screen and (min-width: 1200px) {
   .banner .asideImg {
     height: 5.25rem;
   }

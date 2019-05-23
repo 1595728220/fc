@@ -319,13 +319,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@media (min-width: 36rem) {
+@media (min-width: 576px) {
   .header .navbar-nav {
     align-items: flex-start;
   }
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
   .header_nav .class_area {
     width: 31.25rem;
     position: absolute;

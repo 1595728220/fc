@@ -234,7 +234,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@media screen and (max-width: 35.9375rem) {
+@media screen and (max-width: 575px) {
   .aside_nav {
     width: 6.25rem;
   }
@@ -242,7 +242,7 @@ export default {
     width: 14rem;
   }
 }
-@media screen and (max-width: 38.875rem) {
+@media screen and (max-width: 622px) {
   .person_area {
     height: 47.5rem;
   }

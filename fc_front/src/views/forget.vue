@@ -202,7 +202,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@media screen and (max-width: 47.9375rem) {
+@media screen and (max-width: 767px) {
   .col-sm-0 {
     display: none;
   }

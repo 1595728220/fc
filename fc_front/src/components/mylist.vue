@@ -4,7 +4,7 @@
       <router-link :to="'/detail/'+product.pid" class="d-block p-2">
         <img :src="`imgs/product/${product.photo1}`" class="w-100">
         <p class="described middle_font product_title">{{product.described}}</p>
-        <p class="text-success product_price">￥{{product.price}}</p>
+        <p class="text-success product_price">￥{{product.price.toFixed(2)}}</p>
       </router-link>
     </li>
   </ul>

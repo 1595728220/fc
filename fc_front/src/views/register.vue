@@ -341,25 +341,25 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@media screen and (min-width: 36rem) {
+@media screen and (min-width: 576px) {
   .register {
     width: 70%;
   }
 }
 
-@media screen and (min-width: 48rem) {
+@media screen and (min-width: 768px) {
   .register {
     width: 60%;
   }
 }
 
-@media screen and (min-width: 62rem) {
+@media screen and (min-width: 992px) {
   .register {
     width: 50%;
   }
 }
 
-@media screen and (min-width: 75rem) {
+@media screen and (min-width: 1200px) {
   .register {
     width: 40%;
   }
