@@ -1,10 +1,10 @@
 <template>
-  <ul class="productlist row m-0 mb-3">
-    <li v-for="(product,key) in products" class="col-sm-12 col-md-6 col-lg-3 mt-5" :key="key">
+  <ul class="productlist row m-0">
+    <li v-for="(product,key) in products" class="col-sm-12 col-md-6 col-lg-3 mb-5" :key="key">
       <router-link :to="'/detail/'+product.pid" class="d-block p-2">
         <img :src="`imgs/product/${product.photo1}`" class="w-100">
-        <p class="described middle_font product_title">{{product.described}}</p>
-        <p class="text-success product_price">￥{{product.price.toFixed(2)}}</p>
+        <p class="described middle_font product_title mb-3 mt-3 ml-0">{{product.described}}</p>
+        <p class="text-success product_price m-0">￥{{product.price.toFixed(2)}}</p>
       </router-link>
     </li>
   </ul>
@@ -41,7 +41,6 @@ export default {
           throw error;
         });
     },
-    sendValToFather() {}
   },
   watch: {
     //监视props中的的mymsg变化，变化后执行查询产品操作
@@ -64,7 +63,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .productlist a {
-  background: rgba(242, 242, 242, 1);
+  background: rgb(209, 209, 209);
   border-radius: 1rem;
 }
 .productlist > li {

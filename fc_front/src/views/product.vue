@@ -71,7 +71,7 @@
         >
       </div>
     </div>
-    <mylist :mymsg="search" @sendfatherevent="rcvMsg($event)"></mylist>
+    <mylist :mymsg="search" @sendfatherevent="rcvMsg($event)" class="mt-3"></mylist>
     <ul class="pagination justify-content-end mb-3">
       <li class="page-item mr-3">
         <a

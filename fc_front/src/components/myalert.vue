@@ -43,15 +43,14 @@ export default {
     },
     //获取页面可视区域的宽高，并修改偏移量
     func_position() {
-      //获取组件父元素的宽度和高度
-      this.father_height = this.$parent.$refs.father_area.offsetHeight;
-      this.father_width = this.$parent.$refs.father_area.offsetWidth;
+      // //获取组件父元素的宽度和高度
+      // this.father_height = this.$parent.$refs.father_area.offsetHeight;
+      // this.father_width = this.$parent.$refs.father_area.offsetWidth;
       //获取当前提示框的宽度
       this.alert_width = this.$refs.myalert.offsetWidth;
       // this.alert_height = this.$refs.myalert.offsetHeight
       //计算提示框的偏移属性
-      this.alert_left = (this.father_width - this.alert_width) / 2;
-      this.alert_top = this.father_height / 2 - 30;
+      this.alert_left =  this.alert_width / 2;
       // console.log(this.father_height,this.father_width)
       // console.log(this.alert_width)
       // console.log(this.alert_left,this.alert_top)
@@ -92,7 +91,7 @@ export default {
   computed: {
     //利用计算属性将偏移属性拼接成为一个内联的样式
     alert_position() {
-      return `left:${this.alert_left/16}rem;top:${this.alert_top/16}rem`;
+      return `margin-left:${-this.alert_left/16}rem`;
     },
     //返回对vuex仓库的变量
     mymsg() {
@@ -103,9 +102,13 @@ export default {
 </script>
 <style scoped lang="scss">
 .alert_area {
-  height: 0rem;
+  height: 0;
   margin: auto;
   position: absolute;
+  left:50%;
+  top:50%;
+  margin-left:0;
+  margin-top:-1.875rem;
   background: rgba(0, 0, 0, 0.6);
   border-radius: 0.4rem;
   color: #fff;
@@ -115,6 +118,7 @@ export default {
   opacity: 0;
   padding: 0 0.625rem;
   transition: opacity 0.5s linear 0s, height 0.5s linear 0s;
+  // transition: all 1s linear 0s;
   z-index: 100;
 }
 
