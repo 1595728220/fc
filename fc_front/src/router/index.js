@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/components/index'
-import NotFound from "@/components/notfound"
-import Login from '@/components/login'
-import Register from '@/components/register'
-import Product from "@/components/product"
-import AppDown from "@/components/appdown"
-import Detail from "@/components/detail"
-import Person from "@/components/person"
-import Forget from "@/components/forget"
+import Index from '@/views/index'
+import NotFound from "@/views/notfound"
+import Login from '@/views/login'
+import Register from '@/views/register'
+import Product from "@/views/product"
+import AppDown from "@/views/appdown"
+import Detail from "@/views/detail"
+import Person from "@/views/person"
+import Forget from "@/views/forget"
 Vue.use(Router)
 export default new Router({
   routes: [

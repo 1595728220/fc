@@ -29,7 +29,7 @@ import MyTuwen from "@/components/mytuwen"
 import MyAside from "@/components/myaside"
 import MyPingLun from "@/components/mypinglun"
 //引入过滤器
-import * as filters from "./assets/filter/filter"
+import * as filters from "./filter/filter"
 //取出对象中的属性名构成数组
 Object.keys(filters)
 //遍历数组
