@@ -251,7 +251,7 @@ export default {
     }
   },
   //当组件挂载后
-  mounted() {
+  created() {
     //请求产品的分类信息
     this.$axios
       .get("/product/classfy")

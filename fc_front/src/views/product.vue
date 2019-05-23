@@ -126,7 +126,6 @@ export default {
   },
 
   mounted() {
-    // console.log(this.$route.query)
     //将参数放入search
     this.save_route_search();
   },

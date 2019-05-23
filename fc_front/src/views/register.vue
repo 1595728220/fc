@@ -63,20 +63,20 @@
         <div class="col-sm-12 mb-3">
           <!-- 验证码表单开始 -->
           <div v-show="!state_form.iden" class="text-right text-danger">验证码错误</div>
-          <div class="row m-0">
+          <div class="d-flex">
             <input
               type="text"
               placeholder="验证码"
-              class="input_form col-sm-6 d-inline-block"
+              class="input_form d-inline-block w-50"
               v-model="input_form.iden"
               :class="{input_form_error:!state_form.iden}"
               @blur="func_iden_blur"
             >
-            <div class="col-sm-6 p-0 align-self-center">
-              <div class="row m-0">
-                <myyzm :yzmimg="yzm_result_img" v-if="yzm_result_img" @fatherfunc="require_yzm"></myyzm>
+            <div class="w-50 p-0 align-self-center">
+              <div class="d-flex">
+                <myyzm :yzmimg="yzm_result_img" v-if="yzm_result_img" @fatherfunc="require_yzm" class="w-50"></myyzm>
                 <a
-                  class="col-sm-6 align-self-center cp text-primary p-0"
+                  class="w-50 align-self-center cp text-primary p-0"
                   @click="require_yzm"
                 >看不清楚，换一张</a>
               </div>
@@ -153,7 +153,7 @@ export default {
       register_timer: null //注册页面的定时器
     };
   },
-  mounted() {
+  created() {
     //获取验证码
     this.require_yzm();
   },
@@ -341,12 +341,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@media screen and (max-width: 35.9375rem) {
-  .register {
-    width: 18rem;
-  }
-}
-
 @media screen and (min-width: 36rem) {
   .register {
     width: 70%;
@@ -375,6 +369,8 @@ export default {
   border-radius: 0.5rem;
   box-shadow: 0 0 1rem 0.01rem #333;
   padding-top: 2rem;
+  max-width:27.75rem;
+  min-width: 22.3125rem;
   h2 {
     font-size: 1.25rem;
     text-align:center;

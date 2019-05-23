@@ -18,7 +18,7 @@ export default {
       productsCount: 0
     };
   },
-  mounted() {
+  created() {
     // console.log(this.mymsg);
     this.query_product();
   },

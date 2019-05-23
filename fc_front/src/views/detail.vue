@@ -143,7 +143,7 @@ export default {
       // console.log(this.mask_top);
     }
   },
-  mounted() {
+  created() {
     //页面加载后将路由中的产品编号参数保存在本地变量中
     // this.pid = this.$route.params.pid;
     //根据产品编号查找对应的产品信息

@@ -201,7 +201,7 @@ export default {
     }
   },
   // this.$store.dispatch("set_user")
-  mounted() {
+  created() {
     //组件挂载后,获取当前用户信息
     this.$store.dispatch("set_user").then(this.get_user_info);
     // this.get_user_info()

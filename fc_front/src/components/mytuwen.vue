@@ -21,9 +21,6 @@ export default {
   data() {
     return {};
   },
-  mounted() {
-    // console.log(this.mymsg);
-  },
   computed: {},
   methods: {}
 };

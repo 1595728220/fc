@@ -144,6 +144,38 @@ export default {
       }
     };
   },
+  created(){
+     //请求banner数据
+    this.$axios
+      .get("/product/banner")
+      .then(result => {
+        //将结果图片存入变量
+        this.banner.imgMsg = result.data;
+        //轮播的图片的数量
+        this.banner.lunbo.imgCount = result.data.length;
+        //在添加一个新属性时，需要使用this.$set添加，此时添加的新属性为被监听的属性
+        this.banner.imgMsg.forEach(el => {
+          //设置图片的相对路径
+          this.$set(
+            el,
+            "bannerSrc",
+            "imgs/banner/" + el.banner
+          );
+          this.$set(el, "isshow", false);
+        });
+        //默认第一张图高亮
+        this.banner.imgMsg[0].isshow = true;
+        //构造成一个适合轮播的数组
+        this.banner.lunbo.imgMsg = [
+          ...this.banner.imgMsg,
+          this.banner.imgMsg[0]
+        ];
+      })
+      .catch(error => {
+        throw error;
+      });
+    
+  },
   mounted() {
     //获取当前轮播一张图的宽度
     this.banner.lunbo.onceWidth = this.$refs.banner_area.offsetWidth;

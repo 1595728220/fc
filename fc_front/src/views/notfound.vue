@@ -9,7 +9,7 @@ export default {
       timer: null
     };
   },
-  mounted() {
+  created() {
     this.timer = setInterval(() => {
       // console.log("notfound网页中的定时器运行中，剩余时间"+this.time)
       this.time--;
