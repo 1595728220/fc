@@ -11,7 +11,7 @@ Vue.use(Vuex)
 //js
 
 //css
-import "./assets/css/my_comm.css"
+// import "./assets/css/my_comm.css"
 
 //声明全局组件
 import MyHeader from "@/components/myheader"
