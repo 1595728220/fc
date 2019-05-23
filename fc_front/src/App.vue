@@ -21,4 +21,5 @@ export default {
 </script>
 
 <style>
+@import "./assets/css/my_comm.css";
 </style>
