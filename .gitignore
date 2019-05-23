@@ -1,2 +1,3 @@
 *.rp
 node_modules/
+dist/

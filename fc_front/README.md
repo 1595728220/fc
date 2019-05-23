@@ -1,4 +1,4 @@
-# fc_front
+# xz_vue
 
 ## Project setup
 ```

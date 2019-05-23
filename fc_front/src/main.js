@@ -15,8 +15,8 @@ Vue.use(Vuex)
 // import "./assets/js/bootstrap.bundle"
 //css
 import "./assets/css/bootstrap.css"
-import "./assets/css/font-awesome.css"
-import "./assets/css/animate.css"
+// import "./assets/css/font-awesome.css"
+// import "./assets/css/animate.css"
 import "./assets/css/my_comm.css"
 
 //声明全局组件
