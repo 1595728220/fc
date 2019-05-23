@@ -74,7 +74,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-8 col-lg-4 d-flex">
+      <div class="col-sm-12 col-lg-4 d-flex justify-content-center">
         <div class="w-50 text-center">
           <img :src="img_app" class="img-fluid erweima">
           <p class="m-0">安装对庄APP</p>
