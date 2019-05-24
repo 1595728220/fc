@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #father{
+      height:300px;
+      width:300px;
+      background:blue;
+      position: relative;
+      overflow: hidden;
+    }
+    #father div:first-child{
+      height:300px;
+      width:100px;
+      background:yellow;
+      position: absolute;
+      z-index:10;
+      top:100px;
+    }
+    #father div:nth-child(2){
+      height:100px;
+      width:300px;
+      background:red;
+      position: absolute;
+      top:0;
+      z-index:2;
+    }
+    #father div:nth-child(3){
+      height:100px;
+      width:300px;
+      background:red;
+      position: absolute;
+      bottom:0px;
+      z-index:4
+    }
+    #father div:last-child{
+      height:300px;
+      width:100px;
+      background:pink;
+      position: absolute;
+      top:0;
+      right:0;
+      z-index:3
+    }
+  </style>
+</head>
+<body>
+  <div id="father">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</body>
+</html>

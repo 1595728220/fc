@@ -1,0 +1,122 @@
+/* 网页样式初始化 */
+*{
+  margin:0;
+  padding:0;
+}
+body,a{
+  color:#333;
+  font:12px "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+a:hover,a:focus{
+  text-decoration:none;
+}
+ul{
+  list-style:none;
+  padding-left: 0;
+  margin:0;
+}
+/*定义一些常用的样式*/
+.clear:before{
+  content:"";
+  display:table;
+}
+.clear:after{
+  content:"";
+  display:block;
+  clear:both;
+}
+.fl{
+  float:left;
+}
+.fr{
+  float:right;
+}
+.pr{
+  position: relative;
+}
+.pa{
+  position: absolute;
+}
+.df{
+  display:flex;
+}
+.db{
+  display:block;
+}
+.dib{
+  display:inline-block;
+}
+.cp{
+  cursor:pointer;
+}
+img{
+  border:0;
+  vertical-align: middle;
+}
+
+input:-webkit-autofill{
+  box-shadow:0 0 0px 1000px #fff inset;
+}
+.triangle-top{
+  width:0;
+  height:0;
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  border-top: 8px solid #333;
+  display:inline-block;
+  margin-left:3px;
+}
+.triangle-right{
+  width:0;
+  height:0;
+  border-top:6px solid transparent;
+  border-bottom:6px solid transparent;
+  border-right: 8px solid #333;
+  display:inline-block;
+  margin-left:3px;
+}
+.triangle-bottom{
+  width:0;
+  height:0;
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  border-bottom: 8px solid #333;
+  display:inline-block;
+  margin-left:3px;
+}
+.triangle-left{
+  width:0;
+  height:0;
+  border-top:6px solid transparent;
+  border-bottom:6px solid transparent;
+  border-left: 8px solid #333;
+  display:inline-block;
+  margin-left:3px;
+}
+.tr{
+  transition:all .5s linear 0s;
+}
+.small_font{
+  font-size:12px;
+  color:#333;
+}
+.v_hidden {
+  visibility:hidden;
+  height:0px !important;
+}
+.v_show{
+  visibility: visible;
+}
+.middle_font{
+  font-size:1rem;
+  color:#333;
+}
+.oh{
+  overflow:hidden;
+}
+a:focus{
+  box-shadow: 0 0 0 !important;
+}
+[v-cloak]{
+  display:none !important;
+}
