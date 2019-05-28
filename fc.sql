@@ -5,17 +5,17 @@ use fc;
 #用户表
 create table user(
   uid int primary key auto_increment comment "用户编号",
-  upwd varchar(16) comment "密码",
+  upwd varchar(32) comment "密码",
   userName varchar(8) default "不详" comment "姓名",
   phone varchar(11) comment "手机",
   addr varchar(32) default "无" comment "收货地址",
   nick varchar(12) default "无" comment "昵称",
   user_imgId int default 1 comment "用户头像图片编号" 
 );
-insert into user values(null,"123456","丁丁","15057391900","杭州市西湖区中心路11号","zero",1);
-insert into user values(null,"123456","当当","13811111112","杭州市西湖区中心路12号","旧日憾事",1);
-insert into user values(null,"123456","东东","13811111113","杭州市西湖区中心路13号","失去派大",1);
-insert into user values(null,"123456","端端","13811111114","杭州市西湖区中心路14号","朕好萌i",1);
+insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","丁丁","15057391900","杭州市西湖区中心路11号","zero",1);
+insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","当当","13811111112","杭州市西湖区中心路12号","旧日憾事",1);
+insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","东东","13811111113","杭州市西湖区中心路13号","失去派大",1);
+insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","端端","13811111114","杭州市西湖区中心路14号","朕好萌i",1);
 #竞拍表
 create table auction(
   aid int primary key auto_increment comment "竞拍编号",

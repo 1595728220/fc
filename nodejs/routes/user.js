@@ -32,7 +32,7 @@ router.post("/login", (req, res) => {
     return
   }
   //操作数据库查询用户名密码是否正确
-  let sql = "select uid, nick from user where phone = ? and upwd = ?"
+  let sql = "select uid, nick from user where phone = ? and upwd = md5(?)"
   pool.query(sql, [phone, upwd], (err, result) => {
     if (err) throw err
     if (result.length > 0) { //用户名密码正确
@@ -126,7 +126,7 @@ router.post("/register", (req, res) => {
       })
     } else { //查询结果数组为空，手机号未被注册
       //查询数据库，插入新注册的用户手机号和密码
-      let sql = "insert into user(phone, upwd) values(?, ?)"
+      let sql = "insert into user(phone, upwd) values(?, md5(?))"
       pool.query(sql, [phone, upwd], (err, result) => {
         if (err) throw err
         if (result.affectedRows > 0) { //插入影响的行数大于0，成功注册
@@ -212,7 +212,7 @@ router.post("/forget", (req, res) => {
     return
   }
   //更新数据库的用户表phone对应的upwd字段
-  let sql = "update user set upwd = ? where phone = ?"
+  let sql = "update user set upwd = md5(?) where phone = ?"
   pool.query(sql, [upwd, phone], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) { //更新成功
