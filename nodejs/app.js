@@ -31,7 +31,7 @@ app.use(cookieParser("123456"))
 app.use(session({
     secret:"123456",
     cookie:{maxAge:60*1000*30},//过期时间ms
-    resave:false,
+    resave:true,
     saveUninitialized:true
 }))
 app.use(bodyParser.urlencoded({
