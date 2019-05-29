@@ -13,6 +13,9 @@
       <mt-tab-container-item id="personal">
         <my-personal></my-personal>
       </mt-tab-container-item>
+      <mt-tab-container-item id="sort">
+        <my-sort></my-sort>
+      </mt-tab-container-item>
     </mt-tab-container>
     <!-- 底部导航栏 -->
     <mt-tabbar v-model="selected" fixed>
@@ -22,6 +25,12 @@
           :class="selected === 'market' ? 'icon-shangpin' : 'icon-shangpin-xianxing'"
         ></span>
         逛市场
+      </mt-tab-item>
+      <mt-tab-item id="sort">
+        <span
+          class="icon iconfont icon-gonggeshitu"
+        ></span>
+        分类
       </mt-tab-item>
       <mt-tab-item id="goods">
         <span
@@ -45,6 +54,7 @@
 import Market from "../components/market/market.vue";
 import Goods from "../components/goods/goods.vue";
 import Personal from "../components/personal/personal.vue";
+import Sort from "../components/search/sort.vue"
 export default {
   data() {
     return {
@@ -54,7 +64,8 @@ export default {
   components: {
     "my-market": Market,
     "my-goods": Goods,
-    "my-personal": Personal
+    "my-personal": Personal,
+    "my-sort":Sort
   }
 };
 </script>
