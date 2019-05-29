@@ -1,5 +1,6 @@
 <template>
-  <div class="contanier">
+  <div class="page-tabbar">
+    <div class="page-wrap">
     <h1>首页页面</h1>
     <!-- 首页面板 -->
     <mt-tab-container class="page-tabbar-container" v-model="selected">
@@ -37,6 +38,7 @@
         个人中心
       </mt-tab-item>
     </mt-tabbar>
+    </div>
   </div>
 </template>
 <script>
@@ -57,9 +59,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.mint-tabbar {
-  .mint-tab-item.is-selected {
-    color: #00c17b;
+.page-tabbar{
+  overflow: hidden;
+  .page-wrap{
+    overflow: auto;
+    h1{
+      height:1000px;
+    }
+  }
+  .mint-tabbar {
+    .mint-tab-item.is-selected {
+      color: #00c17b;
+    }
   }
 }
 </style>
