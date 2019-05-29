@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <h1>浏览过的产品项</h1>
   </div>
 </template>
 <script>

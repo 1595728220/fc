@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <h1>个人中心面板</h1>  
   </div>
 </template>
 <script>

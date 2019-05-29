@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <h1>通过关键词搜索</h1>
   </div>
 </template>
 <script>
