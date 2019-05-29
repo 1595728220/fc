@@ -55,49 +55,49 @@ img{
 }
 
 input:-webkit-autofill{
-  box-shadow:0 0 0px 1000px #fff inset;
+  box-shadow:0 0 0px 62.5rem #fff inset;
 }
 .triangle-top{
   width:0;
   height:0;
-  border-left:6px solid transparent;
-  border-right:6px solid transparent;
-  border-top: 8px solid #333;
+  border-left:0.375rem solid transparent;
+  border-right:0.375rem solid transparent;
+  border-top: 0.5rem solid #333;
   display:inline-block;
-  margin-left:3px;
+  margin-left:0.1875rem;
 }
 .triangle-right{
   width:0;
   height:0;
-  border-top:6px solid transparent;
-  border-bottom:6px solid transparent;
-  border-right: 8px solid #333;
+  border-top:0.375rem solid transparent;
+  border-bottom:0.375rem solid transparent;
+  border-right: 0.5rem solid #333;
   display:inline-block;
-  margin-left:3px;
+  margin-left:0.1875rem;
 }
 .triangle-bottom{
   width:0;
   height:0;
-  border-left:6px solid transparent;
-  border-right:6px solid transparent;
-  border-bottom: 8px solid #333;
+  border-left:0.375rem solid transparent;
+  border-right:0.375rem solid transparent;
+  border-bottom: 0.5rem solid #333;
   display:inline-block;
-  margin-left:3px;
+  margin-left:0.1875rem;
 }
 .triangle-left{
   width:0;
   height:0;
-  border-top:6px solid transparent;
-  border-bottom:6px solid transparent;
-  border-left: 8px solid #333;
+  border-top:0.375rem solid transparent;
+  border-bottom:0.375rem solid transparent;
+  border-left: 0.5rem solid #333;
   display:inline-block;
-  margin-left:3px;
+  margin-left:0.1875rem;
 }
 .tr{
   transition:all .5s linear 0s;
 }
 .small_font{
-  font-size:12px;
+  font-size:0.75rem;
   color:#333;
 }
 .v_hidden {
@@ -111,6 +111,7 @@ input:-webkit-autofill{
   font-size:1rem;
   color:#333;
 }
+
 .oh{
   overflow:hidden;
 }
