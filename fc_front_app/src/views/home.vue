@@ -12,6 +12,7 @@
         <my-personal></my-personal>
       </mt-tab-container-item>
     </mt-tab-container>
+    <span class=" icon iconfont icon-shangpin"></span>
   </div>
 </template>
 <script>
