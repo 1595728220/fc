@@ -1,22 +1,33 @@
 <template>
   <div class="title-bar">
-    <mt-search v-model="keyword" cancel-text="取消" placeholder="搜索" :result.sync="result">
-      <mt-cell v-for="(item,index) in result" :title="item.title" :value="item.value" :key="index"></mt-cell>
-    </mt-search>
+    <form action @submit.prevent="function(){return false}">
+      <mt-search
+        v-model="keyword"
+        cancel-text="取消"
+        placeholder="输入关键词"
+        @keyup.enter.native="searchEvent"
+      ></mt-search>
+    </form>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      keyword: "",
-      result: [
-        { title: "冰种", value: "冰种" },
-        { title: "冰种", value: "冰种" },
-        { title: "冰种", value: "冰种" }
-      ]
+      keyword: ""
     };
-  }
+  },
+  methods: {
+    //回车时触发的事件
+    searchEvent() {
+      console.log("查找" + this.keyword);
+      //从当前搜索框失去焦点
+      document.activeElement.blur();
+      //清空搜索框输入内容
+      this.keyword = "";
+    }
+  },
+  computed: {}
 };
 </script>
 <style lang="scss" scoped>

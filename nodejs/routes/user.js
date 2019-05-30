@@ -56,7 +56,8 @@ router.post("/login", (req, res) => {
 })
 //用户登录状态验证,登录状态则返回用户昵称
 router.get("/state", (req, res) => {
-  //console.log(req.session.uid)
+	// console.log(req.cookies)
+  // console.log(req.session.uid)
   if (req.session.uid === undefined) //根据cookie凭证验证session中有无uid数据
     //session为空
     res.send({

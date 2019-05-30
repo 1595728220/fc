@@ -60,6 +60,7 @@ import TitleBar from "../components/common/titlebar.vue"
 export default {
   data() {
     return {
+      //当前显示的面板id
       selected: "market"
     };
   },

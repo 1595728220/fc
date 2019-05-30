@@ -54,10 +54,6 @@ img{
   cursor:pointer;
 }
 
-
-input:-webkit-autofill{
-  box-shadow:0 0 0px 62.5rem #fff inset;
-}
 .triangle-top{
   width:0;
   height:0;
@@ -125,4 +121,17 @@ a:focus{
 .app-container{
   overflow-x:hidden;
   width:100%;
+}
+/*修改浏览器默认样式*/
+input:-webkit-autofill{
+  box-shadow:0 0 0px 62.5rem #fff inset;
+}
+.mint-searchbar-core::-ms-input-placeholder{text-align: center;}
+.mint-searchbar-core::-webkit-input-placeholder{text-align: center;}
+.mint-searchbar-inner .mintui-search{
+  font-size:1rem !important;
+  color:#aaa !important;
+}
+.mint-searchbar-core{
+  padding-left:0.4rem;
 }
