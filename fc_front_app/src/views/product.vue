@@ -1,6 +1,7 @@
 <template>
   <div>
     <back-bar title="产品" back="/"></back-bar>
+    <div class="hinder"></div>
     <h1>产品页面</h1>
   </div>
 </template>

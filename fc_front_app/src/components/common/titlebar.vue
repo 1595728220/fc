@@ -27,14 +27,16 @@ export default {
       this.keyword = "";
     }
   },
-  computed: {}
+  computed: {
+    
+  }
 };
 </script>
 <style lang="scss">
 .title-bar {
   width: 100%;
   position: fixed;
-  height: 3rem;
+  height: 2.75rem;
   .mint-searchbar-core::-ms-input-placeholder {
     text-align: center;
   }

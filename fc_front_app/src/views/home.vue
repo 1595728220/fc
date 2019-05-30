@@ -79,9 +79,6 @@ export default {
   .page-wrap{
     overflow: auto;
   }
-  .hinder{
-    margin-top:3rem;
-  }
   .mint-tabbar {
     .mint-tab-item.is-selected {
       color: #00c17b;

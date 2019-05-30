@@ -122,6 +122,9 @@ a:focus{
   overflow-x:hidden;
   width:100%;
 }
+.hinder{
+  margin-top:2.75rem;
+}
 /*修改浏览器默认样式*/
 input:-webkit-autofill{
   box-shadow:0 0 0px 62.5rem #fff inset;
