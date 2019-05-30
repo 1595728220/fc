@@ -50,5 +50,11 @@ export default {
   .mint-searchbar-core {
     padding-left: 0.4rem;
   }
+  .mint-searchbar{
+    background:#00c17b
+  }
+  a:not([href]):not([tabindex]){
+    color:#fff;
+  }
 }
 </style>

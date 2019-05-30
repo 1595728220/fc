@@ -10,7 +10,9 @@
 <script>
 export default {
   props: {
+    //父组件传递的标题
     title: { default: "" },
+    //父组件传递的后退路由地址
     back: { default: "" }
   }
 };

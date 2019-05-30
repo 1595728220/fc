@@ -1,7 +1,11 @@
 <template>
-  <h1 class="text-center text-danger">404 Not Found!{{time}}秒后返回首页</h1>
+  <div>
+    <back-bar title="404" back="/"></back-bar>
+    <h1 class="text-center text-danger">404 Not Found!{{time}}秒后返回首页</h1>
+  </div>
 </template>
 <script>
+import BackBar from "../components/common/backbar";
 export default {
   data() {
     return {
@@ -24,6 +28,9 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.timer);
+  },
+  components: {
+    "back-bar": BackBar
   }
 };
 </script>
