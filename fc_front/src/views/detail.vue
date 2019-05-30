@@ -161,12 +161,12 @@ export default {
             case "photo3":
             case "photo4":
               this.imgSrc.product.push(
-                "imgs/product/" + result.data[0][key]
+                "http://127.0.0.1:8081/product/" + result.data[0][key]
               );
               break;
             case "promise":
               this.imgSrc.promise.push(
-                "imgs/product/" + result.data[0][key]
+                "http://127.0.0.1:8081/product/" + result.data[0][key]
               );
               break;
             default:

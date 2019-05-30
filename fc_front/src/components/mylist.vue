@@ -2,7 +2,7 @@
   <ul class="productlist row m-0">
     <li v-for="(product,key) in products" class="col-sm-12 col-md-6 col-lg-3 mb-5" :key="key">
       <router-link :to="'/detail/'+product.pid" class="d-block p-2">
-        <img :src="`imgs/product/${product.photo1}`" class="w-100">
+        <img :src="`http://127.0.0.1:8081/product/${product.photo1}`" class="w-100">
         <p class="described middle_font product_title mb-3 mt-3 ml-0">{{product.described}}</p>
         <p class="text-success product_price m-0">￥{{product.price.toFixed(2)}}</p>
       </router-link>

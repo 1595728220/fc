@@ -201,7 +201,7 @@ export default {
           this.$set(
             el,
             "bannerSrc",
-            "imgs/banner/" + el.banner
+            "http://127.0.0.1:8081/banner/" + el.banner
           );
           this.$set(el, "isshow", false);
         });
