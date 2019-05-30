@@ -126,12 +126,3 @@ a:focus{
 input:-webkit-autofill{
   box-shadow:0 0 0px 62.5rem #fff inset;
 }
-.mint-searchbar-core::-ms-input-placeholder{text-align: center;}
-.mint-searchbar-core::-webkit-input-placeholder{text-align: center;}
-.mint-searchbar-inner .mintui-search{
-  font-size:1rem !important;
-  color:#aaa !important;
-}
-.mint-searchbar-core{
-  padding-left:0.4rem;
-}

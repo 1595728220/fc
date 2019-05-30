@@ -30,10 +30,25 @@ export default {
   computed: {}
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .title-bar {
   width: 100%;
   position: fixed;
   height: 3rem;
+  .mint-searchbar-core::-ms-input-placeholder {
+    text-align: center;
+  }
+  .mint-searchbar-core::-webkit-input-placeholder {
+    text-align: center;
+  }
+  .mint-searchbar-inner {
+    .mintui-search {
+      font-size: 1rem !important;
+      color: #aaa !important;
+    }
+  }
+  .mint-searchbar-core {
+    padding-left: 0.4rem;
+  }
 }
 </style>
