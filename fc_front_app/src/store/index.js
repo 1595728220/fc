@@ -6,13 +6,11 @@ Vue.use(Vuex);
 //要设置的全局访问的state对象
 const state = {
   //要设置的初始属性值
-  // 保存用户id
-  person_uid: 0,
-  persion_nick: "",
   //手机号正则
   phoneRegex: /^1[34578]\d{9}$/,
   //密码正则
-  upwdRegex: /^[a-zA-Z\d_]{6,18}$/,
+  // upwdRegex: /^[a-zA-Z\d_]{6,18}$/,
+  productList:[]
 };
 const getters = { //实时监听state值的变化(最新状态)
 

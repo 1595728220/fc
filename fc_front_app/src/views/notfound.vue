@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="not-found">
     <back-bar title="404" back="/"></back-bar>
-    <h1 class="text-center text-danger">404 Not Found!{{time}}秒后返回首页</h1>
+    <div class="hinder"></div>
+    <img v-lazy="imgSrc">
+    <h1>{{time}}秒后返回首页</h1>
   </div>
 </template>
 <script>
@@ -10,7 +12,8 @@ export default {
   data() {
     return {
       time: 5,
-      timer: null
+      timer: null,
+      imgSrc:"imgs/404/404.jpg"
     };
   },
   created() {
@@ -35,4 +38,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.not-found{
+  img{
+    width:100%;
+  }
+  h1{
+    color:#00c17b;
+    text-align:center
+  }
+}
 </style>
