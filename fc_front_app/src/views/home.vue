@@ -1,7 +1,8 @@
 <template>
   <div class="page-tabbar">
     <div class="page-wrap">
-    <h1>首页页面</h1>
+    <title-bar></title-bar>
+    <div class="hinder"></div>
     <!-- 首页面板 -->
     <mt-tab-container class="page-tabbar-container" v-model="selected">
       <mt-tab-container-item id="market">
@@ -55,6 +56,7 @@ import Market from "../components/market/market.vue";
 import Goods from "../components/goods/goods.vue";
 import Personal from "../components/personal/personal.vue";
 import Sort from "../components/search/sort.vue"
+import TitleBar from "../components/common/titlebar.vue"
 export default {
   data() {
     return {
@@ -65,7 +67,8 @@ export default {
     "my-market": Market,
     "my-goods": Goods,
     "my-personal": Personal,
-    "my-sort":Sort
+    "my-sort":Sort,
+    "title-bar":TitleBar
   }
 };
 </script>
@@ -74,9 +77,9 @@ export default {
   overflow: hidden;
   .page-wrap{
     overflow: auto;
-    h1{
-      height:1000px;
-    }
+  }
+  .hinder{
+    margin-top:3rem;
   }
   .mint-tabbar {
     .mint-tab-item.is-selected {

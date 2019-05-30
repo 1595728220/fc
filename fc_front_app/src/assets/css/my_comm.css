@@ -1,5 +1,5 @@
 /* 网页样式初始化 */
-*{
+/* *{
   margin:0;
   padding:0;
 }
@@ -15,6 +15,10 @@ ul{
   padding-left: 0;
   margin:0;
 }
+img{
+  border:0;
+  vertical-align: middle;
+} */
 /*定义一些常用的样式*/
 .clear:before{
   content:"";
@@ -49,10 +53,7 @@ ul{
 .cp{
   cursor:pointer;
 }
-img{
-  border:0;
-  vertical-align: middle;
-}
+
 
 input:-webkit-autofill{
   box-shadow:0 0 0px 62.5rem #fff inset;

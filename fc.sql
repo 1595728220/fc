@@ -26,7 +26,7 @@ create table auction(
 #产品表
 create table product(
   pid int primary key auto_increment comment "产品编号",
-  price int comment "产品价格",
+  price decimal(10,2) comment "产品价格",
   described varchar(64) comment "描述",
   artNo varchar(12) comment "货号",
   classify varchar(8) comment "分类",

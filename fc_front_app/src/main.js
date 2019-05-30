@@ -29,19 +29,19 @@ Object.keys(filters)
 Vue.config.productionTip = false
 
 //设置路由守卫，验证用户登录状态
-router.beforeEach((to, from, next) => {
-  let uid = store.state.person_uid
-  if (!uid) {
-    if (to.path !== "/login") {
-       next({ path: "/login" })
-    } 
-  } else {
-    if (to.path === '/login') {
-      next({ path: '/' });
-    }
-  }
-  next()
-})
+// router.beforeEach((to, from, next) => {
+//   let uid = store.state.person_uid
+//   if (!uid) {
+//     if (to.path !== "/login") {
+//        next({ path: "/login" })
+//     } 
+//   } else {
+//     if (to.path === '/login') {
+//       next({ path: '/' });
+//     }
+//   }
+//   next()
+// })
 
 new Vue({
   render: h => h(App),
