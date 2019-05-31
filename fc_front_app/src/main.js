@@ -16,7 +16,7 @@ Vue.use(VueLazyload, {
   preLoad: 1.3,
   error: 'imgs/lazyload/error.jpg',
   loading: 'imgs/lazyload/loading.gif',
-  attempt: 3
+  attempt: 1
 })
 
 //声明全局组件

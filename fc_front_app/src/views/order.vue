@@ -1,6 +1,7 @@
 <template>
   <div>
     <back-bar title="订单" back="/"></back-bar>
+    <div class="hinder"></div>
     <h1>订单页面</h1>
   </div>
 </template>
