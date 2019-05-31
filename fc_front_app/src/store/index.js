@@ -6,6 +6,9 @@ Vue.use(Vuex);
 //要设置的全局访问的state对象
 const state = {
   //要设置的初始属性值
+  //服务器端的图片路径
+  productServerAdd:"http://127.0.0.1:8081/product/",
+  bannerServerAdd:"http://127.0.0.1:8081/banner/",
   //手机号正则
   phoneRegex: /^1[34578]\d{9}$/,
   //密码正则

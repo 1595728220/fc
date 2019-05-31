@@ -1,23 +1,41 @@
 <template>
-  <div>
+  <div class="product">
     <back-bar title="产品" back="/"></back-bar>
     <div class="hinder"></div>
     <h1>产品页面</h1>
+    <div v-for="(item,index) of productList" :key="index" class="product-area">
+      <product-detail :productItem="item"></product-detail>
+    </div>
   </div>
 </template>
 <script>
-import BackBar from "../components/common/backbar"
+import BackBar from "../components/common/backbar";
+import ProductDetail from "../components/product/product_detail";
 export default {
   data() {
-    return {
-      
+    return {};
+  },
+  computed: {
+    productList() {
+      return this.$store.state.productList;
     }
   },
-  components:{
-    "back-bar":BackBar
+  components: {
+    "back-bar": BackBar,
+    "product-detail": ProductDetail
+  },
+  watch: {
+    productList() {
+      console.log("产品列表信息更新");
+    }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
-
+.product{
+  .product-area{
+    display:flex;
+    flex-wrap: wrap;
+  }
+}
 </style>
