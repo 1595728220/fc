@@ -34,7 +34,7 @@ const state = {
   totalQueryProduct:""
 };
 const getters = { //实时监听state值的变化(最新状态)
-
+  
 };
 const mutations = {
   //自定义改变state初始值的方法，这里面的参数除了state之外还可以再传额外的参数(变量或对象);
@@ -62,7 +62,7 @@ const mutations = {
   },
   //为查询参数修改数据
   changeProductQuery(state,val){
-    // console.log(1)
+    
     //验证参数是否为对象
     if (Object.prototype.toString.call(val) === "[object Object]") {
 
@@ -76,7 +76,6 @@ const mutations = {
         //如果存在，则将对应对象中的值保存进目标对象
         index !== -1 && (state.productQuery[keys[index]] = val[el])
       })
-      console.log(state.productQuery)
     }
   },
   setTotalQueryProduct(state,val){
@@ -87,10 +86,11 @@ const actions = { //this.$store.dispatch('set_uid'，6)
   //自定义触发mutations里函数的方法，context与store 实例具有相同方法和属性  
   //发送请求，查询符合条件的产品信息
   getProductList(context) {
-    // console.log(state.productQuery)
+    console.log(context.state.productQuery)
     axios.get("/product/list", {
-      params: state.productQuery
+      params: context.state.productQuery
     }).then(result => {
+      // console.log(state.productQuery)
       context.commit("setTotalQueryProduct",result.data[1][0]["found_rows()"])
       context.commit("setProductList", result.data[0])
     }).catch(err => { throw err })

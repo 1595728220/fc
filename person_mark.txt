@@ -51,7 +51,7 @@ SELECT FOUND_ROWS();执行一次查询同时获得数据，该方法查询效率
   product_detail //产品详情
 21.vuex中存储的数据再f5刷新后会初始化state导致数据丢失，解决的方法是使用别人封装的插件vuex-persistedstate，将要丢失的数据暂时保存在sessionStorage.
 22.在移动端引入vue-lazyload 参考http://www.qiutianaimeili.com/html/page/2018/08/fmo2p56v6ms.html
-
+23.在vuex中如果想在actions中发送axios请求，这时请求的参数如果时state中的数据时需要使用context.state.属性名获取，否则无法获取最新的属性值，造成错误，然后mutations 有一个固有参数 state，接收的是 Vuex 中的 state 对象，action 也有一个固有参数 context，但是 context 是 state 的父级，包含  state、getters
 
 
 
