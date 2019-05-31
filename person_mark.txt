@@ -46,8 +46,9 @@ SELECT FOUND_ROWS();执行一次查询同时获得数据，该方法查询效率
   order //收货地址和登录状态验证 通过点击购买商品后跳转
     add_addr //添加收货地址
     confirm_order //确认订单 
-  product
-    product_detail //产品详情
+  product //产品列表
+    product_item //产品列表项
+  product_detail //产品详情
 21.vuex中存储的数据再f5刷新后会初始化state导致数据丢失，解决的方法是使用别人封装的插件vuex-persistedstate，将要丢失的数据暂时保存在sessionStorage.
 22.在移动端引入vue-lazyload 参考http://www.qiutianaimeili.com/html/page/2018/08/fmo2p56v6ms.html
 

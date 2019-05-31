@@ -1,5 +1,5 @@
 <template>
-  <div class="product-detail">
+  <div class="product-item">
     <!-- <h1>产品详情</h1> -->
     <img v-lazy="baseSrc+productItem.photo1" class="img">
     <div class="described">{{productItem.described}}</div>
@@ -22,7 +22,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.product-detail {
+.product-item {
   .img {
     width: 100%;
   }
@@ -35,7 +35,8 @@ export default {
     color:#555;
   }
   .price{
-    color:#00c17b
+    color:#00c17b;
+    text-align:right;
   }
 }
 </style>

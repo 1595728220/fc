@@ -5,9 +5,15 @@ import Login from '@/views/login'
 import Order from "@/views/order"
 import NotFound from "@/views/notfound"
 import Product from "@/views/product"
+import ProductDetail from "@/views/product_detail"
 Vue.use(Router)
 export default new Router({
   routes: [
+    {
+      name:"product_datail",
+      path:"/detail",
+      component:ProductDetail
+    },
     {
       name:"product",
       path:"/product",
