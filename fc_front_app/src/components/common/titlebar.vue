@@ -22,7 +22,7 @@ export default {
     searchEvent() {
       console.log("查找" + this.keywords);
       //将关键词发送到vuex中
-      this.$store.state.productQuery.keywords = this.keywords;
+      this.$store.commit("changeProductQuery",{keywords:this.keywords}) ;
       //触发vuex中的查询产品信息的方法
       this.$store.dispatch("getProductList");
       //从当前搜索框失去焦点

@@ -7,8 +7,8 @@ Vue.use(Vuex);
 const state = {
   //要设置的初始属性值
   //服务器端的图片路径
-  productServerAdd:"http://127.0.0.1:8081/product/",
-  bannerServerAdd:"http://127.0.0.1:8081/banner/",
+  productServerAdd: "http://127.0.0.1:8081/product/",
+  bannerServerAdd: "http://127.0.0.1:8081/banner/",
   //手机号正则
   phoneRegex: /^1[34578]\d{9}$/,
   //密码正则
@@ -29,7 +29,9 @@ const state = {
     recommond: false,
     pno: 1,
     size: 6,
-  }
+  },
+  //查询商品的总记录数
+  totalQueryProduct:""
 };
 const getters = { //实时监听state值的变化(最新状态)
 
@@ -58,16 +60,38 @@ const mutations = {
       size: 6,
     }
   },
+  //为查询参数修改数据
+  changeProductQuery(state,val){
+    // console.log(1)
+    //验证参数是否为对象
+    if (Object.prototype.toString.call(val) === "[object Object]") {
+
+      // 提取两个对象中的属性名
+      let keys = Object.keys(state.productQuery),
+        tmpKeys = Object.keys(val)
+      //遍历参数属性名数组
+      tmpKeys.forEach(el => {
+        //查找参数属性名在目标属性名数组中的下标
+        let index = keys.indexOf(el)
+        //如果存在，则将对应对象中的值保存进目标对象
+        index !== -1 && (state.productQuery[keys[index]] = val[el])
+      })
+      console.log(state.productQuery)
+    }
+  },
+  setTotalQueryProduct(state,val){
+    state.totalQueryProduct = val
+  }
 };
 const actions = { //this.$store.dispatch('set_uid'，6)
   //自定义触发mutations里函数的方法，context与store 实例具有相同方法和属性  
   //发送请求，查询符合条件的产品信息
   getProductList(context) {
-    console.log(state.productQuery)
+    // console.log(state.productQuery)
     axios.get("/product/list", {
       params: state.productQuery
     }).then(result => {
-      console.log(result.data[0])
+      context.commit("setTotalQueryProduct",result.data[1][0]["found_rows()"])
       context.commit("setProductList", result.data[0])
     }).catch(err => { throw err })
   },
