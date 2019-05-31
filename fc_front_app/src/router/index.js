@@ -10,7 +10,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      name:"product_datail",
+      name:"product_detail",
       path:"/detail",
       component:ProductDetail
     },

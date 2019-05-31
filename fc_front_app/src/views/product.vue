@@ -1,14 +1,14 @@
 <template>
-  <div class="product">
-    <back-bar title="产品" back="/"></back-bar>
-    <div class="hinder"></div>
-    <!-- <h1>产品页面</h1> -->
-    <div class="product-area">
-      <div v-for="(item,index) of productList" :key="index" class="product-item">
-        <product-item :productItem="item"></product-item>
+      <div class="product">
+        <back-bar title="产品" back="/"></back-bar>
+        <div class="hinder"></div>
+        <!-- <h1>产品页面</h1> -->
+        <div class="product-area">
+          <div v-for="(item,index) of productList" :key="index" class="product-item">
+            <product-item :productItem="item"></product-item>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 </template>
 <script>
 import BackBar from "../components/common/backbar";
@@ -41,8 +41,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    .product-item{
-      width:49%;
+    padding: 0.25rem;
+    .product-item {
+      width: 49%;
     }
   }
 }

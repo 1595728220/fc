@@ -13,6 +13,9 @@ export default {
 
     };
   },
+  created() {
+    console.log(this.$route.params.pid)
+  },
   components:{
     "back-bar":BackBar
   }
