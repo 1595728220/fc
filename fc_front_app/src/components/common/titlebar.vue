@@ -5,7 +5,7 @@
         v-model="keywords"
         cancel-text="取消"
         placeholder="输入关键词"
-        @keyup.enter.native="searchEvent"
+        @keyup.enter.native="searchEvent"   
       ></mt-search>
     </form>
   </div>
@@ -22,19 +22,17 @@ export default {
     searchEvent() {
       console.log("查找" + this.keywords);
       //将关键词发送到vuex中
-      this.$store.state.productQuery.keywords = this.keywords
+      this.$store.state.productQuery.keywords = this.keywords;
       //触发vuex中的查询产品信息的方法
-      this.$store.dispatch("getProductList")
+      this.$store.dispatch("getProductList");
       //从当前搜索框失去焦点
       document.activeElement.blur();
       //清空搜索框输入内容
       this.keywords = "";
-      this.$router.push("/product")
+      this.$router.push("/product");
     }
   },
-  computed: {
-    
-  }
+  computed: {}
 };
 </script>
 <style lang="scss">
@@ -57,11 +55,11 @@ export default {
   .mint-searchbar-core {
     padding-left: 0.4rem;
   }
-  .mint-searchbar{
-    background:#00c17b
+  .mint-searchbar {
+    background: #00c17b;
   }
-  a:not([href]):not([tabindex]){
-    color:#fff;
+  a:not([href]):not([tabindex]) {
+    color: #fff;
   }
 }
 </style>

@@ -2,9 +2,11 @@
   <div class="product">
     <back-bar title="产品" back="/"></back-bar>
     <div class="hinder"></div>
-    <h1>产品页面</h1>
-    <div v-for="(item,index) of productList" :key="index" class="product-area">
-      <product-detail :productItem="item"></product-detail>
+    <!-- <h1>产品页面</h1> -->
+    <div class="product-area">
+      <div v-for="(item,index) of productList" :key="index" class="product-item">
+        <product-detail :productItem="item"></product-detail>
+      </div>
     </div>
   </div>
 </template>
@@ -16,6 +18,7 @@ export default {
     return {};
   },
   computed: {
+    //获取产品列表信息
     productList() {
       return this.$store.state.productList;
     }
@@ -25,6 +28,7 @@ export default {
     "product-detail": ProductDetail
   },
   watch: {
+    //监听产品列表信息
     productList() {
       console.log("产品列表信息更新");
     }
@@ -32,10 +36,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.product{
-  .product-area{
-    display:flex;
+.product {
+  .product-area {
+    display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    .product-item{
+      width:49%;
+    }
   }
 }
 </style>

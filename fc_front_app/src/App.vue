@@ -10,6 +10,6 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 @import "./assets/css/my_comm.css";
 </style>
