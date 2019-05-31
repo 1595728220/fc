@@ -4,7 +4,7 @@
     v-infinite-scroll="loadMore"
     infinite-scroll-disabled="moreLoading"
     infinite-scroll-immediate-check="false"
-    infinite-scroll-distance="20"
+    infinite-scroll-distance="50"
   >
     <back-bar title="产品" back="/"></back-bar>
     <div class="hinder"></div>
@@ -14,7 +14,7 @@
         <product-item :productItem="item"></product-item>
       </div>
       <div class="more_loading">
-        <mt-spinner type="snake" color="#00c17b" :size="20" v-show="moreLoading"></mt-spinner>
+        <mt-spinner type="snake" color="#00c17b" :size="20" v-show="moreLoading && !allLoaded"></mt-spinner>
         <span v-show="allLoaded">已全部加载</span>
       </div>
     </div>
@@ -47,10 +47,10 @@ export default {
   },
   methods: {
     loadMore() {
-      console.log("正在加载更多数据");
-      this.moreLoading = false;
+      console.log("正在加载更多数据"+(this.page.pno+1));
+      this.moreLoading = true;
       if (this.allLoaded) {
-        // this.moreLoading = true;
+        this.moreLoading = true;
       } else {
         //查询的页数++
         this.page.pno++;
@@ -70,12 +70,22 @@ export default {
     productList() {
       console.log("产品列表信息更新");
       this.localProductList = this.localProductList.concat(this.productList);
+      this.moreLoading = false
       if (this.localProductList.length >= this.totalProduct) {
         console.log("已经超出总产品记录数")
+        this.moreLoading = true;
         this.allLoaded = true;
       }
     }
-  }
+  },
+  mounted() {
+    //挂载后触发vuex中的查询产品信息的方法
+    this.$store.dispatch("getProductList");
+  },
+  destroyed() {
+    //组件销毁后初始化查询参数
+    this.$store.commit("initProductQuery")
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -90,6 +100,14 @@ export default {
     .product-item {
       width: 49%;
     }
+    .more_loading{
+      width:100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
   }
 }
 </style>

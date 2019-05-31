@@ -24,7 +24,7 @@ export default {
       //将关键词发送到vuex中
       this.$store.commit("changeProductQuery",{keywords:this.keywords}) ;
       //触发vuex中的查询产品信息的方法
-      this.$store.dispatch("getProductList");
+      // this.$store.dispatch("getProductList");
       //从当前搜索框失去焦点
       document.activeElement.blur();
       //清空搜索框输入内容

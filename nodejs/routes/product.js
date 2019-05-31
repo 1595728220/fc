@@ -116,6 +116,7 @@ router.get("/list", (req, res) => {
   }
   sql += " limit ?,?;select found_rows();"
   console.log(sql)
+  console.log(keywords)
   arr = arr.concat([start, size])
   // console.log(sql)
   // console.log(arr)

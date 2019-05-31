@@ -62,7 +62,6 @@ const mutations = {
   },
   //为查询参数修改数据
   changeProductQuery(state,val){
-    
     //验证参数是否为对象
     if (Object.prototype.toString.call(val) === "[object Object]") {
 
