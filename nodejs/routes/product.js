@@ -62,10 +62,11 @@ router.get("/list", (req, res) => {
   !size && (size = 6);
   //转换位整数
   pno = parseInt(pno)
-  size = parseInt(size)
+  size = parseInt(size);
   //不规范的参数规范化
-  minprice < 0 && (minprice = 0)
-  maxprice < minprice && (maxprice = 99999999)
+  (isNaN(Number(minprice)) || minprice < 0) && (minprice = 0);
+    (isNaN(Number(maxprice)) || maxprice < minprice) && (maxprice = 99999999)
+  // console.log(maxprice, minprice)
   //计算分页的开始下标
   let start = (pno - 1) * size,
     sql = "select sql_calc_found_rows pid,described,price,photo1 from product,product_img where product_imgId = iid", //存储查询的sql 语句
@@ -114,6 +115,7 @@ router.get("/list", (req, res) => {
     }
   }
   sql += " limit ?,?;select found_rows();"
+  console.log(sql)
   arr = arr.concat([start, size])
   // console.log(sql)
   // console.log(arr)
@@ -160,10 +162,10 @@ router.get("/get_words", (req, res) => {
   })
 })
 //用户搜索时添加搜索记录
-router.get("/search",(req,res)=>{
-  let {uid,keywords} = req.query
-   //检查用户是否输入用户编号，如果没有统一改为0，表示游客的搜索关键词
-   if (!uid) {
+router.get("/search", (req, res) => {
+  let { uid, keywords } = req.query
+  //检查用户是否输入用户编号，如果没有统一改为0，表示游客的搜索关键词
+  if (!uid) {
     uid = 0
   }
   //当用户通过关键字搜索产品时
