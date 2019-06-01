@@ -18,7 +18,7 @@ export default {
     goTop(e){
       console.log("点击返回顶部")
       // console.log(e.target)
-      // this.$emit("backTop")
+      this.$emit("backTop")
       // this.scroll.scrollTo(0,0)
     }
   },

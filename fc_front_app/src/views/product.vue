@@ -5,14 +5,14 @@
       v-infinite-scroll="loadMore"
       infinite-scroll-disabled="moreLoading"
       infinite-scroll-immediate-check="false"
-      infinite-scroll-distance="0"
+      infinite-scroll-distance="10"
       @scroll.native="saveTop"
       ref="fatherScroll"
     >
       <back-bar title="产品" back="/"></back-bar>
       <div class="hinder"></div>
       <!-- <h1>产品页面</h1> -->
-      <my-scroll :data="localProductList">
+      <!-- <my-scroll :data="localProductList"> -->
         <div class="product-area">
           <div v-for="(item,index) of localProductList" :key="index" class="product-item">
             <product-item :productItem="item"></product-item>
@@ -22,8 +22,8 @@
             <span v-show="allLoaded">已全部加载</span>
           </div>
         </div>
-      </my-scroll>
-      <scroll-top :top="top" @backTop="initTop"></scroll-top>
+        <scroll-top :top="top" @backTop="initTop"></scroll-top>
+      <!-- </my-scroll> -->
     </div>
   </div>
 </template>
@@ -42,7 +42,6 @@ export default {
       },
       localProductList: [],
       top: 0,
-      pull:true,
     };
   },
   computed: {
@@ -77,26 +76,25 @@ export default {
       }, 2000);
     },
     //保存当前滚动的距离
-    // saveTop(e) {
-    //   this.top = e.target.scrollTop;
-    //   // console.log(this.top)
-    // },
-    //无动画的返回顶部
-    // initTop() {
-    //   console.log("回到顶部");
-    //   this.top = 0;
-    //   // console.log(this.aBScroll);
-    //   // this.aBScroll.scrollTo(0, 0);
-    //   this.$refs.fatherScroll.scrollTop = 0
-    // },
+    saveTop(e) {
+      this.top = e.target.scrollTop;
+      // console.log(this.top)
+    },
+    // 无动画的返回顶部
+    initTop() {
+      console.log("回到顶部");
+      this.top = 0;
+      // console.log(this.aBScroll);
+      // this.aBScroll.scrollTo(0, 0);
+      this.$refs.fatherScroll.scrollTop = 0
+    },
     // loadData(){
     //   console.log("加载数据")
     // }
-
   },
-  // created() {
-  //   window.addEventListener("scroll", this.saveTop, true);
-  // },
+  created() {
+    window.addEventListener("scroll", this.saveTop, true);
+  },
   components: {
     "back-bar": BackBar,
     "product-item": ProductItem,
