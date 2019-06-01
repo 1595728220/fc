@@ -53,7 +53,8 @@ SELECT FOUND_ROWS();执行一次查询同时获得数据，该方法查询效率
 22.在移动端引入vue-lazyload 参考http://www.qiutianaimeili.com/html/page/2018/08/fmo2p56v6ms.html 个人总结一下，首先v-infinite-scroll是该组件要触发的事件，当滚动到距离底部infinite-scroll-distance中对应的像素值时触发时间，而infinite-scroll-disabled="moreLoading" 该属性需要绑定一个bool类型的变量，为false时事件可以被触发，而为true时事件无法触发，所以在数据加载完时需要将该变量设为true，有一点需要注意的是，该组件要求所在的元素占父元素高度的100%才能生效，解决的办法是添加样式max-height: 100vh; overflow-y: auto;该组件可以配合mt-spinner使用，需要在要加载数据时将moreLoading改为true,显示等待图标，请求完成后再将值改回false，隐藏图标。
 23.在vuex中如果想在actions中发送axios请求，这时请求的参数如果是state中的数据时需要使用context.state.属性名获取，否则无法获取最新的属性值，造成错误，然后mutations 有一个固有参数 state，接收的是 Vuex 中的 state 对象，action 也有一个固有参数 context，但是 context 是 state 的父级，包含  state、getters
 
-
+24.引入better-scroll 参考https://blog.csdn.net/abcde158308/article/details/82665386
+http://www.imooc.com/article/18232
 
 
 

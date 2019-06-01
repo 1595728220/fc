@@ -1,6 +1,6 @@
 <template>
-  <div class="scrollTop" v-show="isShow" >
-    <span class="icon iconfont icon-shangfan text" @click.stop="goTop"></span>
+  <div class="scrollTop" v-show="isShow" @click.stop="goTop">
+    <span class="icon iconfont icon-shangfan text" ></span>
   </div>
 </template>
 <script>
@@ -16,7 +16,9 @@ export default {
   },
   methods: {
     goTop(e){
-      this.$emit("backTop")
+      console.log("点击返回顶部")
+      // console.log(e.target)
+      // this.$emit("backTop")
     }
   },
   watch: {
