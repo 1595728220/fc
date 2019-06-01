@@ -131,8 +131,16 @@ router.get("/finish", (req, res) => {
 router.get("/add_collect", (req, res) => {
   let pid = req.query.pid,
     uid = req.session.uid,
-    time = (new Date()).getTime()
-  sql = "insert into collect values(null,?,?,?)"
+    time = (new Date()).getTime(),
+    sql = "insert into collect values(null,?,?,?)"
+    if(!uid){
+      res.send({code:400,msg:"用户未登录"})
+      return 
+    }
+    if(!pid){
+      res.send({code:401,msg:"缺少产品编号"})
+      return
+    }
   pool.query(sql, [pid, uid, time], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0)
@@ -146,6 +154,14 @@ router.get("/remove_collect", (req, res) => {
   let pid = req.query.pid,
     uid = req.session.uid,
     sql = "delete from collect where coll_productId = ? and coll_userId = ?"
+    if(!uid){
+      res.send({code:400,msg:"用户未登录"})
+      return 
+    }
+    if(!pid){
+      res.send({code:401,msg:"缺少产品编号"})
+      return
+    }
   pool.query(sql, [pid, uid], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0)
@@ -158,6 +174,10 @@ router.get("/remove_collect", (req, res) => {
 router.get("/get_collect",(req,res)=>{
   let uid = req.session.uid,
   sql = "select pid,described,price,photo1,coll_time from product,product_img,collect where product_imgId = iid and coll_productId = pid and coll_userId = ?"
+  if(!uid){
+    res.send({code:400,msg:"用户未登录"})
+    return 
+  }
   pool.query(sql,[uid],(err,result)=>{
     if(err) throw err
     if(result.length > 0) {
@@ -171,8 +191,16 @@ router.get("/get_collect",(req,res)=>{
 router.get("/add_browse", (req, res) => {
   let pid = req.query.pid,
     uid = req.session.uid,
-    time = (new Date()).getTime()
+    time = (new Date()).getTime(),
   sql = "insert into browse values(null,?,?,?)"
+  if(!uid){
+    res.send({code:400,msg:"用户未登录"})
+    return 
+  }
+  if(!pid){
+    res.send({code:401,msg:"缺少产品编号"})
+    return
+  }
   pool.query(sql, [pid, uid, time], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0)
@@ -185,6 +213,10 @@ router.get("/add_browse", (req, res) => {
 router.get("/remove_browse", (req, res) => {
   let uid = req.session.uid,
     sql = "delete from browse where brow_userId = ?"
+    if(!uid){
+      res.send({code:400,msg:"用户未登录"})
+      return 
+    }
   pool.query(sql, [uid], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0)
@@ -197,6 +229,10 @@ router.get("/remove_browse", (req, res) => {
 router.get("/get_browse",(req,res)=>{
   let uid = req.session.uid,
   sql = "select pid,described,price,photo1,brow_time from product,product_img,browse where product_imgId = iid and brow_productId = pid and brow_userId = ?"
+  if(!uid){
+    res.send({code:400,msg:"用户未登录"})
+    return 
+  }
   pool.query(sql,[uid],(err,result)=>{
     if(err) throw err
     if(result.length > 0) {

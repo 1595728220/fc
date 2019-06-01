@@ -1,9 +1,16 @@
 <template>
-  <div class="item" @click="goToDetail">
+  <div class="item" >
     <!-- <h1>产品详情</h1> -->
-    <img v-lazy="baseSrc+productItem.photo1" class="img">
+    <img v-lazy="baseSrc+productItem.photo1" class="img" @click="goToDetail">
     <div class="described">{{productItem.described}}</div>
-    <div class="price">￥{{productItem.price.toFixed(2)}}</div>
+    <div class="price">
+      <span class="text">￥{{productItem.price.toFixed(2)}}</span>
+      <span
+        class="icon iconfont shoucang"
+        :class="productItem.collect ? 'icon-xihuan' :'icon-xihuan-xianxing' "
+        @click="addCollect"
+      ></span>
+    </div>
   </div>
 </template>
 <script>
@@ -15,11 +22,39 @@ export default {
     return {};
   },
   methods: {
-    goToDetail(e){
-      this.$router.push({name:"product_detail",params:{pid:this.productItem.pid}})
+    //跳转到商品详情页
+    goToDetail() {
+      this.$router.push({
+        name: "product_detail",
+        params: { pid: this.productItem.pid }
+      });
+    },
+    //添加收藏
+    addCollect(){
+      //发送请求添加收藏记录
+      this.$axios.get("/order/add_collect",{
+        params:{pid:this.productItem.pid}
+      }).then((result)=>{
+        if(result.data.code === 200){ //收藏成功
+          this.$toast({
+            message:result.data.msg,
+            position:"middle",
+            duration:1000
+          })
+          //获取最新的数据
+          this.$store.dispatch("getProductList")
+        } else { //收藏失败
+          this.$toast({
+            message:result.data.msg,
+            position:"middle",
+            duration:1500
+          })
+        }
+      })
     }
   },
   computed: {
+    //获取产品图片保存的路径
     baseSrc() {
       return this.$store.state.productServerAdd;
     }
@@ -36,14 +71,20 @@ export default {
     overflow: hidden; /*超出部分隐藏*/
     white-space: nowrap; /*不换行*/
     text-overflow: ellipsis; /*超出部分文字以...显示*/
-    padding:0 0.25rem;
+    padding: 0 0.25rem;
   }
   .described {
     color: #555;
   }
   .price {
-    color: #00c17b;
-    text-align: right;
+    .text{
+      color: #00c17b;
+    }
+    .shoucang{
+      color:#F30213;
+    }
+    display:flex;
+    justify-content: space-between;
   }
 }
 </style>
