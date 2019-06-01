@@ -97,9 +97,12 @@ export default {
       this.user_no_change = true;
       // console.log(this.$store.getters.get_uid)
       this.$axios
-        .get("/user/detail", {
-          params: { uid: this.$store.getters.get_uid }
-        })
+        .get("/user/detail"
+        //移出请求的uid参数
+        // , {
+        //   params: { uid: this.$store.getters.get_uid }
+        // }
+        )
         .then(result => {
           // console.log(result);
           //如果查询用户基本信息成功

@@ -223,11 +223,14 @@ export default {
       // console.log("请求用户的搜索历史记录")
       //发送请求
       this.$axios
-        .get("/user/search", {
-          params: {
-            uid: this.person_uid
-          }
-        })
+        .get("/user/search"
+        //移除请求携带的uid
+        // , {
+        //   params: {
+        //     uid: this.person_uid
+        //   }
+        // }
+        )
         .then(result => {
           // console.log(result)
           // this.keywords = JSON.parse(JSON.stringify(result.data.data.all))

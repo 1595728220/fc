@@ -6,7 +6,7 @@ Vue.use(Vuex);
 const state = {
   //要设置的初始属性值
   // 保存用户id
-  person_uid: 0,
+  // person_uid: 0,
   persion_nick: "",
   //保存所有的产品分类信息
   product_class: {},

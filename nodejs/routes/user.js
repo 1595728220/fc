@@ -56,7 +56,7 @@ router.post("/login", (req, res) => {
 })
 //用户登录状态验证,登录状态则返回用户昵称
 router.get("/state", (req, res) => {
-	// console.log(req.cookies)
+  // console.log(req.cookies)
   // console.log(req.session.uid)
   if (req.session.uid === undefined) //根据cookie凭证验证session中有无uid数据
     //session为空
@@ -451,7 +451,7 @@ router.get("/yzm", (req, res) => {
 router.get("/detail", (req, res) => {
   //获取用户的编号
   let uid = req.session.uid,
-    sql = "select phone,userName,addr,nick,img_addr from user,user_img where user_imgId = uiid and uid = ?" 
+    sql = "select phone,userName,addr,nick,img_addr from user,user_img where user_imgId = uiid and uid = ?"
   if (!uid) { //用户编号为空
     res.send({
       code: 401,
