@@ -4,7 +4,7 @@
     v-infinite-scroll="loadMore"
     infinite-scroll-disabled="moreLoading"
     infinite-scroll-immediate-check="false"
-    infinite-scroll-distance="50"
+    infinite-scroll-distance="0"
   >
     <back-bar title="产品" back="/"></back-bar>
     <div class="hinder"></div>
@@ -47,18 +47,23 @@ export default {
   },
   methods: {
     loadMore() {
-      console.log("正在加载更多数据"+(this.page.pno+1));
+      console.log("正在加载更多数据" + (this.page.pno + 1));
       this.moreLoading = true;
-      if (this.allLoaded) {
-        this.moreLoading = true;
-      } else {
-        //查询的页数++
-        this.page.pno++;
-        //将关键词发送到vuex中
-        this.$store.commit("changeProductQuery", this.page);
-        //触发vuex中的查询产品信息的方法
-        this.$store.dispatch("getProductList");
-      }
+      console.log("moreLoading:"+this.moreLoading)
+      setTimeout(() => { //人为延长数据加载时间，仅测试使用
+        //如果数据全部加载
+        if (this.allLoaded) {
+          //禁用无限滚动
+          this.moreLoading = true;
+        } else {
+          //查询的页数++
+          this.page.pno++;
+          //将关键词发送到vuex中
+          this.$store.commit("changeProductQuery", this.page);
+          //触发vuex中的查询产品信息的方法
+          this.$store.dispatch("getProductList");
+        }
+      }, 2000);
     }
   },
   components: {
@@ -66,14 +71,20 @@ export default {
     "product-item": ProductItem
   },
   watch: {
-    //监听产品列表信息
+    //监听产品列表信息，如果有新数据则触发操作
     productList() {
       console.log("产品列表信息更新");
+      //将本次查询的数据拼接到本地数组
       this.localProductList = this.localProductList.concat(this.productList);
-      this.moreLoading = false
+      //启用无限滚动
+      this.moreLoading = false;
+      console.log("moreLoading:"+this.moreLoading+"数据："+this.localProductList.length+"/"+this.totalProduct)
+      //如果本地的数据条数不小于总记录条数
       if (this.localProductList.length >= this.totalProduct) {
-        console.log("已经超出总产品记录数")
+        console.log("已经超出总产品记录数");
+        //禁用无限滚动
         this.moreLoading = true;
+        //数据全部加载
         this.allLoaded = true;
       }
     }
@@ -84,13 +95,13 @@ export default {
   },
   destroyed() {
     //组件销毁后初始化查询参数
-    this.$store.commit("initProductQuery")
-  },
+    this.$store.commit("initProductQuery");
+  }
 };
 </script>
 <style lang="scss" scoped>
 .product {
-  max-height: 100vh; 
+  max-height: 100vh;
   overflow-y: auto;
   .product-area {
     display: flex;
@@ -100,14 +111,13 @@ export default {
     .product-item {
       width: 49%;
     }
-    .more_loading{
-      width:100%;
+    .more_loading {
+      width: 100%;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    
   }
 }
 </style>
