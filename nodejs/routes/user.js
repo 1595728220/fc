@@ -455,7 +455,7 @@ router.get("/detail", (req, res) => {
   if (!uid) { //用户编号为空
     res.send({
       code: 401,
-      msg: "用户编号不能为空"
+      msg: "请先登录"
     })
     return
   }

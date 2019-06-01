@@ -203,3 +203,17 @@ create table keywords(
   count int comment "关键词使用次数"
 );
 insert into keywords values(null,"超值",1,1);
+create table collect(
+  cid int primary key auto_increment,
+  coll_productId int comment "产品编号",
+  coll_userId int comment "用户编号",
+  coll_time bigint comment "收藏时间"
+);
+insert into collect values(null,1,1,1559366285389);
+create table browse(
+  bid int primary key auto_increment,
+  brow_productId int comment "产品编号",
+  brow_userId int comment "用户编号",
+  brow_time bigint comment "收藏时间"
+);
+insert into browse values(null,1,1,1559366285389);

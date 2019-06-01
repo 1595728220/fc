@@ -7,13 +7,13 @@ let router = express.Router()
 router.get("/create", (req, res) => {
   //获取用户编号和产品编号
   let {
-    uid,
     pid
-  } = req.query
+  } = req.query,
+    uid = req.session.uid
   if (!uid) { //用户编号为空
     res.send({
       code: 401,
-      msg: "用户编号不能为空"
+      msg: "请先登录"
     })
     return
   }
@@ -48,7 +48,7 @@ router.get("/list", (req, res) => {
   if (!uid) { //用户编号为空
     res.send({
       code: 401,
-      msg: "用户编号不能为空"
+      msg: "请先登录"
     })
     return
   }
@@ -125,6 +125,59 @@ router.get("/finish", (req, res) => {
         msg: "订单不存在"
       })
     }
+  })
+})
+//添加收藏
+router.get("/add_collect", (req, res) => {
+  let pid = req.query.pid,
+    uid = req.session.uid,
+    time = (new Date()).getTime()
+  sql = "insert into collect values(null,?,?,?)"
+  pool.query(sql, [pid, uid, time], (err, result) => {
+    if (err) throw err
+    if (result.affectedRows > 0)
+      res.send({ code: 200, msg: "收藏成功" })
+    else
+      res.send({ code: 301, msg: "收藏失败" })
+  })
+})
+//取消收藏
+router.get("/remove_collect", (req, res) => {
+  let pid = req.query.pid,
+    uid = req.session.uid,
+    sql = "delete from collect where coll_productId = ? and coll_userId = ?"
+  pool.query(sql, [pid, uid], (err, result) => {
+    if (err) throw err
+    if (result.affectedRows > 0)
+      res.send({ code: 200, msg: "取消收藏成功" })
+    else
+      res.send({ code: 301, msg: "取消收藏失败" })
+  })
+})
+//添加浏览历史记录
+router.get("/add_browse", (req, res) => {
+  let pid = req.query.pid,
+    uid = req.session.uid,
+    time = (new Date()).getTime()
+  sql = "insert into browse values(null,?,?,?)"
+  pool.query(sql, [pid, uid, time], (err, result) => {
+    if (err) throw err
+    if (result.affectedRows > 0)
+      res.send({ code: 200, msg: "添加浏览记录成功" })
+    else
+      res.send({ code: 301, msg: "添加浏览记录失败" })
+  })
+})
+//清空用户浏览记录
+router.get("/remove_browse", (req, res) => {
+  let uid = req.session.uid,
+    sql = "delete from browse where brow_userId = ?"
+  pool.query(sql, [uid], (err, result) => {
+    if (err) throw err
+    if (result.affectedRows > 0)
+      res.send({ code: 200, msg: "删除历史浏览记录成功" })
+    else
+      res.send({ code: 301, msg: "删除历史浏览记录失败" })
   })
 })
 //导出路由模块
