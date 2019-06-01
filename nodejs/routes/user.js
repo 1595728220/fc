@@ -450,7 +450,7 @@ router.get("/yzm", (req, res) => {
 //获取用户信息
 router.get("/detail", (req, res) => {
   //获取用户的编号
-  let uid = req.query.uid,
+  let uid = req.session.uid,
     sql = "select phone,userName,addr,nick,img_addr from user,user_img where user_imgId = uiid and uid = ?" 
   if (!uid) { //用户编号为空
     res.send({
@@ -543,7 +543,7 @@ router.post("/user_words", (req, res) => {
 //用户搜索记录
 router.get("/search", (req, res) => {
   //获取用户id
-  let uid = req.query.uid,
+  let uid = req.session.uid,
     //存储sql语句
     sql,
     //存储数据

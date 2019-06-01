@@ -44,7 +44,7 @@ router.get("/create", (req, res) => {
 //用户的订单概况 get uid
 router.get("/list", (req, res) => {
   //获取用户编号
-  let uid = req.query.uid
+  let uid = req.session.uid
   if (!uid) { //用户编号为空
     res.send({
       code: 401,
