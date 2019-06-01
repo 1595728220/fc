@@ -85,7 +85,7 @@ const actions = { //this.$store.dispatch('set_uid'，6)
   //自定义触发mutations里函数的方法，context与store 实例具有相同方法和属性  
   //发送请求，查询符合条件的产品信息
   getProductList(context) {
-    console.log(context.state.productQuery)
+    // console.log(context.state.productQuery)
     axios.get("/product/list", {
       params: context.state.productQuery
     }).then(result => {

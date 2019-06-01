@@ -2,7 +2,7 @@
 const express = require("express")
 const pool = require("../pool")
 let router = express.Router()
-
+//10个路由
 //生成订单 get uid,pid
 router.get("/create", (req, res) => {
   //获取用户编号和产品编号
@@ -154,6 +154,19 @@ router.get("/remove_collect", (req, res) => {
       res.send({ code: 301, msg: "取消收藏失败" })
   })
 })
+//获取用户的收藏记录
+router.get("/get_collect",(req,res)=>{
+  let uid = req.session.uid,
+  sql = "select pid,described,price,photo1,coll_time from product,product_img,collect where product_imgId = iid and coll_productId = pid and coll_userId = ?"
+  pool.query(sql,[uid],(err,result)=>{
+    if(err) throw err
+    if(result.length > 0) {
+      res.send({code:200,msg:"查询收藏商品成功",data:result})
+    } else {
+      res.send({code:301,msg:"未收藏商品"})
+    }
+  })
+})
 //添加浏览历史记录
 router.get("/add_browse", (req, res) => {
   let pid = req.query.pid,
@@ -178,6 +191,19 @@ router.get("/remove_browse", (req, res) => {
       res.send({ code: 200, msg: "删除历史浏览记录成功" })
     else
       res.send({ code: 301, msg: "删除历史浏览记录失败" })
+  })
+})
+//获取用户的浏览记录
+router.get("/get_browse",(req,res)=>{
+  let uid = req.session.uid,
+  sql = "select pid,described,price,photo1,brow_time from product,product_img,browse where product_imgId = iid and brow_productId = pid and brow_userId = ?"
+  pool.query(sql,[uid],(err,result)=>{
+    if(err) throw err
+    if(result.length > 0) {
+      res.send({code:200,msg:"查询收藏商品成功",data:result})
+    } else {
+      res.send({code:301,msg:"未收藏商品"})
+    }
   })
 })
 //导出路由模块

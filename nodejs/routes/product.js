@@ -1,6 +1,7 @@
 const express = require("express")
 const pool = require("../pool")
 let router = express.Router()
+//6个路由
 //宝贝详情 /get pid
 router.get("/detail", (req, res) => {
   let pid = req.query.pid
@@ -125,18 +126,25 @@ router.get("/list", (req, res) => {
   pool.query(sql, arr, (err, result) => {
     if (err) throw err
     console.log(result)
+    //查询该用户的收藏记录
     sql = "select coll_productId pid from collect where coll_userId = ?"
     let tmpArr = result
     pool.query(sql, [uid], (err, result) => {
       if (err) throw err
+      //如果存在收藏记录
       if (result.length > 0) {
+        //取出收藏产品编号转为数组
         result = Object.values(result[0])
         console.log(result)
+        //遍历查询产品结果列表
         tmpArr[0].forEach(el => {
+          //如果查询结果中的产品不是用户所收藏的
           if (result.indexOf(el.pid) === -1) {
+            //添加收藏属性为false
             el.collect = false
-          } else {
+          } else { //是用户收藏
             console.log(`商品${el.pid}为用户收藏的产品`)
+            //添加收藏属性为true
             el.collect = true
           }
         })

@@ -9,6 +9,7 @@ let router = express.Router()
 let uidRegex = /^\d*$/
 let phoneRegex = /^1[34578]\d{9}$/
 let upwdRegex = /^[a-zA-Z\d_]{6,12}$/
+//13个路由
 //用户登陆 /login post phone upwd
 router.post("/login", (req, res) => {
   //获取请求主体中的phone,upwd
