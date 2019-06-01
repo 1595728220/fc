@@ -77,26 +77,26 @@ export default {
       }, 2000);
     },
     //保存当前滚动的距离
-    saveTop(e) {
-      this.top = e.target.scrollTop;
-      // console.log(this.top)
-    },
+    // saveTop(e) {
+    //   this.top = e.target.scrollTop;
+    //   // console.log(this.top)
+    // },
     //无动画的返回顶部
-    initTop() {
-      console.log("回到顶部");
-      this.top = 0;
-      // console.log(this.aBScroll);
-      // this.aBScroll.scrollTo(0, 0);
-      this.$refs.fatherScroll.scrollTop = 0
-    },
-    loadData(){
-      console.log("加载数据")
-    }
+    // initTop() {
+    //   console.log("回到顶部");
+    //   this.top = 0;
+    //   // console.log(this.aBScroll);
+    //   // this.aBScroll.scrollTo(0, 0);
+    //   this.$refs.fatherScroll.scrollTop = 0
+    // },
+    // loadData(){
+    //   console.log("加载数据")
+    // }
 
   },
-  created() {
-    window.addEventListener("scroll", this.saveTop, true);
-  },
+  // created() {
+  //   window.addEventListener("scroll", this.saveTop, true);
+  // },
   components: {
     "back-bar": BackBar,
     "product-item": ProductItem,
