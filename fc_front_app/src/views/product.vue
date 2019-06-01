@@ -1,28 +1,34 @@
 <template>
-  <div
-    class="product"
-    v-infinite-scroll="loadMore"
-    infinite-scroll-disabled="moreLoading"
-    infinite-scroll-immediate-check="false"
-    infinite-scroll-distance="0"
-  >
-    <back-bar title="产品" back="/"></back-bar>
-    <div class="hinder"></div>
-    <!-- <h1>产品页面</h1> -->
-    <div class="product-area">
-      <div v-for="(item,index) of localProductList" :key="index" class="product-item">
-        <product-item :productItem="item"></product-item>
+  <div>
+    <div
+      class="product"
+      v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="moreLoading"
+      infinite-scroll-immediate-check="false"
+      infinite-scroll-distance="0"
+      @scroll.native="saveTop"
+      ref="fatherScroll"
+    >
+      <back-bar title="产品" back="/"></back-bar>
+      <div class="hinder"></div>
+      <!-- <h1>产品页面</h1> -->
+      <div class="product-area">
+        <div v-for="(item,index) of localProductList" :key="index" class="product-item">
+          <product-item :productItem="item"></product-item>
+        </div>
+        <div class="more_loading">
+          <mt-spinner type="snake" color="#00c17b" :size="20" v-show="moreLoading && !allLoaded"></mt-spinner>
+          <span v-show="allLoaded">已全部加载</span>
+        </div>
       </div>
-      <div class="more_loading">
-        <mt-spinner type="snake" color="#00c17b" :size="20" v-show="moreLoading && !allLoaded"></mt-spinner>
-        <span v-show="allLoaded">已全部加载</span>
-      </div>
+    <scroll-top :top="top" @backTop="initTop"></scroll-top>
     </div>
   </div>
 </template>
 <script>
 import BackBar from "../components/common/backbar";
 import ProductItem from "../components/product/product_item";
+import ScrollTop from "../components/common/scrollTop";
 export default {
   data() {
     return {
@@ -32,7 +38,8 @@ export default {
         pno: 1,
         size: 6
       },
-      localProductList: []
+      localProductList: [],
+      top:0
     };
   },
   computed: {
@@ -49,8 +56,9 @@ export default {
     loadMore() {
       console.log("正在加载更多数据" + (this.page.pno + 1));
       this.moreLoading = true;
-      console.log("moreLoading:"+this.moreLoading)
-      setTimeout(() => { //人为延长数据加载时间，仅测试使用
+      console.log("moreLoading:" + this.moreLoading);
+      setTimeout(() => {
+        //人为延长数据加载时间，仅测试使用
         //如果数据全部加载
         if (this.allLoaded) {
           //禁用无限滚动
@@ -64,11 +72,25 @@ export default {
           this.$store.dispatch("getProductList");
         }
       }, 2000);
+    },
+    //保存当前滚动的距离
+    saveTop(e){
+      this.top = e.target.scrollTop
+      // console.log(this.top)
+    },
+    initTop(){
+      console.log("回到顶部")
+      this.top = 0
+      this.$refs.fatherScroll.scrollTop = 0
     }
+  },
+  created() {
+    window.addEventListener('scroll', this.saveTop, true);
   },
   components: {
     "back-bar": BackBar,
-    "product-item": ProductItem
+    "product-item": ProductItem,
+    "scroll-top": ScrollTop
   },
   watch: {
     //监听产品列表信息，如果有新数据则触发操作
@@ -78,7 +100,14 @@ export default {
       this.localProductList = this.localProductList.concat(this.productList);
       //启用无限滚动
       this.moreLoading = false;
-      console.log("moreLoading:"+this.moreLoading+"数据："+this.localProductList.length+"/"+this.totalProduct)
+      console.log(
+        "moreLoading:" +
+          this.moreLoading +
+          "数据：" +
+          this.localProductList.length +
+          "/" +
+          this.totalProduct
+      );
       //如果本地的数据条数不小于总记录条数
       if (this.localProductList.length >= this.totalProduct) {
         console.log("已经超出总产品记录数");
