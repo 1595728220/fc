@@ -42,7 +42,8 @@ router.get("/list", (req, res) => {
     pno,
     size,
     keywords
-  } = req.query;
+  } = req.query,
+    uid = req.session.uid
   // console.log(uid,
   //   classify,
   //   style,
@@ -65,7 +66,7 @@ router.get("/list", (req, res) => {
   size = parseInt(size);
   //不规范的参数规范化
   (isNaN(Number(minprice)) || minprice < 0) && (minprice = 0);
-    (isNaN(Number(maxprice)) || maxprice < minprice) && (maxprice = 99999999)
+  (isNaN(Number(maxprice)) || maxprice < minprice) && (maxprice = 99999999)
   // console.log(maxprice, minprice)
   //计算分页的开始下标
   let start = (pno - 1) * size,
@@ -115,23 +116,36 @@ router.get("/list", (req, res) => {
     }
   }
   sql += " limit ?,?;select found_rows();"
-  console.log(sql)
-  console.log(keywords)
+  // console.log(sql)
+  // console.log(keywords)
   arr = arr.concat([start, size])
   // console.log(sql)
   // console.log(arr)
   //查询数据库
   pool.query(sql, arr, (err, result) => {
     if (err) throw err
-    // sql = "select found_rows()"
-    // pool.query(sql, (err, result) => {
-    //   if (err) throw err
-    //   console.log(result)
-    //   res.send(result)
+    console.log(result)
+    sql = "select coll_productId pid from collect where coll_userId = ?"
+    let tmpArr = result
+    pool.query(sql, [uid], (err, result) => {
+      if (err) throw err
+      if (result.length > 0) {
+        result = Object.values(result[0])
+        console.log(result)
+        tmpArr[0].forEach(el => {
+          if (result.indexOf(el.pid) === -1) {
+            el.collect = false
+          } else {
+            console.log(`商品${el.pid}为用户收藏的产品`)
+            el.collect = true
+          }
+        })
+      }
+      //返回查询结果
+      res.send(tmpArr)
+    })
 
-    // })
-    //返回查询结果
-    res.send(result)
+
   })
 })
 //获取产品的分类信息 /get 
