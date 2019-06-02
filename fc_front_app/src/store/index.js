@@ -31,14 +31,23 @@ const state = {
     size: 6,
   },
   //查询商品的总记录数
-  totalQueryProduct:"",
+  totalQueryProduct: "",
   //手机号
-  userPhone:"",
+  userPhone: "",
   //验证码
-  userIdentify:""
+  userIdentify: ""
 };
 const getters = { //实时监听state值的变化(最新状态)
-  
+  //返回一个格式化的手机号
+  getPhone(state) {
+    let arr = state.userPhone.split("")
+    arr.splice(3, 0, " ")
+    arr.splice(8, 0, " ")
+    return arr.join("")
+  },
+  getIdentify(state){
+    return state.userIdentify
+  }
 };
 const mutations = {
   //自定义改变state初始值的方法，这里面的参数除了state之外还可以再传额外的参数(变量或对象);
@@ -65,7 +74,7 @@ const mutations = {
     }
   },
   //为查询参数修改数据
-  changeProductQuery(state,val){
+  changeProductQuery(state, val) {
     //验证参数是否为对象
     if (Object.prototype.toString.call(val) === "[object Object]") {
 
@@ -81,13 +90,16 @@ const mutations = {
       })
     }
   },
-  setTotalQueryProduct(state,val){
+  //设置符合结果的产品总数
+  setTotalQueryProduct(state, val) {
     state.totalQueryProduct = val
   },
-  setUserPhone(state,val){
+  //设置用户手机号
+  setUserPhone(state, val) {
     state.userPhone = val
   },
-  setUserIdentify(state,val){
+  //设置用户验证码
+  setUserIdentify(state, val) {
     state.userIdentify = val
   }
 };
@@ -100,19 +112,19 @@ const actions = { //this.$store.dispatch('set_uid'，6)
       params: context.state.productQuery
     }).then(result => {
       // console.log(state.productQuery)
-      context.commit("setTotalQueryProduct",result.data[1][0]["found_rows()"])
+      context.commit("setTotalQueryProduct", result.data[1][0]["found_rows()"])
       context.commit("setProductList", result.data[0])
     }).catch(err => { throw err })
   },
   //发送请求，请求验证码
-  requireIdentify(context,val){
-    context.commit("setUserPhone",val)
-    axios.get("/user/yzm",{
-      params:{phone:context.state.userPhone}
-    }).then(result=>{
+  requireIdentify(context) {
+    //将手机号保存
+    axios.get("/user/yzm", {
+      params: { phone: context.state.userPhone }
+    }).then(result => {
       // console.log(result)
-      context.commit("setUserIdentify",result.data.yzm.text)
-      // console.log(context.state.userIdentify)
+      context.commit("setUserIdentify", result.data.yzm.text)
+      console.log(context.state.userIdentify)
     })
   }
 };

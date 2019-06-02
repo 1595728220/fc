@@ -32,6 +32,7 @@ export default {
     };
   },
   computed: {
+    //返回手机号验证结果
     phoneTest() {
       return !!this.phoneRegex && this.phoneRegex.test(this.phone);
     }
@@ -46,8 +47,13 @@ export default {
   //   this.phoneRegex = this.$store.state.phoneRegex
   // },
   methods: {
+    //点击跳转验证码页面
     toIdentify() {
-      this.$store.dispatch("requireIdentify", this.phone);
+      //存储当前输入的手机号
+      this.$store.commit("setUserPhone",this.phone)
+      //获取验证码
+      this.$store.dispatch("requireIdentify");
+      //跳转
       this.$router.push("/identify");
     }
   }
