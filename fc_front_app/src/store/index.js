@@ -10,7 +10,7 @@ const state = {
   productServerAdd: "http://127.0.0.1:8081/product/",
   bannerServerAdd: "http://127.0.0.1:8081/banner/",
   //手机号正则
-  phoneRegex: /^1[34578]\d{9}$/,
+  // phoneRegex: /^1[34578]\d{9}$/,
   //密码正则
   // upwdRegex: /^[a-zA-Z\d_]{6,18}$/,
   //产品列表
@@ -31,7 +31,11 @@ const state = {
     size: 6,
   },
   //查询商品的总记录数
-  totalQueryProduct:""
+  totalQueryProduct:"",
+  //手机号
+  userPhone:"",
+  //验证码
+  userIdentify:""
 };
 const getters = { //实时监听state值的变化(最新状态)
   
@@ -79,6 +83,12 @@ const mutations = {
   },
   setTotalQueryProduct(state,val){
     state.totalQueryProduct = val
+  },
+  setUserPhone(state,val){
+    state.userPhone = val
+  },
+  setUserIdentify(state,val){
+    state.userIdentify = val
   }
 };
 const actions = { //this.$store.dispatch('set_uid'，6)
@@ -94,6 +104,17 @@ const actions = { //this.$store.dispatch('set_uid'，6)
       context.commit("setProductList", result.data[0])
     }).catch(err => { throw err })
   },
+  //发送请求，请求验证码
+  requireIdentify(context,val){
+    context.commit("setUserPhone",val)
+    axios.get("/user/yzm",{
+      params:{phone:context.state.userPhone}
+    }).then(result=>{
+      // console.log(result)
+      context.commit("setUserIdentify",result.data.yzm.text)
+      // console.log(context.state.userIdentify)
+    })
+  }
 };
 const store = new Vuex.Store({
   state,

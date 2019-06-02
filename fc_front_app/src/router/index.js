@@ -6,9 +6,15 @@ import Order from "@/views/order"
 import NotFound from "@/views/notfound"
 import Product from "@/views/product"
 import ProductDetail from "@/views/product_detail"
+import LoginIdentify from "@/views/login_identify"
 Vue.use(Router)
 export default new Router({
   routes: [
+    {
+      name:"login_identify",
+      path:"/identify",
+      component:LoginIdentify
+    },
     {
       name:"product_detail",
       path:"/detail",
