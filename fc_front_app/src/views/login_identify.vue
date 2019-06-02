@@ -89,7 +89,10 @@ export default {
         }
         if (i !== len) this.$refs.inputSquer[i].focus();
         else if (this.getIdentify.toLowerCase() === arr.join("").toLowerCase()) {
-          this.$toast("登录成功",1000);
+          this.$toast({
+              message:"登录成功",
+              duration:500
+          });
           this.$router.push("/");
         } else {
           this.$messagebox({
