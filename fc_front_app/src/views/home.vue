@@ -1,23 +1,23 @@
 <template>
-  <div class="page-tabbar">
-    <div class="page-wrap">
+  <div class="page-tabbar clear">
     <title-bar></title-bar>
-    <div class="hinder"></div>
     <!-- 首页面板 -->
-    <mt-tab-container class="page-tabbar-container" v-model="selected">
-      <mt-tab-container-item id="market">
-        <my-market></my-market>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="goods">
-        <my-goods></my-goods>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="personal">
-        <my-personal></my-personal>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="sort">
-        <my-sort></my-sort>
-      </mt-tab-container-item>
-    </mt-tab-container>
+    <div class="hinder">
+      <mt-tab-container class="page-tabbar-container" v-model="selected">
+        <mt-tab-container-item id="market">
+          <my-market></my-market>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="goods">
+          <my-goods></my-goods>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="personal">
+          <my-personal></my-personal>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="sort">
+          <my-sort></my-sort>
+        </mt-tab-container-item>
+      </mt-tab-container>
+    </div>
     <!-- 底部导航栏 -->
     <mt-tabbar v-model="selected" fixed>
       <mt-tab-item id="market">
@@ -28,9 +28,7 @@
         逛市场
       </mt-tab-item>
       <mt-tab-item id="sort">
-        <span
-          class="icon iconfont icon-gonggeshitu"
-        ></span>
+        <span class="icon iconfont icon-gonggeshitu"></span>
         分类
       </mt-tab-item>
       <mt-tab-item id="goods">
@@ -48,15 +46,15 @@
         个人中心
       </mt-tab-item>
     </mt-tabbar>
-    </div>
   </div>
+  <!-- </div> -->
 </template>
 <script>
 import Market from "../components/market/market.vue";
 import Goods from "../components/goods/goods.vue";
 import Personal from "../components/personal/personal.vue";
-import Sort from "../components/search/sort.vue"
-import TitleBar from "../components/common/titlebar.vue"
+import Sort from "../components/search/sort.vue";
+import TitleBar from "../components/common/titlebar.vue";
 export default {
   data() {
     return {
@@ -68,17 +66,13 @@ export default {
     "my-market": Market,
     "my-goods": Goods,
     "my-personal": Personal,
-    "my-sort":Sort,
-    "title-bar":TitleBar
+    "my-sort": Sort,
+    "title-bar": TitleBar
   }
 };
 </script>
 <style lang="scss" scoped>
-.page-tabbar{
-  overflow: hidden;
-  .page-wrap{
-    overflow: auto;
-  }
+.page-tabbar {
   .mint-tabbar {
     .mint-tab-item.is-selected {
       color: #00c17b;

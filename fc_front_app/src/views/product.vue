@@ -104,7 +104,7 @@ export default {
     "scroll-top": ScrollTop,
     "infi-scroll": InfiScroll
   },
-  watch: {
+  // watch: {
     //监听产品列表信息，如果有新数据则触发操作
     // productList() {
     //   console.log("产品列表信息更新");
@@ -130,7 +130,7 @@ export default {
     //     this.allLoaded = true;
     //   }
     // }
-  }
+  // }
   // mounted() {
   //   //挂载后触发vuex中的查询产品信息的方法
   //   this.$store.dispatch("getProductList");
