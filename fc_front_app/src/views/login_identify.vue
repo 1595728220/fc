@@ -71,8 +71,8 @@ export default {
     this.timer = setInterval(() => {
       this.time !== 0 ? this.time-- : clearInterval(this.timer);
     }, 1000);
-    this.$refs.inputSquer[0].focus()
-    console.log(this.getIdentify)
+    this.$refs.inputSquer[0].focus();
+    console.log(this.getIdentify);
   },
   destroyed() {
     clearInterval(this.timer);
@@ -88,17 +88,30 @@ export default {
           if (arr[i] === "") break;
         }
         if (i !== len) this.$refs.inputSquer[i].focus();
-        else if (this.getIdentify.toLowerCase() === arr.join("").toLowerCase()) {
-          this.$toast({
-              message:"登录成功",
-              duration:500
-          });
-          this.$router.push("/");
+        else if (
+          this.getIdentify.toLowerCase() === arr.join("").toLowerCase()
+        ) {
+          this.$axios
+            .get("/user/mobileLogin", {
+              params: {
+                phone: this.$store.state.userPhone,
+                identify: this.getIdentify
+              }
+            })
+            .then(result => {
+              this.$toast({
+                message: result.data.msg,
+                duration: 500
+              });
+              if (result.data.code === 200) {
+                this.$router.push("/");
+              }
+            });
         } else {
           this.$messagebox({
             message: "验证码输入错误，请重新输入",
-            showConfirmButton: "true",
-          }).then(this.backspace)
+            showConfirmButton: "true"
+          }).then(this.backspace);
         }
       },
       deep: true

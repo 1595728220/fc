@@ -573,9 +573,38 @@ router.get("/search", (req, res) => {
     }
   })
 })
-// //批量查询用户基本信息
-// router.get("/simple",(req,res)=>{
-//   let uid = req.query.uid,
+router.get("/mobileLogin",(req,res)=>{
+  let {phone,identify} = req.query,
+  sql = "select uid from user where phone  = ?"
+  if(identify.toLowerCase !== req.session.captcha.toLowerCase){
+    res.send({code:401,msg:"验证码错误"})
+    return 
+  }
+  if(!phoneRegex.test(phone)){
+    res.send({code:402,msg:"手机号格式不正确"})
+    return
+  }
+  pool.query(sql,[phone],(err,result)=>{
+    if(err) throw err
+    if(result.length === 0) {
+      console.log("用户未注册")
+      sql = "insert into user(phone,upwd) values(?, md5(?))"
+      pool.query(sql,[phone,identify],(err,result)=>{
+        if(err) throw err
+        if(result.affectedRows > 0){
+          console.log("注册新用户成功")
+          req.session.uid = result.insertId
+          res.send({code:200,msg:"登录成功"})
 
-// })
+        }else{
+          res.send({code:301,msg:"登录失败，无法创建新用户"})
+        }
+      })
+    } else{
+      console.log("用户登录成功")
+      req.session.uid = result[0].uid
+      res.send({code:200,msg:"登录成功"})
+    }
+  }) 
+})
 module.exports = router
