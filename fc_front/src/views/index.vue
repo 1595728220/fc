@@ -273,10 +273,6 @@ export default {
         this.banner.lunbo.critical =
           (this.banner.lunbo.currentIndex + 1) * this.banner.lunbo.onceWidth;
       }
-      //限制时间间隔在40ms以内
-      if (this.banner.lunbo.deltaTime > 40) {
-        this.banner.lunbo.deltaTime = 40;
-      }
       //计算left属性值
       this.banner.lunbo.left +=
         this.banner.lunbo.speed * this.banner.lunbo.deltaTime;
@@ -298,16 +294,21 @@ export default {
     },
     //智能动画
     smartLoop() {
-      // console.log(this.banner.lunbo.left)
-      // console.log(this.banner.lunbo.critical)
       //定义开始执行时的时间节点
       let now = new Date();
       //计算中间的时间间隔
       this.banner.lunbo.deltaTime = now - this.banner.lunbo.lastTime;
+      this.banner.lunbo.lastTime = now
+      // console.log(this.banner.lunbo.lastTime)
+      //限制时间间隔在40ms以内
+      if (this.banner.lunbo.deltaTime > 40) {
+        this.banner.lunbo.deltaTime = 40;
+      }
+      // console.log(this.banner.lunbo.deltaTime)
       //不延迟轮播
       if (this.banner.lunbo.sign === 1) {
         this.lunbo();
-        requestAnimationFrame(this.smartLoop);
+        requestAnimationFrame(this.smartLoop,this.banner.lunbo.deltaTime);
       } else {
         //延迟轮播
         //当图片到达边界点时，等待3秒继续
@@ -315,7 +316,7 @@ export default {
           //   console.log("运行定时器"+this.banner.lunbo.timer)
           this.lunbo();
           this.banner.lunbo.sign = 1;
-          requestAnimationFrame(this.smartLoop);
+          requestAnimationFrame(this.smartLoop,this.banner.lunbo.deltaTime);
         }, 4000);
         // console.log("当前等待运行的定时器" + this.banner.lunbo.timer);
       }
