@@ -67,7 +67,7 @@ export default {
           this.moreLoading = true;
         } else {
           //查询的页数++
-          this.page.pno++;
+          this.page.size+= 6;
           //将关键词发送到vuex中
           this.$store.commit("changeProductQuery", this.page);
           //触发vuex中的查询产品信息的方法
@@ -105,7 +105,8 @@ export default {
     productList() {
       console.log("产品列表信息更新");
       //将本次查询的数据拼接到本地数组
-      this.localProductList = this.localProductList.concat(this.productList);
+      // this.localProductList = this.localProductList.concat(this.productList);
+      this.localProductList = this.productList
       //启用无限滚动
       this.moreLoading = false;
       console.log(

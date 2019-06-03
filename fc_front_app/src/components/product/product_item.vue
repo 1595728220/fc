@@ -1,5 +1,5 @@
 <template>
-  <div class="item" >
+  <div class="item">
     <!-- <h1>产品详情</h1> -->
     <img v-lazy="baseSrc+productItem.photo1" class="img" @click="goToDetail">
     <div class="described">{{productItem.described}}</div>
@@ -30,27 +30,56 @@ export default {
       });
     },
     //添加收藏
-    addCollect(){
+    addCollect() {
       //发送请求添加收藏记录
-      this.$axios.get("/order/add_collect",{
-        params:{pid:this.productItem.pid}
-      }).then((result)=>{
-        if(result.data.code === 200){ //收藏成功
-          this.$toast({
-            message:result.data.msg,
-            position:"middle",
-            duration:1000
+      if (this.productItem.collect) {
+        console.log("取消收藏")
+        this.$axios.get("/order/remove_collect",{
+          params:{pid:this.productItem.pid}
+        }).then(result=>{
+          if (result.data.code === 200) {
+              //取消收藏成功
+              this.$toast({
+                message: result.data.msg,
+                position: "middle",
+                duration: 1000
+              });
+              //获取最新的数据
+              this.$store.dispatch("getProductList");
+            } else {
+              //取消收藏失败
+              this.$toast({
+                message: result.data.msg,
+                position: "middle",
+                duration: 1500
+              });
+            }
+        })
+      } else {
+        this.$axios
+          .get("/order/add_collect", {
+            params: { pid: this.productItem.pid }
           })
-          //获取最新的数据
-          this.$store.dispatch("getProductList")
-        } else { //收藏失败
-          this.$toast({
-            message:result.data.msg,
-            position:"middle",
-            duration:1500
-          })
-        }
-      })
+          .then(result => {
+            if (result.data.code === 200) {
+              //收藏成功
+              this.$toast({
+                message: result.data.msg,
+                position: "middle",
+                duration: 1000
+              });
+              //获取最新的数据
+              this.$store.dispatch("getProductList");
+            } else {
+              //收藏失败
+              this.$toast({
+                message: result.data.msg,
+                position: "middle",
+                duration: 1500
+              });
+            }
+          });
+      }
     }
   },
   computed: {
@@ -77,13 +106,13 @@ export default {
     color: #555;
   }
   .price {
-    .text{
+    .text {
       color: #00c17b;
     }
-    .shoucang{
-      color:#F30213;
+    .shoucang {
+      color: #f30213;
     }
-    display:flex;
+    display: flex;
     justify-content: space-between;
   }
 }

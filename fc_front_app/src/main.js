@@ -20,7 +20,7 @@ Vue.use(VueLazyload, {
   attempt: 1
 })
 //声明全局组件
-Vue.component("my-scroll",Scroll)
+Vue.component("my-scroll", Scroll)
 //引入过滤器
 import * as filters from "./filter/filter"
 //取出对象中的属性名构成数组
@@ -35,19 +35,20 @@ Object.keys(filters)
 Vue.config.productionTip = false
 
 //设置路由守卫，验证用户登录状态
-// router.beforeEach((to, from, next) => {
-//   let uid = store.state.person_uid
-//   if (!uid) {
-//     if (to.path !== "/login") {
-//        next({ path: "/login" })
-//     } 
-//   } else {
-//     if (to.path === '/login') {
-//       next({ path: '/' });
-//     }
-//   }
-//   next()
-// })
+router.beforeEach((to, from, next) => {
+  axios.get("/user/state").then(result => {
+    if (result.data.code === 200) {
+      if (to.path === '/login') {
+        next({ path: '/' });
+      }
+    } else {
+      if (to.path !== "/login") {
+        next({ path: "/login" })
+      }
+    }
+    next()
+  })
+})
 
 new Vue({
   render: h => h(App),

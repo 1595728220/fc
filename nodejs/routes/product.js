@@ -105,17 +105,19 @@ router.get("/list", (req, res) => {
     sql += " and described like ? "
     arr.push(keyword)
   }
-  if (rexiao === "true" || xinpin === "true") { //热销和新品中至少有一个不为空 , 
+  // if (rexiao === "true" || xinpin === "true") { //热销和新品中至少有一个不为空 , 
     sql += " order by "
     if (rexiao === "true") { //热销不为空
       sql += " month_buy desc"
-      if (xinpin === "true") { //新品不为空
-        sql += " ,shelf_time desc"
-      }
+      // if (xinpin === "true") { //新品不为空
+      //   sql += " ,shelf_time desc"
+      // }
     } else if (xinpin === "true") { //新品不为空
       sql += " shelf_time desc"
+    } else {
+      sql += " pid asc"
     }
-  }
+  // }
   sql += " limit ?,?;select found_rows();"
   // console.log(sql)
   // console.log(keywords)
@@ -133,9 +135,13 @@ router.get("/list", (req, res) => {
       if (err) throw err
       //如果存在收藏记录
       if (result.length > 0) {
+        // console.dir("收藏产品编号结果"+result)
         //取出收藏产品编号转为数组
-        result = Object.values(result[0])
-        console.log(result)
+        result = result.map(el=>{
+          return el.pid
+        })
+        // result = Object.values(result[0])
+        // console.log("产品编号数组："+result)
         //遍历查询产品结果列表
         tmpArr[0].forEach(el => {
           //如果查询结果中的产品不是用户所收藏的
