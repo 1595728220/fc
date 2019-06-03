@@ -1,6 +1,10 @@
 <template>
   <div ref="fatherScroll" class="market-new pr">
-    <p>新品</p>
+    <infi-scroll>
+      <div v-for="(item,index) of productList" :key="index">
+        <span>{{item.described}}</span>
+      </div>
+    </infi-scroll>
     <scroll-top :top="top" @backTop="initTop"></scroll-top>
   </div>
 </template>
@@ -15,8 +19,9 @@ export default {
   },
   created() {
     window.addEventListener("scroll", this.saveTop, true);
-    this.$store.commit("changeProductQuery", { keywords: this.keywords });
-    this.$store.dispatch("getProductList");
+    this.$store.commit("initProductQuery")
+    this.$store.commit("changeProductQuery", { xinpin: true });
+    // this.$store.dispatch("getProductList");
   },
   methods: {
     initTop() {
@@ -28,7 +33,7 @@ export default {
     saveTop(e) {
       this.top = e.target.scrollTop;
       // console.log(this.top)
-    },
+    }
   },
   computed: {
     productList() {
@@ -46,8 +51,5 @@ export default {
 .market-new {
   max-height: 100vh;
   overflow-y: auto;
-  /deep/ p{
-    height: 1000px;
-  }
 }
 </style>
