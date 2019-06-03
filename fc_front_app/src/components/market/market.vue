@@ -8,20 +8,26 @@
     </div>
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="新品">
-        新品
+        <market-new></market-new>
       </mt-tab-container-item>
       <mt-tab-container-item id="热销">
-        热销
+        <market-hot></market-hot>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
 </template>
 <script>
+import marketHot from "./market_hot"
+import marketNew from "./market_new"
 export default {
   data() {
     return {
       selected: "新品"
     };
+  },
+  components:{
+    "market-hot":marketHot,
+    "market-new":marketNew
   }
 };
 </script>
