@@ -308,7 +308,7 @@ export default {
       //不延迟轮播
       if (this.banner.lunbo.sign === 1) {
         this.lunbo();
-        requestAnimationFrame(this.smartLoop,this.banner.lunbo.deltaTime);
+        requestAnimationFrame(this.smartLoop);
       } else {
         //延迟轮播
         //当图片到达边界点时，等待3秒继续
@@ -316,7 +316,7 @@ export default {
           //   console.log("运行定时器"+this.banner.lunbo.timer)
           this.lunbo();
           this.banner.lunbo.sign = 1;
-          requestAnimationFrame(this.smartLoop,this.banner.lunbo.deltaTime);
+          requestAnimationFrame(this.smartLoop);
         }, 4000);
         // console.log("当前等待运行的定时器" + this.banner.lunbo.timer);
       }
