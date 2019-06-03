@@ -21,6 +21,9 @@ img{
 } */
 
 /*定义一些常用的样式*/
+body{
+  overflow: hidden;
+}
 .clear:before{
   content:"";
   display:table;

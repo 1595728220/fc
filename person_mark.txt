@@ -57,4 +57,4 @@ SELECT FOUND_ROWS();执行一次查询同时获得数据，该方法查询效率
 http://www.imooc.com/article/18232
 https://ustbhuangyi.github.io/better-scroll/doc/zh-hans/installation.html
 25.在使用第三方组件库的时候，如果在scoped的css作用域中无法修改组件的样式时可以使用 /deep/ 或 >>> 深度修改样式，>>>有时无法被scss解析器解释，可以使用/deep/代替
-
+26.在使用滚动条的时候，如果出现原的滚动条变长，内容错位，可能就是body的滚动条和自己设置的滚动条之间产生了冲突，目前解决办法是将body的overflow:hidden
