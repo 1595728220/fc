@@ -71,7 +71,7 @@ router.get("/list", (req, res) => {
   // console.log(maxprice, minprice)
   //计算分页的开始下标
   let start = (pno - 1) * size,
-    sql = "select sql_calc_found_rows pid,described,price,photo1,shelf_time from product,product_img where product_imgId = iid", //存储查询的sql 语句
+    sql = "select sql_calc_found_rows pid,described,price,photo1,shelf_time,month_buy from product,product_img where product_imgId = iid", //存储查询的sql 语句
     arr = [] //存储查询的参数
   if (!!classify) { //如果分类不为空
     sql += " and classify = ?" //拼接查询条件
@@ -119,7 +119,7 @@ router.get("/list", (req, res) => {
     }
   // }
   sql += " limit ?,?;select found_rows();"
-  console.log(sql)
+  // console.log(sql)
   // console.log(keywords)
   arr = arr.concat([start, size])
   // console.log(sql)

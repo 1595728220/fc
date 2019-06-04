@@ -2,7 +2,7 @@
   <div ref="fatherScroll" class="market-list pr">
     <infi-scroll>
       <div v-for="(item,index) of productList" :key="index">
-        <market-item :productItem="item"></market-item>
+        <market-item :productItem="item" :origin="origin"></market-item>
       </div>
     </infi-scroll>
     <scroll-top :top="top" @backTop="initTop"></scroll-top>
@@ -14,7 +14,8 @@ import InfiScroll from "../common/infiScroll";
 import MarketItem from "./market_item";
 export default {
   props: {
-    query: { Type: Object, default: {} }
+    query: { Type: Object, default: {} },
+    origin:{ default:"" }
   },
   data() {
     return {
@@ -55,7 +56,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .market-list {
-  max-height: 100vh;
+  max-height: 83vh;
   overflow-y: auto;
 }
+
 </style>

@@ -8,10 +8,10 @@
     </div>
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="新品" >
-        <market-list :query="xinpin" v-if="selected === '新品'"></market-list>
+        <market-list :query="xinpin" v-if="selected === '新品'" origin="新品"></market-list>
       </mt-tab-container-item>
       <mt-tab-container-item id="热销" >
-        <market-list :query="rexiao" v-if="selected === '热销'"></market-list>
+        <market-list :query="rexiao" v-if="selected === '热销'" origin="热销"></market-list>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
