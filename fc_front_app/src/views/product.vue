@@ -103,33 +103,33 @@ export default {
     "product-item": ProductItem,
     "scroll-top": ScrollTop,
     "infi-scroll": InfiScroll
-  },
+  }
   // watch: {
-    //监听产品列表信息，如果有新数据则触发操作
-    // productList() {
-    //   console.log("产品列表信息更新");
-    //   //将本次查询的数据拼接到本地数组
-    //   // this.localProductList = this.localProductList.concat(this.productList);
-    //   this.localProductList = this.productList;
-    //   //启用无限滚动
-    //   this.moreLoading = false;
-    //   console.log(
-    //     "moreLoading:" +
-    //       this.moreLoading +
-    //       "数据：" +
-    //       this.localProductList.length +
-    //       "/" +
-    //       this.totalProduct
-    //   );
-    //   //如果本地的数据条数不小于总记录条数
-    //   if (this.localProductList.length >= this.totalProduct) {
-    //     console.log("已经超出总产品记录数");
-    //     //禁用无限滚动
-    //     this.moreLoading = true;
-    //     //数据全部加载
-    //     this.allLoaded = true;
-    //   }
-    // }
+  //监听产品列表信息，如果有新数据则触发操作
+  // productList() {
+  //   console.log("产品列表信息更新");
+  //   //将本次查询的数据拼接到本地数组
+  //   // this.localProductList = this.localProductList.concat(this.productList);
+  //   this.localProductList = this.productList;
+  //   //启用无限滚动
+  //   this.moreLoading = false;
+  //   console.log(
+  //     "moreLoading:" +
+  //       this.moreLoading +
+  //       "数据：" +
+  //       this.localProductList.length +
+  //       "/" +
+  //       this.totalProduct
+  //   );
+  //   //如果本地的数据条数不小于总记录条数
+  //   if (this.localProductList.length >= this.totalProduct) {
+  //     console.log("已经超出总产品记录数");
+  //     //禁用无限滚动
+  //     this.moreLoading = true;
+  //     //数据全部加载
+  //     this.allLoaded = true;
+  //   }
+  // }
   // }
   // mounted() {
   //   //挂载后触发vuex中的查询产品信息的方法
@@ -145,21 +145,8 @@ export default {
 .product {
   max-height: 100vh;
   overflow-y: auto;
-  .product-area {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 0.25rem;
-    .product-item {
-      width: 49%;
-    }
-    .more_loading {
-      width: 100%;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  .product-item {
+    width: 49%;
   }
 }
 </style>

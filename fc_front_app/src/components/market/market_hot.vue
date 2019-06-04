@@ -3,7 +3,7 @@
     <div ref="fatherScroll" class="market-hot pr">
       <infi-scroll>
         <div v-for="(item,index) of productList" :key="index">
-          <span>{{item.described}}</span>
+          <market-item :productItem="item"></market-item>
         </div>
       </infi-scroll>
       <scroll-top :top="top" @backTop="initTop"></scroll-top>
@@ -13,6 +13,7 @@
 <script>
 import ScrollTop from "../common/scrollTop";
 import InfiScroll from "../common/infiScroll";
+import MarketItem from "./market_item"
 export default {
   data() {
     return {
@@ -48,7 +49,8 @@ export default {
   watch: {},
   components: {
     "scroll-top": ScrollTop,
-    "infi-scroll": InfiScroll
+    "infi-scroll": InfiScroll,
+    "market-item" : MarketItem,
   }
 };
 </script>
