@@ -7,27 +7,28 @@
       </mt-navbar>
     </div>
     <mt-tab-container v-model="selected">
-      <mt-tab-container-item id="新品" v-if="selected === '新品'">
-        <market-new></market-new>
+      <mt-tab-container-item id="新品" >
+        <market-list :query="xinpin" v-if="selected === '新品'"></market-list>
       </mt-tab-container-item>
-      <mt-tab-container-item id="热销" v-if="selected === '热销'">
-        <market-hot></market-hot>
+      <mt-tab-container-item id="热销" >
+        <market-list :query="rexiao" v-if="selected === '热销'"></market-list>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
 </template>
 <script>
-import marketHot from "./market_hot"
-import marketNew from "./market_new"
+import marketList from "./market_list"
+// import marketNew from "./market_new"
 export default {
   data() {
     return {
-      selected: "新品"
+      selected: "新品",
+      rexiao:{rexiao:true},
+      xinpin:{xinpin:true}
     };
   },
   components:{
-    "market-hot":marketHot,
-    "market-new":marketNew
+    "market-list":marketList,
   },
 };
 </script>
