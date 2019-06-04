@@ -79,7 +79,9 @@ export default {
   color: #f30213;
   display: flex;
   align-items: center;
+  font-size:1.5rem;
   span {
+    margin-left:0.1rem;
     color: #000;
     font-size: 0.85rem;
   }

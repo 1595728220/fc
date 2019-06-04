@@ -7,7 +7,8 @@
       <div class="described">{{productItem.described}}</div>
       <div class="price">{{productItem.price|money}}</div>
       <div class="bottom">
-        <span>{{productItem.shelf_time|monthDate}}</span>
+        <span v-show="origin==='新品'">{{productItem.shelf_time|monthDate}}</span>
+        <span v-show="origin==='热销'">月售:{{productItem.month_buy|toWan}}</span>
         <!-- <div
           class="icon iconfont shoucang"
           :class="productItem.collect ? 'icon-xihuan' :'icon-xihuan-xianxing' "
@@ -38,57 +39,57 @@ export default {
   methods: {
     goToDetail() {},
     //添加收藏
-    addCollect() {
-      //发送请求添加收藏记录
-      if (this.productItem.collect) {
-        console.log("取消收藏")
-        this.$axios.get("/order/remove_collect",{
-          params:{pid:this.productItem.pid}
-        }).then(result=>{
-          if (result.data.code === 200) {
-              //取消收藏成功
-              this.$toast({
-                message: result.data.msg,
-                position: "middle",
-                duration: 1000
-              });
-              //获取最新的数据
-              this.$store.dispatch("getProductList");
-            } else {
-              //取消收藏失败
-              this.$toast({
-                message: result.data.msg,
-                position: "middle",
-                duration: 1500
-              });
-            }
-        })
-      } else {
-        this.$axios
-          .get("/order/add_collect", {
-            params: { pid: this.productItem.pid }
-          })
-          .then(result => {
-            if (result.data.code === 200) {
-              //收藏成功
-              this.$toast({
-                message: result.data.msg,
-                position: "middle",
-                duration: 1000
-              });
-              //获取最新的数据
-              this.$store.dispatch("getProductList");
-            } else {
-              //收藏失败
-              this.$toast({
-                message: result.data.msg,
-                position: "middle",
-                duration: 1500
-              });
-            }
-          });
-      }
-    }
+    // addCollect() {
+    //   //发送请求添加收藏记录
+    //   if (this.productItem.collect) {
+    //     console.log("取消收藏")
+    //     this.$axios.get("/order/remove_collect",{
+    //       params:{pid:this.productItem.pid}
+    //     }).then(result=>{
+    //       if (result.data.code === 200) {
+    //           //取消收藏成功
+    //           this.$toast({
+    //             message: result.data.msg,
+    //             position: "middle",
+    //             duration: 1000
+    //           });
+    //           //获取最新的数据
+    //           this.$store.dispatch("getProductList");
+    //         } else {
+    //           //取消收藏失败
+    //           this.$toast({
+    //             message: result.data.msg,
+    //             position: "middle",
+    //             duration: 1500
+    //           });
+    //         }
+    //     })
+    //   } else {
+    //     this.$axios
+    //       .get("/order/add_collect", {
+    //         params: { pid: this.productItem.pid }
+    //       })
+    //       .then(result => {
+    //         if (result.data.code === 200) {
+    //           //收藏成功
+    //           this.$toast({
+    //             message: result.data.msg,
+    //             position: "middle",
+    //             duration: 1000
+    //           });
+    //           //获取最新的数据
+    //           this.$store.dispatch("getProductList");
+    //         } else {
+    //           //收藏失败
+    //           this.$toast({
+    //             message: result.data.msg,
+    //             position: "middle",
+    //             duration: 1500
+    //           });
+    //         }
+    //       });
+    //   }
+    // }
   },
   components:{
     "my-collect":Collect
@@ -121,6 +122,7 @@ export default {
     .bottom {
       display:flex;
       justify-content: space-between;
+      align-items: center;
       // .shoucang {
       //   color: #f30213;
       //   display:flex;

@@ -41,12 +41,12 @@ export default {
   padding:0.5rem 0;
 }
 /deep/ .mint-tab-item-label{
-  font-size:1.5rem;
+  font-size:1.2rem;
 }
 .mint-navbar{
   margin-top:2.75rem;
 }
 .mint-tab-container{
-  margin-top:2.5rem;
+  margin-top:2rem;
 }
 </style>
