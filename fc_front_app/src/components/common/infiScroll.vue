@@ -88,13 +88,16 @@ export default {
       }
     }
   },
+  created() {
+    // this.$store.commit("initProductQuery");
+  },
   mounted() {
     //挂载后触发vuex中的查询产品信息的方法
     this.$store.dispatch("getProductList");
   },
   destroyed() {
     //组件销毁后初始化查询参数
-    this.$store.commit("initProductQuery");
+    // this.$store.commit("initProductQuery");
   }
 };
 </script>

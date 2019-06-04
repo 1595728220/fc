@@ -21,6 +21,7 @@ export default {
     //回车时触发的事件
     searchEvent() {
       console.log("查找" + this.keywords);
+      this.$store.commit("initProductQuery");
       //将关键词发送到vuex中
       this.$store.commit("changeProductQuery",{keywords:this.keywords}) ;
       //触发vuex中的查询产品信息的方法

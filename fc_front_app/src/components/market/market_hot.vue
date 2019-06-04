@@ -21,12 +21,12 @@ export default {
   },
   created() {
     window.addEventListener("scroll", this.saveTop, true);
-    
+    // this.$store.commit("initProductQuery")
+    this.$store.commit("changeProductQuery", { rexiao: true })
+    // this.$store.dispatch("getProductList");
   },
   mounted() {
-    this.$store.commit("initProductQuery")
-    this.$store.commit("changeProductQuery", { rexiao: true });
-    // this.$store.dispatch("getProductList");
+    
   },
   methods: {
     initTop() {

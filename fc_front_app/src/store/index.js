@@ -54,10 +54,12 @@ const mutations = {
 
   //修改产品列表数据
   setProductList(state, val) {
+    console.log("vuex：更新产品列表")
     state.productList = val
   },
   //初始化查询参数
   initProductQuery(state) {
+    console.log("vuex：初始化查询产品列表参数")
     state.productQuery = {
       keywords: "",
       classify: "",
@@ -75,6 +77,7 @@ const mutations = {
   },
   //为查询参数修改数据
   changeProductQuery(state, val) {
+    console.log("vuex：修改查询产品列表参数")
     //验证参数是否为对象
     if (Object.prototype.toString.call(val) === "[object Object]") {
 
@@ -92,6 +95,7 @@ const mutations = {
   },
   //设置符合结果的产品总数
   setTotalQueryProduct(state, val) {
+    console.log("vuex：更新产品总数")
     state.totalQueryProduct = val
   },
   //设置用户手机号
@@ -107,6 +111,7 @@ const actions = { //this.$store.dispatch('set_uid'，6)
   //自定义触发mutations里函数的方法，context与store 实例具有相同方法和属性  
   //发送请求，查询符合条件的产品信息
   getProductList(context) {
+    console.log("vuex：发送请求/product/list")
     // console.log(context.state.productQuery)
     axios.get("/product/list", {
       params: context.state.productQuery
@@ -118,6 +123,7 @@ const actions = { //this.$store.dispatch('set_uid'，6)
   },
   //发送请求，请求验证码
   requireIdentify(context) {
+    console.log("vuex：发送请求/user/yzm")
     //将手机号保存
     axios.get("/user/yzm", {
       params: { phone: context.state.userPhone }
