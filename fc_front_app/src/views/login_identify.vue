@@ -104,7 +104,7 @@ export default {
                 duration: 500
               });
               if (result.data.code === 200) {
-                this.$router.push("/");
+                this.$router.replace("/");
               }
             });
         } else {

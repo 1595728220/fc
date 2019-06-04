@@ -5,15 +5,17 @@
     <div class="described">{{productItem.described}}</div>
     <div class="price">
       <span class="text">￥{{productItem.price.toFixed(2)}}</span>
-      <span
+      <!-- <span
         class="icon iconfont shoucang"
         :class="productItem.collect ? 'icon-xihuan' :'icon-xihuan-xianxing' "
         @click="addCollect"
-      ></span>
+      ></span> -->
+      <my-collect :productItem="productItem"></my-collect>
     </div>
   </div>
 </template>
 <script>
+import Collect from "../common/collect"
 export default {
   props: {
     productItem: { default: {} }
@@ -29,64 +31,67 @@ export default {
         params: { pid: this.productItem.pid }
       });
     },
-    //添加收藏
-    addCollect() {
-      //发送请求添加收藏记录
-      if (this.productItem.collect) {
-        console.log("取消收藏")
-        this.$axios.get("/order/remove_collect",{
-          params:{pid:this.productItem.pid}
-        }).then(result=>{
-          if (result.data.code === 200) {
-              //取消收藏成功
-              this.$toast({
-                message: result.data.msg,
-                position: "middle",
-                duration: 1000
-              });
-              //获取最新的数据
-              this.$store.dispatch("getProductList");
-            } else {
-              //取消收藏失败
-              this.$toast({
-                message: result.data.msg,
-                position: "middle",
-                duration: 1500
-              });
-            }
-        })
-      } else {
-        this.$axios
-          .get("/order/add_collect", {
-            params: { pid: this.productItem.pid }
-          })
-          .then(result => {
-            if (result.data.code === 200) {
-              //收藏成功
-              this.$toast({
-                message: result.data.msg,
-                position: "middle",
-                duration: 1000
-              });
-              //获取最新的数据
-              this.$store.dispatch("getProductList");
-            } else {
-              //收藏失败
-              this.$toast({
-                message: result.data.msg,
-                position: "middle",
-                duration: 1500
-              });
-            }
-          });
-      }
-    }
+    // //添加收藏
+    // addCollect() {
+    //   //发送请求添加收藏记录
+    //   if (this.productItem.collect) {
+    //     console.log("取消收藏")
+    //     this.$axios.get("/order/remove_collect",{
+    //       params:{pid:this.productItem.pid}
+    //     }).then(result=>{
+    //       if (result.data.code === 200) {
+    //           //取消收藏成功
+    //           this.$toast({
+    //             message: result.data.msg,
+    //             position: "middle",
+    //             duration: 1000
+    //           });
+    //           //获取最新的数据
+    //           this.$store.dispatch("getProductList");
+    //         } else {
+    //           //取消收藏失败
+    //           this.$toast({
+    //             message: result.data.msg,
+    //             position: "middle",
+    //             duration: 1500
+    //           });
+    //         }
+    //     })
+    //   } else {
+    //     this.$axios
+    //       .get("/order/add_collect", {
+    //         params: { pid: this.productItem.pid }
+    //       })
+    //       .then(result => {
+    //         if (result.data.code === 200) {
+    //           //收藏成功
+    //           this.$toast({
+    //             message: result.data.msg,
+    //             position: "middle",
+    //             duration: 1000
+    //           });
+    //           //获取最新的数据
+    //           this.$store.dispatch("getProductList");
+    //         } else {
+    //           //收藏失败
+    //           this.$toast({
+    //             message: result.data.msg,
+    //             position: "middle",
+    //             duration: 1500
+    //           });
+    //         }
+    //       });
+    //   }
+    // }
   },
   computed: {
     //获取产品图片保存的路径
     baseSrc() {
       return this.$store.state.productServerAdd;
     }
+  },
+  components:{
+    "my-collect":Collect
   }
 };
 </script>
@@ -109,9 +114,9 @@ export default {
     .text {
       color: #00c17b;
     }
-    .shoucang {
-      color: #f30213;
-    }
+    // .shoucang {
+    //   color: #f30213;
+    // }
     display: flex;
     justify-content: space-between;
   }

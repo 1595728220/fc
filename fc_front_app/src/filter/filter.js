@@ -10,9 +10,19 @@ const fanyi = english=>{
     if(english === "addr") return "联系地址"
     if(english === "userName") return "姓名"
     if(english === "nick") return "昵称"
-    if(english === "img_addr") return "头像"
-    
+    if(english === "img_addr") return "头像" 
+}
+const money = price =>{
+    if(!isNaN(Number(price)))
+    return `￥${price.toFixed(2)}`
+}
+const monthDate = time =>{
+    if(!isNaN(Number(time)))
+    time = new Date(time)
+    return `${time.getMonth()+1}月${time.getDate()}日`
 }
 export{
-    fanyi
+    fanyi,
+    money,
+    monthDate
 }
