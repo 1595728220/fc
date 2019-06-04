@@ -11,7 +11,10 @@
     <div class="info">
       <div>{{product_detail.described}}，质量优良，品质有保障，欲购从速！</div>
       <div>货号：{{product_detail.artNo}}</div>
-      <div>价格：<span>{{product_detail.price|money}}</span></div>
+      <div>
+        价格：
+        <span>{{product_detail.price|money}}</span>
+      </div>
     </div>
     <mt-navbar v-model="selected">
       <mt-tab-item id="详情">详情</mt-tab-item>
@@ -22,7 +25,7 @@
     <!-- tab-container -->
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="详情">
-        <mt-cell v-for="n in 10" :title="'content ' + n"/>
+        <mt-cell v-for="(val,index) in show_detail" :title="''+val" :key="index" :value="val|fanyi"/>
       </mt-tab-container-item>
       <mt-tab-container-item id="评价">
         <mt-cell v-for="n in 4" :title="'content ' + n"/>
@@ -50,19 +53,28 @@ export default {
     baseSrc() {
       return this.$store.state.productServerAdd;
     },
+    //获取产品的图片
     imgList() {
       let { photo1, photo2, photo3, photo4 } = this.product_detail;
       return [photo1, photo2, photo3, photo4];
+    },
+    //提取要展示的详情信息
+    show_detail(){
+      let {artNo,classify,color,described,month_buy,price,shelf_time,style,thickness} = this.product_detail
+      return [artNo,classify,color,described,month_buy,price,shelf_time,style,thickness]
     }
   },
   created() {
     window.addEventListener("scroll", this.saveTop, true);
     console.log(this.$route.query.pid);
+    //获取地址栏中的产品id
     let pid = this.$route.query.pid;
     if (pid) {
+      //发送请求保存本次的浏览记录
       this.$axios.get("/order/add_browse", {
         params: { pid }
       });
+      //发送请求获取产品的详细信息
       this.$axios
         .get("/product/detail", {
           params: { pid }
@@ -107,16 +119,16 @@ export default {
   .info {
     background: #fff;
     padding: 0.7rem 0.3rem;
-    div:first-child{
-      padding-bottom:0.5rem;
+    div:first-child {
+      padding-bottom: 0.5rem;
     }
-    div:nth-child(2){
-      color:#666;
+    div:nth-child(2) {
+      color: #666;
     }
-    div:last-child{
-      color:#00c17b;
-      span{
-        font-size:1.5rem;
+    div:last-child {
+      color: #00c17b;
+      span {
+        font-size: 1.5rem;
       }
     }
   }

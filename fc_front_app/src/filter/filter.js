@@ -11,6 +11,7 @@ const fanyi = english => {
     if (english === "userName") return "姓名"
     if (english === "nick") return "昵称"
     if (english === "img_addr") return "头像"
+    return english
 }
 const money = price => {
     let tmp = price
