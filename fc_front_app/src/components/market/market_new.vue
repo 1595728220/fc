@@ -19,7 +19,7 @@ export default {
   },
   created() {
     window.addEventListener("scroll", this.saveTop, true);
-    // this.$store.commit("initProductQuery")
+    this.$store.commit("initProductQuery")
     this.$store.commit("changeProductQuery", { xinpin: true });
     // this.$store.dispatch("getProductList");
   },
