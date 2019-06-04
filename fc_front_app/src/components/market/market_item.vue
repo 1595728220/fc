@@ -37,7 +37,12 @@ export default {
     }
   },
   methods: {
-    goToDetail() {},
+    goToDetail() {
+      this.$router.push({
+        path: "/detail",
+        query: { pid: this.productItem.pid }
+      });
+    },
     //添加收藏
     // addCollect() {
     //   //发送请求添加收藏记录

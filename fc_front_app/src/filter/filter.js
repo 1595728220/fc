@@ -28,6 +28,7 @@ const monthDate = time => {
     }
     return tmp
 }
+//将数字补全为两位
 function geshi(n) {
     return n > 9 ? n : "0" + n
 }

@@ -27,8 +27,8 @@ export default {
     //跳转到商品详情页
     goToDetail() {
       this.$router.push({
-        name: "product_detail",
-        params: { pid: this.productItem.pid }
+        path: "/detail",
+        query: { pid: this.productItem.pid }
       });
     },
     // //添加收藏
