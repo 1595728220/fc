@@ -1,7 +1,7 @@
 <template>
   <div class="market-item">
     <div @click="goToDetail" class="left-img">
-      <img v-lazy="baseSrc+productItem.photo1">
+      <img :src="baseSrc+productItem.photo1">
     </div>
     <div class="text-right">
       <div class="described">{{productItem.described}}</div>

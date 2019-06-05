@@ -68,7 +68,15 @@ export default {
     "my-personal": Personal,
     "my-sort": Sort,
     "title-bar": TitleBar
-  }
+  },
+  created() {
+    this.selected = this.$store.state.home_selected
+  },
+  watch: {
+    selected(){
+      this.$store.commit("setHomeSelected",this.selected)
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>

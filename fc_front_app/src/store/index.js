@@ -36,7 +36,8 @@ const state = {
   //手机号
   userPhone: "",
   //验证码
-  userIdentify: ""
+  userIdentify: "",
+  home_selected:"market"
 };
 const getters = { //实时监听state值的变化(最新状态)
   //返回一个格式化的手机号
@@ -106,6 +107,10 @@ const mutations = {
   //设置用户验证码
   setUserIdentify(state, val) {
     state.userIdentify = val
+  },
+  //设置主页的当前selected
+  setHomeSelected(state,val){
+    state.home_selected = val
   }
 };
 const actions = { //this.$store.dispatch('set_uid'，6)
