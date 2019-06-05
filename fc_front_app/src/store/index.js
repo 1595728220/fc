@@ -9,6 +9,7 @@ const state = {
   //服务器端的图片路径
   productServerAdd: "http://127.0.0.1:8081/product/",
   bannerServerAdd: "http://127.0.0.1:8081/banner/",
+  userServerAdd: "http://127.0.0.1:8081/user/",
   //手机号正则
   // phoneRegex: /^1[34578]\d{9}$/,
   //密码正则

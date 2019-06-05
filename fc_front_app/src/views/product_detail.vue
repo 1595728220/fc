@@ -2,7 +2,6 @@
   <div class="product-detail" ref="fatherScroll">
     <back-bar title="产品详情" back="/product"></back-bar>
     <div class="hinder"></div>
-
     <mt-swipe :auto="3000">
       <mt-swipe-item v-for="(item,index) of imgList" :key="index">
         <img :src="baseSrc+item" class="detail-img" v-if="!!item">
@@ -25,10 +24,25 @@
     <!-- tab-container -->
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="详情">
-        <mt-cell v-for="(val,name,index) in show_detail" :title="''+val" :key="index" :value="name|fanyi"/>
+        <mt-cell
+          v-for="(val,name,index) in show_detail"
+          :title="name|fanyi"
+          :key="index"
+          :value="val"
+        />
+        <div v-for="(item,index) of imgList" :key="index+10">
+          <img :src="baseSrc+item" class="detail-img" v-if="!!item">
+        </div>
       </mt-tab-container-item>
       <mt-tab-container-item id="评价">
-        <mt-cell v-for="n in 4" :title="'content ' + n"/>
+        <div>
+          <div v-if="content">
+            <div v-for="(obj,index) of content" :key="index">
+              <user-content :user_content="obj"></user-content>
+            </div>
+          </div>
+          <div v-if="content_msg" class="content_msg">{{content_msg}}</div>
+        </div>
       </mt-tab-container-item>
       <mt-tab-container-item id="保障">
         <img v-lazy="baseSrc+product_detail.promise">
@@ -40,12 +54,15 @@
 <script>
 import BackBar from "../components/common/backbar";
 import ScrollTop from "../components/common/scrollTop";
+import UserContent from "../components/common/user_content"
 export default {
   data() {
     return {
       product_detail: {},
       selected: "详情",
-      top: 0
+      top: 0,
+      content: null,
+      content_msg: ""
     };
   },
   computed: {
@@ -59,9 +76,35 @@ export default {
       return [photo1, photo2, photo3, photo4];
     },
     //提取要展示的详情信息
-    show_detail(){
-      let {artNo,classify,color,described,month_buy,price,shelf_time,style,thickness} = this.product_detail
-      return {artNo,classify,color,described,month_buy,price,shelf_time,style,thickness}
+    show_detail() {
+      let {
+        artNo,
+        classify,
+        color,
+        described,
+        month_buy,
+        price,
+        shelf_time,
+        style,
+        thickness
+      } = this.product_detail;
+      //对数据格式进行修改
+      shelf_time = new Date(shelf_time);
+      shelf_time = `${shelf_time.getMonth() + 1}月${shelf_time.getDate()}日`;
+      month_buy += " 件";
+      price += " 元";
+      // 返回一个对象
+      return {
+        artNo,
+        described,
+        shelf_time,
+        month_buy,
+        price,
+        color,
+        classify,
+        style,
+        thickness
+      };
     }
   },
   created() {
@@ -82,7 +125,20 @@ export default {
         .then(result => {
           // console.log(result);
           this.product_detail = result.data[0];
-          console.log(this.product_detail);
+          // console.log(this.product_detail);
+        });
+      this.$axios
+        .get("/product/get_words", {
+          params: { pid }
+        })
+        .then(result => {
+          // console.log(result)
+          let data = result.data;
+          if (data.code === 200) {
+            this.content = data.msg;
+          } else {
+            this.content_msg = data.msg
+          }
         });
     }
   },
@@ -100,7 +156,8 @@ export default {
   },
   components: {
     "back-bar": BackBar,
-    "scroll-top": ScrollTop
+    "scroll-top": ScrollTop,
+    "user-content":UserContent
   }
 };
 </script>
@@ -112,9 +169,9 @@ export default {
   .mint-swipe {
     max-width: 100vw;
     height: 100vw;
-    .detail-img {
-      width: 100%;
-    }
+  }
+  .detail-img {
+    width: 100%;
   }
   .info {
     background: #fff;
@@ -146,6 +203,11 @@ export default {
   }
   /deep/ .mint-tab-item-label {
     font-size: 1rem;
+  }
+  .content_msg{
+    text-align: center;
+    color:#999;
+    padding:1rem 0;
   }
 }
 </style>
