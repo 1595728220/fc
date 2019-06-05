@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <h1>产品的总分类</h1>
+  <div class="sort">
+    <mt-navbar v-model="selected" class="mynavbar">
+      <mt-tab-item :id="name" v-for="(arr,name,index) of product_classfy" :key="index">{{name}}</mt-tab-item>
+    </mt-navbar>
+    <mt-tab-container class="page-tabbar-container" v-model="selected">
+      <mt-tab-container-item :id="name" v-for="(arr,name,index) of product_classfy" :key="index">{{arr}}</mt-tab-container-item>
+    </mt-tab-container>
   </div>
 </template>
 <script>
@@ -11,7 +16,8 @@ export default {
       product_classfy: {
         颜色: [],
         种水: []
-      }
+      },
+      selected: "颜色"
     };
   },
   created() {
@@ -55,4 +61,26 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.sort {
+  .mynavbar {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 30%;
+    height: 88vh;
+    float: left;
+    /deep/ .mint-tab-item-label {
+      font-size: 1rem;
+    }
+    .mint-tab-item.is-selected {
+      border-bottom: none;
+      color:#00c17b;
+      /deep/ .mint-tab-item-label {
+        font-size: 1.5rem;  
+      }
+    }
+    .mint-tab-item {
+      flex: 0;
+    }
+  }
+}
 </style>
