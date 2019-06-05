@@ -25,7 +25,7 @@
     <!-- tab-container -->
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="详情">
-        <mt-cell v-for="(val,index) in show_detail" :title="''+val" :key="index" :value="val|fanyi"/>
+        <mt-cell v-for="(val,name,index) in show_detail" :title="''+val" :key="index" :value="name|fanyi"/>
       </mt-tab-container-item>
       <mt-tab-container-item id="评价">
         <mt-cell v-for="n in 4" :title="'content ' + n"/>
@@ -61,7 +61,7 @@ export default {
     //提取要展示的详情信息
     show_detail(){
       let {artNo,classify,color,described,month_buy,price,shelf_time,style,thickness} = this.product_detail
-      return [artNo,classify,color,described,month_buy,price,shelf_time,style,thickness]
+      return {artNo,classify,color,described,month_buy,price,shelf_time,style,thickness}
     }
   },
   created() {
