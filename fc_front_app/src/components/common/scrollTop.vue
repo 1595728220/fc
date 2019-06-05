@@ -46,7 +46,7 @@ export default {
     background:#00c17b;
     position:fixed;
     right:0.5rem;
-    bottom:4%;
+    bottom:10vh;
     border-radius: 50%;
     text-align: center;
   }

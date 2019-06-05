@@ -30,7 +30,7 @@ app.all("*",(req,res,next)=>{
 app.use(cookieParser("123456"))
 app.use(session({
     secret:"123456",
-    cookie:{maxAge:60*1000*60},//过期时间ms
+    cookie:{maxAge:60*1000*60*24},//过期时间ms
     resave:true,
     saveUninitialized:true
 }))
