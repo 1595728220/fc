@@ -58,7 +58,7 @@ export default {
           //触发vuex中的查询产品信息的方法
           this.$store.dispatch("getProductList");
         }
-      }, 2000);
+      }, 1000);
     },
   },
   watch: {

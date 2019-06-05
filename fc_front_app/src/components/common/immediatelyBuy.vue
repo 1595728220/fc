@@ -1,6 +1,7 @@
 <template>
   <div class="immediately-buy">
     <my-collect :productItem="productItem"></my-collect>
+    <mt-button type="primary" class="my-button" >立即购买</mt-button>
   </div>
 </template>
 <script>
@@ -16,6 +17,7 @@ export default {
     "my-collect": Collect
   },
   computed: {
+    //根据当前产品id取出产品总列表中对应的数据
     productItem() {
       return this.$store.state.productList.filter(el => el.pid == this.pid)[0];
     }
@@ -33,5 +35,13 @@ export default {
   bottom: 0;
   background: #fff;
   width: 100%;
+  display:flex;
+  justify-content: space-between;
+  padding-left:1rem;
+  .my-button{
+    // margin-right:1rem;
+    border-radius: 0;
+    line-height: 2.5625rem;
+  }
 }
 </style>

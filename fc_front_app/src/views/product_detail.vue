@@ -170,6 +170,7 @@ export default {
 .product-detail {
   background: #eee;
   max-height: 100vh;
+  padding-bottom:2.7rem;
   overflow: auto;
   .mint-swipe {
     max-width: 100vw;

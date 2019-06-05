@@ -4,7 +4,7 @@
     :class="productItem.collect ? 'icon-xihuan' :'icon-xihuan-xianxing' "
     @click="addCollect"
   >
-    <span>收藏</span>
+    <span v-show="!productItem.collect">收藏</span>
   </div>
 </template>
 <script>

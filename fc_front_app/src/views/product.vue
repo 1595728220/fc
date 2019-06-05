@@ -3,11 +3,15 @@
     <div class="product pr" ref="fatherScroll">
       <back-bar title="产品" back="/"></back-bar>
       <div class="hinder"></div>
+
       <infi-scroll>
         <div v-for="(item,index) of productList" :key="index" class="product-item">
           <product-item :productItem="item"></product-item>
         </div>
       </infi-scroll>
+      <div v-show="productList.length === 0" class="no-found">
+        <img v-lazy="`imgs/404/nofound.jpg`">
+      </div>
       <!-- <div
         class="product-area"
         v-infinite-scroll="loadMore"
@@ -147,6 +151,10 @@ export default {
   overflow-y: auto;
   .product-item {
     width: 49%;
+  }
+  .no-found {
+    text-align: center;
+    margin-top:3rem;
   }
 }
 </style>
