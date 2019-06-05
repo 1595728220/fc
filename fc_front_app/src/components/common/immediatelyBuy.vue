@@ -21,7 +21,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("getProductList");
+    // this.$store.dispatch("getProductList");
     console.log(this.productItem)
   },
   methods: {}
