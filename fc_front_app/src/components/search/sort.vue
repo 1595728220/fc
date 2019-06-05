@@ -82,5 +82,9 @@ export default {
       flex: 0;
     }
   }
+  .page-tabbar-container{
+    height:100vh;
+    background-color:#f3f3f3;
+  }
 }
 </style>
