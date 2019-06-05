@@ -49,12 +49,14 @@
       </mt-tab-container-item>
     </mt-tab-container>
     <scroll-top :top="top" @backTop="initTop"></scroll-top>
+    <immediately-buy :pid="pid"></immediately-buy>
   </div>
 </template>
 <script>
 import BackBar from "../components/common/backbar";
 import ScrollTop from "../components/common/scrollTop";
 import UserContent from "../components/common/user_content"
+import ImmediatelyBuy from "../components/common/immediatelyBuy"
 export default {
   data() {
     return {
@@ -62,7 +64,8 @@ export default {
       selected: "详情",
       top: 0,
       content: null,
-      content_msg: ""
+      content_msg: "",
+      pid:""
     };
   },
   computed: {
@@ -109,9 +112,10 @@ export default {
   },
   created() {
     window.addEventListener("scroll", this.saveTop, true);
-    console.log(this.$route.query.pid);
+    // console.log(this.$route.query.pid);
     //获取地址栏中的产品id
-    let pid = this.$route.query.pid;
+    let pid = this.pid = this.$route.query.pid;
+    console.log(this.pid)
     if (pid) {
       //发送请求保存本次的浏览记录
       this.$axios.get("/order/add_browse", {
@@ -157,7 +161,8 @@ export default {
   components: {
     "back-bar": BackBar,
     "scroll-top": ScrollTop,
-    "user-content":UserContent
+    "user-content":UserContent,
+    "immediately-buy":ImmediatelyBuy
   }
 };
 </script>

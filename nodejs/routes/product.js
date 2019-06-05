@@ -4,7 +4,8 @@ let router = express.Router()
 //6个路由
 //宝贝详情 /get pid
 router.get("/detail", (req, res) => {
-  let pid = req.query.pid
+  let pid = req.query.pid,
+    uid = req.session.uid
   //验证产品编号是否为空
   if (!pid) {
     res.send({
@@ -18,7 +19,18 @@ router.get("/detail", (req, res) => {
   pool.query(sql, [pid], (err, result) => {
     if (err) throw err
     if (result.length > 0) { //查询到产品的详情结果不为空，返回详情数据
-      res.send(result)
+      // res.send(result)
+      let tmpArr = result
+      sql = "select coll_productId pid from collect where coll_userId = ? and coll_productId = ?"
+      pool.query(sql, [uid, pid], (err, result) => {
+        if (err) throw err
+        if (result.length > 0) {
+          tmpArr[0].collect = true
+        } else {
+          tmpArr[0].collect = false
+        }
+        res.send(tmpArr)
+      })
     } else { //为空，返回提示信息
       res.send({
         code: 301,
@@ -106,17 +118,17 @@ router.get("/list", (req, res) => {
     arr.push(keyword)
   }
   // if (rexiao === "true" || xinpin === "true") { //热销和新品中至少有一个不为空 , 
-    sql += " order by "
-    if (rexiao === "true") { //热销不为空
-      sql += " month_buy desc"
-      // if (xinpin === "true") { //新品不为空
-      //   sql += " ,shelf_time desc"
-      // }
-    } else if (xinpin === "true") { //新品不为空
-      sql += " shelf_time desc"
-    } else {
-      sql += " pid asc"
-    }
+  sql += " order by "
+  if (rexiao === "true") { //热销不为空
+    sql += " month_buy desc"
+    // if (xinpin === "true") { //新品不为空
+    //   sql += " ,shelf_time desc"
+    // }
+  } else if (xinpin === "true") { //新品不为空
+    sql += " shelf_time desc"
+  } else {
+    sql += " pid asc"
+  }
   // }
   sql += " limit ?,?;select found_rows();"
   // console.log(sql)
@@ -137,7 +149,7 @@ router.get("/list", (req, res) => {
       if (result.length > 0) {
         // console.dir("收藏产品编号结果"+result)
         //取出收藏产品编号转为数组
-        result = result.map(el=>{
+        result = result.map(el => {
           return el.pid
         })
         // result = Object.values(result[0])
