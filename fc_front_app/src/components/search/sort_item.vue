@@ -25,7 +25,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.sort)
+    // console.log(this.sort)
     // Object.values(JSON.parse(sort))[0]
   },
 };
