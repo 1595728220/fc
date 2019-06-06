@@ -133,14 +133,14 @@ router.get("/add_collect", (req, res) => {
     uid = req.session.uid,
     time = (new Date()).getTime(),
     sql = "insert into collect values(null,?,?,?)"
-    if(!uid){
-      res.send({code:400,msg:"用户未登录"})
-      return 
-    }
-    if(!pid){
-      res.send({code:401,msg:"缺少产品编号"})
-      return
-    }
+  if (!uid) {
+    res.send({ code: 400, msg: "用户未登录" })
+    return
+  }
+  if (!pid) {
+    res.send({ code: 401, msg: "缺少产品编号" })
+    return
+  }
   pool.query(sql, [pid, uid, time], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0)
@@ -154,14 +154,14 @@ router.get("/remove_collect", (req, res) => {
   let pid = req.query.pid,
     uid = req.session.uid,
     sql = "delete from collect where coll_productId = ? and coll_userId = ?"
-    if(!uid){
-      res.send({code:400,msg:"用户未登录"})
-      return 
-    }
-    if(!pid){
-      res.send({code:401,msg:"缺少产品编号"})
-      return
-    }
+  if (!uid) {
+    res.send({ code: 400, msg: "用户未登录" })
+    return
+  }
+  if (!pid) {
+    res.send({ code: 401, msg: "缺少产品编号" })
+    return
+  }
   pool.query(sql, [pid, uid], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0)
@@ -171,19 +171,19 @@ router.get("/remove_collect", (req, res) => {
   })
 })
 //获取用户的收藏记录
-router.get("/get_collect",(req,res)=>{
+router.get("/get_collect", (req, res) => {
   let uid = req.session.uid,
-  sql = "select pid,described,price,photo1,coll_time from product,product_img,collect where product_imgId = iid and coll_productId = pid and coll_userId = ?"
-  if(!uid){
-    res.send({code:400,msg:"用户未登录"})
-    return 
+    sql = "select pid,described,price,photo1,coll_time from product,product_img,collect where product_imgId = iid and coll_productId = pid and coll_userId = ?"
+  if (!uid) {
+    res.send({ code: 400, msg: "用户未登录" })
+    return
   }
-  pool.query(sql,[uid],(err,result)=>{
-    if(err) throw err
-    if(result.length > 0) {
-      res.send({code:200,msg:"查询收藏商品成功",data:result})
+  pool.query(sql, [uid], (err, result) => {
+    if (err) throw err
+    if (result.length > 0) {
+      res.send({ code: 200, msg: "查询收藏商品成功", data: result })
     } else {
-      res.send({code:301,msg:"未收藏商品"})
+      res.send({ code: 301, msg: "未收藏商品" })
     }
   })
 })
@@ -192,31 +192,47 @@ router.get("/add_browse", (req, res) => {
   let pid = req.query.pid,
     uid = req.session.uid,
     time = (new Date()).getTime(),
-  sql = "insert into browse values(null,?,?,?)"
-  if(!uid){
-    res.send({code:400,msg:"用户未登录"})
-    return 
-  }
-  if(!pid){
-    res.send({code:401,msg:"缺少产品编号"})
+    sql = "select bid from browse where brow_userId = ? and brow_productId = ?"
+  if (!uid) {
+    res.send({ code: 400, msg: "用户未登录" })
     return
   }
-  pool.query(sql, [pid, uid, time], (err, result) => {
+  if (!pid) {
+    res.send({ code: 401, msg: "缺少产品编号" })
+    return
+  }
+  pool.query(sql, [uid, pid], (err, result) => {
     if (err) throw err
-    if (result.affectedRows > 0)
-      res.send({ code: 200, msg: "添加浏览记录成功" })
-    else
-      res.send({ code: 301, msg: "添加浏览记录失败" })
+    if (result.length > 0) {
+      sql = "update browse set brow_time = ? where bid = ?"
+      pool.query(sql, [time, result[0].bid], (err, result) => {
+        if (err) throw err
+        if (result.affectedRows > 0)
+          res.send({ code: 200, msg: "更新浏览记录的时间成功" })
+        else
+          res.send({ code: 302, msg: "更新浏览记录的时间失败" })
+      })
+    } else {
+      sql = "insert into browse values(null,?,?,?)"
+      pool.query(sql, [pid, uid, time], (err, result) => {
+        if (err) throw err
+        if (result.affectedRows > 0)
+          res.send({ code: 200, msg: "添加浏览记录成功" })
+        else
+          res.send({ code: 301, msg: "添加浏览记录失败" })
+      })
+    }
   })
+
 })
 //清空用户浏览记录
 router.get("/remove_browse", (req, res) => {
   let uid = req.session.uid,
     sql = "delete from browse where brow_userId = ?"
-    if(!uid){
-      res.send({code:400,msg:"用户未登录"})
-      return 
-    }
+  if (!uid) {
+    res.send({ code: 400, msg: "用户未登录" })
+    return
+  }
   pool.query(sql, [uid], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0)
@@ -226,19 +242,19 @@ router.get("/remove_browse", (req, res) => {
   })
 })
 //获取用户的浏览记录
-router.get("/get_browse",(req,res)=>{
+router.get("/get_browse", (req, res) => {
   let uid = req.session.uid,
-  sql = "select pid,described,price,photo1,brow_time from product,product_img,browse where product_imgId = iid and brow_productId = pid and brow_userId = ?"
-  if(!uid){
-    res.send({code:400,msg:"用户未登录"})
-    return 
+    sql = "select pid,described,price,photo1,brow_time from product,product_img,browse where product_imgId = iid and brow_productId = pid and brow_userId = ?"
+  if (!uid) {
+    res.send({ code: 400, msg: "用户未登录" })
+    return
   }
-  pool.query(sql,[uid],(err,result)=>{
-    if(err) throw err
-    if(result.length > 0) {
-      res.send({code:200,msg:"查询收藏商品成功",data:result})
+  pool.query(sql, [uid], (err, result) => {
+    if (err) throw err
+    if (result.length > 0) {
+      res.send({ code: 200, msg: "查询收藏商品成功", data: result })
     } else {
-      res.send({code:301,msg:"未收藏商品"})
+      res.send({ code: 301, msg: "未收藏商品" })
     }
   })
 })
