@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.user_content);
+    // console.log(this.user_content);
   }
 };
 </script>
