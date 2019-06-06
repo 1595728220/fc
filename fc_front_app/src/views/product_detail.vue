@@ -158,6 +158,11 @@ export default {
       // console.log(this.top)
     }
   },
+  watch: {
+    $route(to,from){
+      
+    }
+  },
   components: {
     "back-bar": BackBar,
     "scroll-top": ScrollTop,
