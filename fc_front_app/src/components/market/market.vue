@@ -38,13 +38,13 @@ export default {
   color: #00c17b;
 }
 .mint-navbar .mint-tab-item {
-  padding: 0.5rem 0;
+  padding: 0.7rem 0;
   &:first-child {
     border-right: 1px solid #ddd;
   }
 }
 /deep/ .mint-tab-item-label {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .mint-navbar {
   margin-top: 2.75rem;
