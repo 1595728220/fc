@@ -8,7 +8,7 @@
 import Collect from "../common/collect";
 export default {
   props: {
-    pid: { default: "" }
+    // pid: { default: "" }
   },
   data() {
     return {};
@@ -19,25 +19,20 @@ export default {
   computed: {
     //根据当前产品id取出产品总列表中对应的数据
     productItem() {
-      // let tmp = this.$store.state.productList.filter(el => el.pid == this.pid)[0]
-      // if(tmp)
-      // console.log(
-      //   this.$store.state.productList.filter(el => el.pid == this.pid)[0]
-      // );
-      // console.log(this.$store.state.productList)
-      return this.$store.state.productList.filter(el => el.pid == this.pid)[0];
-      // else return {}
+      return this.$store.state.productDetail
+    },
+    pid(){
+      return this.$store.state.productId
     }
   },
   created() {
-    // this.$store.dispatch("getProductList");
-    // console.log(this.productItem);
+
   },
   methods: {
     goToOrder() {
       this.$router.push({
         path: "/order",
-        query: { pid: this.productItem.pid }
+        // query: { pid: this.productItem.pid }
       });
     }
   }

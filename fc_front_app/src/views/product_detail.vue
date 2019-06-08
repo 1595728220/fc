@@ -50,7 +50,8 @@
       </mt-tab-container-item>
     </mt-tab-container>
     <scroll-top :top="top" @backTop="initTop"></scroll-top>
-    <immediately-buy :pid="pid"></immediately-buy>
+    <!-- <immediately-buy :pid="pid"></immediately-buy> -->
+    <immediately-buy></immediately-buy>
   </div>
 </template>
 <script>
@@ -61,12 +62,12 @@ import ImmediatelyBuy from "../components/common/immediatelyBuy";
 export default {
   data() {
     return {
-      product_detail: {},
+      // product_detail: {},
       selected: "详情",
       top: 0,
       content: null,
       content_msg: "",
-      pid: "",
+      // pid: "",
       backAddr: ""
     };
   },
@@ -77,7 +78,7 @@ export default {
     },
     //获取产品的图片
     imgList() {
-      let { photo1, photo2, photo3, photo4 } = this.product_detail;
+      let { photo1, photo2, photo3, photo4 } = this.$store.state.productDetail;
       return [photo1, photo2, photo3, photo4];
     },
     //提取要展示的详情信息
@@ -92,7 +93,7 @@ export default {
         shelf_time,
         style,
         thickness
-      } = this.product_detail;
+      } = this.$store.state.productDetail;
       //对数据格式进行修改
       shelf_time = new Date(shelf_time);
       shelf_time = `${shelf_time.getMonth() + 1}月${shelf_time.getDate()}日`;
@@ -110,29 +111,29 @@ export default {
         style,
         thickness
       };
+    },
+    //返回产品编号
+    pid() {
+      return this.$store.state.productId;
+    },
+    //返回产品详情
+    product_detail() {
+      // console.log(this.$store.state.productDetail);
+      return this.$store.state.productDetail;
     }
   },
   created() {
     window.addEventListener("scroll", this.saveTop, true);
     // console.log(this.$route.query.pid);
     //获取地址栏中的产品id
-    let pid = (this.pid = this.$route.query.pid);
-    console.log(this.pid);
+    let pid = this.$route.query.pid;
+    this.$store.commit("setProductId", pid);
+    this.$store.dispatch("requireProductDetail");
     if (pid) {
       //发送请求保存本次的浏览记录
       this.$axios.get("/order/add_browse", {
         params: { pid }
       });
-      //发送请求获取产品的详细信息
-      this.$axios
-        .get("/product/detail", {
-          params: { pid }
-        })
-        .then(result => {
-          // console.log(result);
-          this.product_detail = result.data[0];
-          // console.log(this.product_detail);
-        });
       this.$axios
         .get("/product/get_words", {
           params: { pid }

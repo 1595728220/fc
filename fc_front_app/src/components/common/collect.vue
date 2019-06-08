@@ -36,6 +36,7 @@ export default {
               });
               //获取最新的数据
               this.$store.dispatch("getProductList");
+              this.$store.dispatch("requireProductDetail");
             } else {
               //取消收藏失败
               this.$toast({
@@ -60,6 +61,7 @@ export default {
               });
               //获取最新的数据
               this.$store.dispatch("getProductList");
+              this.$store.dispatch("requireProductDetail");
             } else {
               //收藏失败
               this.$toast({

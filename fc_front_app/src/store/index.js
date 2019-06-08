@@ -10,11 +10,6 @@ const state = {
   productServerAdd: "http://127.0.0.1:8081/product/",
   bannerServerAdd: "http://127.0.0.1:8081/banner/",
   userServerAdd: "http://127.0.0.1:8081/user/",
-  //手机号正则
-  // phoneRegex: /^1[34578]\d{9}$/,
-  //密码正则
-  // upwdRegex: /^[a-zA-Z\d_]{6,18}$/,
-  //产品列表
   productList: [],
   //查询产品的参数
   productQuery: {
@@ -37,7 +32,12 @@ const state = {
   userPhone: "",
   //验证码
   userIdentify: "",
-  home_selected:"market"
+  //home页面当前选中的面板
+  home_selected:"market",
+  //产品编号
+  productId:"",
+  //产品详情
+  productDetail:{}
 };
 const getters = { //实时监听state值的变化(最新状态)
   //返回一个格式化的手机号
@@ -111,7 +111,15 @@ const mutations = {
   //设置主页的当前selected
   setHomeSelected(state,val){
     state.home_selected = val
-  }
+  },
+  //设置当前浏览的产品编号
+  setProductId(state,val){
+    state.productId = val
+  },
+  //设置当前浏览的产品详情
+  setProductDetail(state,val){
+    state.productDetail = val
+  },
 };
 const actions = { //this.$store.dispatch('set_uid'，6)
   //自定义触发mutations里函数的方法，context与store 实例具有相同方法和属性  
@@ -138,6 +146,19 @@ const actions = { //this.$store.dispatch('set_uid'，6)
       context.commit("setUserIdentify", result.data.yzm.text)
       console.log(context.state.userIdentify)
     })
+  },
+  //根据产品编号查询对应产品详情
+  requireProductDetail(context){
+    //发送请求获取产品的详细信息
+    axios
+      .get("/product/detail", {
+        params: { pid:context.state.productId }
+      })
+      .then(result => {
+        // console.log(result);
+        context.state.productDetail = result.data[0];
+        // console.log(this.product_detail);
+      });
   }
 };
 const store = new Vuex.Store({
