@@ -1,7 +1,7 @@
 <template>
   <div class="back-bar">
     <mt-header fixed :title="title">
-      <router-link :to="back" slot="left">
+      <router-link  slot="left" :to="back">
         <mt-button icon="back">返回</mt-button>
       </router-link>
     </mt-header>
@@ -14,7 +14,7 @@ export default {
     title: { default: "" },
     //父组件传递的后退路由地址
     back: { default: "" }
-  }
+  },
 };
 </script>
 <style lang="scss">

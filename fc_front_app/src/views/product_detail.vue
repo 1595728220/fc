@@ -1,6 +1,7 @@
 <template>
   <div class="product-detail" ref="fatherScroll">
-    <back-bar title="产品详情" back="/product"></back-bar>
+    <!-- <back-bar title="产品详情" back="/product"></back-bar> -->
+    <back-bar title="产品详情" :back="backAddr"></back-bar>
     <div class="hinder"></div>
     <mt-swipe :auto="3000">
       <mt-swipe-item v-for="(item,index) of imgList" :key="index">
@@ -55,8 +56,8 @@
 <script>
 import BackBar from "../components/common/backbar";
 import ScrollTop from "../components/common/scrollTop";
-import UserContent from "../components/common/user_content"
-import ImmediatelyBuy from "../components/common/immediatelyBuy"
+import UserContent from "../components/common/user_content";
+import ImmediatelyBuy from "../components/common/immediatelyBuy";
 export default {
   data() {
     return {
@@ -65,7 +66,8 @@ export default {
       top: 0,
       content: null,
       content_msg: "",
-      pid:""
+      pid: "",
+      backAddr: ""
     };
   },
   computed: {
@@ -114,8 +116,8 @@ export default {
     window.addEventListener("scroll", this.saveTop, true);
     // console.log(this.$route.query.pid);
     //获取地址栏中的产品id
-    let pid = this.pid = this.$route.query.pid;
-    console.log(this.pid)
+    let pid = (this.pid = this.$route.query.pid);
+    console.log(this.pid);
     if (pid) {
       //发送请求保存本次的浏览记录
       this.$axios.get("/order/add_browse", {
@@ -141,10 +143,16 @@ export default {
           if (data.code === 200) {
             this.content = data.msg;
           } else {
-            this.content_msg = data.msg
+            this.content_msg = data.msg;
           }
         });
     }
+  },
+  // 组件内的路由守卫，将来源的路由保存起来
+  beforeRouteEnter(to, from, next) {
+    // console.log(from.path);
+    // vm.backAddr = from.path
+    next(vm => (vm.backAddr = from.path));
   },
   methods: {
     initTop() {
@@ -158,16 +166,12 @@ export default {
       // console.log(this.top)
     }
   },
-  watch: {
-    $route(to,from){
-      
-    }
-  },
+  watch: {},
   components: {
     "back-bar": BackBar,
     "scroll-top": ScrollTop,
-    "user-content":UserContent,
-    "immediately-buy":ImmediatelyBuy
+    "user-content": UserContent,
+    "immediately-buy": ImmediatelyBuy
   }
 };
 </script>
@@ -175,7 +179,7 @@ export default {
 .product-detail {
   background: #eee;
   max-height: 100vh;
-  padding-bottom:2.7rem;
+  padding-bottom: 2.7rem;
   overflow: auto;
   .mint-swipe {
     max-width: 100vw;
@@ -215,10 +219,10 @@ export default {
   /deep/ .mint-tab-item-label {
     font-size: 1rem;
   }
-  .content_msg{
+  .content_msg {
     text-align: center;
-    color:#999;
-    padding:1rem 0;
+    color: #999;
+    padding: 1rem 0;
   }
 }
 </style>

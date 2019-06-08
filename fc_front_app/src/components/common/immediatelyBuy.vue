@@ -24,7 +24,7 @@ export default {
       // console.log(
       //   this.$store.state.productList.filter(el => el.pid == this.pid)[0]
       // );
-      console.log(this.$store.state.productList)
+      // console.log(this.$store.state.productList)
       return this.$store.state.productList.filter(el => el.pid == this.pid)[0];
       // else return {}
     }

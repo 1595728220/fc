@@ -1,6 +1,6 @@
 <template>
   <div class="market-item">
-    <div  class="left-img">
+    <div  class="left-img" @click="goToDetail">
       <img :src="baseSrc+productItem.photo1">
     </div>
     <div class="text-right">
@@ -36,12 +36,12 @@ export default {
         query: { pid: this.productItem.pid }
       });
     },
-    // goToDetail(){
-    //   this.$router.push({
-    //     path: "/detail",
-    //     query: { pid: this.productItem.pid },
-    //   });
-    // }
+    goToDetail(){
+      this.$router.push({
+        path: "/detail",
+        query: { pid: this.productItem.pid },
+      });
+    }
   }
 };
 </script>
