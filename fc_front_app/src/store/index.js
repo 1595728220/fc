@@ -170,11 +170,11 @@ const actions = { //this.$store.dispatch('set_uid'，6)
     return new Promise((resolve) => {
       axios.get("/order/get_order_addr").then(result => {
         let tmp = result.data
-        console.log(result.data)
+        // console.log(result.data)
         if (tmp.code === 200) {
           context.commit("setUserOrderAddr", tmp.data)
           //如果收货地址不全
-          if(!Object.values(tmp.data).every(el=>el !== "无")){
+          if(!Object.values(tmp.data).every(el=>{ return el !==  "无" && el !== "" })){
             resolve()
           }
         } else {

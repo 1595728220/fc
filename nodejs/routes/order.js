@@ -258,6 +258,7 @@ router.get("/get_browse", (req, res) => {
     }
   })
 })
+//获取用户的收货信息
 router.get("/get_order_addr",(req,res)=>{
   let uid = req.session.uid
   ,sql = "select userName,phone,addr from user where uid = ?"
@@ -267,6 +268,26 @@ router.get("/get_order_addr",(req,res)=>{
       res.send({code:200,msg:"用户已填写收货信息",data:result[0]})
     } else {
       res.send({code:301,msg:"用户未填写收货信息"})
+    }
+  })
+})
+//修改用户的收货信息
+router.get("/set_order_addr",(req,res)=>{
+  let uid = req.session.uid,
+  {userName,addr} = req.query
+  ,sql = "update user set userName = ?, addr = ? where uid = ?"
+  pool.query(sql,[userName,addr,uid],(err,result)=>{
+    if(err) throw err
+    if (result.affectedRows > 0) { //更新成功
+      res.send({
+        code: 200,
+        msg: "修改收货信息成功"
+      })
+    } else {
+      res.send({ //更新失败
+        code: 301,
+        msg: "修改收货信息失败"
+      })
     }
   })
 })

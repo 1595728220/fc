@@ -3,10 +3,10 @@
     <back-bar title="新增收货地址" :back="backAddr"></back-bar>
     <div class="hinder">
       <mt-field placeholder="请输入收货人真实姓名" v-model="userName" label="收货人"></mt-field>
-      <mt-field placeholder="请输入联系电话" v-model="phone" label="联系电话"></mt-field>
+      <mt-field placeholder="请输入联系电话" v-model="phone" label="联系电话" disabled></mt-field>
       <mt-picker :slots="datalist" @change="onValuesChange"></mt-picker>
-      <mt-field placeholder="请输入收货人详细地址" v-model="addr" label="详细地址" type="textarea"></mt-field>
-      <mt-button size="large" type="primary">保存</mt-button>
+      <mt-field placeholder="请输入收货人详细地址(街道及以下信息)" v-model="addr" label="详细地址" type="textarea"></mt-field>
+      <mt-button size="large" type="primary" @click.native="saveAddr">保存</mt-button>
     </div>
   </div>
 </template>
@@ -24,10 +24,9 @@ export default {
       userName: "",
       backAddr: "",
       phone: "",
-      addr_prov:"",
-      addr_area:"",
-      addr: "",
-
+      addr_prov: "",
+      addr_area: "",
+      addr: ""
     };
   },
   components: {
@@ -55,8 +54,25 @@ export default {
           });
         }
       });
-      this.addr_prov = picker.values[0]
-      this.addr_area = picker.values[2]
+      this.addr_prov = picker.values[0];
+      this.addr_area = picker.values[2];
+    },
+    saveAddr() {
+      this.$axios
+        .get("/order/set_order_addr", {
+          params: {
+            userName: this.userName,
+            addr: this.addr_prov + this.addr_area + this.addr
+          }
+        })
+        .then(result => {
+          // this.$store.dispatch("requireUserOrderAddr")
+          console.log(result.data);
+          this.$toast({ message: result.data.msg, duration: 1000 });
+          if (result.data.code === 200) {
+            this.$router.push(this.backAddr);
+          }
+        });
     }
   },
   computed: {
@@ -66,7 +82,8 @@ export default {
           flex: 1,
           values: Object.keys(pickerObj.prov),
           className: "slot1",
-          textAlign: "right"
+          textAlign: "right",
+          defaultIndex: 2
         },
         {
           divider: true,
@@ -88,7 +105,8 @@ export default {
           flex: 1,
           values: Object.keys(pickerObj.area),
           className: "slot5",
-          textAlign: "left"
+          textAlign: "left",
+          defaultIndex: 2
         }
       ];
       return slots;
@@ -101,10 +119,10 @@ export default {
     next(vm => (vm.backAddr = from.path));
   },
   created() {
-    let { userName, phone, userAddr, addr } = this.$store.state;
+    let { userName, phone, userAddr, addr } = this.$store.state.userOrderAddr;
     this.userName = userName;
     this.phone = phone;
-    this.addr = addr;
+    console.log(userName, phone, userAddr, addr);
     allCity.forEach((val, index) => {
       pickerObj.prov[val.label] = val.label;
     });
