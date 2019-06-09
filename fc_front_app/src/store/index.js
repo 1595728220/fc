@@ -26,6 +26,8 @@ const state = {
     pno: 1,
     size: 6,
   },
+  //用户的收货地址
+  userOrderAddr: null,
   //查询商品的总记录数
   totalQueryProduct: "",
   //手机号
@@ -33,11 +35,11 @@ const state = {
   //验证码
   userIdentify: "",
   //home页面当前选中的面板
-  home_selected:"market",
+  home_selected: "market",
   //产品编号
-  productId:"",
+  productId: "",
   //产品详情
-  productDetail:{}
+  productDetail: {}
 };
 const getters = { //实时监听state值的变化(最新状态)
   //返回一个格式化的手机号
@@ -47,7 +49,7 @@ const getters = { //实时监听state值的变化(最新状态)
     arr.splice(8, 0, " ")
     return arr.join("")
   },
-  getIdentify(state){
+  getIdentify(state) {
     return state.userIdentify
   }
 };
@@ -109,17 +111,21 @@ const mutations = {
     state.userIdentify = val
   },
   //设置主页的当前selected
-  setHomeSelected(state,val){
+  setHomeSelected(state, val) {
     state.home_selected = val
   },
   //设置当前浏览的产品编号
-  setProductId(state,val){
+  setProductId(state, val) {
     state.productId = val
   },
   //设置当前浏览的产品详情
-  setProductDetail(state,val){
+  setProductDetail(state, val) {
     state.productDetail = val
   },
+  //设置用户的收货地址
+  setUserOrderAddr(state, val) {
+    state.userOrderAddr = val
+  }
 };
 const actions = { //this.$store.dispatch('set_uid'，6)
   //自定义触发mutations里函数的方法，context与store 实例具有相同方法和属性  
@@ -148,17 +154,36 @@ const actions = { //this.$store.dispatch('set_uid'，6)
     })
   },
   //根据产品编号查询对应产品详情
-  requireProductDetail(context){
+  requireProductDetail(context) {
     //发送请求获取产品的详细信息
     axios
       .get("/product/detail", {
-        params: { pid:context.state.productId }
+        params: { pid: context.state.productId }
       })
       .then(result => {
         // console.log(result);
-        context.state.productDetail = result.data[0];
+        context.commit("setProductDetail", result.data[0])
         // console.log(this.product_detail);
       });
+  },
+  requireUserOrderAddr(context) {
+    return new Promise((resolve) => {
+      axios.get("/order/get_order_addr").then(result => {
+        let tmp = result.data
+        console.log(result.data)
+        if (tmp.code === 200) {
+          context.commit("setUserOrderAddr", tmp.data)
+          //如果收货地址不全
+          if(!Object.values(tmp.data).every(el=>el !== "无")){
+            resolve()
+          }
+        } else {
+          context.commit("setUserOrderAddr", null)
+          resolve()
+        }
+      })
+    })
+
   }
 };
 const store = new Vuex.Store({

@@ -7,36 +7,42 @@ import NotFound from "@/views/notfound"
 import Product from "@/views/product"
 import ProductDetail from "@/views/product_detail"
 import LoginIdentify from "@/views/login_identify"
+import AddAddr from "@/views/add_addr"
 Vue.use(Router)
 export default new Router({
   routes: [
     {
-      name:"login_identify",
-      path:"/identify",
-      component:LoginIdentify
+      name: "add_order_addr",
+      path: "/add_addr",
+      component: AddAddr
     },
     {
-      name:"product_detail",
-      path:"/detail",
-      component:ProductDetail
+      name: "login_identify",
+      path: "/identify",
+      component: LoginIdentify
     },
     {
-      name:"product",
-      path:"/product",
-      component:Product
+      name: "product_detail",
+      path: "/detail",
+      component: ProductDetail
     },
     {
-      name:"home",
+      name: "product",
+      path: "/product",
+      component: Product
+    },
+    {
+      name: "home",
       path: '/',
       component: Home
     },
     {
-      name:"login",
+      name: "login",
       path: '/login',
       component: Login
     },
     {
-      name:"order",
+      name: "order",
       path: '/order',
       component: Order
     },

@@ -258,5 +258,17 @@ router.get("/get_browse", (req, res) => {
     }
   })
 })
+router.get("/get_order_addr",(req,res)=>{
+  let uid = req.session.uid
+  ,sql = "select userName,phone,addr from user where uid = ?"
+  pool.query(sql,[uid],(err,result)=>{
+    if(err) throw err
+    if(result.length > 0) {
+      res.send({code:200,msg:"用户已填写收货信息",data:result[0]})
+    } else {
+      res.send({code:301,msg:"用户未填写收货信息"})
+    }
+  })
+})
 //导出路由模块
 module.exports = router
