@@ -6,13 +6,17 @@
 <script>
 import BackBar from "../components/common/backbar"
 export default {
+  props:{
+    selected:{default:-1}
+  },
   data() {
     return {
       
     }
   },
   created() {
-    
+    console.log(this.$route.params.selected)
+    console.log(this.selected)
   },
   components:{
     "back-bar":BackBar
