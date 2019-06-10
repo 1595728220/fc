@@ -8,9 +8,15 @@ import Product from "@/views/product"
 import ProductDetail from "@/views/product_detail"
 import LoginIdentify from "@/views/login_identify"
 import AddAddr from "@/views/add_addr"
+import ConfirmOrder from "@/views/confirm_order"
 Vue.use(Router)
 export default new Router({
   routes: [
+    {
+      name:"confirm_order",
+      path:"/confirm_order",
+      component:ConfirmOrder
+    },
     {
       name: "add_order_addr",
       path: "/add_addr",
