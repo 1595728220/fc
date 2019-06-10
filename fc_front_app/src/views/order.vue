@@ -26,12 +26,12 @@
         鉴定宝服务
         <span class="price">￥75</span>
       </div>
-      <mt-checklist v-model="server"  :options="['']"></mt-checklist>
+      <mt-checklist v-model="server" :options="['']"></mt-checklist>
     </div>
     <div class="primose">您购买的宝贝将发至对庄，出具GTC证书后再发给您，并由对庄提供翡翠保A承诺，最高赔付一百万，退货来回运费全部由对庄承担</div>
     <div class="bottom-bar">
       合计：{{(productDetail.price+5+75*server.length)|money}}(含5元运费)
-      <mt-button type="primary" class="button">确认</mt-button>
+      <mt-button type="primary" class="button" @click.native="create_order">确认</mt-button>
     </div>
   </div>
 </template>
@@ -48,8 +48,9 @@ export default {
       return this.$store.state.productId;
     },
     userOrderAddr() {
-      let tmp = this.$store.state.userOrderAddr
-      tmp = tmp || {}
+      let tmp = this.$store.state.userOrderAddr;
+      tmp = tmp || {};
+      console.log(tmp);
       return tmp;
     },
     productDetail() {
@@ -57,6 +58,9 @@ export default {
     },
     productServerAdd() {
       return this.$store.state.productServerAdd;
+    },
+    total_price() {
+      return this.productDetail.price + 5 + 75 * this.server.length;
     }
   },
   created() {
@@ -78,6 +82,33 @@ export default {
     });
     console.log(this.productDetail);
   },
+  methods: {
+    create_order() {
+      this.$messagebox({
+        message: `是否支付${this.total_price}元`,
+        showConfirmButton: true,
+        showCancelButton: true
+      }).then(action => {
+        if (action === "confirm") {
+          this.$axios
+            .get("/order/create", {
+              params: {
+                total: this.total_price,
+                pid: this.pid
+              }
+            })
+            .then(result => {
+              this.$messagebox({
+                message: result.data.msg,
+                showConfirmButton: true
+              }).then(() => {
+                this.$router.push("/");
+              });
+            });
+        }
+      });
+    }
+  },
   components: {
     "back-bar": BackBar
   }
@@ -87,7 +118,7 @@ export default {
 .order {
   background: #f5f5f5;
   height: 100vh;
- 
+
   .user-order-addr {
     text-decoration: none;
     display: block;
@@ -134,28 +165,30 @@ export default {
     justify-content: space-between;
     background: #fff;
     align-items: center;
-     padding-left:0.5rem;
-  padding-right:0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     .price {
       color: #00c17b;
     }
-    /deep/ .mint-checklist-label{
-      padding:0;
+    /deep/ .mint-checklist-label {
+      padding: 0;
     }
-    /deep/ .mint-checkbox-input:checked + .mint-checkbox-core::after{
-      transform:rotate(45deg) scale(1.4)
+    /deep/ .mint-checkbox-input:checked + .mint-checkbox-core::after {
+      transform: rotate(45deg) scale(1.4);
+      left: 7px;
+      top: 4px;
     }
-    .mint-checkbox-label{
-      margin-left:0;
+    .mint-checkbox-label {
+      margin-left: 0;
     }
   }
   .primose {
     font-size: 0.7rem;
     color: #999;
-    background:#fff;
-    padding-bottom:0.5rem;
-     padding-left:0.5rem;
-  padding-right:0.5rem;
+    background: #fff;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
   .bottom-bar {
     position: absolute;

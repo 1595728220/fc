@@ -155,9 +155,9 @@ insert into product values(null,7100,"糯种满绿天然翡翠扁管手镯","ch6
 create table user_order(
   oid int primary key auto_increment comment "订单编号",
   userId int comment "用户编号",
-  productId int comment "产品编号"
+  productId int comment "产品编号",
+  total decimal(10,2) comment "价格总计"
 );
-insert into user_order values(1,1,1);
 #图片表
 create table product_img(
   iid int primary key auto_increment comment "图片编号",

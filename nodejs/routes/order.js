@@ -7,7 +7,8 @@ let router = express.Router()
 router.get("/create", (req, res) => {
   //获取用户编号和产品编号
   let {
-    pid
+    pid,
+    total
   } = req.query,
     uid = req.session.uid
   if (!uid) { //用户编号为空
@@ -25,8 +26,8 @@ router.get("/create", (req, res) => {
     return
   }
   //生成订单将订单数据插入数据库
-  let sql = "insert into user_order values(null, ?, ?)"
-  pool.query(sql, [uid, pid], (err, result) => {
+  let sql = "insert into user_order values(null, ?, ?,?)"
+  pool.query(sql, [uid, pid, total], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) { //插入影响的行数不为0 
       res.send({
@@ -259,25 +260,25 @@ router.get("/get_browse", (req, res) => {
   })
 })
 //获取用户的收货信息
-router.get("/get_order_addr",(req,res)=>{
+router.get("/get_order_addr", (req, res) => {
   let uid = req.session.uid
-  ,sql = "select userName,phone,addr from user where uid = ?"
-  pool.query(sql,[uid],(err,result)=>{
-    if(err) throw err
-    if(result.length > 0) {
-      res.send({code:200,msg:"用户已填写收货信息",data:result[0]})
+    , sql = "select userName,phone,addr from user where uid = ?"
+  pool.query(sql, [uid], (err, result) => {
+    if (err) throw err
+    if (result.length > 0) {
+      res.send({ code: 200, msg: "用户已填写收货信息", data: result[0] })
     } else {
-      res.send({code:301,msg:"用户未填写收货信息"})
+      res.send({ code: 301, msg: "用户未填写收货信息" })
     }
   })
 })
 //修改用户的收货信息
-router.get("/set_order_addr",(req,res)=>{
+router.get("/set_order_addr", (req, res) => {
   let uid = req.session.uid,
-  {userName,addr} = req.query
-  ,sql = "update user set userName = ?, addr = ? where uid = ?"
-  pool.query(sql,[userName,addr,uid],(err,result)=>{
-    if(err) throw err
+    { userName, addr } = req.query
+    , sql = "update user set userName = ?, addr = ? where uid = ?"
+  pool.query(sql, [userName, addr, uid], (err, result) => {
+    if (err) throw err
     if (result.affectedRows > 0) { //更新成功
       res.send({
         code: 200,

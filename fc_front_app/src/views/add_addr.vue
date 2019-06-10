@@ -119,10 +119,13 @@ export default {
     next(vm => (vm.backAddr = from.path));
   },
   created() {
-    let { userName, phone, userAddr, addr } = this.$store.state.userOrderAddr;
-    this.userName = userName;
-    this.phone = phone;
-    console.log(userName, phone, userAddr, addr);
+    //如果用户收货信息非空
+    if (this.$store.state.userOrderAddr) {
+      let { userName, phone, userAddr, addr } = this.$store.state.userOrderAddr;
+      this.userName = userName;
+      this.phone = phone;
+      console.log(userName, phone, userAddr, addr);
+    }
     allCity.forEach((val, index) => {
       pickerObj.prov[val.label] = val.label;
     });
