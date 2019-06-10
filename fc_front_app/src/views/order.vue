@@ -30,7 +30,7 @@
     </div>
     <div class="primose">您购买的宝贝将发至对庄，出具GTC证书后再发给您，并由对庄提供翡翠保A承诺，最高赔付一百万，退货来回运费全部由对庄承担</div>
     <div class="bottom-bar">
-      合计：{{(productDetail.price+5+75*server)|money}}(含5元运费)
+      合计：{{(productDetail.price+5+75*server.length)|money}}(含5元运费)
       <mt-button type="primary" class="button">确认</mt-button>
     </div>
   </div>
@@ -40,7 +40,7 @@ import BackBar from "../components/common/backbar";
 export default {
   data() {
     return {
-      server: false
+      server: []
     };
   },
   computed: {
@@ -48,7 +48,9 @@ export default {
       return this.$store.state.productId;
     },
     userOrderAddr() {
-      return this.$store.state.userOrderAddr;
+      let tmp = this.$store.state.userOrderAddr
+      tmp = tmp || {}
+      return tmp;
     },
     productDetail() {
       return this.$store.state.productDetail;
