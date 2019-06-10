@@ -54,7 +54,7 @@ router.get("/list", (req, res) => {
     return
   }
   //查询某用户某产品对应的订单
-  let sql = "select described,price,oid from user_order,product where productId = pid and userId = ?"
+  let sql = "select described,total,oid from user_order,product where productId = pid and userId = ?"
   pool.query(sql, [uid], (err, result) => {
     if (err) throw err
     if (result.length > 0) { //查询结果不为空
@@ -85,7 +85,7 @@ router.get("/detail", (req, res) => {
     return
   }
   //查询订单编号对应的订单详情
-  let sql = "select userName,oid,described,price,sm1 from user,product,user_order,product_img where uid = userId and productId = pid and iid = product_imgId and oid = ?"
+  let sql = "select userName,oid,described,price,sm1 from user,product,user_order,product_img,total where uid = userId and productId = pid and iid = product_imgId and oid = ?"
   pool.query(sql, [oid], (err, result) => {
     if (err) throw err
     if (result.length > 0) { //查询结果不为空
