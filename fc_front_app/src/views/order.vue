@@ -164,7 +164,7 @@ export default {
     display: flex;
     justify-content: space-between;
     background: #fff;
-    align-items: center;
+    // align-items: center;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     .price {
@@ -178,8 +178,11 @@ export default {
       left: 7px;
       top: 4px;
     }
-    .mint-checkbox-label {
-      margin-left: 0;
+    /deep/ .mint-checklist-title {
+      margin:0;
+    }
+    /deep/ .mint-cell{
+      min-height:21px;
     }
   }
   .primose {
