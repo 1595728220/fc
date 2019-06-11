@@ -156,8 +156,14 @@ create table user_order(
   oid int primary key auto_increment comment "订单编号",
   userId int comment "用户编号",
   productId int comment "产品编号",
-  total decimal(10,2) comment "价格总计"
+  total decimal(10,2) comment "价格总计",
+  order_state int comment "订单状态"
 );
+insert into user_order values(null,1,1,10000,0);
+insert into user_order values(null,1,1,10000,1);
+insert into user_order values(null,1,1,10000,2);
+insert into user_order values(null,1,1,10000,3);
+insert into user_order values(null,1,1,10000,4);
 #图片表
 create table product_img(
   iid int primary key auto_increment comment "图片编号",

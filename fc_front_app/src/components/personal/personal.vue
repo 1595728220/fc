@@ -3,11 +3,11 @@
     <div class="title">
       <div class="bg-user"></div>
       <div class="user">
-        <img v-lazy="baseServerAdd+userInfo.img_addr">
+        <img :src="baseServerAdd+userInfo.img_addr">
         <div class="nick">用户昵称：{{userInfo.nick}}</div>
       </div>
     </div>
-    <router-link class="myOrder" :to="{path:'/confirm_order',params:{selected:-1}}">
+    <router-link class="myOrder" to="/confirm_order" >
       <div class="left">
         <span class="iconfont icon-baoguofahuo"></span>
         我购买的订单
@@ -20,7 +20,7 @@
       </div>
     </router-link>
     <div class="order-icon">
-      <router-link class="icon-item" :to="{path:'/confirm_order',params:{selected:index}}" v-for="(obj,index) of orderList" :key="index">
+      <router-link class="icon-item" :to="{name:'confirm_order',params:{selected:obj.name}}" v-for="(obj,index) of orderList" :key="index">
         <span class="iconfont" :class="obj.class"></span>
         {{obj.name}}
       </router-link>
