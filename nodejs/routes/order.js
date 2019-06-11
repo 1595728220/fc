@@ -46,6 +46,7 @@ router.get("/create", (req, res) => {
 router.get("/list", (req, res) => {
   //获取用户编号
   let uid = req.session.uid
+  let { order_state } = req.query
   if (!uid) { //用户编号为空
     res.send({
       code: 401,
@@ -53,9 +54,17 @@ router.get("/list", (req, res) => {
     })
     return
   }
+  // console.log(order_state)
+  // console.log(typeof order_state)
   //查询某用户某产品对应的订单
-  let sql = "select described,total,oid from user_order,product where productId = pid and userId = ?"
-  pool.query(sql, [uid], (err, result) => {
+  let sql = "select described,total,oid from user_order,product where productId = pid and userId = ?", arr = [uid]
+  if (order_state || order_state === "0") {
+    sql += " and order_state = ?"
+    arr.push(order_state)
+  }
+  // console.log(sql)
+  // console.log(arr)
+  pool.query(sql, arr, (err, result) => {
     if (err) throw err
     if (result.length > 0) { //查询结果不为空
       res.send({

@@ -50,7 +50,37 @@ export default {
   },
   components: {
     "back-bar": BackBar
-  }
+  },
+  watch: {
+    selected(){
+      let params
+      console.log(this.selected)
+      switch(this.selected){
+        case "待付款":
+          params = {order_state:0}
+          break
+        case "代发货":
+          params = {order_state:1}
+          break
+        case "待收货":
+          params = {order_state:2}
+          break
+        case "已完成":
+          params = {order_state:3}
+          break
+        case "退款":
+          params = {order_state:4}
+          break
+        default:
+          params = {}
+      }
+      this.$axios.get("/order/list",{
+        params
+      }).then(result=>{
+        console.log(result)
+      })
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>
