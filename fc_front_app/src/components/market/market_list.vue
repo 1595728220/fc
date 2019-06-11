@@ -39,7 +39,6 @@ export default {
     //保存当前滚动的距离
     saveTop(e) {
       this.top = e.target.scrollTop;
-      // console.log(this.top)
     }
   },
   computed: {

@@ -9,14 +9,15 @@
         :id="obj.name"
         v-for="(obj,index) of orderListName"
         :key="index"
-        ref="fatherScroll"
+        
       >
-        <div class="order-list">
+        <div class="order-list" ref="fatherScroll">
+          <!-- {{check(obj.name)}} -->
           <div v-for="(val,ind) of check(obj.name)" :key="ind">
             <order-item :productItem="val"></order-item>
           </div>
-        </div>
         <scroll-top :top="top" @backTop="initTop"></scroll-top>
+        </div>
       </mt-tab-container-item>
       <!-- <mt-tab-container-item id="待付款">待付款</mt-tab-container-item>
       <mt-tab-container-item id="待发货">待发货</mt-tab-container-item>
@@ -44,7 +45,7 @@ export default {
         { name: "退款" }
       ],
       orderList: [],
-      top: 0
+      top: 0,
     };
   },
   created() {
@@ -76,12 +77,18 @@ export default {
       if (val === "全部") {
         return this.orderList;
       } else {
-        // console.log(val);
-        switch (val) {
+        return this.orderList.filter(el => {
+          return el.order_state == this.change(val);
+        });
+      }
+    },
+    change(val){
+      let params
+      switch (val) {
           case "待付款":
             params = 0;
             break;
-          case "代发货":
+          case "待发货":
             params = 1;
             break;
           case "待收货":
@@ -90,21 +97,22 @@ export default {
           case "已完成":
             params = 3;
             break;
+          case "退款":
+            params =4;
+            break;
           default:
-            params = 4;
+            params = -1;
         }
-        return this.orderList.filter(el => {
-          return el.order_state === params;
-        });
-      }
+        return params
     },
     initTop() {
       console.log("回到顶部");
       this.top = 0;
-      this.$refs.fatherScroll.scrollTop = 0;
+      this.$refs.fatherScroll[this.change(this.selected)+1].scrollTop = 0;
     },
     //保存当前滚动的距离
     saveTop(e) {
+      console.log()
       this.top = e.target.scrollTop;
       // console.log(this.top)
     }
