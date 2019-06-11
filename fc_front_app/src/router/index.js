@@ -9,9 +9,15 @@ import ProductDetail from "@/views/product_detail"
 import LoginIdentify from "@/views/login_identify"
 import AddAddr from "@/views/add_addr"
 import ConfirmOrder from "@/views/confirm_order"
+import Profile from "@/views/profile"
 Vue.use(Router)
 export default new Router({
   routes: [
+    {
+      name:"profile",
+      path:"/profile",
+      component:Profile
+    },
     {
       name:"confirm_order",
       path:"/confirm_order",

@@ -41,7 +41,7 @@ const state = {
   //产品详情
   productDetail: {},
   //用户信息
-  userInfo:{}
+  userInfo: {}
 };
 const getters = { //实时监听state值的变化(最新状态)
   //返回一个格式化的手机号
@@ -129,7 +129,7 @@ const mutations = {
     state.userOrderAddr = val
   },
   //设置用户的基本信息
-  setUserInfo(state,val){
+  setUserInfo(state, val) {
     state.userInfo = val
   }
 };
@@ -181,7 +181,7 @@ const actions = { //this.$store.dispatch('set_uid'，6)
         if (tmp.code === 200) {
           context.commit("setUserOrderAddr", tmp.data)
           //如果收货地址不全
-          if(!Object.values(tmp.data).every(el=>{ return el !==  "无" && el !== "" })){
+          if (!Object.values(tmp.data).every(el => { return el !== "无" && el !== "" })) {
             resolve()
           }
         } else {
@@ -193,11 +193,15 @@ const actions = { //this.$store.dispatch('set_uid'，6)
 
   },
   //请求用户基本信息
-  requireUserInfo(context){
-    axios.get("/user/detail").then(result=>{
-      // console.log(result)
-      context.commit("setUserInfo",result.data.data)
+  requireUserInfo(context) {
+    return new Promise(resolve => {
+      axios.get("/user/detail").then(result => {
+        // console.log(result)
+        context.commit("setUserInfo", result.data.data)
+        resolve()
+      })
     })
+
   }
 };
 const store = new Vuex.Store({

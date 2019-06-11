@@ -62,3 +62,4 @@ https://ustbhuangyi.github.io/better-scroll/doc/zh-hans/installation.html
 28.在使用v-lazy时如果是面板切换很容易不加载图片，因为面板切换时，是不会重新请求数据的，所以在面板切换的地方不推荐使用v-lazy
 29.在路由传参时params必须用name来识别路径
 30.由于产品详情页中的后退是返回上一个页面，所有没事别跳回产品详情页。
+31.在vuex中想异步执行一个函数，可以在actions中定义方法返回一个promise,作为回调在想要执行的地方执行

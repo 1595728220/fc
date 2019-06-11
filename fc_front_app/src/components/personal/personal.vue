@@ -2,12 +2,12 @@
   <div class="personal">
     <div class="title">
       <div class="bg-user"></div>
-      <div class="user">
+      <div class="user" @click="goToprofile">
         <img :src="baseServerAdd+userInfo.img_addr">
         <div class="nick">用户昵称：{{userInfo.nick}}</div>
       </div>
     </div>
-    <router-link class="myOrder" to="/confirm_order" >
+    <router-link class="myOrder" to="/confirm_order">
       <div class="left">
         <span class="iconfont icon-baoguofahuo"></span>
         我购买的订单
@@ -20,27 +20,17 @@
       </div>
     </router-link>
     <div class="order-icon">
-      <router-link class="icon-item" :to="{name:'confirm_order',params:{selected:obj.name}}" v-for="(obj,index) of orderList" :key="index">
+      <router-link
+        class="icon-item"
+        :to="{name:'confirm_order',params:{selected:obj.name}}"
+        v-for="(obj,index) of orderList"
+        :key="index"
+      >
         <span class="iconfont" :class="obj.class"></span>
         {{obj.name}}
       </router-link>
-      <!-- <router-link class="icon-item" to="/confirm_order">
-        <span class="iconfont icon-yunshuzhongwuliu"></span>
-        待发货
-      </router-link>
-      <router-link class="icon-item" to="/confirm_order">
-        <span class="iconfont icon-baoguofahuo"></span>
-        待收货
-      </router-link>
-      <router-link class="icon-item" to="/confirm_order">
-        <span class="iconfont icon-chaibaoguoqujian"></span>
-        已完成
-      </router-link>
-      <router-link class="icon-item" to="/confirm_order">
-        <span class="iconfont icon-tuikuan-xi"></span>
-        退款
-      </router-link> -->
     </div>
+    <mt-button type="danger" size="large" @click.native="logout">退出登录</mt-button>
   </div>
 </template>
 <script>
@@ -66,6 +56,26 @@ export default {
     baseServerAdd() {
       return this.$store.state.userServerAdd;
     }
+  },
+  methods: {
+    logout() {
+      this.$messagebox({
+        message: "是否退出登录",
+        title: "",
+        showConfirmButton: true,
+        showCancelButton: true
+      }).then(action => {
+        if (action === "confirm") {
+          this.$axios.get("/user/logout").then(result => {
+            this.$toast({ message: result.data.msg, duration: 1000 });
+            this.$router.push("/baibai");
+          });
+        }
+      });
+    },
+    goToprofile() {
+      this.$router.push("/profile");
+    }
   }
 };
 </script>
@@ -84,6 +94,8 @@ export default {
       img {
         background: #aaa;
         border-radius: 50%;
+        width:4rem;
+        height:4rem;
       }
       .nick {
         margin-top: 1rem;
@@ -134,6 +146,21 @@ export default {
       font-size: 2.125rem;
       color: #00c17b;
     }
+  }
+  .mint-button--large {
+    margin: 5rem auto;
+    width: 50%;
+  }
+  /deep/ .mint-button-text {
+    margin-bottom: 0;
+  }
+  .mint-button--danger{
+    color:#ef4f4f;
+    background:#fff;
+    border:1px solid #ccc;
+  }
+  .mint-button{
+    outline:0;
   }
 }
 </style>

@@ -29,5 +29,10 @@ export default {
     margin-bottom: 0;
     font-size: 1rem;
   }
+ 
+   .mint-header .mint-button{
+      outline:0;
+    }
+  
 }
 </style>
