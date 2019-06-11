@@ -116,7 +116,7 @@ export default {
   beforeRouteEnter(to, from, next) {
     // console.log(from.path);
     // vm.backAddr = from.path
-    next(vm => (vm.backAddr = from.path));
+    next(vm => (vm.backAddr = from.fullPath));
   },
   created() {
     //如果用户收货信息非空

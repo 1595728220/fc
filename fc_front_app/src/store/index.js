@@ -167,9 +167,9 @@ const actions = { //this.$store.dispatch('set_uid'，6)
         params: { pid: context.state.productId }
       })
       .then(result => {
-        // console.log(result);
+        console.log(result.data);
         context.commit("setProductDetail", result.data[0])
-        // console.log(this.product_detail);
+        // console.log(context.state.productDetail);
       });
   },
   //请求用户收货信息

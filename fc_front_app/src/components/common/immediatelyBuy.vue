@@ -32,7 +32,7 @@ export default {
     goToOrder() {
       this.$router.push({
         path: "/order",
-        // query: { pid: this.productItem.pid }
+        query: { pid: this.productItem.pid }
       });
     }
   }

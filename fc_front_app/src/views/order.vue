@@ -1,6 +1,6 @@
 <template>
   <div class="order">
-    <back-bar title="订单" :back="`/detail?pid=${pid}`"></back-bar>
+    <back-bar title="订单" :back="`/product`"></back-bar>
     <div class="hinder"></div>
     <router-link class="user-order-addr" to="/add_addr">
       <div class="top">
@@ -14,7 +14,7 @@
         </span>
       </div>
     </router-link>
-    <div class="product-detail">
+    <div class="product-detail" v-if="productDetail">
       <img v-lazy="productServerAdd+productDetail.photo1" class="img">
       <div class="right">
         <div class="title">{{productDetail.described}}超值好货赶紧来抢吧，限时特价只卖一个星期，走过不要错过</div>
@@ -64,6 +64,8 @@ export default {
     }
   },
   created() {
+    this.$store.commit("setProductId",this.$route.query.pid)
+    this.$store.dispatch("requireProductDetail")
     this.$store.dispatch("requireUserOrderAddr").then(() => {
       this.$messagebox({
         showConfirmButton: true,

@@ -26,7 +26,7 @@ router.get("/create", (req, res) => {
     return
   }
   //生成订单将订单数据插入数据库
-  let sql = "insert into user_order values(null, ?, ?,?)"
+  let sql = "insert into user_order values(null, ?, ?,?,1)"
   pool.query(sql, [uid, pid, total], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) { //插入影响的行数不为0 
@@ -46,7 +46,7 @@ router.get("/create", (req, res) => {
 router.get("/list", (req, res) => {
   //获取用户编号
   let uid = req.session.uid
-  let { order_state } = req.query
+  // let { order_state } = req.query
   if (!uid) { //用户编号为空
     res.send({
       code: 401,
@@ -57,11 +57,11 @@ router.get("/list", (req, res) => {
   // console.log(order_state)
   // console.log(typeof order_state)
   //查询某用户某产品对应的订单
-  let sql = "select described,total,oid from user_order,product where productId = pid and userId = ?", arr = [uid]
-  if (order_state || order_state === "0") {
-    sql += " and order_state = ?"
-    arr.push(order_state)
-  }
+  let sql = "select described,total,oid,photo1,order_state from user_order,product,product_img where productId = pid and userId = ? and product_imgId = iid", arr = [uid]
+  // if (order_state || order_state === "0") {
+  //   sql += " and order_state = ?"
+  //   arr.push(order_state)
+  // }
   // console.log(sql)
   // console.log(arr)
   pool.query(sql, arr, (err, result) => {
