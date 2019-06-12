@@ -236,7 +236,11 @@ router.post("/add", (req, res) => {
   let {
     userName = null,
     addr = null,
-    nick = null
+    nick = null,
+    birthday = null,
+    addr_city = null,
+    addr_detail = null,
+    gender = null
   } = req.body
   console.log(req.body)
 	,uid = req.session.uid
@@ -262,6 +266,22 @@ router.post("/add", (req, res) => {
   if (!!nick) {
     sql += "  nick = ?,"
     arr.push(nick)
+  }
+  if (!!birthday) {
+    sql += "  birthday = ?,"
+    arr.push(birthday)
+  }
+  if (!!addr_city) {
+    sql += "  addr_city = ?,"
+    arr.push(addr_city)
+  }
+  if (!!addr_detail) {
+    sql += "  addr_detail = ?,"
+    arr.push(addr_detail)
+  }
+  if (!!gender) {
+    sql += "  gender = ?,"
+    arr.push(gender)
   }
   sql = sql.substring(0,sql.length-1)
   sql += " where uid = ?"
@@ -460,7 +480,7 @@ router.get("/yzm", (req, res) => {
 router.get("/detail", (req, res) => {
   //获取用户的编号
   let uid = req.session.uid,
-    sql = "select phone,userName,addr,nick,img_addr from user,user_img where user_imgId = uiid and uid = ?"
+    sql = "select phone,userName,addr,nick,img_addr,addr_city,addr_detail,gender,birthday from user,user_img where user_imgId = uiid and uid = ?"
   if (!uid) { //用户编号为空
     res.send({
       code: 401,

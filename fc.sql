@@ -10,12 +10,16 @@ create table user(
   phone varchar(11) comment "手机",
   addr varchar(32) default "无" comment "收货地址",
   nick varchar(12) default "无" comment "昵称",
-  user_imgId int default 1 comment "用户头像图片编号" 
+  user_imgId int default 1 comment "用户头像图片编号",
+  gender int default 0 comment "性别",
+  addr_city varchar(32) default "无" comment "收货地址市级以上",
+  addr_detail varchar(32) default "无" comment "收货地址详情",
+  birthday bigint comment "出生日期" 
 );
-insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","丁丁","15057391900","杭州市西湖区中心路11号","zero",1);
-insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","当当","13811111112","杭州市西湖区中心路12号","旧日憾事",1);
-insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","东东","13811111113","杭州市西湖区中心路13号","失去派大",1);
-insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","端端","13811111114","杭州市西湖区中心路14号","朕好萌i",1);
+insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","丁丁","15057391900","杭州市西湖区中心路11号","zero",1,1,"浙江省杭州市","西湖区中心路11号",1553604596095);
+insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","当当","13811111112","杭州市西湖区中心路12号","旧日憾事",1,2,"浙江省杭州市","西湖区中心路12号",1553604596095);
+insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","东东","13811111113","杭州市西湖区中心路13号","失去派大",1,2,"浙江省杭州市","西湖区中心路13号",1553604596095);
+insert into user values(null,"e10adc3949ba59abbe56e057f20f883e","端端","13811111114","杭州市西湖区中心路14号","朕好萌i",1,1,"浙江省杭州市","西湖区中心路14号",1553604596095);
 #竞拍表
 create table auction(
   aid int primary key auto_increment comment "竞拍编号",

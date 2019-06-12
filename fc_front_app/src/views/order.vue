@@ -8,7 +8,7 @@
         <span>{{userOrderAddr.phone}}</span>
       </div>
       <div class="bottom">
-        <span>{{userOrderAddr.addr}}</span>
+        <span>{{userOrderAddr.addr_city+userOrderAddr.addr_detail}}</span>
         <span class="mint-button-icon rotate">
           <i class="mintui mintui-back"></i>
         </span>

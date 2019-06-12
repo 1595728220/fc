@@ -271,7 +271,7 @@ router.get("/get_browse", (req, res) => {
 //获取用户的收货信息
 router.get("/get_order_addr", (req, res) => {
   let uid = req.session.uid
-    , sql = "select userName,phone,addr from user where uid = ?"
+    , sql = "select userName,phone,addr,addr_city,addr_detail from user where uid = ?"
   pool.query(sql, [uid], (err, result) => {
     if (err) throw err
     if (result.length > 0) {
@@ -284,9 +284,9 @@ router.get("/get_order_addr", (req, res) => {
 //修改用户的收货信息
 router.get("/set_order_addr", (req, res) => {
   let uid = req.session.uid,
-    { userName, addr } = req.query
-    , sql = "update user set userName = ?, addr = ? where uid = ?"
-  pool.query(sql, [userName, addr, uid], (err, result) => {
+    { userName, addr,addr_city,addr_detail } = req.query
+    , sql = "update user set userName = ?, addr = ?,addr_city = ?,addr_detail = ? where uid = ?"
+  pool.query(sql, [userName, addr, addr_city,addr_detail,uid], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) { //更新成功
       res.send({

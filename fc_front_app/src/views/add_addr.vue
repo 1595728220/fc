@@ -5,7 +5,7 @@
       <mt-field placeholder="请输入收货人真实姓名" v-model="userName" label="收货人"></mt-field>
       <mt-field placeholder="请输入联系电话" v-model="phone" label="联系电话" disabled></mt-field>
       <mt-picker :slots="datalist" @change="onValuesChange"></mt-picker>
-      <mt-field placeholder="请输入收货人详细地址(街道及以下信息)" v-model="addr" label="详细地址" type="textarea"></mt-field>
+      <mt-field placeholder="请输入收货人详细地址(街道及以下信息)" v-model="addr_detail" label="详细地址" type="textarea"></mt-field>
       <mt-button size="large" type="primary" @click.native="saveAddr">保存</mt-button>
     </div>
   </div>
@@ -25,7 +25,8 @@ export default {
       backAddr: "",
       phone: "",
       addr_prov: "",
-      addr_area: "",
+      addr_area:"",
+      addr_detail: "",
       addr: ""
     };
   },
@@ -62,7 +63,9 @@ export default {
         .get("/order/set_order_addr", {
           params: {
             userName: this.userName,
-            addr: this.addr_prov + this.addr_area + this.addr
+            addr: this.addr_prov + this.addr_area + this.addr_detail,
+            addr_city:this.addr_prov + this.addr_area,
+            addr_detail:this.addr_detail
           }
         })
         .then(result => {
@@ -121,10 +124,9 @@ export default {
   created() {
     //如果用户收货信息非空
     if (this.$store.state.userOrderAddr) {
-      let { userName, phone, userAddr, addr } = this.$store.state.userOrderAddr;
+      let { userName, phone, userAddr, addr,addr_city,addr_detail } = this.$store.state.userOrderAddr;
       this.userName = userName;
       this.phone = phone;
-      console.log(userName, phone, userAddr, addr);
     }
     allCity.forEach((val, index) => {
       pickerObj.prov[val.label] = val.label;
