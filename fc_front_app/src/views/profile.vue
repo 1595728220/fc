@@ -32,8 +32,8 @@ export default {
     userServerAdd() {
       return this.$store.state.userServerAdd;
     },
-    userInfo(){
-      return this.$store.state.userInfo
+    userInfo() {
+      return this.$store.state.userInfo;
     }
   },
   methods: {
@@ -65,25 +65,30 @@ export default {
             showCancelButton: true,
             message: "输入昵称",
             $type: "prompt"
-          }).then(({ action, value }) => {
-            console.log(action);
-            console.log(value);
-            if(action === "confirm") {
-              this.$axios.post("/user/add",{nick:value}).then(result=>{
-                this.$toast({message:result.data.msg})
-                if(result.data.code === 200) {
-                  this.$store.dispatch("requireUserInfo")
-                }
-                this.sheetVisible.nick = false
-              })
+          }).then(
+            ({ action, value }) => {
+              console.log(action);
+              console.log(value);
+              if (action === "confirm") {
+                this.$axios.post("/user/add", { nick: value }).then(result => {
+                  this.$toast({ message: result.data.msg });
+                  if (result.data.code === 200) {
+                    this.$store.dispatch("requireUserInfo");
+                  }
+                });
+              }
+              this.sheetVisible.nick = false;
+            },
+            () => {
+              this.sheetVisible.nick = false;
             }
-          });
+          );
         }
       }
     }
   },
   created() {
-    this.$store.dispatch("requireUserInfo")
+    this.$store.dispatch("requireUserInfo");
     // .then(() => {
     //   this.userInfo = this.$store.state.userInfo;
     //   console.log(this.userInfo);
