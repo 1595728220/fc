@@ -234,34 +234,42 @@ router.post("/forget", (req, res) => {
 router.post("/add", (req, res) => {
   //取出请求主体中的uid,userName,addr,nick属性,使用对象结构的默认值写法
   let {
-    uid,
     userName = null,
     addr = null,
     nick = null
   } = req.body
   console.log(req.body)
+	,uid = req.session.uid
   //验证用户编号格式
-  if (!uidRegex.test(uid)) {
+  if (!uid) {
     res.send({
       code: 401,
-      msg: "用户编号格式不正确"
+      msg: "用户未登录"
     })
     return
   }
   // console.log(userName,addr)
   // console.log(typeof nick)
-  // if (!userName) {
-  //   userName = null
-  // }
-  // if (!addr) {
-  //   addr = null
-  // }
-  // if (!nick) {
-  //   nick = null
-  // }
+  let sql = "update user set ",arr = []
+  if (!!userName) {
+    sql += " userName = ?,"
+    arr.push(userName)
+  }
+  if (!!addr) {
+    sql += "  addr = ?,"
+    arr.push(addr)
+  }
+  if (!!nick) {
+    sql += "  nick = ?,"
+    arr.push(nick)
+  }
+  sql = sql.substring(0,sql.length-1)
+  sql += " where uid = ?"
+  arr.push(uid)
   //更新数据库中的用户信息
-  let sql = "update user set userName = ?, addr = ?, nick = ? where uid = ?"
-  pool.query(sql, [userName, addr, nick, uid], (err, result) => {
+  console.log(sql)
+  console.log(arr)
+  pool.query(sql, arr, (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) { //更新成功
       res.send({
