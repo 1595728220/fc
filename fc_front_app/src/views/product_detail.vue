@@ -151,7 +151,7 @@ export default {
   },
   // 组件内的路由守卫，将来源的路由保存起来
   beforeRouteEnter(to, from, next) {
-    console.log(from);
+    // console.log(from);
     // vm.backAddr = from.path
     next(vm => (vm.backAddr = from.fullPath));
   },

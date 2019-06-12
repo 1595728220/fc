@@ -167,7 +167,7 @@ const actions = { //this.$store.dispatch('set_uid'，6)
         params: { pid: context.state.productId }
       })
       .then(result => {
-        console.log(result.data);
+        // console.log(result.data);
         context.commit("setProductDetail", result.data[0])
         // console.log(context.state.productDetail);
       });

@@ -10,8 +10,9 @@ import LoginIdentify from "@/views/login_identify"
 import AddAddr from "@/views/add_addr"
 import ConfirmOrder from "@/views/confirm_order"
 import Profile from "@/views/profile"
+import axios from "axios"
 Vue.use(Router)
-export default new Router({
+let router = new Router({
   routes: [
     {
       name:"profile",
@@ -64,3 +65,22 @@ export default new Router({
     }
   ],
 })
+
+//设置路由守卫，验证用户登录状态
+router.beforeEach((to, from, next) => {
+  axios.get("/user/state").then(result => {
+    if (result.data.code === 200) {
+      console.log("已经登录")
+      if (to.path === '/login') {
+        next({ path: '/' });
+      }
+    } else {
+      console.log("未登录")
+      if (to.path !== "/login") {
+        next({ path: "/login" })
+      }
+    }
+    next()
+  })
+})
+export default router

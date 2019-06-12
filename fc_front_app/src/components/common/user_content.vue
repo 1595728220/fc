@@ -1,7 +1,7 @@
 <template>
   <div class="user-content">
     <div class="title">
-      <img v-lazy="baseSrc+user_content.img_addr">
+      <img :src="baseSrc+user_content.img_addr">
       <span>{{user_content.nick}}</span>
     </div>
 

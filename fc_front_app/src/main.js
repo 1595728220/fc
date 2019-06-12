@@ -34,21 +34,7 @@ Object.keys(filters)
 
 Vue.config.productionTip = false
 
-//设置路由守卫，验证用户登录状态
-router.beforeEach((to, from, next) => {
-  axios.get("/user/state").then(result => {
-    if (result.data.code === 200) {
-      if (to.path === '/login') {
-        next({ path: '/' });
-      }
-    } else {
-      if (to.path !== "/login") {
-        next({ path: "/login" })
-      }
-    }
-    next()
-  })
-})
+
 
 new Vue({
   render: h => h(App),
