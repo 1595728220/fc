@@ -3,7 +3,7 @@
     <div class="title">
       <div class="bg-user"></div>
       <div class="user" @click="goToprofile">
-        <img :src="baseServerAdd+userInfo.img_addr">
+        <img :src="baseServerAdd+userInfo.img_addr" v-if="userInfo.img_addr">
         <div class="nick">用户昵称：{{userInfo.nick}}</div>
       </div>
     </div>

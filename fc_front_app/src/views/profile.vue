@@ -6,10 +6,32 @@
         <img v-lazy="userServerAdd+userInfo.img_addr" class="avatar" v-if="userInfo.img_addr">
       </mt-cell>
       <mt-cell title="昵称" is-link :value="userInfo.nick" @click.native="changeSheetVisible('nick')"></mt-cell>
-      <mt-cell title="所在地" :value="userInfo.addr.split('市')[0]+'市'" v-if="userInfo.addr"></mt-cell>
+      <mt-cell title="所在地" :value="userInfo.addr_city" v-if="userInfo.addr" is-link @click.native="changeSheetVisible('addr_city')"></mt-cell>
+      <mt-cell
+        title="出生日期"
+        :value="userInfo.birthday"
+        @click.native="changeSheetVisible('birthday')"
+        is-link
+      ></mt-cell>
+      <mt-cell
+        title="性别"
+        :value="userInfo.gender"
+        @click.native="changeSheetVisible('gender')"
+        is-link
+      ></mt-cell>
+      <mt-cell
+        title="详细地址"
+        :value="userInfo.addr_detail"
+        @click.native="changeSheetVisible('addr_detail')"
+        is-link
+      ></mt-cell>
     </div>
     <mt-actionsheet v-model="sheetVisible.avatar" :actions="actions"></mt-actionsheet>
     <mt-popup v-model="sheetVisible.nick" popup-transition="popup-fade"></mt-popup>
+    <mt-popup v-model="sheetVisible.gender" position="bottom"></mt-popup>
+    <mt-popup v-model="sheetVisible.addr_detail" position="bottom"></mt-popup>
+    <mt-popup v-model="sheetVisible.birthday" position="bottom"></mt-popup>
+    <mt-popup v-model="sheetVisible.addr_city" position="bottom"></mt-popup>
   </div>
 </template>
 <script>
@@ -20,7 +42,11 @@ export default {
       // userInfo: {},
       sheetVisible: {
         avatar: false,
-        nick: false
+        nick: false,
+        birthday: false,
+        addr_city:false,
+        addr_detail:false,
+        gender:false
       },
       actions: [
         { name: "拍照", method: this.getCamera },
@@ -37,16 +63,21 @@ export default {
     }
   },
   methods: {
+    //获取相机
     getCamera() {
       console.log("打开摄像机");
+      // this.sheetVisible.avatar = false;
+      // console.log(this.sheetVisible.avatar)
     },
+    //获取相册
     getLibrary() {
-      console.log("打开相册");
+      console.log("打开相册");      
+      // this.sheetVisible.avatar = false;
     },
     changeSheetVisible(name) {
       this.sheetVisible[name] = true;
       console.log(name);
-      console.log(this.sheetVisible.avatar);
+      console.log(this.sheetVisible[name]);
     }
   },
   components: {
