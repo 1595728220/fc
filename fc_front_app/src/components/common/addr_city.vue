@@ -1,6 +1,7 @@
 <template>
   <div class="addr-city">
-    <mt-picker :slots="datalist" @change="onValuesChange"></mt-picker>
+    <mt-picker :slots="datalist" @change="onValuesChange">
+    </mt-picker>
   </div>
 </template>
 <script>

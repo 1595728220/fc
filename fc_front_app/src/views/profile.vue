@@ -34,7 +34,17 @@
     </div>
     <mt-actionsheet v-model="sheetVisible.avatar" :actions="actions"></mt-actionsheet>
     <mt-popup v-model="sheetVisible.nick" popup-transition="popup-fade"></mt-popup>
-    <mt-popup v-model="sheetVisible.gender" position="bottom"></mt-popup>
+    <mt-popup v-model="sheetVisible.gender" position="bottom">
+      <mt-picker
+        :slots="gender_slots"
+        @change="onGenderChange"
+        class="gender-picker"
+        :showToolbar="true"
+      >
+        <span @click="cancelGender">取消</span> 
+        <span @click="saveGender">保存</span>
+      </mt-picker>
+    </mt-popup>
     <mt-popup v-model="sheetVisible.addr_detail" position="bottom"></mt-popup>
 
     <mt-datetime-picker
@@ -49,9 +59,9 @@
       @confirm="handleConfirm"
     ></mt-datetime-picker>
     <mt-popup v-model="sheetVisible.addr_city" position="bottom" class="addr-city">
-      <div class="my-tool-bar">
-        <span>保存</span>
-        <span>取消</span>
+      <div class="picker-toolbar">
+        <span @click="cancelCity">取消</span>
+        <span @click="saveCity">保存</span>
       </div>
       <addr-city @getAddr="modifyCity"></addr-city>
       <mt-button type="primary" @click.native="saveCity">保存</mt-button>
@@ -79,7 +89,9 @@ export default {
         { name: "拍照", method: this.getCamera },
         { name: "从相册中选择", method: this.getLibrary }
       ],
-      birthday: ""
+      birthday: "",
+      gender_slots: [{ flex: 1, values: ["男", "女"], textAlign: "center" }],
+      gender: 1
     };
   },
   computed: {
@@ -91,6 +103,11 @@ export default {
     }
   },
   methods: {
+    onGenderChange(e) {
+      let gender = e.getSlotValue(0) === '男' ? 1 : 2;
+      console.log(gender);
+      this.gender = gender
+    },
     openPicker() {
       this.$refs.picker.open();
     },
@@ -142,8 +159,25 @@ export default {
           this.sheetVisible.addr_city = false;
         });
     },
+    //点击取消选择城市
     cancelCity() {
       this.sheetVisible.addr_city = false;
+    },
+    //点击保存性别
+    saveGender() {
+      this.$axios
+        .post("/user/add", {
+          gender: this.gender
+        })
+        .then(result => {
+          this.$toast(result.data.msg);
+          if (result.data.code === 200) this.requireUserInfo();
+          this.sheetVisible.gender = false;
+        });
+    },
+    //点击取消性别选择
+    cancelGender() {
+      this.sheetVisible.gender = false;
     }
   },
   components: {
@@ -273,7 +307,7 @@ export default {
       outline: none;
     }
   }
-  .my-tool-bar {
+  .picker-toolbar {
     height: 40px;
     border-bottom: solid 1px #eaeaea;
     span:first-child {
@@ -290,6 +324,9 @@ export default {
       font-size: 16px;
       color: #26a2ff;
     }
+  }
+  .gender-picker {
+    width: 100vw;
   }
 }
 </style>

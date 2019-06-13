@@ -243,7 +243,7 @@ router.post("/add", (req, res) => {
     gender = null
   } = req.body
   console.log(req.body)
-	,uid = req.session.uid
+    , uid = req.session.uid
   //验证用户编号格式
   if (!uid) {
     res.send({
@@ -252,9 +252,19 @@ router.post("/add", (req, res) => {
     })
     return
   }
+  if (![userName,
+    addr,
+    nick,
+    birthday,
+    addr_city,
+    addr_detail,
+    gender].some(el => el)) {
+    res.send({ code: 402, msg: "请输入要保存的信息" })
+    return
+  }
   // console.log(userName,addr)
   // console.log(typeof nick)
-  let sql = "update user set ",arr = []
+  let sql = "update user set ", arr = []
   if (!!userName) {
     sql += " userName = ?,"
     arr.push(userName)
@@ -283,7 +293,7 @@ router.post("/add", (req, res) => {
     sql += "  gender = ?,"
     arr.push(gender)
   }
-  sql = sql.substring(0,sql.length-1)
+  sql = sql.substring(0, sql.length - 1)
   sql += " where uid = ?"
   arr.push(uid)
   //更新数据库中的用户信息
@@ -601,38 +611,38 @@ router.get("/search", (req, res) => {
     }
   })
 })
-router.get("/mobileLogin",(req,res)=>{
-  let {phone,identify} = req.query,
-  sql = "select uid from user where phone  = ?"
-  if(identify.toLowerCase !== req.session.captcha.toLowerCase){
-    res.send({code:401,msg:"验证码错误"})
-    return 
-  }
-  if(!phoneRegex.test(phone)){
-    res.send({code:402,msg:"手机号格式不正确"})
+router.get("/mobileLogin", (req, res) => {
+  let { phone, identify } = req.query,
+    sql = "select uid from user where phone  = ?"
+  if (identify.toLowerCase !== req.session.captcha.toLowerCase) {
+    res.send({ code: 401, msg: "验证码错误" })
     return
   }
-  pool.query(sql,[phone],(err,result)=>{
-    if(err) throw err
-    if(result.length === 0) {
+  if (!phoneRegex.test(phone)) {
+    res.send({ code: 402, msg: "手机号格式不正确" })
+    return
+  }
+  pool.query(sql, [phone], (err, result) => {
+    if (err) throw err
+    if (result.length === 0) {
       console.log("用户未注册")
       sql = "insert into user(phone,upwd) values(?, md5(?))"
-      pool.query(sql,[phone,identify],(err,result)=>{
-        if(err) throw err
-        if(result.affectedRows > 0){
+      pool.query(sql, [phone, identify], (err, result) => {
+        if (err) throw err
+        if (result.affectedRows > 0) {
           console.log("注册新用户成功")
           req.session.uid = result.insertId
-          res.send({code:200,msg:"登录成功"})
+          res.send({ code: 200, msg: "登录成功" })
 
-        }else{
-          res.send({code:301,msg:"登录失败，无法创建新用户"})
+        } else {
+          res.send({ code: 301, msg: "登录失败，无法创建新用户" })
         }
       })
-    } else{
+    } else {
       console.log("用户登录成功")
       req.session.uid = result[0].uid
-      res.send({code:200,msg:"登录成功"})
+      res.send({ code: 200, msg: "登录成功" })
     }
-  }) 
+  })
 })
 module.exports = router
