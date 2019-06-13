@@ -63,3 +63,4 @@ https://ustbhuangyi.github.io/better-scroll/doc/zh-hans/installation.html
 29.在路由传参时params必须用name来识别路径
 30.由于产品详情页中的后退是返回上一个页面，所有没事别跳回产品详情页。
 31.在vuex中想异步执行一个函数，可以在actions中定义方法返回一个promise,作为回调在想要执行的地方执行
+32.过滤器可以用于插值语法和属性绑定中

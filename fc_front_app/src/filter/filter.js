@@ -79,9 +79,13 @@ const toWan = count => {
     }
     return tmp
 }
+const sex = gender => {
+    return gender === 0 ? "不详" : gender === 1 ? "男" : "女" 
+}
 export {
     fanyi,
     money,
     monthDate,
     toWan,
+    sex,
 }

@@ -129,6 +129,9 @@ a:focus{
 .hinder{
   margin-top:2.75rem;
 }
+ .mint-msgbox-confirm{
+  color:#00c17b !important;
+}
 /*修改浏览器默认样式*/
 input:-webkit-autofill{
   box-shadow:0 0 0px 62.5rem #fff inset;
