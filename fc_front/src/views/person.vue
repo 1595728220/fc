@@ -97,18 +97,20 @@ export default {
       this.user_no_change = true;
       // console.log(this.$store.getters.get_uid)
       this.$axios
-        .get("/user/detail"
-        //移出请求的uid参数
-        // , {
-        //   params: { uid: this.$store.getters.get_uid }
-        // }
+        .get(
+          "/user/detail"
+          //移出请求的uid参数
+          // , {
+          //   params: { uid: this.$store.getters.get_uid }
+          // }
         )
         .then(result => {
           // console.log(result);
           //如果查询用户基本信息成功
           if (result.data.code === 200) {
-            let data = result.data.data;
-            //遍历结果保存入本地变量user
+            //遍历取出需要的结果保存入本地
+            let { phone, nick, userName, addr, img_addr } = result.data.data,
+              data = { phone, nick, userName, addr, img_addr };
             for (let key in data) {
               // this.$set(this.user,key,result.data.data[key])
               this.user[key] = data[key];
@@ -254,8 +256,8 @@ export default {
   margin: 0 auto;
 }
 .person_area {
-  border-top: .0625rem solid #eee;
-  border-bottom: .0625rem solid #eee;
+  border-top: 0.0625rem solid #eee;
+  border-bottom: 0.0625rem solid #eee;
   ul {
     background: #ddd;
     padding: 1rem 0 1rem 0.5rem;
@@ -285,7 +287,7 @@ export default {
       margin-bottom: 0;
     }
     .change_user_info {
-      &>div {
+      & > div {
         text-align: center;
       }
       span {
@@ -299,7 +301,7 @@ export default {
         height: 2.5rem;
         box-shadow: 0 0 0;
         border: 0;
-        border-bottom: .0625rem solid #333;
+        border-bottom: 0.0625rem solid #333;
         outline: 0;
         vertical-align: bottom;
         &:disabled {
@@ -363,5 +365,4 @@ export default {
     }
   }
 }
-
 </style>
