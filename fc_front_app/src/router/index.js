@@ -1,28 +1,42 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from "@/views/home"
-import Login from '@/views/login'
-import Order from "@/views/order"
-import NotFound from "@/views/notfound"
-import Product from "@/views/product"
-import ProductDetail from "@/views/product_detail"
-import LoginIdentify from "@/views/login_identify"
-import AddAddr from "@/views/add_addr"
-import ConfirmOrder from "@/views/confirm_order"
-import Profile from "@/views/profile"
+
+//使用路由懒加载
+const Home = () => import('@/views/home')
+const Login = () => import('@/views/login')
+const Order = () => import('@/views/order')
+const NotFound = () => import('@/views/notfound')
+const Product = () => import('@/views/product')
+const ProductDetail = () => import('@/views/product_detail')
+const LoginIdentify = () => import('@/views/login_identify')
+const AddAddr = () => import('@/views/add_addr')
+const ConfirmOrder = () => import('@/views/confirm_order')
+const Profile = () => import('@/views/profile')
+
+// import Home from "@/views/home"
+// import Login from '@/views/login'
+// import Order from "@/views/order"
+// import NotFound from "@/views/notfound"
+// import Product from "@/views/product"
+// import ProductDetail from "@/views/product_detail"
+// import LoginIdentify from "@/views/login_identify"
+// import AddAddr from "@/views/add_addr"
+// import ConfirmOrder from "@/views/confirm_order"
+// import Profile from "@/views/profile"
+
 import axios from "axios"
 Vue.use(Router)
 let router = new Router({
   routes: [
     {
-      name:"profile",
-      path:"/profile",
-      component:Profile
+      name: "profile",
+      path: "/profile",
+      component: Profile
     },
     {
-      name:"confirm_order",
-      path:"/confirm_order",
-      component:ConfirmOrder
+      name: "confirm_order",
+      path: "/confirm_order",
+      component: ConfirmOrder
     },
     {
       name: "add_order_addr",
